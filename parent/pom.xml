@@ -15,6 +15,7 @@
     <name>parent</name>
     <modules>
         <module>../common</module>
+        <module>../activity</module>
     </modules>
 
     <properties>
@@ -150,7 +151,6 @@
             <scope>provided</scope>
         </dependency>
         <!-- AOP -->
-        <!-- AOP begin -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
