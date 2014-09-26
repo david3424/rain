@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans  default-lazy-init="true">
+
+	<!-- 使用Spring封装的Mail Sender -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="mail.oa.wanmei.com" />
+		<property name="username" value="bigdata.delivery" />
+		<property name="password" value="plwdro" />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+			</props>
+		</property>
+	</bean>
+
+    <bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="bigdata.delivery@pwrd.com"/>
+    </bean>
+	
+	<bean id="mailSupport" class="com.wanmei.webgame.mail.MailSupport">
+		<property name="mailSender" ref="mailSender"/>
+		<property name="freeMarkerConfigurer" ref="freeMarkerConfigurer"/>
+    </bean>
+    
+	<!-- 用于生成HTML邮件内容的Freemarker配置 -->
+    <bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="classpath:config/mailTemplate/" />
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">0</prop>
+                <prop key="default_encoding">GBK</prop>
+                <prop key="locale">zh_CN</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

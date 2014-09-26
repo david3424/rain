@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * 数据库操作接口 处理事务时使用
+ * 数据库操作接口 处理事务时使用 读写主库 通过xml注入runner
  * david xu
  */
 public class WriteDaoImp implements Idao {

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+    <!--取消静态文件及登录页的安全检查-->
+	<sec:http pattern="/login" security="none" />
+	<sec:http pattern="/css/**" security="none" />
+	<sec:http pattern="/err/**" security="none" />
+    <sec:http pattern="/img/**" security="none" />
+    <sec:http pattern="/js/**" security="none" />
+    <sec:http auto-config="true" use-expressions="true" access-denied-page="/err/access_denied.jsp" >
+    	<sec:intercept-url pattern="/favicon.ico" access="hasAnyRole('ROLE_ANONYMOUS')" />
+        <sec:intercept-url pattern="/" access="isAuthenticated()" />
+        <!-- 退出系统action="j_spring_security_logout" 指定退出系统后跳转的页面 -->
+        <sec:logout invalidate-session="true" logout-success-url="/err/logout.jsp" delete-cookies="JSESSIONID" />
+        <!-- 配置会话管理 -->
+        <sec:session-management invalid-session-url="/login">
+            <sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
+        </sec:session-management>
+        <!-- <sec:intercept-url pattern="/**" requires-channel="https" />
+        <sec:form-login login-page="/login" authentication-failure-url="/login?error=true"  
+        	authentication-success-handler-ref="customAuthenticationSuccessHandler"></sec:form-login> -->
+        <sec:custom-filter ref="customUsernamePasswordAuthenticationFilter" before="FORM_LOGIN_FILTER" />
+        <sec:custom-filter ref="customSecurityFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+    </sec:http>
+
+    <!-- 验证配置，认证管理器，实现用户认证的入口，主要实现UserDetailsService接口即可 -->
+	<sec:authentication-manager alias="customAuthenticationManager">
+		<sec:authentication-provider user-service-ref="customUserDetailsService">
+			<sec:password-encoder hash="plaintext" />
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+
+	<bean id="customUsernamePasswordAuthenticationFilter"
+		class="org.david.rain.security.CustomUsernamePasswordAuthenticationFilter">
+		<property name="authenticationManager" ref="customAuthenticationManager" />
+		<!-- 处理登录的action -->
+		<property name="filterProcessesUrl" value="/j_spring_security_check"/>
+        <!-- 验证成功后的处理-->
+		<property name="authenticationSuccessHandler" ref="customAuthenticationSuccessHandler"/>
+        <!-- 验证失败后的处理-->
+		<property name="authenticationFailureHandler" ref="simpleUrlAuthenticationFailureHandler"/>
+	</bean>
+
+	<!-- 一个自定义的filter，必须包含authenticationManager,accessDecisionManager,securityMetadataSource三个属性， 
+		我们的所有控制将在这三个类中实现，解释详见具体配置 -->
+	<bean id="customSecurityFilter"
+		class="org.david.rain.security.CustomFilterSecurityInterceptor">
+		<property name="authenticationManager" ref="customAuthenticationManager" />
+		<property name="accessDecisionManager" ref="customAccessDecisionManager" />
+		<property name="securityMetadataSource" ref="customInvocationSecurityMetadataSource" />
+	</bean>
+
+    <!-- 系统实现的用户查询服务，将用户信息查询出来 -->
+    <bean id="customUserDetailsService" class="org.david.rain.security.CustomUserDetailsService">
+    </bean>
+
+    <!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
+	<bean id="customAccessDecisionManager" class="org.david.rain.security.CustomAccessDecisionManager">
+	</bean>
+
+    <!-- 资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色访问 -->
+    <bean id="customInvocationSecurityMetadataSource" init-method="loadResourceDefine" class="org.david.rain.security.CustomInvocationSecurityMetadataSource">
+    </bean>
+
+    <!-- 当登陆成功会调用实现AuthenticationSuccessHandler接口的onAuthenticationSuccess方法 -->
+	<bean id="customAuthenticationSuccessHandler" class="org.david.rain.security.CustomAuthenticationSuccessHandler">
+		<property name="verifyIpFlg" value="true" />
+	</bean>
+	<bean id="simpleUrlAuthenticationFailureHandler"
+		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+		<!-- 可以配置相应的跳转方式。属性forwardToDestination为true采用forward false为sendRedirect -->
+		<property name="defaultFailureUrl" value="/err/login_err.jsp"/>
+	</bean>
+	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/>
+</beans>

@@ -15,3 +15,10 @@ lang包，search包主要是分页以及tuple类，用于传递2种不同的数�
 servlet是验证码
 util工具包，包括memcached、ip获取，服务器列表、时间操作，
 
+
+activity模块 业务主要模块，也是parent的子模块，引入common包，包括
+单元测试
+    测试数据库连接 dbutils/mybatis
+    测试service层业务
+    测试controller层逻辑
+

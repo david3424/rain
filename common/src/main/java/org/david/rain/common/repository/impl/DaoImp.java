@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * 数据库操作接口
+ * 数据库操作接口 只读数据库
  * User: david
  * Date: 12-11-20
  * Time: 上午11:44

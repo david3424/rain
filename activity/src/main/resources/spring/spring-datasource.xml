@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
-
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
        default-lazy-init="true">
     <description>Spring数据配置</description>
-
-
-    <!-- 属性文件读入 -->
-    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:jdbc.properties</value>
-            </list>
-        </property>
-    </bean>
 
     <!-- BoneCP configuration -->
     <bean id="dataSource_W" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
@@ -33,8 +22,6 @@
         <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}"/>
         <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
     </bean>
-
-
     <bean id="dataSource_R" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
         <!-- Connection Info -->
         <property name="driverClass" value="${jdbc.driverClassName}"/>
@@ -53,41 +40,41 @@
         <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
     </bean>
 
+    <!--transction on writer datasource -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource_W"/>
     </bean>
 
+    <!--mybatis conf-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource_W" />
-        <property name="configLocation" value="classpath:spring/mybatis-conf.xml" />
-        <property name="typeAliasesPackage" value="org.david.entity" />
+        <property name="dataSource" ref="dataSource_W"/>
+        <property name="configLocation" value="classpath:spring/mybatis-conf.xml"/>
+        <property name="typeAliasesPackage" value="org.david.rain.entity"/>
     </bean>
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory" />
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
     <!-- scan for mappers and let them be autowired -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="org.david.persistence" />
+        <property name="basePackage" value="org.david.rain.persistence"/>
     </bean>
 
-
     <!--注入queryRunner的为R数据库-->
-        <bean id="queryRunner" class="org.apache.commons.dbutils.QueryRunner">
-            <constructor-arg ref="dataSource_R"/>
-        </bean>
-        <!--构造注入-->
-        <!--注入queryNewRunner的为W数据库-->
-        <bean id="queryNewRunner" class="org.david.common.repository.QueryNewRunner">
-            <constructor-arg ref="dataSource_W"/>
-        </bean>
-
-    <bean id="daoImp" class="org.david.common.repository.impl.DaoImp">
-           <constructor-arg ref="queryRunner"/>
-       </bean>
-
-       <bean id="writeDaoImp" class="org.david.common.repository.impl.WriteDaoImp">
-           <constructor-arg ref="queryNewRunner"/>
-       </bean>
+    <bean id="queryRunner" class="org.apache.commons.dbutils.QueryRunner">
+        <constructor-arg ref="dataSource_R"/>
+    </bean>
+    <!--构造注入-->
+    <!--注入queryNewRunner的为W数据库-->
+    <bean id="queryNewRunner" class="org.david.rain.common.repository.QueryNewRunner">
+        <constructor-arg ref="dataSource_W"/>
+    </bean>
+    <!--dao层操作基础类-->
+    <bean id="daoImp" class="org.david.rain.common.repository.impl.DaoImp">
+        <constructor-arg ref="queryRunner"/>
+    </bean>
+    <bean id="writeDaoImp" class="org.david.rain.common.repository.impl.WriteDaoImp">
+        <constructor-arg ref="queryNewRunner"/>
+    </bean>
 
 
     <!--<tx:jta-transaction-manager />-->

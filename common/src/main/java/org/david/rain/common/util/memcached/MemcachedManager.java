@@ -4,6 +4,7 @@ package org.david.rain.common.util.memcached;
 import net.rubyeye.xmemcached.MemcachedClient;
 import net.rubyeye.xmemcached.MemcachedClientBuilder;
 import net.rubyeye.xmemcached.XMemcachedClientBuilder;
+import net.rubyeye.xmemcached.command.BinaryCommandFactory;
 import net.rubyeye.xmemcached.exception.MemcachedException;
 import net.rubyeye.xmemcached.utils.AddrUtil;
 
@@ -36,6 +37,7 @@ public class MemcachedManager {
         MemcachedClientBuilder builder = new XMemcachedClientBuilder(
                 AddrUtil.getAddresses(serverUrl));
         try {
+            builder.setCommandFactory(new BinaryCommandFactory());
             builder.setConnectionPoolSize(poolSize);
             mcc = builder.build();
         } catch (IOException e) {

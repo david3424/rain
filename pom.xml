@@ -11,6 +11,7 @@
 
     <modules>
     <module>parent</module>
+    <module>bhhd</module>
     </modules>
     <properties>
         <java-version>1.7</java-version>

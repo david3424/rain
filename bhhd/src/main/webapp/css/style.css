@@ -1,0 +1,193 @@
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+    font-family: "Helvetica Neue", Helvetica, STheiti, "微软雅黑", "宋体", Arial, Tahoma, sans-serif, serif;
+    font-size: 12px;
+    /*background-color: #FAFCFE;*/
+}
+
+/*!
+菜单，去掉了左右的border
+*/
+.sidebar-nav .accordion-group {
+    border-left: none;
+    border-right: none;
+    margin-bottom: -1px;
+}
+
+/*!
+调整左侧导航菜单链接样式
+*/
+.sidebar-nav li a {
+    color: #404040;
+}
+.sidebar-nav a {
+    font-size: 14px;
+}
+.sidebar-nav .nav-list {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.sidebar-nav.nav-list > li > a {
+    padding-left: 25px;
+}
+
+.div-display {
+	display: none
+}
+
+
+/*!
+临时保存
+
+  .sidebar-nav .nav a:hover, .sidebar-nav .nav a:focus {
+    background-color: inherit;
+    color: #54A4DE;
+}
+*/
+
+/**     widget box    **/
+.box {
+    margin: 10px 0px;
+}
+
+.box-header {
+    height: 18px;
+    border: 1px solid #ddd;
+    margin-bottom: -1px;
+    padding: 10px;
+    background-color: #fafafa;
+    background-image: -moz-linear-gradient(top, #fafafa, #efefef);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#efefef));
+    background-image: -webkit-linear-gradient(top, #fafafa, #efefef);
+    background-image: -o-linear-gradient(top, #fafafa, #efefef);
+    background-image: linear-gradient(to bottom, #fafafa, #efefef);
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#fafafa', endColorstr='#efefef', GradientType=0);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 2px 2px 0px 0px;
+    -moz-border-radius: 2px 2px 0px 0px;
+    border-radius: 2px 2px 0px 0px;
+    overflow: hidden;
+}
+
+.box-header h2 {
+    font-size: 16px;
+    line-height: 16px;
+    float: left;
+    margin-top: 2px;
+    color: #646464;
+    font-weight: normal;
+    text-shadow: 0px 1px 0px #fff;
+}
+
+.box-header h2 i {
+    margin: 1px 3px 0px 5px;
+    opacity: .4;
+}
+
+.box-header .break {
+    border-left: 1px solid #fcfcfc;
+    border-right: 1px solid #ddd;
+    margin: -12px 10px -10px 10px;
+    padding: 12px 0px 10px 0px;
+
+}
+
+.box-header .box-icon {
+    float: right;
+    margin-top: 1px;
+}
+
+.box-header .box-icon i {
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
+    -ms-transition: all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    opacity: .4;
+}
+
+.box-header .box-icon i:hover {
+    opacity: .8;
+}
+
+.box-header .box-icon a {
+    margin: 0px 5px;
+}
+
+.box-content {
+    margin-top: -1px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #fcfcfc;
+    -webkit-border-radius: 0px 0px 2px 2px;
+    -moz-border-radius: 0px 0px 2px 2px;
+    border-radius: 0px 0px 2px 2px;
+    -webkit-box-shadow: 0 1px 0px rgba(255, 255, 255, .6);
+    -moz-box-shadow: 0 1px 0px rgba(255, 255, 255, .6);
+    box-shadow: 0 1px 0px rgba(255, 255, 255, .6);
+}
+/**     box end    **/
+
+.table input,select{
+	margin: 0 auto;
+}
+
+.table input[readonly],input[disabled]{
+	cursor: pointer;
+	background-color: #fff;
+}
+
+/** dataTables pagination **/
+
+.paging_full_numbers {
+	height: 22px;
+	line-height: 22px;
+}
+
+.paging_full_numbers a:active {
+	outline: none
+}
+
+.paging_full_numbers a:hover {
+	text-decoration: none;
+}
+
+.paging_full_numbers a.paginate_button,
+ 	.paging_full_numbers a.paginate_active {
+	border: 1px solid #DDDDDD; 
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	padding: 2px 5px;
+	margin: 0 3px;
+	cursor: pointer;
+	*cursor: hand;
+	color: #0088CC !important; /**字体颜色**/
+}
+
+.paging_full_numbers a.paginate_button {
+	background-color: #fff; /**框颜色**/
+}
+
+.paging_full_numbers a.paginate_button:hover {
+	background-color: #F5F5F5;
+	text-decoration: none !important;
+}
+
+.paging_full_numbers a.paginate_active {
+	background-color: #F5F5F5;
+	color: #999999 !important;
+}
+
+/** 调整查询条件的样式 **/
+.table .input-append{
+	display: inline-block;
+	font-size: 0;
+	white-space: nowrap;
+	vertical-align: middle;
+	margin-bottom: 0px;
+}
+
