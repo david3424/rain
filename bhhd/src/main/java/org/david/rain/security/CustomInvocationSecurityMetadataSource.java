@@ -120,7 +120,7 @@ public class CustomInvocationSecurityMetadataSource implements
 	}
 
 	public void loadResourceDefine() {
-		resourceMap = new HashMap<String, Collection<ConfigAttribute>>();
+		resourceMap = new HashMap<>();
 		List<RolePermissionMapping> rolePermissionMapping = roleDetailDao
 				.getRolePermissionMapping();
 

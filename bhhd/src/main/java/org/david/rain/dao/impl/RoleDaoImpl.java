@@ -15,12 +15,11 @@ import java.util.List;
 @Repository("roleDetailDao")
 public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 
-	private static final String TABLE_NAME = "T_SYS_ROLE";
-	private static final String TABLE_NAME_MAPPING = "T_SYS_PERMISSION_MAPPING";
+	private static final String TABLE_ROLE = "T_SYS_ROLE";
+	private static final String TABLE_ROLE_PERMISSION_MAPPING = "T_SYS_PERMISSION_MAPPING";
 	private static final String TABLE_NAME_PERMISSION = "T_SYS_PERMISSION";
 	private static final String TABLE_NAME_USER = "T_SYS_USER";
-	private static final String TABLE_NAME_MENU_TYPE = "T_SYS_MENU_TYPE";
-	private static final String TABLE_NAME_GAME = "T_GAME_DICT";
+	private static final String TABLE_NAME_MENU_MODULE = "T_SYS_MENU_TYPE";
 
 	@Resource(name = "dataSource")
 	private DataSource dataSource;
@@ -33,7 +32,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 	@Override
 	public List<Role> getRoleDetailList() {
 		final String sql = "select ROLE_ID, ROLE_NAME, ROLE_CODE, DESCRIPTION from "
-				+ TABLE_NAME
+				+ TABLE_ROLE
 				+ " order by ROLE_NAME ";
 
 		List<Role> roleDetailList = getJdbcTemplate().query(sql,
@@ -44,7 +43,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 
 	@Override
 	public int countUserRoleByName(String roleName) {
-		String sql = "select count(1) from " + TABLE_NAME
+		String sql = "select count(1) from " + TABLE_ROLE
 				+ " where ROLE_NAME = ? ";
 
 		Object[] args = { roleName };
@@ -57,7 +56,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 
 	@Override
 	public int countUserRoleByCode(String roleCode) {
-		String sql = "select count(1) from " + TABLE_NAME
+		String sql = "select count(1) from " + TABLE_ROLE
 				+ " where ROLE_CODE = ? ";
 
 		Object[] args = { roleCode };
@@ -72,7 +71,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 	public int insertUserRole(String roleName, String roleCode,
 			String roleDescribe) {
 		final String sql = "insert into "
-				+ TABLE_NAME
+				+ TABLE_ROLE
 				+ " ( ROLE_NAME, ROLE_CODE, DESCRIPTION) values (?, ?, ?) ";
 
 		Object[] args = { roleName, roleCode, roleDescribe };
@@ -84,7 +83,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 
 	@Override
 	public int countUserRoleByNameWithoutId(String roleName, Integer roleId) {
-		String sql = "select count(1) from " + TABLE_NAME
+		String sql = "select count(1) from " + TABLE_ROLE
 				+ " where ROLE_NAME = ? and ROLE_ID <> ? ";
 
 		Object[] args = { roleName, roleId };
@@ -97,7 +96,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 
 	@Override
 	public int countUserRoleByCodeWithoutId(String roleCode, Integer roleId) {
-		String sql = "select count(1) from " + TABLE_NAME
+		String sql = "select count(1) from " + TABLE_ROLE
 				+ " where ROLE_CODE = ? and ROLE_ID <> ? ";
 
 		Object[] args = { roleCode, roleId };
@@ -112,7 +111,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 	public int updateUserRole(Integer roleId, String roleName, String roleCode,
 			String roleDescribe) {
 		final String sql = "update "
-				+ TABLE_NAME
+				+ TABLE_ROLE
 				+ " set ROLE_NAME = ?, ROLE_CODE = ?, DESCRIPTION = ? where ROLE_ID = ? ";
 
 		Object[] args = { roleName, roleCode, roleDescribe, roleId };
@@ -124,7 +123,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 
 	@Override
 	public int deleteUserRole(Integer roleId) {
-		final String sql = "delete from " + TABLE_NAME + " where ROLE_ID = ? ";
+		final String sql = "delete from " + TABLE_ROLE + " where ROLE_ID = ? ";
 
 		Object[] args = { roleId };
 
@@ -136,7 +135,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 	@Override
 	public List<Role> getRoleDetailById(Integer roleId) {
 		final String sql = "select ROLE_ID,ROLE_NAME, ROLE_CODE, DESCRIPTION from "
-				+ TABLE_NAME + " where ROLE_ID = ? ";
+				+ TABLE_ROLE + " where ROLE_ID = ? ";
 
 		Object[] args = { roleId };
 
@@ -149,25 +148,25 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 	@Override
 	public List<Permission> getBindPermissionsByRoleId(Integer roleId) {
 		final String sql = "select * from (select t3.permission_id, t3.resource_url, concat(t5.game_name , '-', t4.menu_type_name , '-' , t3.resource_name ) as resource_name, t3.game_id, t3.menu_type_id from "
-				+ TABLE_NAME
+				+ TABLE_ROLE
 				+ " t1, "
-				+ TABLE_NAME_MAPPING
+				+ TABLE_ROLE_PERMISSION_MAPPING
 				+ " t2, "
 				+ TABLE_NAME_PERMISSION
 				+ " t3, "
-				+ TABLE_NAME_MENU_TYPE
+				+ TABLE_NAME_MENU_MODULE
 				+ " t4, "
 				+ TABLE_NAME_GAME
 				+ " t5 "
 				+ "where t1.role_id = t2.role_id and t2.permission_id = t3.permission_id and t3.menu_type_id = t4.menu_type_id and t3.game_id = t5.game_id and t1.role_id = ? "
 				+ "union all select t3.permission_id, t3.resource_url, concat('系统-' , t4.menu_type_name , '-' , t3.resource_name) as resource_name, t3.game_id, t3.menu_type_id from "
-				+ TABLE_NAME
+				+ TABLE_ROLE
 				+ " t1, "
-				+ TABLE_NAME_MAPPING
+				+ TABLE_ROLE_PERMISSION_MAPPING
 				+ " t2, "
 				+ TABLE_NAME_PERMISSION
 				+ " t3, "
-				+ TABLE_NAME_MENU_TYPE
+				+ TABLE_NAME_MENU_MODULE
 				+ " t4 "
 				+ "where t1.role_id = t2.role_id and t2.permission_id = t3.permission_id and t3.menu_type_id = t4.menu_type_id and t3.game_id = 0 and t1.role_id = ?) order by game_id, menu_type_id, permission_id ";
 
@@ -185,25 +184,25 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 		final String sql = "select * from (select t3.permission_id, t3.resource_url, concat(t5.game_name , '-', t4.menu_type_name , '-' , t3.resource_name ) as resource_name, t3.game_id, t3.menu_type_id from "
 				+ TABLE_NAME_PERMISSION
 				+ " t3, "
-				+ TABLE_NAME_MENU_TYPE
+				+ TABLE_NAME_MENU_MODULE
 				+ " t4, "
 				+ TABLE_NAME_GAME
 				+ " t5 "
 				+ "where t3.permission_id not in (select t2.permission_id from "
-				+ TABLE_NAME
+				+ TABLE_ROLE
 				+ " t1, "
-				+ TABLE_NAME_MAPPING
+				+ TABLE_ROLE_PERMISSION_MAPPING
 				+ " t2 where t1.role_id = t2.role_id and t1.role_id = ?) "
 				+ "and t3.menu_type_id = t4.menu_type_id and t3.game_id = t5.game_id "
 				+ "union all select t3.permission_id, t3.resource_url, concat('系统-' , t4.menu_type_name , '-' , t3.resource_name) as resource_name, t3.game_id, t3.menu_type_id from "
 				+ TABLE_NAME_PERMISSION
 				+ " t3, "
-				+ TABLE_NAME_MENU_TYPE
+				+ TABLE_NAME_MENU_MODULE
 				+ " t4 "
 				+ "where t3.permission_id not in (select t2.permission_id from "
-				+ TABLE_NAME
+				+ TABLE_ROLE
 				+ " t1, "
-				+ TABLE_NAME_MAPPING
+				+ TABLE_ROLE_PERMISSION_MAPPING
 				+ " t2 where t1.role_id = t2.role_id and t1.role_id = ?) "
 				+ "and t3.menu_type_id = t4.menu_type_id and t3.game_id = 0) order by game_id, menu_type_id, permission_id ";
 
@@ -218,7 +217,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 	@Override
 	public int insertRolePromissionMappingById(Integer roleId, Integer permissionId) {
 		final String sql = "insert into "
-				+ TABLE_NAME_MAPPING
+				+ TABLE_ROLE_PERMISSION_MAPPING
 				+ " ( ROLE_ID, PERMISSION_ID) values (?, ?) ";
 		Object[] args = { roleId, permissionId };
 
@@ -230,7 +229,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 	@Override
 	public int deleteRolePromissionMappingById(Integer roleId,
 			Integer permissionId) {
-		final String sql = "delete from " + TABLE_NAME_MAPPING
+		final String sql = "delete from " + TABLE_ROLE_PERMISSION_MAPPING
 				+ " where ROLE_ID = ? and PERMISSION_ID = ? ";
 		Object[] args = { roleId, permissionId };
 
@@ -242,9 +241,9 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 	@Override
 	public List<RolePermissionMapping> getRolePermissionMapping() {
 		final String sql = "select t2.mapping_id, t1.role_id, t3.permission_id, t1.role_code, t3.resource_url from "
-				+ TABLE_NAME
+				+ TABLE_ROLE
 				+ " t1, "
-				+ TABLE_NAME_MAPPING
+				+ TABLE_ROLE_PERMISSION_MAPPING
 				+ " t2, "
 				+ TABLE_NAME_PERMISSION
 				+ " t3 where t1.role_id = t2.role_id and t2.permission_id = t3.permission_id ";
@@ -268,7 +267,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 
 	@Override
 	public int countRole() {
-		String sql = "select count(1) from " + TABLE_NAME + " t1 ";
+		String sql = "select count(1) from " + TABLE_ROLE + " t1 ";
 
 		int records = getJdbcTemplate().queryForObject(sql, Integer.class);
 
@@ -279,7 +278,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 	public List<Role> getRoleGrid(int from, int length, String sidx, String sord) {
 		List<Object> params = new ArrayList<Object>();
 		String sql = "select ROLE_ID, ROLE_NAME, ROLE_CODE, DESCRIPTION from "
-				+ TABLE_NAME + " t1 ";
+				+ TABLE_ROLE + " t1 ";
 
 		if (StringUtils.isBlank(sidx)) {
 			sql += "order by ROLE_ID desc ";
@@ -310,25 +309,25 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 	@Override
 	public List<Menu> getMenuListByRoleCode(String roleCode) {
 		final String sql = "select * from (select t3.permission_id, t4.menu_order, t3.game_id, t5.game_ab, t5.game_name, t3.menu_type_id, t4.menu_type_name, t3.resource_url, t3.resource_name, t3.resource_order, t3.description from "
-				+ TABLE_NAME_MAPPING
+				+ TABLE_ROLE_PERMISSION_MAPPING
 				+ " t1, "
-				+ TABLE_NAME
+				+ TABLE_ROLE
 				+ " t2, "
 				+ TABLE_NAME_PERMISSION
 				+ " t3, "
-				+ TABLE_NAME_MENU_TYPE
+				+ TABLE_NAME_MENU_MODULE
 				+ " t4, "
 				+ TABLE_NAME_GAME
 				+ " t5 "
 				+ "where t2.role_code = ? and t1.role_id = t2.role_id and t1.permission_id = t3.permission_id and t3.menu_type_id = t4.menu_type_id and t3.game_id = t5.game_id "
 				+ "union all select t3.permission_id, t4.menu_order, t3.game_id, 'system' as game_ab, '系统' as game_name, t3.menu_type_id, t4.menu_type_name, t3.resource_url, t3.resource_name, t3.resource_order, t3.description from "
-				+ TABLE_NAME_MAPPING
+				+ TABLE_ROLE_PERMISSION_MAPPING
 				+ " t1, "
-				+ TABLE_NAME
+				+ TABLE_ROLE
 				+ " t2, "
 				+ TABLE_NAME_PERMISSION
 				+ " t3, "
-				+ TABLE_NAME_MENU_TYPE
+				+ TABLE_NAME_MENU_MODULE
 				+ " t4 "
 				+ "where t2.role_code = ? and t1.role_id = t2.role_id and t1.permission_id = t3.permission_id and t3.menu_type_id = t4.menu_type_id and t3.game_id = 0) t order by menu_order, resource_order, permission_id ";
 
@@ -342,7 +341,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 	@Override
 	public List<MenuType> getMenuTypeList() {
 		final String sql = "select t1.menu_type_id, t1.menu_type_name, t1.description from "
-				+ TABLE_NAME_MENU_TYPE + " t1 order by t1.menu_order ";
+				+ TABLE_NAME_MENU_MODULE + " t1 order by t1.menu_order ";
 
 		List<MenuType> list = getJdbcTemplate()
 				.query(sql, new MenuTypeMapper());
@@ -359,7 +358,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 			sql = "select count(1) from (select t1.permission_id from "
 					+ TABLE_NAME_PERMISSION
 					+ " t1, "
-					+ TABLE_NAME_MENU_TYPE
+					+ TABLE_NAME_MENU_MODULE
 					+ " t2, "
 					+ TABLE_NAME_GAME
 					+ " t3 "
@@ -382,7 +381,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 			sql += " union all select t1.permission_id from "
 					+ TABLE_NAME_PERMISSION
 					+ " t1, "
-					+ TABLE_NAME_MENU_TYPE
+					+ TABLE_NAME_MENU_MODULE
 					+ " t2 "
 					+ "where t1.menu_type_id = t2.menu_type_id and t1.game_id = 0 ";
 			if (menuTypeId != null && menuTypeId.intValue() > 0) {
@@ -404,7 +403,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 			sql = "select count(1) from "
 					+ TABLE_NAME_PERMISSION
 					+ " t1, "
-					+ TABLE_NAME_MENU_TYPE
+					+ TABLE_NAME_MENU_MODULE
 					+ " t2, "
 					+ TABLE_NAME_GAME
 					+ " t3 "
@@ -432,7 +431,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 			sql = "select count(1) from "
 					+ TABLE_NAME_PERMISSION
 					+ " t1, "
-					+ TABLE_NAME_MENU_TYPE
+					+ TABLE_NAME_MENU_MODULE
 					+ " t2 "
 					+ "where t1.menu_type_id = t2.menu_type_id and t1.game_id = 0 ";
 			if (menuTypeId != null && menuTypeId.intValue() > 0) {
@@ -472,7 +471,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 			sql = "select * from (select t1.permission_id, t1.resource_url, t1.resource_name, t1.game_id, t3.game_name, t3.game_ab, t1.menu_type_id, t2.menu_type_name, t1.description, t2.menu_order from "
 					+ TABLE_NAME_PERMISSION
 					+ " t1, "
-					+ TABLE_NAME_MENU_TYPE
+					+ TABLE_NAME_MENU_MODULE
 					+ " t2, "
 					+ TABLE_NAME_GAME
 					+ " t3 "
@@ -495,7 +494,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 			sql += " union all select t1.permission_id, t1.resource_url, t1.resource_name, t1.game_id, '系统' as game_name, 'system' as game_ab, t1.menu_type_id, t2.menu_type_name, t1.description, t2.menu_order from "
 					+ TABLE_NAME_PERMISSION
 					+ " t1, "
-					+ TABLE_NAME_MENU_TYPE
+					+ TABLE_NAME_MENU_MODULE
 					+ " t2 "
 					+ "where t1.menu_type_id = t2.menu_type_id and t1.game_id = 0 ";
 			if (menuTypeId != null && menuTypeId.intValue() > 0) {
@@ -517,7 +516,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 			sql = "select t1.permission_id, t1.resource_url, t1.resource_name, t1.game_id, t3.game_name, t3.game_ab, t1.menu_type_id, t2.menu_type_name, t1.description, t2.menu_order from "
 					+ TABLE_NAME_PERMISSION
 					+ " t1, "
-					+ TABLE_NAME_MENU_TYPE
+					+ TABLE_NAME_MENU_MODULE
 					+ " t2, "
 					+ TABLE_NAME_GAME
 					+ " t3 "
@@ -545,7 +544,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 			sql = "select t1.permission_id, t1.resource_url, t1.resource_name, t1.game_id, '系统' as game_name, 'system' as game_ab, t1.menu_type_id, t2.menu_type_name, t1.description, t2.menu_order from "
 					+ TABLE_NAME_PERMISSION
 					+ " t1, "
-					+ TABLE_NAME_MENU_TYPE
+					+ TABLE_NAME_MENU_MODULE
 					+ " t2 "
 					+ "where t1.menu_type_id = t2.menu_type_id and t1.game_id = 0 ";
 			if (menuTypeId != null && menuTypeId.intValue() > 0) {
@@ -691,13 +690,13 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 		String sql = "";
 		if (gameId.intValue() == 0) {
 			sql = "select t3.permission_id, t3.resource_url, concat('系统-' , t4.menu_type_name , '-' , t3.resource_name) as resource_name, t3.game_id, t3.menu_type_id from "
-					+ TABLE_NAME
+					+ TABLE_ROLE
 					+ " t1, "
-					+ TABLE_NAME_MAPPING
+					+ TABLE_ROLE_PERMISSION_MAPPING
 					+ " t2, "
 					+ TABLE_NAME_PERMISSION
 					+ " t3, "
-					+ TABLE_NAME_MENU_TYPE
+					+ TABLE_NAME_MENU_MODULE
 					+ " t4 "
 					+ "where t1.role_id = t2.role_id and t2.permission_id = t3.permission_id and t3.menu_type_id = t4.menu_type_id and t3.game_id = 0 and t1.role_id = ? "
 					+ " order by game_id, menu_type_id, permission_id ";
@@ -705,13 +704,13 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 		} else {
             //替换之concat(t5.game_name , '-', t4.menu_type_name , '-' , t3.resource_name )
 			sql = "select t3.permission_id, t3.resource_url, concat(t5.game_name , '-', t4.menu_type_name , '-' , t3.resource_name ) as resource_name, t3.game_id, t3.menu_type_id from "
-					+ TABLE_NAME
+					+ TABLE_ROLE
 					+ " t1, "
-					+ TABLE_NAME_MAPPING
+					+ TABLE_ROLE_PERMISSION_MAPPING
 					+ " t2, "
 					+ TABLE_NAME_PERMISSION
 					+ " t3, "
-					+ TABLE_NAME_MENU_TYPE
+					+ TABLE_NAME_MENU_MODULE
 					+ " t4, "
 					+ TABLE_NAME_GAME
 					+ " t5 "
@@ -741,12 +740,12 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 			sql = "select t3.permission_id, t3.resource_url, concat('系统-' , t4.menu_type_name , '-' , t3.resource_name) as resource_name, t3.game_id, t3.menu_type_id from "
 					+ TABLE_NAME_PERMISSION
 					+ " t3, "
-					+ TABLE_NAME_MENU_TYPE
+					+ TABLE_NAME_MENU_MODULE
 					+ " t4 "
 					+ "where t3.permission_id not in (select t2.permission_id from "
-					+ TABLE_NAME
+					+ TABLE_ROLE
 					+ " t1, "
-					+ TABLE_NAME_MAPPING
+					+ TABLE_ROLE_PERMISSION_MAPPING
 					+ " t2 where t1.role_id = t2.role_id and t1.role_id = ?) "
 					+ "and t3.menu_type_id = t4.menu_type_id and t3.game_id = 0 order by game_id, menu_type_id, permission_id ";
 			params.add(roleId);
@@ -754,14 +753,14 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 			sql = "select t3.permission_id, t3.resource_url, concat(t5.game_name , '-', t4.menu_type_name , '-' , t3.resource_name )  as resource_name, t3.game_id, t3.menu_type_id from "
 					+ TABLE_NAME_PERMISSION
 					+ " t3, "
-					+ TABLE_NAME_MENU_TYPE
+					+ TABLE_NAME_MENU_MODULE
 					+ " t4, "
 					+ TABLE_NAME_GAME
 					+ " t5 "
 					+ "where t3.permission_id not in (select t2.permission_id from "
-					+ TABLE_NAME
+					+ TABLE_ROLE
 					+ " t1, "
-					+ TABLE_NAME_MAPPING
+					+ TABLE_ROLE_PERMISSION_MAPPING
 					+ " t2 where t1.role_id = t2.role_id and t1.role_id = ?) "
 					+ "and t3.menu_type_id = t4.menu_type_id and t3.game_id = t5.game_id and t3.game_id = ? "
 					+ " order by game_id, menu_type_id, permission_id ";
@@ -796,7 +795,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 	@Override
 	public List<MenuType> getMenuTypeById(Integer menuTypeId) {
 		final String sql = "select t1.menu_type_id, t1.menu_type_name, t1.description from "
-				+ TABLE_NAME_MENU_TYPE + " t1 where t1.menu_type_id = ? ";
+				+ TABLE_NAME_MENU_MODULE + " t1 where t1.menu_type_id = ? ";
 
 		Object[] args = { menuTypeId };
 		List<MenuType> list = getJdbcTemplate().query(sql, args,

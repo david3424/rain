@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*" %>
-<%@ page import="com.wanmei.webgame.security.tool.SessionUser" %>
-<%@ page import="com.wanmei.webgame.web.model.GameBean" %>
-<%@ page import="com.wanmei.webgame.web.model.Menu" %>
+<%@ page import="org.david.rain.security.tool.SessionUser" %>
+<%@ page import="org.david.rain.model.GameBean" %>
+<%@ page import="org.david.rain.model.Menu" %>
 <%
 	HttpSession httpSession = request.getSession(true);
 	String currentGameShort = (String)httpSession.getAttribute(SessionUser.SESSION_CURRENT_GAME_SHORT);
@@ -29,30 +29,11 @@
 	Map<Integer, Map<String, List<Menu>>> userMenuMap = sessionUser.getUserMenuMap();
 
 	List<String> authorityGameList = sessionUser.getAuthorityGameList();
-	
-	//测试添加
-//	if(null == authorityGameList){
-//		authorityGameList = new ArrayList<String>();
-//		authorityGameList.add("hzxf");
-//		authorityGameList.add("bhsj");
-//		authorityGameList.add("mslrly");
-//	}
 
 	String path = request.getContextPath();
 	String basePath;
 	String gamePath;
 	String menuPath;
-	int port = request.getServerPort();
-	/*if(80 == port){
-		menuPath = request.getScheme() + "://" + request.getServerName() + path;
-		basePath = request.getScheme() + "://" + request.getServerName() + path +"/";
-		gamePath = request.getScheme() + "://" + request.getServerName() + path + "/wanmei/"+currentGameShort+"/";
-	}else{
-		menuPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
-		basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path +"/";
-		gamePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/wanmei/"+currentGameShort+"/";
-	}*/
-    menuPath =  path;
     basePath =  path +"/";
     gamePath =  path + "/wanmei/"+currentGameShort+"/";
 %>
@@ -83,10 +64,10 @@
 <script type="text/javascript" src="<c:url value="/js/libs/bootstrap-datepicker-master/js/locales/bootstrap-datepicker.zh-CN.js"/>" charset="UTF-8"></script>
 
 
-<script type="text/javascript" src="<c:url value="/js/libs/Highstock-1.3.2/js/highstock.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/js/libs/Highstock-1.3.2/js/modules/exporting.js"/>"></script>
+<%--<script type="text/javascript" src="<c:url value="/js/libs/Highstock-1.3.2/js/highstock.js"/>"></script>--%>
+<%--<script type="text/javascript" src="<c:url value="/js/libs/Highstock-1.3.2/js/modules/exporting.js"/>"></script>--%>
 <!-- 用下面的试试 
-<script type="text/javascript" src="<c:url value="/js/libs/highcharts/js/highcharts.js"/>"></script> -->
+<%--<script type="text/javascript" src="<c:url value="/js/libs/highcharts/js/highcharts.js"/>"></script> -->--%>
 <script type="text/javascript" src="<c:url value="/js/libs/DataTables-1.9.4/jquery.dataTables.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/libs/DataTables-1.9.4/dataTables.bootstrap.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/libs/DataTables-1.9.4/extras/media/js/TableTools.min.js"/>"></script>

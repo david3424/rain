@@ -21,17 +21,14 @@
 	}else{ //不止一个游戏的访问权限，进入到游戏选择页面
 %>
 <head>
-<c:set  var="authorityGameList" value="<%=authorityGameList%>" scope="page"></c:set>
+<c:set  var="authorityGameList" value="<%=authorityGameList%>" scope="page"  />
 <style type="text/css">
 .div_center{
 	background-color: #F1F1F1;
 	vertical-align: middle;
-	margin-top: 100px;
-	margin-left:auto;
-	margin-right:auto;
-	width: 50%;
+    width: 50%;
 	text-align: center;
-	margin-bottom: 100px;
+    margin: 100px auto;
 }
 
 </style>
