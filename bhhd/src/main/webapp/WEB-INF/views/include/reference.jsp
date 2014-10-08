@@ -66,7 +66,6 @@
 
 <%--<script type="text/javascript" src="<c:url value="/js/libs/Highstock-1.3.2/js/highstock.js"/>"></script>--%>
 <%--<script type="text/javascript" src="<c:url value="/js/libs/Highstock-1.3.2/js/modules/exporting.js"/>"></script>--%>
-<!-- 用下面的试试 
 <%--<script type="text/javascript" src="<c:url value="/js/libs/highcharts/js/highcharts.js"/>"></script> -->--%>
 <script type="text/javascript" src="<c:url value="/js/libs/DataTables-1.9.4/jquery.dataTables.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/libs/DataTables-1.9.4/dataTables.bootstrap.js"/>"></script>

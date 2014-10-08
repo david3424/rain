@@ -44,7 +44,7 @@ public class CustomInvocationSecurityMetadataSource implements
 	private RoleDao roleDetailDao;
 
 	private UrlMatcher urlMatcher = new AntUrlPathMatcher();
-	private static Map<String, Collection<ConfigAttribute>> resourceMap = null;
+	private static Map<String, Collection<ConfigAttribute>> resourceMap = null; // url与角色集合
 	private static boolean reloadResourceMapFlg = false;
 
 	public CustomInvocationSecurityMetadataSource() {

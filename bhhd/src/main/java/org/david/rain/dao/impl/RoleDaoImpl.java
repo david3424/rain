@@ -20,6 +20,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 	private static final String TABLE_NAME_PERMISSION = "T_SYS_PERMISSION";
 	private static final String TABLE_NAME_USER = "T_SYS_USER";
 	private static final String TABLE_NAME_MENU_MODULE = "T_SYS_MENU_TYPE";
+    private static final String TABLE_NAME_GAME = "T_GAME_DICT";
 
 	@Resource(name = "dataSource")
 	private DataSource dataSource;
