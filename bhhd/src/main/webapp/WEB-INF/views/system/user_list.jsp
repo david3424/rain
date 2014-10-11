@@ -122,14 +122,6 @@
         		<form:select id="user_status" path="userStatusList" items="${userStatusList}" itemValue="id" itemLabel="name"></form:select>
             </div>
         </div>
-        <div id="agent_main" class="control-group">
-            <label class="control-label" for="agent">所属联运商：</label>
-        	<div class="controls">
-        		<form:select id="agent" path="providerList"  cssStyle="width: 220px;">
-        			<form:option value="all" label="全部"></form:option>
-                    <form:options items="${providerList}" itemValue="provider_id" itemLabel="provider_name" /></form:select>
-            </div>
-        </div>
     </fieldset>
     </form>
 </div>

@@ -34,6 +34,7 @@
 	String basePath;
 	String gamePath;
 	String menuPath;
+    menuPath =  path;
     basePath =  path +"/";
     gamePath =  path + "/wanmei/"+currentGameShort+"/";
 %>

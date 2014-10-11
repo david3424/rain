@@ -135,7 +135,7 @@ function initDatePicker() {
         autoclose: true,
         todayBtn: 'linked',
         endDate: '+1',
-        language: 'zh-CN',
+        language: 'zh-CN'
     });
 }
 
@@ -370,7 +370,7 @@ function initHighChartsLine(chartsId, title, subTitle, categories, yTitle, toolt
     $('#' + chartsId).highcharts({
         chart: {
             type: 'line',
-            backgroundColor: '#FCFCFC', // transparent
+            backgroundColor: '#FCFCFC' // transparent
         },
         title: {
             text: title,
@@ -474,7 +474,7 @@ function initHighChartsColumn(chartsId, title, subTitle, categories, yAxisTitle,
     $('#' + chartsId).highcharts({
         chart: {
             type: 'column',
-            backgroundColor: '#FCFCFC', // transparent
+            backgroundColor: '#FCFCFC' // transparent
         },
         title: {
             text: title
@@ -806,7 +806,7 @@ function initHighChartsLineDetails(chartsId, title, subTitle, categories, yTitle
     $('#' + chartsId).highcharts({
         chart: {
             type: 'line',
-            backgroundColor: '#FCFCFC', // transparent
+            backgroundColor: '#FCFCFC' // transparent
         },
         title: {
             text: title,
