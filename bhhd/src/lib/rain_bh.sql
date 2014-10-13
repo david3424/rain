@@ -38,7 +38,7 @@ CREATE TABLE `t_game_dict` (
 
 LOCK TABLES `t_game_dict` WRITE;
 /*!40000 ALTER TABLE `t_game_dict` DISABLE KEYS */;
-INSERT INTO `t_game_dict` VALUES (27,'冰火破坏神','bhphs','2',NULL,1);
+INSERT INTO `t_game_dict` VALUES (27,'lost','bhphs','2',NULL,1);
 /*!40000 ALTER TABLE `t_game_dict` ENABLE KEYS */;
 UNLOCK TABLES;
 
