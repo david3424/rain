@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context>
+        <Resource
+                name="jdbc/huodong161"
+                auth="Container"
+                type="javax.sql.DataSource"
+                factory="org.apache.commons.dbcp.BasicDataSourceFactory"
+                maxActive="100"
+                maxIdle="30"
+                username="root"
+                maxWait="5000"
+                driverClassName="org.gjt.mm.mysql.Driver"
+                password=""
+                url="jdbc:mysql://127.0.0.1:3306/rain_auto?useUnicode=true&amp;characterEncoding=UTF8&amp;useOldAliasMetadataBehavior=true"
+                removeAbandoned="true" removeAbandonedTimeout="5" logAbandoned="true"
+                testOnReturn="true" testWhileIdle="true"/>
+    </Context>

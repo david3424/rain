@@ -16,6 +16,7 @@
     <modules>
         <module>../common</module>
         <module>../activity</module>
+        <module>../hdauto</module>
     </modules>
 
     <properties>
@@ -102,6 +103,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
         </dependency>
         <!-- jdbc driver -->
         <dependency>
