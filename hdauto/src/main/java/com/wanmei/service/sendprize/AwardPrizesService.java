@@ -100,10 +100,10 @@ public class AwardPrizesService implements IAwardPrizes {
                     if (!this.ifCoupon) {
                         callback = callback + "&NOCOUPON";
                         if (!this.ifMz) {//非梦诛
-                            flag = prizeService.sendByRoleId(tableName, gid, server, _UserName, roleid.intValue(), prizeid, callback);
+                            flag = prizeService.sendByRoleIdWithTitleAndContent(tableName, gid, server, _UserName, roleid, prizeid, callback,"","");
                         } else {
                             flag = 1;
-                            flag = prizeService.sendByMZRoleId(tableName, gid, server, _UserName, roleid, prizeid, callback);
+                            flag = prizeService.sendByRoleIdWithTitleAndContent(tableName, gid, server, _UserName, roleid, prizeid, callback,"","");
                         }
 
                     } else {
