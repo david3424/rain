@@ -34,14 +34,7 @@
 			<div class="span10">
 				<div id="content" class="container-fluid">
 					<div class="hero-unit">
-						<h1>欢迎访问完美页游管理平台</h1>
-
-						<p style="margin-top: 20px">
-							为了用户的安全性及更好的用户体验，请使用<strong>火狐</strong>浏览器。
-						</p>
-						<p>
-							<a href="<%=basePath%>browser/Firefox-Setup-21.0-CHS.exe" class="btn btn-success btn-large">下载火狐浏览器 &raquo;</a>
-						</p>
+						<h1>Welcome</h1>
 					</div>
 				</div>
 				<!-- content end -->

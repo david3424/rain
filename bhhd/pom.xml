@@ -469,9 +469,6 @@
                     <httpConnector>
                         <port>9090</port>
                     </httpConnector>
-                    <webAppConfig>
-                        <contextPath>/${project.artifactId}</contextPath>
-                    </webAppConfig>
                     <scanIntervalSeconds>2</scanIntervalSeconds>
                 </configuration>
 
