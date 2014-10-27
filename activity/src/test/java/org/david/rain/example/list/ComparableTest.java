@@ -1,13 +1,12 @@
 package org.david.rain.example.list;
 
 import org.junit.Test;
-import org.apache.commons.lang.builder.*;
 
 /**
  * Created by zhangxingang on 14-10-22.
  */
 public class ComparableTest {
-    CompareToBuilder compareToBuilder;
+  /*  CompareToBuilder compareToBuilder;
     @Test
     public void ComparableTest(){
 
@@ -32,6 +31,6 @@ public class ComparableTest {
         public int compareTo(Employee o) {
             return new CompareToBuilder().a;
         }
-    }
+    }*/
 
 }
