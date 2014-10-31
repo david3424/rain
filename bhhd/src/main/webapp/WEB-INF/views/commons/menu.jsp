@@ -10,7 +10,7 @@
 <c:set  var="menuPath" value="<%=menuPath%>" scope="page"/>
 
 <div id="sidebar-nav-menu" class="sidebar-nav">
-	<!-- 添加一个显示当前所处的游戏名称 -->
+	<!-- 添加一个显示当前所处的商品名称 -->
     <c:if test="${not empty menuMap[gameId]}">
     <c:forEach items="${menuMap[gameId]}" var="menuEntityMap" varStatus="status">
     	<div class="accordion-group">

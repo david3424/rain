@@ -6,12 +6,11 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * 在tomcat重新启动之时，通过读取配置文件的配置信息，决定哪些游戏的公告需要重新启动，并发布
+ * 在tomcat重新启动之时，通过读取配置文件的配置信息，决定哪些商品的公告需要重新启动，并发布
  * 
- * bulletinrestat.properties主要记录key所代表的游戏下是否重启公告
+ * bulletinrestat.properties主要记录key所代表的商品下是否重启公告
  * 
- * @author liuxiaochong
- * 
+ *
  */
 public class LoadBulletinRestartXmlUtil {
 

@@ -8,7 +8,7 @@ import java.util.Properties;
 /**
  * 加载获取连接客服接口的配置文件server.xml
  * 
- * serverxml.properties主要记录游戏对应的xml地址
+ * serverxml.properties主要记录商品对应的xml地址
  * 
  * @author GAMEUSER
  * 

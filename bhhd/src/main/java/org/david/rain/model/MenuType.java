@@ -42,4 +42,22 @@ public class MenuType implements Serializable {
 		this.description = description;
 	}
 
+    public MenuType(String menuTypeName, Integer menuOrder, String description) {
+        this.menuTypeName = menuTypeName;
+        this.menuOrder = menuOrder;
+        this.description = description;
+    }
+
+    public MenuType() {
+    }
+
+    @Override
+    public String toString() {
+        return "MenuType{" +
+                "menuTypeId=" + menuTypeId +
+                ", menuTypeName='" + menuTypeName + '\'' +
+                ", menuOrder=" + menuOrder +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

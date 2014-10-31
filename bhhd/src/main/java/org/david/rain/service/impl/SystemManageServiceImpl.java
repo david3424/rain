@@ -477,7 +477,9 @@ public class SystemManageServiceImpl implements SystemManageService {
 		return records;
 	}
 
-	@Override
+
+
+    @Override
 	@Transactional(rollbackFor = Throwable.class, propagation = Propagation.REQUIRED)
 	public int editMenu(Integer permissionId, String resourceName,
 			String resourceUrl, Integer gameId, Integer menuTypeId,

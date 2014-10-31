@@ -34,7 +34,7 @@ public class XmlUtil {
 //		doc = parseDOMTree();
 //	}
 	
-	//系统公告重启时使用，分游戏
+	//系统公告重启时使用，分商品
 	public static void getDomByGame(Integer game_id){
 		String xmluri = LoadServerXmlUtil.getValue(String.valueOf(game_id));
 		System.out.println("-------!!!!!!!!!!!!!===xmluri==" + xmluri); //这里只要获取正确就可以
@@ -45,7 +45,7 @@ public class XmlUtil {
 		ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 		if(null != sra){
 			Integer currentGameId = Utils.getCurrentGameId();
-			if(!"-1".equals(currentGameId)){ //可以通过SESSION获取游戏
+			if(!"-1".equals(currentGameId)){ //可以通过SESSION获取商品
 				String xmluri = LoadServerXmlUtil.getValue(String.valueOf(currentGameId));
 				System.out.println("`````````!!!!!!!!!!!!!===xmluri==" + xmluri); //这里只要获取正确就可以
 				doc = parseDOMTree(xmluri);

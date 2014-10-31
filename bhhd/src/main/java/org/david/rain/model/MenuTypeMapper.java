@@ -14,9 +14,9 @@ public class MenuTypeMapper implements RowMapper<MenuType> {
 		MenuType bean = new MenuType();
 		bean.setMenuTypeId(rs.getInt("MENU_TYPE_ID"));
 		bean.setMenuTypeName(rs.getString("MENU_TYPE_NAME"));
+		bean.setMenuOrder(rs.getInt("menu_order"));
 		bean.setDescription(HtmlUtils.htmlEscape(JavaScriptUtils
 				.javaScriptEscape(rs.getString("DESCRIPTION"))));
-
 		return bean;
 	}
 

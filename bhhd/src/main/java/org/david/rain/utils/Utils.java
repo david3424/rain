@@ -288,7 +288,7 @@ public final class Utils {
 	}
 	
 	/**
-	 * 判断调用游戏的HTTP接口是否成功返回
+	 * 判断调用商品的HTTP接口是否成功返回
 	 * @param jo
 	 * @return
 	 * @author yuhongyong
@@ -313,7 +313,7 @@ public final class Utils {
 	{
 		if (null==jo)
 		{
-			return "游戏服返回Null";
+			return "商品服返回Null";
 		}
 		String msg = "";
 		String code = jo.getString("code");
@@ -524,7 +524,7 @@ public final class Utils {
 	}
 
 	/**
-	 * 取得当前用户访问的游戏ID
+	 * 取得当前用户访问的商品ID
 	 */
 	public static Integer getCurrentGameId() {
 		Integer gameId = -1;

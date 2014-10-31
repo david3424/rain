@@ -12,13 +12,13 @@
 	<%@ include file="/err/login_err.jsp"%>
 <%		
 	} //没有访问权限END 
-	else if( authorityGameListSize == 1 ){ //只有一个访问权限，直接跳转到对应的游戏
+	else if( authorityGameListSize == 1 ){ //只有一个访问权限，直接跳转到对应的商品
 %>
 <head>
 	<meta http-equiv="refresh" content="0; url=<c:url value='<%=basePath + "wanmei/" + authorityGameList.get(0)%>'/>">
 </head>
 <%
-	}else{ //不止一个游戏的访问权限，进入到游戏选择页面
+	}else{ //不止一个商品的访问权限，进入到商品选择页面
 %>
 <head>
 <c:set  var="authorityGameList" value="<%=authorityGameList%>" scope="page"  />
@@ -38,7 +38,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container-fluid">
-            <span class="brand" style="color: #fff">完美世界页游统计平台</span><!-- 这里的跳转地址在联运情况最好为当前地址 -->
+            <span class="brand" style="color: #fff">平台</span><!-- 这里的跳转地址在联运情况最好为当前地址 -->
             <div class="nav-collapse collapse">
 				<ul class="navbar-text pull-right" style="margin: 10px">
 					<li class="dropdown"><a href="#" role="button"

@@ -1,7 +1,7 @@
 /**
  * 首页菜单
  */
-var stayTime = 1000;
+var stayTime = 300;
 
 /**
  * 显示操作成功提示

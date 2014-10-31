@@ -469,10 +469,8 @@
                     <httpConnector>
                         <port>9090</port>
                     </httpConnector>
-                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                    <scanIntervalSeconds>4</scanIntervalSeconds>
                 </configuration>
-
-
             </plugin>
 
         </plugins>

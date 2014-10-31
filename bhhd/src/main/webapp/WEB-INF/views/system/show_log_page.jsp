@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>页游统计平台</title>
+<title>平台</title>
 <%@ include file="../include/reference.jsp"%>
 <script type="text/javascript" src="<%=basePath%>js/apps/system/utils/system_common.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/apps/system/show_log_page.js"></script>

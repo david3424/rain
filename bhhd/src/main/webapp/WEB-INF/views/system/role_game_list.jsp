@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>页游统计平台</title>
+<title>平台</title>
 <%@ include file="../include/reference.jsp"%>
 <script type="text/javascript" src="<%=basePath%>js/apps/system/utils/system_common.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/apps/system/role_game_list.js"></script>
@@ -24,7 +24,7 @@
 
 					<ul class="breadcrumb">
 						<li><a href="<%=basePath%>wanmei/system/show_role_page">用户角色</a><span class="divider">/</span></li>
-						<li class="active">用户游戏绑定</li>
+						<li class="active">用户商品绑定</li>
 					</ul>
 
 					<!-- 查询box -->
@@ -51,7 +51,7 @@
 					<div class="box">
 						<div class="box-header">
 							<h2>
-								<i class="icon-table"></i><span class="break"></span><span>角色游戏绑定列表</span>
+								<i class="icon-table"></i><span class="break"></span><span>角色类别绑定列表</span>
 							</h2>
 							<div class="box-icon">
 								<a class="btn-minimize" href="#"><i class="icon-chevron-up"></i>

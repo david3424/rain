@@ -1,11 +1,12 @@
 package org.david.rain.controller;
 
-import org.david.rain.security.tool.SessionUser;
-import org.david.rain.utils.Constants;
-import org.david.rain.controller.common.BaseController;
-import org.david.rain.model.*;
-import org.david.rain.service.SystemManageService;
 import org.apache.commons.lang.StringUtils;
+import org.david.rain.controller.common.BaseController;
+import org.david.rain.dao.MenuTypeDao;
+import org.david.rain.model.*;
+import org.david.rain.security.tool.SessionUser;
+import org.david.rain.service.SystemManageService;
+import org.david.rain.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +38,10 @@ public class SystemManageController extends BaseController {
 
 	@Resource(name = "systemManageService")
 	private SystemManageService systemManageService;
-	
+
+	@Resource(name = "menuTypeDaoImpl")
+	private MenuTypeDao menuTypeDao;
+
 
 	@RequestMapping(value = "/show_log_page", method = RequestMethod.GET)
 	public String showUserOptionLogPage(ModelMap modelMap) {
@@ -518,11 +523,62 @@ public class SystemManageController extends BaseController {
 	public @ResponseBody
 	Integer deleteMenu(Integer permissionId) {
 		logger.info("deleteMenu start");
-
 		int records = systemManageService.deleteMenu(permissionId);
-
 		return records;
-
 	}
+
+
+    /*菜单类型管理*/
+
+    @RequestMapping(value = "/menu_type", method = RequestMethod.GET)
+    public String menuType() {
+        return "system/menu_type_list";
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/addMenuType", method = RequestMethod.POST)
+    public Map addMenuType( MenuType menuType) {
+        String message;
+        Map<String, Object> mresult = new HashMap<>();
+        try {
+            message = menuTypeDao.addMenuType(menuType);
+            mresult.put("result", message);
+        } catch (Exception e) {
+            e.printStackTrace();
+            message = "异常错误";
+        }
+        mresult.put("result", message);
+        return mresult;
+    }
+
+    @RequestMapping(value = "/getMenuTypeTableData", method = RequestMethod.POST)
+    public void getActivityTypeTableData( HttpServletResponse response,
+                                         @RequestParam("dt_json") String dtjson) {
+        Map<String, Object> map = jsonToMap(dtjson);
+        Integer displayStart = Integer.parseInt((String) map.get(Constants.DATATABLES_IDISPLAYSTART));
+        Integer displayLength = Integer.parseInt((String) map.get(Constants.DATATABLES_IDISPLAYLENGTH));
+        //执行查询
+        List<MenuType> list = menuTypeDao.getMenuTypeList(displayStart, displayLength);
+        int count = menuTypeDao.getMenuTypeListCount();
+        printDataTables(response, count, list);
+    }
+
+
+    @RequestMapping(value = "/deleteMenuType", method = RequestMethod.GET)
+    @ResponseBody
+    public Map deleteMenuType(Integer menuTypeId) {
+        Map<String, Object> mresult = new HashMap<>();
+        String message;
+        int count = menuTypeDao.getMenuTypeCountUsed(menuTypeId);
+
+        if(count>0){
+            message =  "nodelete";
+        }else{
+            message = menuTypeDao.deleteMenuTypeById(menuTypeId);
+        }
+        mresult.put("result",message);
+        return mresult;
+    }
 
 }

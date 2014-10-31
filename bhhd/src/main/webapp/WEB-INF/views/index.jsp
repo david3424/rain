@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>页游统计平台</title>
+<title>平台</title>
 
 <%@ include file="./include/reference.jsp"%>
 
@@ -14,7 +14,6 @@
 <%@ include file="./commons/header.jsp"%>
 <div class="container-fluid">
 <%
-	//判断当前访问的游戏是否在权限之内
 	boolean isHave = false;
 	if(null != currentGameShort ){
 		for(String gm : authorityGameList){

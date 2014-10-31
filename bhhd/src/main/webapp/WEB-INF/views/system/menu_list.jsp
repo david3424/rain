@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>页游统计平台</title>
+<title>菜单列表</title>
 <%@ include file="../include/reference.jsp"%>
 <script type="text/javascript" src="<%=basePath%>js/apps/system/utils/system_common.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/apps/system/menu_list.js"></script>
@@ -35,7 +35,7 @@
 							<table class="table table-bordered">
 								<thead>
 									<tr>
-										<th width="20%">游戏列表</th>
+										<th width="20%">商品列表</th>
 										<th width="20%">菜单类型</th>
 										<th width="20%">菜单名称</th>
 										<th width="20%">菜单URL</th>
@@ -110,7 +110,7 @@
             </div>
         </div>
         <div id="game_id_main" class="control-group">
-            <label class="control-label" for="game_id">所属游戏：</label>
+            <label class="control-label" for="game_id">所属商品：</label>
         	<div class="controls">
         		<form:select id="game_id" path="gameList" items="${gameList}" itemValue="gameId" itemLabel="gameName"></form:select>
             </div>
@@ -149,7 +149,7 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn" onclick="closeDialogInform();">取消</button>
-    <button type="button" class="btn btn-primary" onclick="changeDialogInform();">提交</button>
+    <button type="button" class="btn btn-primary" onclick="doDelMenuType();">提交</button>
 </div>
 </div>
 

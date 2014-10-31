@@ -14,5 +14,21 @@
     <packaging>jar</packaging>
     <name>common</name>
 
-    
+    <properties>
+        <c3p0.version>0.9.1.2</c3p0.version>
+            </properties>
+
+<dependencies>
+    <dependency>
+        <groupId>c3p0</groupId>
+        <artifactId>c3p0</artifactId>
+        <version>${c3p0.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>commons-lang</groupId>
+        <artifactId>commons-lang</artifactId>
+        <version>2.6</version>
+    </dependency>
+</dependencies>
 </project>

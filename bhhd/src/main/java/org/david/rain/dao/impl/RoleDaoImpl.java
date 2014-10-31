@@ -341,7 +341,7 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 
 	@Override
 	public List<MenuType> getMenuTypeList() {
-		final String sql = "select t1.menu_type_id, t1.menu_type_name, t1.description from "
+		final String sql = "select t1.menu_type_id, t1.menu_type_name, t1.menu_order,t1.description from "
 				+ TABLE_NAME_MENU_MODULE + " t1 order by t1.menu_order ";
 
 		List<MenuType> list = getJdbcTemplate()
@@ -804,5 +804,6 @@ public class RoleDaoImpl extends JdbcDaoSupport implements RoleDao {
 
 		return list;
 	}
+
 
 }

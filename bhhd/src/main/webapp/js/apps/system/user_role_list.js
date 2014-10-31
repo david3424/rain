@@ -58,7 +58,7 @@ function operateButton(cellvalue, options, rowObject) {
 
     var setBtn = "<button class='btn btn-link btn-mini' onclick=\"setRoleGame("
     	+ _roleId
-    	+ ")\">绑定游戏</button>";
+    	+ ")\">绑定类别</button>";
 
     return editBtn + "&ensp;" + deleteBtn + "&ensp;" + setBtn;
 }

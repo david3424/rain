@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>页游统计平台</title>
+<title>平台</title>
 <%@ include file="../include/reference.jsp"%>
 <script type="text/javascript">
     var pageRoleId = "${roleDetail.roleId}";
@@ -24,7 +24,7 @@
 				<div id="content" class="container-fluid">
 					<ul class="breadcrumb">
 						<li><a href="<%=basePath%>wanmei/system/show_role_page">用户角色</a><span class="divider">/</span></li>
-						<li><a href="<%=basePath%>wanmei/system/show_role_game_page?roleId=${roleDetail.roleId}">用户游戏绑定</a><span class="divider">/</span></li>
+						<li><a href="<%=basePath%>wanmei/system/show_role_game_page?roleId=${roleDetail.roleId}">用户商品绑定</a><span class="divider">/</span></li>
 						<li class="active">角色权限管理</li>
 					</ul>
 		            <!-- 表格box -->

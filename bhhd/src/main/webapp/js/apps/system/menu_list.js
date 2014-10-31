@@ -27,7 +27,7 @@ $(document).ready(function() {
 
 function getMenuTables() {
 	var url = basePath + "wanmei/system/get_menu_table";
-	var columns = [{"sTitle": "所属游戏", "mData": "gameName"},
+	var columns = [{"sTitle": "所属商品", "mData": "gameName"},
 	       	       {"sTitle": "菜单类型", "mData": "menuTypeName"},
 	    	       {"sTitle": "菜单名称", "mData": "resourceName"},
 	    	       {"sTitle": "菜单URL", "mData": "resourceUrl"},

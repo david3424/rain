@@ -9,8 +9,8 @@ $(document).ready(function() {
 
 function getRoleGameTables() {
 	var url = basePath + "wanmei/system/get_role_game_table";
-	var columns = [{"sTitle": "游戏名称", "mData": "gameName", "sWidth": "25%"},
-	       	       {"sTitle": "游戏缩写", "mData": "gameAb", "sWidth": "25%"},
+	var columns = [{"sTitle": "商品名称", "mData": "gameName", "sWidth": "25%"},
+	       	       {"sTitle": "商品缩写", "mData": "gameAb", "sWidth": "25%"},
 	    	       {"sTitle": "操作", "mData": "roleId", "sWidth": "50%", "mRender": function(data, type, row) {return operateButton(data, type, row);}}];
 	var params =[{name: 'roleId', value: pageRoleId}];
 	commonDataTables("roleGameTable", url, columns, params);
@@ -27,12 +27,12 @@ function operateButton(cellvalue, options, rowObject) {
 		bindBtn = "<button class='btn btn-warning btn-mini' onclick=\"bindGame("
 				+ pageRoleId + ","
     			+ _gameId
-    			+ ")\">绑定游戏</button>";
+    			+ ")\">绑定类别</button>";
 	} else {
 		bindBtn = "<button class='btn btn-success btn-mini' onclick=\"unbindGame("
 				+ pageRoleId + ","
     			+ _gameId
-    			+ ")\">解绑游戏</button>";
+    			+ ")\">解绑类别</button>";
 
     	permitBtn = "<button class='btn btn-link btn-mini' onclick=\"permitReSource("
     	+ pageRoleId + ","
@@ -50,7 +50,7 @@ function permitReSource(_roleId, _gameId) {
 function bindGame(_roleId, _gameId) {
 	methodMode = 1;
 	gameId = _gameId;
-	$("#informInfoId").html("你确定要进行此角色<strong style='color:red'>绑定</strong>游戏的操作吗？");
+	$("#informInfoId").html("你确定要进行此角色<strong style='color:red'>绑定</strong>商品的操作吗？");
 
 	$("#dialog_inform").modal({
 		backdrop : false
@@ -60,7 +60,7 @@ function bindGame(_roleId, _gameId) {
 function unbindGame(_roleId, _gameId) {
 	methodMode = 2;
 	gameId = _gameId;
-	$("#informInfoId").html("你确定要进行此角色<strong style='color:red'>解绑</strong>游戏的操作吗？");
+	$("#informInfoId").html("你确定要进行此角色<strong style='color:red'>解绑</strong>商品的操作吗？");
 
 	$("#dialog_inform").modal({
 		backdrop : false
@@ -73,7 +73,7 @@ function changeDialogInform() {
 	} else if (methodMode == 2) {
 		unbindProcess(gameId);
 	} else {
-		alert("操作角色游戏设置失败！");
+		alert("操作角色商品设置失败！");
 	}
 }
 
@@ -89,17 +89,17 @@ function bindProcess(_gameId) {
 		async : true,
 		success : function(response) {
 			if (response == 1) {
-				showSuccessTip_inform("角色绑定游戏成功！");
+				showSuccessTip_inform("角色绑定成功！");
 				setTimeout(function() {closeDialogInform();}, stayTime);
 			} else if (response == 2) {
-				showSuccessTip_inform("该角色已经帮定游戏！");
+				showSuccessTip_inform("该角色已经绑定！");
 				setTimeout(function() {closeDialogInform();}, stayTime);
 			}else {
-				showValidateTip_inform("角色绑定游戏失败！");
+				showValidateTip_inform("角色绑定失败！");
 			}
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			validateTipInfoInform(XMLHttpRequest, "角色绑定游戏失败！");
+			validateTipInfoInform(XMLHttpRequest, "角色绑定失败！");
 			return false;
 		}
 	});
@@ -117,17 +117,17 @@ function unbindProcess(_gameId) {
 		async : true,
 		success : function(response) {
 			if (response == 1) {
-				showSuccessTip_inform("角色解绑游戏成功！");
+				showSuccessTip_inform("角色解绑商品成功！");
 				setTimeout(function() {closeDialogInform();}, stayTime);
 			} else if (response == 2) {
-				showSuccessTip_inform("该角色已经解绑游戏！");
+				showSuccessTip_inform("该角色已经解绑商品！");
 				setTimeout(function() {closeDialogInform();}, stayTime);
 			}else {
-				showValidateTip_inform("角色解绑游戏失败！");
+				showValidateTip_inform("角色解绑商品失败！");
 			}
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			validateTipInfoInform(XMLHttpRequest, "角色解绑游戏失败！");
+			validateTipInfoInform(XMLHttpRequest, "角色解绑商品失败！");
 			return false;
 		}
 	});

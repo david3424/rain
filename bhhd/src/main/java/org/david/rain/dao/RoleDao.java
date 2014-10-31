@@ -78,4 +78,5 @@ public interface RoleDao {
 	List<Permission> getPermissionsById(Integer permissionId);
 
 	List<MenuType> getMenuTypeById(Integer menuTypeId);
+
 }
