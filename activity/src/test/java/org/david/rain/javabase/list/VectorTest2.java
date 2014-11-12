@@ -1,9 +1,7 @@
-package org.david.rain.example.list;
+package org.david.rain.javabase.list;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.Vector;
 
 /**
  * Created by zhangxingang on 14-10-27.

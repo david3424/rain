@@ -21,7 +21,7 @@
             <sec:concurrency-control max-sessions="1" error-if-maximum-exceeded="false" />
         </sec:session-management>
         <!-- <sec:intercept-url pattern="/**" requires-channel="https" /> -->
-        <sec:form-login login-page="/login" authentication-failure-url="/login?error=true"  
+        <sec:form-login login-page="/login" authentication-failure-url="/login?error=true"
         	authentication-success-handler-ref="customAuthenticationSuccessHandler" />
         <!-- FILTER_SECURITY_INTERCEPTOR Spring Security默认的Filter -->
         <sec:custom-filter ref="customSecurityFilter" before="FILTER_SECURITY_INTERCEPTOR" />

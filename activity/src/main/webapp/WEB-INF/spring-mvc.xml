@@ -30,13 +30,7 @@
 
     </bean>
     <!-- 定义无Controller的path<->view直接映射 -->
-    <mvc:view-controller path="/" view-name="redirect:/user/index"/>
-
-    <bean id="/logservice"
-          class="org.springframework.remoting.caucho.HessianServiceExporter">
-        <property name="service" ref="logServiceImp"/>
-        <property name="serviceInterface" value="org.david.logservice.ILogService"/>
-    </bean>
+    <mvc:view-controller path="/" view-name="redirect:/"/>
 
 
     <!-- 将Controller抛出的异常转到特定View -->

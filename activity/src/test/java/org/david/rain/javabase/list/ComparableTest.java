@@ -1,6 +1,4 @@
-package org.david.rain.example.list;
-
-import org.junit.Test;
+package org.david.rain.javabase.list;
 
 /**
  * Created by zhangxingang on 14-10-22.

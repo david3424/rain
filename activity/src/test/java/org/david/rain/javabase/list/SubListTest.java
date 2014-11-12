@@ -1,4 +1,4 @@
-package org.david.rain.example.list;
+package org.david.rain.javabase.list;
 
 import org.junit.Test;
 

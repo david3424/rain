@@ -1,5 +1,6 @@
 package org.david.rain.service;
 
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.JsonEncoding;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -138,22 +139,28 @@ public class JacksonTest {
     @Test
     public void readAsMap(){
 
-        String json = "{\"gender\" : \"MALE\",\n" +
+ /*       String json = "{\"gender\" : \"MALE\",\n" +
                 "  \"verified\" : false,\n" +
                 "  \"age\" : \"aa\",\n" +
-                "  \"userImage\" : \"Rm9vYmFyIQ==\"}";
-        Map testM = new HashMap();
+                "  \"userImage\" : \"Rm9vYmFyIQ==\"}";*/
+        String json = "{\"jsonrpc\":\"2.0\",\"id\":854800568,\"error\":null,\"result\":{\"status\":\"queued\",\"request_type\":\"GameSendMailRequest\",\"request_id\":4548}}";
+       /* Map testM = new HashMap();
         testM.put("gender","MALE");
         testM.put("age","14");
         try {
             json = objectMapper.writeValueAsString(testM);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
         try {
             Map map = objectMapper.readValue(json, Map.class);
-            Integer age = Integer.valueOf((String) map.get("age"));
+            System.out.println(StringUtils.isEmpty((String) map.get("error")));
+            map = (Map) map.get("result");
+            String result = map.get("request_id") + "";
+
+            System.out.println(result);
+//            Integer age = Integer.valueOf((String) map.get("age"));
             System.out.println(map);
         } catch (Exception e) {
             e.printStackTrace();

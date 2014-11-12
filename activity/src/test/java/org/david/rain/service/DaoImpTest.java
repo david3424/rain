@@ -50,14 +50,4 @@ private Idao writeDaoImp;
         }
     }
 
-
-    @Test
-    public void testII(){
-        int m = 0 ;
-        for(int i=0;i<10;i++){
-            System.out.println("i="+i);
-         m = ++i ;
-            System.out.println("m="+m);
-        }
-    }
 }

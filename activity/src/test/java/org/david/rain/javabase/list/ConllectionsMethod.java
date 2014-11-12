@@ -1,7 +1,6 @@
-package org.david.rain.example.list;
+package org.david.rain.javabase.list;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
