@@ -18,7 +18,10 @@ util工具包，包括memcached、ip获取，服务器列表、时间操作，
 
 activity模块 业务主要模块，也是parent的子模块，引入common包，包括
 单元测试
-    测试数据库连接 dbutils/mybatis
-    测试service层业务
-    测试controller层逻辑
+    测试数据库连接 dbutils/mybatis/jdbctemplate
+    测试service层业务 事务管理
+
+    测试javabase的一些东西
+    加载顺序
+    集合的特性
 

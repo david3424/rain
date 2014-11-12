@@ -24,7 +24,7 @@ public class TreadLocalTest {
         TestClient t3 = new TestClient(sn);
         t1.start();
         t2.start();
-        t3.start();
+//        t3.start();
     }
 
     private static class TestClient extends Thread {
