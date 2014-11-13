@@ -2,6 +2,7 @@ package org.david.rain.springtest.transaction;
 
 /**
  * Created by david on 2014/11/11.
+ * threadlocal机制为每个线程分配了定义的变量。在当次线程操作中互不干扰
  */
 public class TreadLocalTest {
 

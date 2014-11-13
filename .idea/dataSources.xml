@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="4093912794">
+  <component name="DataSourceManagerImpl" format="xml" hash="4124972917">
     <data-source source="LOCAL" name="rain-sql" uuid="890d98d1-1a95-403c-85fd-cee5da6b5dea">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
+      <auto-commit>false</auto-commit>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/</jdbc-url>
       <user-name>root</user-name>
@@ -13,7 +14,7 @@
       </driver-properties>
       <libraries>
         <library>
-          <url>file://D:/usefuljar/mysql-connector-java-5.1.26.jar</url>
+          <url>file://$USER_HOME$/Downloads/开发/mysql-connector-java-5.1.18-bin.jar</url>
         </library>
       </libraries>
     </data-source>

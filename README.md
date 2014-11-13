@@ -25,3 +25,21 @@ activity模块 业务主要模块，也是parent的子模块，引入common包�
     加载顺序
     集合的特性
 
+
+
+==============================
+bhhd模块
+后端：
+1.spring security
+2.oracle转mysql
+3.spring jdbctemplate
+4.java-mail
+5.freemarker
+前端：
+1.bootstrap2.2
+2.jquery 分页插件
+3.json数据传输
+架构
+1.单点登录
+2.maven插件
+3.log4j
