@@ -51,4 +51,10 @@ public class AccountBean {
     public void setBirthday(Birthday birthday) {
         this.birthday = birthday;
     }
+
+    public AccountBean(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+    public  AccountBean(){}
 }

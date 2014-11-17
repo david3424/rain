@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.JsonEncoding;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.node.ArrayNode;
 import org.david.rain.entity.AccountBean;
 import org.junit.After;
 import org.junit.Before;
@@ -24,6 +25,7 @@ public class JacksonTest {
     private JsonGenerator jsonGenerator = null;
     private ObjectMapper objectMapper = null;
     private AccountBean bean = null;
+    private static final String TREE_MODEL_BINDING = "{\"treekey1\":\"treevalue1\",\"treekey2\":\"treevalue2\",\"children\":[{\"childkey1\":\"childkey1\"}]}";
 
     @Before
     public void init() {
@@ -165,6 +167,20 @@ public class JacksonTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    @Test
+    public void List2Json(){
+
+        List<AccountBean> accounts = new ArrayList<>();
+        for(int i=0;i<3;i++){
+            AccountBean accountBean = new AccountBean("david"+i,"todavidxu"+i+"@qq.com");
+            accounts.add(accountBean);
+        }
+        ArrayNode array = objectMapper.valueToTree(accounts);
+//        ObjectNode companyNode = objectMapper.valueToTree(company);
+//        companyNode.putArray("Employee").addAll(array);
     }
 
 
