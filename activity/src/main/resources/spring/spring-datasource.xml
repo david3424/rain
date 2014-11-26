@@ -41,11 +41,11 @@
 
     <!--构造注入 dbutils操作-->
     <!--注入queryNewRunner的为W数据库，spring管理事务-->
-    <bean id="queryNewRunner" class="org.david.rain.common.repository.QueryNewRunner">
+    <bean id="queryNewRunner" class="org.david.rain.act.utils.QueryNewRunner">
         <constructor-arg ref="dataSource_W"/>
     </bean>
     <!--dao层操作基础类-->
-    <bean id="writeDaoImp" class="org.david.rain.common.repository.impl.WriteDaoImp">
+    <bean id="commonWriterImp" class="org.david.rain.act.dao.dbutils.CommonWriterImp">
         <constructor-arg ref="queryNewRunner"/>
     </bean>
 

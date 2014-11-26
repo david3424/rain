@@ -14,7 +14,7 @@
     </settings>
     <plugins>
         <!--分页插件-->
-        <plugin interceptor="org.david.rain.utils.PagePlugin">
+        <plugin interceptor="org.david.rain.act.utils.PagePlugin">
             <property name="dialect" value="mysql" />
             <property name="pageSqlId" value=".*ListPage.*" /><!--正则匹配-->
         </plugin>

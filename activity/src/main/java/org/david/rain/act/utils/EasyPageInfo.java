@@ -1,4 +1,4 @@
-package org.david.rain.utils;
+package org.david.rain.act.utils;
 import java.io.Serializable;
 
 public class EasyPageInfo implements Serializable {

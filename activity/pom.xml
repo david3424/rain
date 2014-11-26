@@ -18,17 +18,12 @@
 
 
     <dependencies>
-    <dependency>
+   <!-- <dependency>
         <groupId>org.david.rain</groupId>
         <artifactId>common</artifactId>
         <version>1.0.0</version>
-    </dependency>
+    </dependency>-->
 
-        <dependency>
-            <groupId>org.datanucleus</groupId>
-            <artifactId>datanucleus-api-jdo</artifactId>
-            <version>3.0.0-release</version>
-        </dependency>
     </dependencies>
 
 

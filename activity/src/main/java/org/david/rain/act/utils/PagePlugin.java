@@ -1,4 +1,4 @@
-package org.david.rain.utils;
+package org.david.rain.act.utils;
 
 import org.apache.ibatis.executor.ErrorContext;
 import org.apache.ibatis.executor.ExecutorException;
