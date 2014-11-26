@@ -1,7 +1,10 @@
-package com.wanmei.entity;
+package org.david.rain.act.entity;
 
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.david.rain.act.utils.entity.HdTable;
+import org.david.rain.act.utils.entity.IdEntity;
+import org.david.rain.act.utils.entity.ThisIgnore;
 
 import java.util.Date;
 
@@ -19,7 +22,7 @@ public class User extends IdEntity {
     public User() {
     }
 
-    public User(Integer id) {
+    public User(Long id) {
         this.id = id;
     }
 

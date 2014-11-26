@@ -11,6 +11,7 @@
         <param-name>webAppRootKey</param-name>
         <param-value>webApp.root-activity</param-value>
     </context-param>
+    <!--实现ServletRequestListener监听器接口，该监听器监听HTTP请求事件，Web服务器接收的每次请求都会通知该监听器-->
     <listener>
             <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
         </listener>
@@ -35,6 +36,7 @@
     <listener>
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
     </listener>
+    <!--实现ServletContextListener监听器接口，而ServletContextListener只负责监听Web容器的启动和关闭的事件-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -54,18 +56,18 @@
     </servlet-mapping>
 
     <!--验证码-->
-    <servlet>
+    <!--<servlet>
        <servlet-name>AuthImageServlet</servlet-name>
        <servlet-class>org.david.rain.common.servlet.AuthImageServlet</servlet-class>
      </servlet>
      <servlet-mapping>
        <servlet-name>AuthImageServlet</servlet-name>
        <url-pattern>/servlet/AuthImageServlet</url-pattern>
-     </servlet-mapping>
+     </servlet-mapping>-->
 
 
     <!-- Shiro filter-->
-    <filter>
+   <!-- <filter>
         <filter-name>shiroFilter</filter-name>
         <filter-class>
             org.springframework.web.filter.DelegatingFilterProxy
@@ -78,7 +80,7 @@
     <filter-mapping>
         <filter-name>shiroFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
 
 
