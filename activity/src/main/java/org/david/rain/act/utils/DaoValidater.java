@@ -1,7 +1,7 @@
 package org.david.rain.act.utils;
 
 
-import org.david.rain.common.entity.HdTable;
+import org.david.rain.act.utils.entity.HdTable;
 
 /**
  * 数据库操作对象时校验类.

@@ -33,4 +33,13 @@ public class Task extends IdEntity {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", user=" + user +
+                '}';
+    }
 }

@@ -1,6 +1,5 @@
 package org.david.rain.service;
 
-import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.JsonEncoding;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -9,6 +8,7 @@ import org.david.rain.entity.AccountBean;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
