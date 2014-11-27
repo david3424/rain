@@ -36,7 +36,7 @@ public class CommonWriterImp implements Idao {
 
     /**
      * 插入新数据
-     *
+     *用到hdtable注解
      * @param object
      * @return
      */
@@ -46,6 +46,12 @@ public class CommonWriterImp implements Idao {
         return runner.update(resolver.insertSql(), resolver.paramValues());
     }
 
+    /**
+     * 必须是同一个connection才能取到id，可将conn讲给spring管理
+     * @param object
+     * @return
+     * @throws SQLException
+     */
     @Override
     public long insertAndGetId(Object object) throws SQLException {
         insert(object);
@@ -91,6 +97,7 @@ public class CommonWriterImp implements Idao {
      * 根据ID来更新object
      *
      * @param object
+     * 用到hdtable注解
      * @return
      * @throws java.sql.SQLException
      */
@@ -209,32 +216,6 @@ public class CommonWriterImp implements Idao {
     public <T> List<T> queryObjects(Class<T> clazz, String sql, Object... paramValues) throws SQLException {
         ResultSetHandler<List<T>> handler = new BeanListHandler<>(clazz);
         return runner.query(sql, handler, paramValues);
-    }
-
-
-    /**
-     * 查询数量SQL
-     *
-     * @param sql 必须是查询数量的 select count(1)....
-     * @return
-     */
-    @Override
-    public long queryCount(String sql) throws SQLException {
-        ResultSetHandler handler = new ScalarHandler();
-        return (Long) runner.query(sql, handler);
-    }
-
-
-    /**
-     * 查询数量SQL
-     *
-     * @param sql 必须是查询数量的 select count(1)....
-     * @return
-     */
-    @Override
-    public long queryCount(String sql, Object... paramValues) throws SQLException {
-        ResultSetHandler handler = new ScalarHandler();
-        return (Long) runner.query(sql, handler, paramValues);
     }
 
 

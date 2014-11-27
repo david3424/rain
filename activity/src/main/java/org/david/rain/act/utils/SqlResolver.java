@@ -88,13 +88,18 @@ public class SqlResolver {
     public String updateSql() {
         StringBuffer sql = new StringBuffer("update " + table + " set ");
         Object id = null;
+        boolean flag = false;
         for (int i = 0; i < paramNames.size(); i++) {
             if ("id".equals(paramNames.get(i)) || "null".equals(paramNames.get(i))) {
                 id = paramValues.get(i);
                 paramValues.remove(i);
+                if(i == 0 ){
+                    flag = true;
+                }
                 continue;
             }
-            if (i == 0) {
+            if (i == 0 || flag) {
+                flag= false;
                 sql.append(paramNames.get(i).toLowerCase()).append("=?");
             } else {
                 sql.append(",").append(paramNames.get(i).toLowerCase()).append("=?");

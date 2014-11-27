@@ -56,8 +56,6 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource_W" />
     <!--编码的方式加入事务-->
     <bean id="template" class="org.springframework.transaction.support.TransactionTemplate" p:transactionManager-ref="transactionManager"/>
-    <bean class="org.david.rain.act.daotest.DbutilsTest" id=""/>
-    <bean class="org.david.rain.act.daotest.DbutilsTest" id=""/>
     <!-- 使用annotation定义事务 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 </beans>

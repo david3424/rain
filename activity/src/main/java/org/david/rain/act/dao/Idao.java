@@ -13,6 +13,7 @@ public interface Idao {
 
     int insert(Object object) throws SQLException;
 
+
     public long insertAndGetId(Object object) throws SQLException ;
 
     public int[] batchInsert(String sql, Object[][] objects) throws SQLException ;
@@ -44,7 +45,7 @@ public interface Idao {
      * 根据Sql查询单个字段值
      *
      * @param sql select count(xxx)/sum(xxx)/id/username from .....
-     * @return count()函数返回Long sum()函数返回BigDecimal 其他返回字段对应的类型
+     * @return count()函数返回Long sum()函数返回BigDecimal,不存在返回0 其他返回字段对应的类型，不存在返回null
      */
     public <T> T queryScalar(String sql, Object... paramValues) throws SQLException;
 
@@ -52,12 +53,6 @@ public interface Idao {
     public <T> List<T> queryOneColumnList(String sql) throws SQLException;
 
     public <T> List<T> queryOneColumnList(String sql, Object... paramValues) throws SQLException;
-
-
-    long queryCount(String sql) throws SQLException;
-
-
-    long queryCount(String sql, Object... paramValues) throws SQLException;
 
 
 //    public <T> CommonList<T> pagination(Search search, Class<T> clazz) throws Exception;
