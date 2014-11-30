@@ -112,6 +112,13 @@ public class CommonDaoImp implements CommonDao {
 		return jdbcTemplate.queryForList(sql);
 	}
 
+    /**
+     * 返回包含LinkedCaseInsensitiveMap的list
+     * @param sql
+     * @param o
+     *            参数集
+     * @return
+     */
 	@Override
 	public List queryList(String sql, Object[] o) {
 		return jdbcTemplate.queryForList(sql, o);
@@ -178,7 +185,7 @@ public class CommonDaoImp implements CommonDao {
 	}
 	@Override
 	public <T> T queryObj(String sql, Object[] args, final Class<T> clazz) {
-		return jdbcTemplate.query(sql, new ResultSetExtractor<T>() {
+		return jdbcTemplate.query(sql, args,new ResultSetExtractor<T>() {
 
 			@Override
 			public T extractData(ResultSet rs) throws SQLException,
@@ -213,7 +220,15 @@ public class CommonDaoImp implements CommonDao {
 			Class<T> elementType) {
 		return jdbcTemplate.queryForList(sql, args, elementType);
 	}
-	
+
+    /**
+     * 自定义返回的Bean，用Mapper作列与属性的对应
+     * @param sql
+     * @param args
+     * @param rowMapper
+     * @param <T>
+     * @return
+     */
 	@Override
 	public <T> List<T> query(String sql, Object[] args, RowMapper<T> rowMapper) {
 		return jdbcTemplate.query(sql, args, rowMapper);
