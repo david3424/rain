@@ -5,6 +5,7 @@
     <display-name>activity</display-name>
     <context-param>
         <param-name>contextConfigLocation</param-name>
+        <!--带*表示所有jar的包路径下查找 **匹配多层路径-->
         <param-value>classpath*:spring/applicationContext.xml</param-value>
     </context-param>
     <context-param>
