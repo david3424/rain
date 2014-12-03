@@ -6,6 +6,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -65,9 +67,14 @@ public class ResourceTest {
                 BeanFactory beanFactory = new XmlBeanFactory(rsource);
                 Idao commonWriterImp = beanFactory.getBean("commonWriterImp",Idao.class);
                 System.out.println(commonWriterImp);
-
             }
         }
+    }
 
+    @Test
+    public void testApplicationContext() throws Exception {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/**/application*.xml");
+        Idao commonWriterImp = applicationContext.getBean("commonWriterImp",Idao.class);
+        System.out.println(commonWriterImp);
     }
 }

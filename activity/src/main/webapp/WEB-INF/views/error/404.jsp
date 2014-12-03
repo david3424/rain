@@ -9,7 +9,6 @@
 	<title>404 - 页面不存在</title>
 </head>
 <%
-application
 %>
 <body>
 	<h2>404 - 页面不存在.</h2>
