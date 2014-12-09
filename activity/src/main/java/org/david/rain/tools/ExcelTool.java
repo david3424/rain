@@ -32,7 +32,7 @@ public class ExcelTool {
 
     public int importToDBInTextType(String filePath, String tableName) throws SQLException {
         String nod = "\t";
-        String linenod = "\n";
+        String linenod = "\r\n";//win下面用 linux直接\n
         String sql = "load data local infile '" + (filePath) + "' into table " + tableName + " fields terminated by '" + nod + "' lines terminated by '" + linenod + "' (username,roleid,server,prize);";
         return idao.update(sql);
     }
@@ -79,4 +79,8 @@ public class ExcelTool {
         }
         return true;
     }
+
+
+
+
 }
