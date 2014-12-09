@@ -15,18 +15,6 @@ lang包，search包主要是分页以及tuple类，用于传递2种不同的数�
 servlet是验证码
 util工具包，包括memcached、ip获取，服务器列表、时间操作，
 
-
-activity模块 业务主要模块，也是parent的子模块，引入common包，包括
-单元测试
-    测试数据库连接 dbutils/mybatis/jdbctemplate
-    测试service层业务 事务管理
-
-    测试javabase的一些东西
-    加载顺序
-    集合的特性
-
-
-
 ==============================
 bhhd模块
 后端：
@@ -43,3 +31,16 @@ bhhd模块
 1.单点登录
 2.maven插件
 3.log4j
+
+==================================
+activity模块 spring相关内容以及java基础
+
+1. Spring相关
+1.1 Spring Ioc 装配3总方式
+单元测试
+    测试数据库连接 dbutils/mybatis/jdbctemplate
+    测试service层业务 事务管理
+
+    测试javabase的一些东西
+    加载顺序
+    集合的特性
