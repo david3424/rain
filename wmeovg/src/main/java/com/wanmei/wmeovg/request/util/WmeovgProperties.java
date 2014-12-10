@@ -5,7 +5,6 @@
 
 package com.wanmei.wmeovg.request.util;
 
-import com.wanmei.wmeovg.request.service.PrizeServiceImpl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -109,7 +108,7 @@ public class WmeovgProperties
 	static 
 	{
 		String propertiesFileName = "/wmeovg.properties";
-		InputStream is = PrizeServiceImpl.class.getResourceAsStream(propertiesFileName);
+		InputStream is = WmeovgProperties.class.getResourceAsStream(propertiesFileName);
 		Properties properties = new Properties();
 		try
 		{
