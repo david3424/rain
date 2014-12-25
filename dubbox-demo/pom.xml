@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.david.rain</groupId>
+        <artifactId>rain</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <groupId>org.david.rain</groupId>
+    <artifactId>dubbox-demo</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <description>The demo module of dubbo project</description>
+    <properties>
+        <!--<skip_maven_deploy>true</skip_maven_deploy>-->
+        <outjar.dubbox.2.8.3>${user.dir}/lib/dubbo-2.8.3.jar</outjar.dubbox.2.8.3>
+    </properties>
+    <modules>
+        <module>dubbo-demo-api</module>
+        <module>dubbo-demo-provider</module>
+        <module>dubbo-demo-consumer</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>2.8.3</version>
+            <scope>system</scope>
+            <!--本地jar的路径,相对或者绝对都可以-->
+            <systemPath>${outjar.dubbox.2.8.3}</systemPath>
+        </dependency>
+    </dependencies>
+</project>
