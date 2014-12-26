@@ -18,7 +18,7 @@
         <java-version>1.7</java-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Common libs -->
-        <spring.bom.version>3.2.9.RELEASE</spring.bom.version>
+        <spring.bom.version>4.0.3.RELEASE</spring.bom.version>
         <javassist_version>3.15.0-GA</javassist_version>
         <netty_version>3.2.5.Final</netty_version>
         <mina_version>1.1.7</mina_version>
@@ -27,6 +27,11 @@
         <hessian_lite_version>3.2.1-fixed-2</hessian_lite_version>
         <xstream_version>1.4.1</xstream_version>
         <fastjson_version>1.1.39</fastjson_version>
+        <org.codehaus.jackson>1.1.39</org.codehaus.jackson>
+        <!--utils-->
+        <guava.version>14.0.1</guava.version>
+        <!--aspectj-->
+        <org.aspectj-version>1.7.4</org.aspectj-version>
         <bsf_version>3.1</bsf_version>
         <sorcerer_version>0.8</sorcerer_version>
         <zookeeper_version>3.3.3</zookeeper_version>
@@ -41,7 +46,7 @@
         <servlet_version>3.1.0</servlet_version>
         <jetty_version>6.1.26</jetty_version>
         <validation_version>1.0.0.GA</validation_version>
-        <hibernate_validator_version>4.2.0.Final</hibernate_validator_version>
+        <hibernate_validator_version>4.3.0.Final</hibernate_validator_version>
         <jcache_version>0.4</jcache_version>
         <sca_version>2.0-M5.1</sca_version>
         <guice_version>3.0</guice_version>
@@ -51,14 +56,16 @@
         <commons_pool_version>1.6</commons_pool_version>
         <tomcat_embed_version>8.0.11</tomcat_embed_version>
         <!-- Log libs -->
-        <slf4j_version>1.6.2</slf4j_version>
+        <slf4j_version>1.7.5</slf4j_version>
         <jcl_version>1.1</jcl_version>
         <log4j_version>1.2.16</log4j_version>
-        <logback_version>1.0.6</logback_version>
+        <logback_version>1.0.13</logback_version>
         <!-- Test libs -->
-        <junit_version>4.10</junit_version>
+        <junit_version>4.11</junit_version>
         <easymock_version>3.0</easymock_version>
         <jmockit_version>0.999.8</jmockit_version>
+        <hamcrest_version>1.3</hamcrest_version>
+        <mockito.version>1.9.5</mockito.version>
         <!-- Build args -->
         <!--<argline>-server -Xms64m -Xmx64m -XX:PermSize=64m -XX:MaxPermSize=64m</argline> -->
         <skip_maven_deploy>false</skip_maven_deploy>
@@ -133,10 +140,28 @@
                 <artifactId>hessian-lite</artifactId>
                 <version>${hessian_lite_version}</version>
             </dependency>
+            <!--JSON-->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${org.codehaus.jackson}</version>
+            </dependency>
+            <!-- Utilities -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <!-- AspectJ -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${org.aspectj-version}</version>
             </dependency>
             <dependency>
                 <groupId>com.thoughtworks.xstream</groupId>
@@ -261,6 +286,17 @@
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${slf4j_version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback_version}</version>
+            </dependency>
+           <!-- <dependency>
+                <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>${slf4j_version}</version>
             </dependency>
@@ -273,20 +309,9 @@
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>${log4j_version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${logback_version}</version>
-            </dependency>
-            <!-- Test libs -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit_version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
+            </dependency>-->
+            <!-- old Test libs -->
+          <!--  <dependency>
                 <groupId>org.easymock</groupId>
                 <artifactId>easymock</artifactId>
                 <version>${easymock_version}</version>
@@ -303,7 +328,8 @@
                 <artifactId>easymockclassextension</artifactId>
                 <version>${easymock_version}</version>
                 <scope>test</scope>
-            </dependency>
+            </dependency>-->
+            <!--杂乱-->
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib-nodep</artifactId>
@@ -324,6 +350,49 @@
                 <artifactId>tomcat-embed-logging-juli</artifactId>
                 <version>${tomcat_embed_version}</version>
             </dependency>
+
+            <!--new test-->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit_version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>1.5.0</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-core</artifactId>
+                <version>${hamcrest_version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-library</artifactId>
+                <version>${hamcrest_version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.objenesis</groupId>
+                <artifactId>objenesis</artifactId>
+                <version>1.3</version>
+                <scope>test</scope>
+            </dependency>
+           <!-- <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <scope>test</scope>
+            </dependency>-->
         </dependencies>
     </dependencyManagement>
 
