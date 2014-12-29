@@ -16,9 +16,9 @@
     <name>发奖调度（auto）</name>
     <packaging>war</packaging>
     <properties>
-        <local.springside>E:\codes\rain\hdauto\src\sql\springside-core-4.1.0.GA.jar</local.springside>
-        <local.wmeovg>E:\codes\rain\hdauto\src\sql\wmeovg-client.jar</local.wmeovg>
-        <local.quartzall>E:\codes\rain\hdauto\src\sql\quartz-all-1.6.5.jar</local.quartzall>
+        <local.springside>${user.home}\springside-core-4.1.0.GA.jar</local.springside>
+        <local.wmeovg>${user.home}\wmeovg-client.jar</local.wmeovg>
+        <local.quartzall>${user.home}\quartz-all-1.6.5.jar</local.quartzall>
     </properties>
     <dependencies>
        <!-- <dependency>
