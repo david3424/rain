@@ -10,7 +10,7 @@
     </context-param>
     <context-param>
         <param-name>webAppRootKey</param-name>
-        <param-value>webApp.root-provider</param-value>
+        <param-value>dubbox-consumer</param-value>
     </context-param>
     <!--实现ServletRequestListener监听器接口，该监听器监听HTTP请求事件，Web服务器接收的每次请求都会通知该监听器-->
     <listener>

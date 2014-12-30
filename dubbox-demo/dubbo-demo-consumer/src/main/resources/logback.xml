@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration scan="true" scanPeriod="3 seconds">
 	<contextName>spring-dubbox</contextName>
-
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
 			<pattern>
-				%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %msg%n
+				<!--%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %msg%n-->
+				%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{32} - %msg%n
 			</pattern>
 		</encoder>
 	</appender>
+	<appender name="LOGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<File>${user.dir}/logs/dubbox-consumer-stats.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${user.dir}/logs/dubbox-consumer-stats.%d{yyyy-MM-dd}.log.zip</FileNamePattern>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>2MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date [%thread] %-5level %logger{32} - %msg%n</pattern>
+		</layout>
+	</appender>
 
 	<jmxConfigurator />
-	<root level="info">
+	<root level="ERROR">
 		<appender-ref ref="STDOUT" />
+		<appender-ref ref="LOGFILE" />
 	</root>
+
+	<logger name="org.springframework" level="debug" />
+	<logger name="org.hibernate" level="WARN" />
+	<logger name="org.hibernate.SQL" level="WARN" />
+	<logger name="org.hibernate.cache" level="ERROR" />
 
 	<logger name="org.david.rain" level="debug" />
 </configuration>
