@@ -29,7 +29,7 @@
 		<appender-ref ref="LOGFILE" />
 	</root>
 
-	<logger name="org.springframework" level="debug" />
+	<logger name="org.springframework" level="WARN" />
 	<logger name="org.hibernate" level="WARN" />
 	<logger name="org.hibernate.SQL" level="WARN" />
 	<logger name="org.hibernate.cache" level="ERROR" />
