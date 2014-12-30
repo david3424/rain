@@ -1,10 +1,9 @@
-package org.david.rain.dubbox;
+package org.david.rain.dubbox.provider.serivce.impl;
 
-import org.springframework.stereotype.Service;
+import org.david.rain.dubbox.DemoService;
 
 /**
  */
-@Service
 public class DemoServiceImpl implements DemoService {
 
     @Override

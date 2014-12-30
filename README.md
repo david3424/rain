@@ -44,3 +44,14 @@ activity模块 spring相关内容以及java基础
     测试javabase的一些东西
     加载顺序
     集合的特性
+
+==================================
+dubbox模块 引入dubbo功能
+
+基础pom，加入所有依赖管理与插件管理
+3个子模块
+api，主要提供服务的接口文件
+provider 生产者，这里用spring-mvc实现，应用服务器为tomcat
+数据源bonecp，持久化可选择mybatis、springjdbctemplate、JPA+hibernate
+consumer 消费者，架构一致（用于测试，实际中可为任意形式）
+

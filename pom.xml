@@ -332,6 +332,11 @@
             <!--杂乱-->
             <dependency>
                 <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <version>${cglib_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
                 <artifactId>cglib-nodep</artifactId>
                 <version>${cglib_version}</version>
             </dependency>

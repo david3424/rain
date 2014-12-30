@@ -37,10 +37,6 @@
     <listener>
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
     </listener>
-  <!--
-    <listener>
-        <listener-class>com.alibaba.dubbo.remoting.http.servlet.BootstrapListener</listener-class>
-    </listener>-->
     <!--实现ServletContextListener监听器接口，而ServletContextListener只负责监听Web容器的启动和关闭的事件-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
