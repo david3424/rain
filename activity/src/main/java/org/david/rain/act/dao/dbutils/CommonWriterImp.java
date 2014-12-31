@@ -20,11 +20,11 @@ import java.util.List;
  * 数据库操作接口 处理事务时使用
  * david xu
  */
-public class CommonWriterImpT implements Idao {
+public class CommonWriterImp implements Idao {
 
     private QueryNewRunner runner;
 
-    public CommonWriterImpT() {
+    public CommonWriterImp() {
 
     }
 
@@ -32,7 +32,7 @@ public class CommonWriterImpT implements Idao {
      * 构造注入runner
      * @param runner dbutils封装
      */
-    public CommonWriterImpT(QueryNewRunner runner) {
+    public CommonWriterImp(QueryNewRunner runner) {
         this.runner = runner;
     }
 
