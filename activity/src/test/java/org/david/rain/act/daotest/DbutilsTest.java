@@ -1,6 +1,8 @@
 package org.david.rain.act.daotest;
 
 import org.david.rain.act.dao.Idao;
+import org.david.rain.act.dao.dbutils.CommonList;
+import org.david.rain.act.dao.dbutils.search.Search;
 import org.david.rain.act.entity.Task;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +30,7 @@ public class DbutilsTest {
     private final static Logger LOGGER = LoggerFactory.getLogger(DbutilsTest.class);
     public static final String QUERY_LIST_SQL = "select * from ss_task where 1= ? ";
     public static final String QUERY_SCALAR_COUNT_SQL = "select count(1) from ss_task where 1!=? ";
+    public static final String QUERY_PAGE_COUNT_SQL = "select count(1) from ss_task ";
     public static final String QUERY_SCALAR_SUM_SQL = "select sum(user_id) from ss_task where 1=? ";
     public static final String QUERY_SCALAR_SQL = "select title from ss_task where title=? ";
     public static final String QUERY_OBJ_SQL = " select * from ss_task where title=? ";
@@ -83,5 +86,25 @@ public class DbutilsTest {
         int reb = idao.update(new Task(1l,"title11", "desc11", 11l));
         LOGGER.info("reb in {} is {} ", "testUpdateBean", reb);
         testList();
+    }
+
+    @Test
+    public void testPagination() throws Exception {
+        Search search = new Search();
+        search.setPageNo(2);
+        search.setPageSize(5);
+        search.addOrder("id", Search.SEARCH_DESC);
+        search.addSelectCountSql(QUERY_PAGE_COUNT_SQL);
+        search.addSelectSql("select id,title,user_id,description from ss_task ");
+        search.addWhere(Search.SEARCH_AND,"1=1");
+        CommonList<Task> list = idao.pagination(search,Task.class);
+        System.out.println(list);
+        /*for(Task t:list){
+            System.out.println(t);
+        }*/
+
+        int begin = Math.max(1, list.pageNo - list.pageSize/2);
+        int end = Math.min(begin + (list.pageSize - 1), list.pageNum);
+        System.out.println("begin:"+begin+",end:"+end);
     }
 }

@@ -1,5 +1,7 @@
 package org.david.rain.dubbox.provider.dao;
 
+import org.david.rain.dubbox.provider.dao.utils.CommonList;
+import org.david.rain.dubbox.provider.dao.utils.search.Search;
 import org.david.rain.dubbox.provider.entity.Task;
 import org.david.rain.dubbox.provider.entity.UserTask;
 import org.david.rain.dubbox.provider.entity.UserTaskMapper;
@@ -34,6 +36,7 @@ public class JdbcTempalteTest {
     public static final String QUERY_LIST_SQL = "select * from ss_task where 1= ? ";
     public static final String QUERY_MAPPER_LIST_SQL = "select title,user_id,login_name from ss_task a ,ss_user b where a.user_id =b.id and  a.id> ? ";
     public static final String QUERY_SCALAR_COUNT_SQL = "select count(1) from ss_task where 1=? ";
+    public static final String QUERY_PAGE_COUNT_SQL = "select count(1) from ss_task ";
     public static final String QUERY_SCALAR_SUM_SQL = "select sum(user_id) from ss_task where 1=? ";
     public static final String QUERY_SCALAR_SQL = "select title from ss_task where title=? ";
     public static final String QUERY_OBJ_SQL = " select * from ss_task where id=? ";
@@ -87,6 +90,27 @@ public class JdbcTempalteTest {
       int result =   imp.addOrUpdate(UPDATE_OBJ_SQL,new Object[]{"testTile2"});
     LOGGER.info("result of {},={}","testUpdateBean",result);
         testQueryList();
+    }
+
+    @Test
+    public void testPagination() throws Exception {
+        Search search = new Search();
+        search.setPageNo(2);
+        search.setPageSize(5);
+        search.addOrder("id", Search.SEARCH_DESC);
+        search.addSelectCountSql(QUERY_PAGE_COUNT_SQL);
+        search.addSelectSql("select id,title,user_id,description from ss_task ");
+        search.addWhere(Search.SEARCH_AND,"1=1");
+        CommonList<Task> list = imp.pagination(search,Task.class);
+        System.out.println(list);
+        for(Task t:list){
+            System.out.println(t);
+        }
+
+        /*标签页测试*/
+        int begin = Math.max(1, list.pageNo - list.pageSize/2);
+        int end = Math.min(begin + (list.pageSize - 1), list.pageNum);
+        System.out.println("begin:"+begin+",end:"+end);
     }
 
 }

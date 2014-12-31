@@ -1,5 +1,7 @@
 package org.david.rain.dubbox.provider.dao;
 
+import org.david.rain.dubbox.provider.dao.utils.CommonList;
+import org.david.rain.dubbox.provider.dao.utils.search.Search;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -30,8 +32,10 @@ public interface CommonDao {
 	public List queryList(String sql, Object[] o);
 
 	public <T> List<T> queryObjList(String sql, Object[] args, Class<T> clazz);
-	
+	public <T> List<T> queryObjList(String sql, Class<T> clazz);
+
 	public <T> List<T> queryForList(String sql, Object[] args, Class<T> elementType);
+	public <T> List<T> queryForList(String sql,  Class<T> elementType);
 
 	/**
 	 * 
@@ -43,6 +47,17 @@ public interface CommonDao {
 	 * @throws
 	 */
 	public int queryForInt(String sql, Object[] o);
+
+
+/**
+	 *
+	 * @Title: queryForInt
+	 * @Description: TODO 返回条数信息
+	 * @param sql
+	 * @return
+	 * @throws
+	 */
+	public int queryForInt(String sql);
 
 	/**
 	 * 
@@ -68,5 +83,7 @@ public interface CommonDao {
 	public int[] batchUpdate(String sql, BatchPreparedStatementSetter pss);
 	
 	public void execSql(String sqlString);
+
+	public <T> CommonList<T> pagination(Search search, Class<T> clazz) ;
 
 }

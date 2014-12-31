@@ -2,6 +2,8 @@ package org.david.rain.dubbox.provider.dao.impl;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.david.rain.dubbox.provider.dao.CommonDao;
+import org.david.rain.dubbox.provider.dao.utils.CommonList;
+import org.david.rain.dubbox.provider.dao.utils.search.Search;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -107,6 +109,11 @@ public class CommonDaoImp implements CommonDao {
 		return jdbcTemplate.queryForObject(sql, o, Integer.class);
 	}
 
+@Override
+	public int queryForInt(String sql) {
+		return jdbcTemplate.queryForObject(sql, Integer.class);
+	}
+
 	@Override
 	public List queryList(String sql) {
 		return jdbcTemplate.queryForList(sql);
@@ -145,11 +152,46 @@ public class CommonDaoImp implements CommonDao {
 					for (PropertyDescriptor pd : pds) {//迭代bean的所有属性
 						Method setMethod = pd.getWriteMethod();
 						if (setMethod != null) { //存在set方法
-							String propertyName = pd.getName();							
+							String propertyName = pd.getName();
 							if(columns.contains(propertyName.toLowerCase())){
 								BeanUtils.setProperty(result, propertyName,
 										rs.getObject(propertyName));//往反射的bean中赋值
-							}							
+							}
+						}
+					}
+				} catch (Exception e) {
+					throw new RuntimeException(e);
+				}
+				return result;
+			}
+
+		});
+	}
+/**
+	 * 查询对象列表方法，切记返回结果的列名要与Bean的属性名完全一致！！！
+	 */
+	@Override
+	public <T> List<T> queryObjList(String sql,final Class<T> clazz) {
+		return jdbcTemplate.query(sql,  new RowMapper<T>() {
+
+			@Override
+			public T mapRow(ResultSet rs, int arg1) throws SQLException {
+				T result = null;
+				ResultSetMetaData rsmd = rs.getMetaData();
+				List<String> columns = getColumnList(rsmd); //获取数据rs的列名
+				try {
+					result = clazz.newInstance();
+					BeanInfo beanInfo = Introspector.getBeanInfo(clazz);
+					PropertyDescriptor[] pds = beanInfo
+							.getPropertyDescriptors();
+					for (PropertyDescriptor pd : pds) {//迭代bean的所有属性
+						Method setMethod = pd.getWriteMethod();
+						if (setMethod != null) { //存在set方法
+							String propertyName = pd.getName();
+							if(columns.contains(propertyName.toLowerCase())){
+								BeanUtils.setProperty(result, propertyName,
+										rs.getObject(propertyName));//往反射的bean中赋值
+							}
 						}
 					}
 				} catch (Exception e) {
@@ -183,6 +225,10 @@ public class CommonDaoImp implements CommonDao {
 		}
 		return columnList;
 	}
+
+	/*
+	常用的获取bean-list方法
+	 */
 	@Override
 	public <T> T queryObj(String sql, Object[] args, final Class<T> clazz) {
 		return jdbcTemplate.query(sql, args,new ResultSetExtractor<T>() {
@@ -214,11 +260,24 @@ public class CommonDaoImp implements CommonDao {
 
 		});
 	}
-	
+
+	/**
+	 * 查询单列
+	 * @param sql
+	 * @param args
+	 * @param elementType
+	 * @param <T>
+	 * @return
+	 */
 	@Override
 	public <T> List<T> queryForList(String sql, Object[] args,
 			Class<T> elementType) {
 		return jdbcTemplate.queryForList(sql, args, elementType);
+	}
+
+	@Override
+	public <T> List<T> queryForList(String sql, Class<T> elementType) {
+		return jdbcTemplate.queryForList(sql,  elementType);
 	}
 
     /**
@@ -241,7 +300,34 @@ public class CommonDaoImp implements CommonDao {
 
 	@Override
 	public void execSql(String sqlString) {
-		// TODO Auto-generated method stub
 		jdbcTemplate.execute(sqlString);
+	}
+
+	@Override
+	public <T> CommonList<T> pagination(Search search, Class<T> clazz) {
+		Number recNum = 0; //查询的总页数
+		if (search.getPageNo() <= 0) {
+			search.setPageNo(1);
+		}
+		List<T> objects = null;
+		search.setWhetherPage(true);
+		try {
+			String countsql = search.builderCountSql();
+			String objectssql = search.builderSearchSql();
+			if (search.getWhereParas().size() == 0) {
+				recNum =  queryForInt(countsql);
+				objects = queryObjList(objectssql, clazz); //得到记录集合
+			} else {
+				recNum =  queryForInt(countsql, search.getWhereParas().toArray());
+				objects = queryObjList(objectssql, search.getWhereParas().toArray(), clazz);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		CommonList<T> commonList = new CommonList<>(search. getSearchStr(), recNum.intValue(), search.getPageNo(), search.getPageSize());
+		if (objects != null) {
+			commonList.addAll(objects);
+		}
+		return commonList;
 	}
 }

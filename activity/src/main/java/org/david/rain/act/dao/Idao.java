@@ -1,5 +1,8 @@
 package org.david.rain.act.dao;
 
+import org.david.rain.act.dao.dbutils.CommonList;
+import org.david.rain.act.dao.dbutils.search.Search;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -55,6 +58,6 @@ public interface Idao {
     public <T> List<T> queryOneColumnList(String sql, Object... paramValues) throws SQLException;
 
 
-//    public <T> CommonList<T> pagination(Search search, Class<T> clazz) throws Exception;
+    public <T> CommonList<T> pagination(Search search, Class<T> clazz) throws Exception;
 
 }
