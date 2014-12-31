@@ -73,6 +73,17 @@ public class EasyPageInfo implements Serializable {
         this.order = order;
     }
 
+
+    public EasyPageInfo(int rows,  int currentResult, String sort, String order) {
+        this.rows = rows;
+        this.currentResult = currentResult;
+        this.sort = sort;
+        this.order = order;
+    }
+
+    public EasyPageInfo() {
+    }
+
     @Override
     public String toString() {
         return "EasyPageInfo{" +

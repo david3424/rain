@@ -44,14 +44,15 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource_W"/>
         <property name="configLocation" value="classpath:spring/mybatis-conf.xml"/>
-        <property name="typeAliasesPackage" value="org.david.rain.entity"/>
+        <property name="typeAliasesPackage" value="org.david.rain.dubbox.provider.entity"/>
+        <property name="mapperLocations" value="classpath*:org/david/rain/dubbox/provider/persistence/*Mapper.xml" />
     </bean>
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
     <!-- scan for mappers and let them be autowired -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="org.david.rain.persistence"/>
+        <property name="basePackage" value="org.david.rain.dubbox.provider.persistence"/>
     </bean>
 
 
@@ -64,7 +65,6 @@
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
     <!--jpa-->
-
     <!-- JPA实体管理工厂的配置 -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource_W"/>

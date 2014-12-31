@@ -3,7 +3,7 @@ package org.david.rain.dubbox.provider.entity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class Task  {
+public class Task {
 
     private Long id;
     private String title;
