@@ -1,3 +1,4 @@
+
 package org.david.rain.act.dao.dbutils;
 
 import org.apache.commons.dbutils.ResultSetHandler;
@@ -6,6 +7,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ColumnListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.david.rain.act.dao.Idao;
+import org.david.rain.act.dao.dbutils.search.Search;
 import org.david.rain.act.utils.DaoValidater;
 import org.david.rain.act.utils.QueryNewRunner;
 import org.david.rain.act.utils.SqlResolver;
@@ -18,11 +20,11 @@ import java.util.List;
  * 数据库操作接口 处理事务时使用
  * david xu
  */
-public class CommonWriterImp implements Idao {
+public class CommonWriterImpT implements Idao {
 
     private QueryNewRunner runner;
 
-    public CommonWriterImp() {
+    public CommonWriterImpT() {
 
     }
 
@@ -30,7 +32,7 @@ public class CommonWriterImp implements Idao {
      * 构造注入runner
      * @param runner dbutils封装
      */
-    public CommonWriterImp(QueryNewRunner runner) {
+    public CommonWriterImpT(QueryNewRunner runner) {
         this.runner = runner;
     }
 
@@ -219,16 +221,16 @@ public class CommonWriterImp implements Idao {
     }
 
 
-  /*  *//**
+    /**
      * 分页查询
      *
      * @param search
      * @param clazz
      * @return
-     *//*
+     */
     @Override
     public <T> CommonList<T> pagination(Search search, Class<T> clazz) {
-        int recNum = 0; //查询的总页数；
+        Number recNum = 0; //查询的总页数；
         if (search.getPageNo() <= 0) {
             search.setPageNo(1);
         }
@@ -238,20 +240,20 @@ public class CommonWriterImp implements Idao {
             String countsql = search.builderCountSql();
             String objectssql = search.builderSearchSql();
             if (search.getWhereParas().size() == 0) {
-                recNum = (int) queryCount(countsql);
+                recNum =  queryScalar(countsql);
                 objects = queryObjects(clazz, objectssql); //得到记录集合
             } else {
-                recNum = (int) queryCount(countsql, search.getWhereParas().toArray());
+                recNum =  queryScalar(countsql, search.getWhereParas().toArray());
                 objects = queryObjects(clazz, objectssql, search.getWhereParas().toArray());
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        CommonList<T> commonList = new CommonList<>(search. getSearchStr(), recNum, search.getPageNo(), search.getPageSize());
+        CommonList<T> commonList = new CommonList<>(search. getSearchStr(), recNum.intValue(), search.getPageNo(), search.getPageSize());
         if (objects != null) {
             commonList.addAll(objects);
         }
         return commonList;
-    }*/
+    }
 
 }
