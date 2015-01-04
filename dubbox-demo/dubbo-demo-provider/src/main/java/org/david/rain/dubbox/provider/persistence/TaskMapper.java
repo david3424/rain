@@ -1,6 +1,7 @@
 package org.david.rain.dubbox.provider.persistence;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.david.rain.dubbox.provider.dao.utils.EasyPageInfo;
 import org.david.rain.dubbox.provider.entity.Task;
 
@@ -13,6 +14,7 @@ public interface TaskMapper {
 
     List<Task> getMemberListPage(@Param("page") EasyPageInfo page);
 
-    Task getTask(Integer taskId);
+    @Select("select * from ss_task where id = #{taskId} ")
+    Task getTask(@Param("taskId") Integer taskId);
 
 }

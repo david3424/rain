@@ -33,10 +33,17 @@ public class MybatisTest {
     public void testQuery() throws Exception {
 
 //        System.out.println(taskMapper.getTask(11));
-        List<Task> list = taskMapper.getMemberListPage(new EasyPageInfo(5,3,"id","id"));
+        //每页5条，取第一页
+        List<Task> list = taskMapper.getMemberListPage(new EasyPageInfo(5,1));
         for(Task t:list){
             System.out.println(t);
         }
+    }
+
+    @Test
+    public void testGetBean() throws Exception {
+        Task task = taskMapper.getTask(1);
+        System.out.println(task);
 
     }
 }

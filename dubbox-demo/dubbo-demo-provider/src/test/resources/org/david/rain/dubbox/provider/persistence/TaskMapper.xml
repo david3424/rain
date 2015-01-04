@@ -15,11 +15,11 @@
         select * from ss_task
     </select>
 
-  <select id="getTask" parameterType="long" resultType="Task">
+ <!-- <select id="getTask" parameterType="long" resultType="Task">
     select
       id,user_id,title,description
       FROM SS_TASK T
     where T.ID= #{value}
-  </select>
+  </select>-->
 
 </mapper>

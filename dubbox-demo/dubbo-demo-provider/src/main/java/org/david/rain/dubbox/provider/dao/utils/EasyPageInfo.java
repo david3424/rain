@@ -5,11 +5,11 @@ public class EasyPageInfo implements Serializable {
 
     private static final long serialVersionUID = 587754556498974978L;
 
-    private int rows = 1;
+    private int rows = 1;//pageSize
     private int totalPage;
     private int totalResult;
-    private int page;
-    private int currentResult;
+    private int page;//pageNo
+    private int currentResult;//startnum
     private String sort;
     private String order;
 
@@ -74,11 +74,14 @@ public class EasyPageInfo implements Serializable {
     }
 
 
-    public EasyPageInfo(int rows,  int currentResult, String sort, String order) {
-        this.rows = rows;
-        this.currentResult = currentResult;
-        this.sort = sort;
-        this.order = order;
+    /**
+     *
+     * @param rows 每页数量
+     * @param page 页码
+     */
+    public EasyPageInfo(int rows,int page) {
+       this.rows = rows;
+        this.page = page;
     }
 
     public EasyPageInfo() {
