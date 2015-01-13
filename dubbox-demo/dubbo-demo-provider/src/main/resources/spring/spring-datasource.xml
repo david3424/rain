@@ -83,20 +83,16 @@
             </props>
         </property>
     </bean>
-
     <bean id="transactionManager1" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager1" proxy-target-class="true"/>
-
     <!-- JSR303 Validator定义 -->
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
-
     <bean id="persistenceExceptionTranslationPostProcessor"
           class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
-
     <jpa:repositories base-package="org.david.rain.dubbox.provider"
                       entity-manager-factory-ref="entityManagerFactory"
-                      transaction-manager-ref="transactionManager"/>
+                      transaction-manager-ref="transactionManager1"/>
 
 </beans>
