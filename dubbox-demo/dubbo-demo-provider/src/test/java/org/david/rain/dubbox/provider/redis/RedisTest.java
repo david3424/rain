@@ -7,8 +7,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springside.modules.nosql.redis.JedisTemplate;
 import org.springside.modules.test.spring.SpringContextTestCase;
+import redis.clients.jedis.Pipeline;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,7 +30,21 @@ JedisTemplate jedisTemplate;
     @Test
     public void testPipeActions() throws Exception {
         
-
+        final List results =
+        jedisTemplate.execute(new JedisTemplate.PipelineAction() {
+            @Override
+            public List<Object> action(Pipeline pipeline) {
+//                long start = System.currentTimeMillis();
+                for (int i = 300000; i < 400000; i++) {
+                    pipeline.rpush("cardlist", "nnn" + i);
+                }
+                List<Object> results = pipeline.syncAndReturnAll();
+//                long end = System.currentTimeMillis();
+//                System.out.println("Pipelined@Pool SET: " + ((end - start)/1000.0) + " seconds");
+                return results;
+            }
+        });
+        for(Object r:results) System.out.println(r);
     }
 
     /**
