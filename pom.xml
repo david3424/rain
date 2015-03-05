@@ -13,6 +13,7 @@
     <module>parent</module>
     <module>bhhd</module>
     <module>dubbox-demo</module>
+    <module>pay</module>
     </modules>
     <properties>
         <java-version>1.7</java-version>
@@ -27,11 +28,12 @@
         <hessian_lite_version>3.2.1-fixed-2</hessian_lite_version>
         <xstream_version>1.4.1</xstream_version>
         <fastjson_version>1.1.39</fastjson_version>
-        <org.codehaus.jackson>1.1.39</org.codehaus.jackson>
+        <org.codehaus.jackson>1.9.9</org.codehaus.jackson>
         <!--utils-->
         <guava.version>14.0.1</guava.version>
         <commons-lang3.version>3.1</commons-lang3.version>
         <commons-beanutils>1.8.3</commons-beanutils>
+        <commons-dbutils>1.5</commons-dbutils>
         <!--aspectj-->
         <org.aspectj-version>1.7.4</org.aspectj-version>
         <bsf_version>3.1</bsf_version>
@@ -74,18 +76,6 @@
         <updateReleaseInfo>true</updateReleaseInfo>
         <project.build.sourceEncoding>${file_encoding}</project.build.sourceEncoding>
 
-        <!-- generate idea copyright -->
-        <copyright>Copyright 1999-2012 Alibaba Group.&#10; &#10;Licensed under
-            the Apache License, Version 2.0 (the &quot;License&quot;);&#10;you
-            may not use this file except in compliance with the License.&#10;You
-            may obtain a copy of the License at&#10; &#10;
-            http://www.apache.org/licenses/LICENSE-2.0&#10; &#10;Unless required
-            by applicable law or agreed to in writing, software&#10;distributed
-            under the License is distributed on an &quot;AS IS&quot;
-            BASIS,&#10;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
-            express or implied.&#10;See the License for the specific language
-            governing permissions and&#10;limitations under the License.</copyright>
-        <profile.name>oss</profile.name>
 
         <!-- for maven compiler plugin -->
         <maven_compiler_plugin_version>2.3.2</maven_compiler_plugin_version>
@@ -357,6 +347,13 @@
                 <artifactId>commons-pool</artifactId>
                 <version>${commons_pool_version}</version>
             </dependency>
+            
+            <dependency>
+                <groupId>commons-dbutils</groupId>
+                <artifactId>commons-dbutils</artifactId>
+                <version>${commons-dbutils}</version>
+            </dependency>
+            
             <dependency>
                 <groupId>org.apache.tomcat.embed</groupId>
                 <artifactId>tomcat-embed-core</artifactId>
@@ -455,38 +452,6 @@
                         <source>${java_source_version}</source>
                         <target>${java_target_version}</target>
                         <encoding>${file_encoding}</encoding>
-                    </configuration>
-                </plugin>
-                <!--This plugin's configuration is used to store Eclipse m2e settings
-                    only. It has no influence on the Maven build itself. -->
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>
-                                            org.apache.maven.plugins
-                                        </groupId>
-                                        <artifactId>
-                                            maven-dependency-plugin
-                                        </artifactId>
-                                        <versionRange>
-                                            [2.1,)
-                                        </versionRange>
-                                        <goals>
-                                            <goal>unpack</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore></ignore>
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
                     </configuration>
                 </plugin>
             </plugins>
