@@ -12,6 +12,7 @@
 
     <groupId>org.david.rain</groupId>
     <artifactId>pay</artifactId>
+    <packaging>war</packaging>
     <version>1.0.0</version>
     <properties>
         <bonecp.version>0.7.1.RELEASE</bonecp.version>
@@ -27,7 +28,10 @@
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
