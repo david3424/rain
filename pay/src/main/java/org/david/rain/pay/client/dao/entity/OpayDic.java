@@ -10,8 +10,8 @@ import java.io.Serializable;
  * Date: 14-6-6
  * Time: 下午4:03
  */
-@HdTable("d_sys_dic")
-public class DsysDic implements Serializable {
+@HdTable("o_pay_dic")
+public class OpayDic implements Serializable {
 
 
     private Integer id;
@@ -19,6 +19,7 @@ public class DsysDic implements Serializable {
     private Integer userid;
     private Integer appid;
     private String name;
+    private String callbackurl;
     private String createtime;
     private String privatekey;
     private String notes;
@@ -95,5 +96,13 @@ public class DsysDic implements Serializable {
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public String getCallbackurl() {
+        return callbackurl;
+    }
+
+    public void setCallbackurl(String callbackurl) {
+        this.callbackurl = callbackurl;
     }
 }

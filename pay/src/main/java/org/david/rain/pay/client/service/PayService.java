@@ -19,13 +19,13 @@ import java.sql.SQLException;
  */
 
 @Service
-public class ClientService {
+public class PayService {
 
 
     @Autowired
     private Idao wdao;
 
-    public static final Logger LOG = LoggerFactory.getLogger(ClientService.class);
+    public static final Logger LOG = LoggerFactory.getLogger(PayService.class);
 
 
     public CommonList pagination(Search search, Class<OpayDic> taskClass) throws Exception {

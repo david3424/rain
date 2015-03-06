@@ -13,8 +13,8 @@ public class SignatureUtil {
      * @param secret
      * @return
      */
-    public static String signature(Map<String, ? extends Object> params, String secret) {
-        StringBuffer sbuf = new StringBuffer();
+    public static String signature(Map<String, ?> params, String secret) {
+        StringBuilder sbuf = new StringBuilder();
         if (null != params) {
             Map<String, Object> treeParam = new TreeMap<String, Object>();
             treeParam.putAll(params);

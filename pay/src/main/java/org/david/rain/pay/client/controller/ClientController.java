@@ -3,7 +3,7 @@ package org.david.rain.pay.client.controller;
 import com.google.common.collect.Maps;
 import org.david.rain.pay.client.dao.dbutils.CommonList;
 import org.david.rain.pay.client.dao.dbutils.search.Search;
-import org.david.rain.pay.client.dao.entity.DsysDic;
+import org.david.rain.pay.client.dao.entity.OpayDic;
 import org.david.rain.pay.client.service.ClientService;
 import org.david.rain.pay.utils.DateUtils;
 import org.david.rain.pay.utils.RandomUtil;
@@ -58,9 +58,9 @@ public class ClientController {
         if (StringUtils.isNotBlank(search_LIKE_title)) {
             search.addWhere(Search.SEARCH_AND, " name like ? ", "%" + search_LIKE_title + "%");
         }
-        search.addSelectSql("select * from d_sys_dic ");
-        search.addSelectCountSql("select count(*) from d_sys_dic");
-        CommonList clients = clientService.pagination(search, DsysDic.class);
+        search.addSelectSql("select * from o_pay_dic ");
+        search.addSelectCountSql("select count(1) from o_pay_dic");
+        CommonList clients = clientService.pagination(search, OpayDic.class);
         model.addAttribute("sortType", sortType);
         model.addAttribute("sortTypes", sortTypes);
         model.addAttribute("clients", clients);
@@ -70,14 +70,14 @@ public class ClientController {
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
     public String createForm(Model model) {
-        model.addAttribute("client", new DsysDic());
+        model.addAttribute("client", new OpayDic());
         model.addAttribute("action", "create");
 
         return "client/clientForm";
     }
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    public String create(DsysDic client, RedirectAttributes redirectAttributes) throws SQLException {
+    public String create(OpayDic client, RedirectAttributes redirectAttributes) throws SQLException {
         client.setUserid(1);
         client.setStatus(-1);
         client.setCreatetime(DateUtils.getCurrentFormatDateTime());
@@ -109,7 +109,7 @@ public class ClientController {
     }
 
     @RequestMapping(value = "update", method = RequestMethod.POST)
-    public String update(@ModelAttribute("preloadClient") DsysDic client, RedirectAttributes redirectAttributes) throws SQLException {
+    public String update(@ModelAttribute("preloadClient") OpayDic client, RedirectAttributes redirectAttributes) throws SQLException {
         clientService.saveClient(client);
         redirectAttributes.addFlashAttribute("message", "更新任务成功");
         return "redirect:/client/";
@@ -118,7 +118,7 @@ public class ClientController {
 
 
     @RequestMapping(value = "permit", method = RequestMethod.GET)
-    public String permit(@ModelAttribute("preloadClient") DsysDic client, RedirectAttributes redirectAttributes) throws SQLException {
+    public String permit(@ModelAttribute("preloadClient") OpayDic client, RedirectAttributes redirectAttributes) throws SQLException {
         client.setStatus(client.getStatus()==0?-1:0);
         clientService.saveClient(client);
         redirectAttributes.addFlashAttribute("message", "更新任务成功");
@@ -130,28 +130,13 @@ public class ClientController {
      * 因为仅update()方法的form中有id属性，因此本方法在该方法中执行.
      */
     @ModelAttribute("preloadClient")
-    public DsysDic getClient(@RequestParam(value = "id", required = false) Integer id) throws SQLException {
+    public OpayDic getClient(@RequestParam(value = "id", required = false) Integer id) throws SQLException {
         if (id != null) {
             return clientService.getClient(id);
         }
         return null;
     }
 
-
-    /* */
-
-    /**
-     * Ajax请求校验TaskName是否唯一。
-     *//*
-        @RequestMapping(value = "checkTaskName", method = RequestMethod.GET)
-        @ResponseBody
-        public String checkTaskName(@RequestParam("table_name") String table_name) throws Exception {
-            if (clientService.findByTaskName(table_name) == null) {
-                return "true";
-            } else {
-                return "false";
-            }
-        }*/
 
 
 }

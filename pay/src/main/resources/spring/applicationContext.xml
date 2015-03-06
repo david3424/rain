@@ -8,10 +8,11 @@
 
     <description>Spring公共配置</description>
     <!-- 属性文件读入 -->
-    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:jdbc.properties</value>
+                <value>classpath:pay.properties</value>
             </list>
         </property>
     </bean>
