@@ -63,6 +63,23 @@ public class BasePayAction implements BasePayInterface {
         return null;
     }
 
+/**
+     * 验证参数完整性
+     *
+     * @param opayOrder
+     * @return
+     */
+    protected String checkQuery(OpayOrder opayOrder) {
+        if (opayOrder.getApplicationCode() == null || opayOrder.getApplicationCode() < 1000) {
+            return " appid is illegal ";
+        }
+        if (StringUtils.isEmpty(opayOrder.getReferenceId())) {
+            return "referenceId is empty ";
+        }
+        // todo 待补充
+        return null;
+    }
+
     protected OpayDic getClientByAppid(Integer appid) {
 
         return clientService.getClientByAppid(appid);
@@ -80,6 +97,23 @@ public class BasePayAction implements BasePayInterface {
         resultMap.put("customerId", opayOrder.getCustomerId());
         resultMap.put("ip", opayOrder.getIp());
         return resultMap;
+    }
+
+  protected Map<String, Object> transfer2QueryMap(OpayOrder opayOrder) {
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("applicationCode", opayOrder.getApplicationCode());
+        resultMap.put("referenceId", opayOrder.getReferenceId());
+        return resultMap;
+    }
+
+  protected Map<String, Object> transfer2MolQueryMap(OpayOrder opayOrder) {
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("applicationCode", opayOrder.getApplicationCode());
+        resultMap.put("referenceId", opayOrder.getReferenceId());
+        resultMap.put("version", version);
+      return resultMap;
     }
 
 

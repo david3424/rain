@@ -22,7 +22,10 @@ public class PayRequestTest {
 public static final String PAYURL = "http://103.23.44.239/mol/payout" ;
 public static final String RETURNURL = "http://www.baidu.com" ; //测试用
 public static final String PRIVATEKEY = "T0AxQypxcVdJR0Et" ;
-public static final String REFERENCEID = "1000-testcode-number4" ;
+public static final String REFERENCEID = "1000-testcode-number9" ;
+public static final String CURRENCYCODE = "THB" ;
+public static final int CHANNELID = 1 ;
+public static final int AMOUNT = 100 ;
 
     @Autowired
     PayService payService;
@@ -30,11 +33,11 @@ public static final String REFERENCEID = "1000-testcode-number4" ;
     private String sign() throws Exception {
 
         OpayOrder opayOrder = new OpayOrder();
-        opayOrder.setAmount(1);
+        opayOrder.setAmount(AMOUNT);
         opayOrder.setApplicationCode(1000);
-        opayOrder.setChannelId(1);
+        opayOrder.setChannelId(CHANNELID);
         opayOrder.setReturnUrl(RETURNURL);
-        opayOrder.setCurrencyCode("THB");
+        opayOrder.setCurrencyCode(CURRENCYCODE);
         opayOrder.setReferenceId(REFERENCEID);
         opayOrder.setCustomerId(100001);
         opayOrder.setIp("127.0.0.1");
@@ -63,16 +66,15 @@ public static final String REFERENCEID = "1000-testcode-number4" ;
     public void testURL() throws Exception {
               String redirect = PAYURL
                 + "?applicationCode=" + 1000
-                + "&channelId="+1
-                + "&amount="+1
-                + "&currencyCode=" + "THB"
+                + "&channelId="+CHANNELID
+                + "&amount="+AMOUNT
+                + "&currencyCode=" + CURRENCYCODE
                 + "&referenceId=" + REFERENCEID
                 + "&returnUrl=" + RETURNURL
                 + "&customerId=" + 100001
                 + "&ip=" + "127.0.0.1"
                 + "&signature=" + sign();
         System.out.println(redirect);
-
     }
 
     @Test

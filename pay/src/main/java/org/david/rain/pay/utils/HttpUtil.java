@@ -1,6 +1,5 @@
 package org.david.rain.pay.utils;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -25,15 +24,24 @@ public class HttpUtil {
     private final Logger logger = LoggerFactory.getLogger(HttpUtil.class);
 
     //get方法封装
-    public String getRequest(String url) {
+    public String getRequest(String url,Map<String, Object> rawParams) {
         CloseableHttpClient httpclient = HttpClients.createDefault();
-        HttpGet get = new HttpGet(url);
-        HttpResponse httpResponse;
         try {
-            httpResponse = httpclient.execute(get);
-
-            if (httpResponse.getStatusLine().getStatusCode() == 200) {
-                return EntityUtils.toString(httpResponse.getEntity());
+            if (rawParams != null && rawParams.size() > 0) {
+                for (String key : rawParams.keySet()) {
+                   url = url + "&" + key + "=" + rawParams.get(key).toString();
+                }
+            }
+            System.out.println("url in HttpUtil is :" + url);
+            HttpGet get = new HttpGet(url);
+            CloseableHttpResponse httpResponse = httpclient.execute(get);
+            String msg = EntityUtils.toString(httpResponse.getEntity());
+            System.out.println("returned of httpPost:"+ msg);
+            int returncode = httpResponse.getStatusLine().getStatusCode();
+            if (returncode == 200) {
+                return msg;
+            } else {
+                return msg;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,7 +76,7 @@ public class HttpUtil {
             if (returncode == 200) {
                 return msg;
             } else {
-                return "{\"status\":" + returncode + "}";
+                return msg;
             }
         } catch (Exception e) {
             logger.error("response is break ,the post abort ");
