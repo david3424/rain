@@ -63,8 +63,10 @@ public class HttpUtil {
             }
             CloseableHttpResponse httpResponse = httpclient.execute(post);
             int returncode = httpResponse.getStatusLine().getStatusCode();
+            String msg = EntityUtils.toString(httpResponse.getEntity());
+            System.out.println("returned of httpPost:"+ msg);
             if (returncode == 200) {
-                return EntityUtils.toString(httpResponse.getEntity());
+                return msg;
             } else {
                 return "{\"status\":" + returncode + "}";
             }

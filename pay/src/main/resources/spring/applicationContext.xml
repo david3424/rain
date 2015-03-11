@@ -8,13 +8,16 @@
 
     <description>Spring公共配置</description>
     <!-- 属性文件读入 -->
-    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
             <list>
                 <value>classpath:jdbc.properties</value>
                 <value>classpath:pay.properties</value>
             </list>
         </property>
+    </bean>
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+    <property name="properties" ref="configProperties" />
     </bean>
     <!--排除Controller 交给MVC-->
     <context:component-scan base-package="org.david.rain.pay">

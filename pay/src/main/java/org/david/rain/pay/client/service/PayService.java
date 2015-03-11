@@ -1,14 +1,12 @@
 package org.david.rain.pay.client.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.david.rain.pay.client.dao.Idao;
-import org.david.rain.pay.client.dao.dbutils.CommonList;
-import org.david.rain.pay.client.dao.dbutils.search.Search;
-import org.david.rain.pay.client.dao.entity.OpayDic;
+import org.david.rain.pay.client.dao.entity.OpayOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 
@@ -21,61 +19,67 @@ import java.sql.SQLException;
 @Service
 public class PayService {
 
-
+public static final String PAY_TABLE = "o_pay_order";
     @Autowired
     private Idao wdao;
 
     public static final Logger LOG = LoggerFactory.getLogger(PayService.class);
 
 
-    public CommonList pagination(Search search, Class<OpayDic> taskClass) throws Exception {
 
-        return wdao.pagination(search, taskClass);
-    }
+    public int saveOrder(OpayOrder opayOrder) {
 
-    @Transactional(readOnly = false)
-    public void saveClient(OpayDic entity) throws SQLException {
-        if (entity.getId() == null) {
-            wdao.insert(entity);
-        } else {
-            wdao.updateBean(entity);
-        }
-    }
-
-    public void deleteClient(int id) {
         try {
-            wdao.update("delete from d_sys_dic where id  = ? ", id);
+            return wdao.insert(opayOrder);
         } catch (SQLException e) {
+            LOG.error("insert order[ opayOrder:{}]  failed :{}",opayOrder,e.getMessage());
             e.printStackTrace();
+            return -1;
         }
     }
 
-    public OpayDic getClient(int id) {
+    public boolean ifFirstOrder(String orderid) {
         try {
-            return wdao.queryObject(OpayDic.class, id);
+            long  re = wdao.queryScalar("select count(1) from " + PAY_TABLE + " where referenceId = ? ",orderid);
+            return re == 0   ;
         } catch (SQLException e) {
+            LOG.error("queryOrderNum [orderid:{}]failed :{}",orderid,e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public int updateOrder(OpayOrder opayOrder,String type) {
+        try {
+        if(StringUtils.equals(type,"callback")){
+                return wdao.update("update " + PAY_TABLE + " set status = ? , paymentStatusCode = ?, paymentStatusDate = ? where referenceId = ? ",opayOrder.getStatus(),opayOrder.getPaymentStatusCode(),opayOrder.getPaymentStatusDate(),opayOrder.getReferenceId());
+            }else{
+                return wdao.update("update " + PAY_TABLE + " set status = ? , paymentId = ? where referenceId = ? ",opayOrder.getStatus(),opayOrder.getPaymentId(),opayOrder.getReferenceId());
+        }
+        } catch (SQLException e) {
+            LOG.error("updateOrder[ opayOrder:{}] , type[] === failed :{}",opayOrder,type,e.getMessage());
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public OpayOrder getOpayOrderByOrderId(String referenceId) {
+        try {
+            return  wdao.queryObject(OpayOrder.class,"select * from " + PAY_TABLE + " where referenceId = ? ",referenceId);
+        } catch (SQLException e) {
+            LOG.error("getOpayOrderByOrderId[ referenceId:{}] === failed :{}", referenceId,e.getMessage());
             e.printStackTrace();
             return null;
         }
     }
 
-    public Integer genAppid() {
+    public  String getApplicationCodeByReferenceId(String referenceId){
+        String query = "select  b.callbackUrl from "+PAY_TABLE+" a ,o_pay_dic b where a.applicationCode = b.appid and a.referenceId = ? ";
         try {
-         Integer maxid =    wdao.queryScalar("select max(id) from d_sys_dic ");
-            return maxid == null ? 1000:maxid+1000;
+            return wdao.queryScalar(query,referenceId);
         } catch (SQLException e) {
+            LOG.error("getApplicationCodeByReferenceId[ referenceId:{}] === failed :{}", referenceId,e.getMessage());
             e.printStackTrace();
-            return null;
-        }
-    }
-
-    public OpayDic getClientByAppid(Integer appid) {
-        try {
-            LOG.debug("getClientByAppid by appid [{}]",appid);
-            return wdao.queryObject(OpayDic.class, "select * from d_sys_dic where appid = ? ", appid);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            LOG.error("getClientByAppid excetion [{}]",appid);
             return null;
         }
     }

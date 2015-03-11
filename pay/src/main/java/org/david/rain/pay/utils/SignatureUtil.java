@@ -21,17 +21,17 @@ public class SignatureUtil {
             int i = 0;
             for (Map.Entry<String, Object> e : treeParam.entrySet()) {
                 if (e.getValue() != null && !e.getValue().equals("")) {
-                    if (i++ != 0) {
+                   /* if (i++ != 0) {
                         sbuf.append("&");
                     }
                     sbuf.append(e.getKey());
-                    sbuf.append("=");
-                    sbuf.append(e.getValue() == null ? "" : e.getValue().toString());
+                    sbuf.append("=");*/
+                    sbuf.append(e.getValue().toString());
                 }
             }
-            sbuf.append("&secret=");
+            //把私钥放在最后
             sbuf.append(secret);
-            System.out.println("eventhk  subf md5str==" + sbuf.toString());
+            System.out.println(" subf md5str:" + sbuf.toString());
             return getMd5str(sbuf.toString());
         }
         return "";

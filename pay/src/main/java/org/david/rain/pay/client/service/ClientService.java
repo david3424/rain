@@ -44,7 +44,7 @@ public class ClientService {
 
     public void deleteClient(int id) {
         try {
-            wdao.update("delete from d_sys_dic where id  = ? ", id);
+            wdao.update("delete from o_pay_dic where id  = ? ", id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -61,7 +61,7 @@ public class ClientService {
 
     public Integer genAppid() {
         try {
-         Integer maxid =    wdao.queryScalar("select max(id) from d_sys_dic ");
+         Integer maxid =    wdao.queryScalar("select max(id) from o_pay_dic ");
             return maxid == null ? 1000:maxid+1000;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,8 +71,8 @@ public class ClientService {
 
     public OpayDic getClientByAppid(Integer appid) {
         try {
-            LOG.debug("getClientByAppid by appid [{}]",appid);
-            return wdao.queryObject(OpayDic.class, "select * from d_sys_dic where appid = ? ", appid);
+//            LOG.debug("getClientByAppid by appid [{}]",appid);
+            return wdao.queryObject(OpayDic.class, "select * from o_pay_dic where appid = ? ", appid);
         } catch (SQLException e) {
             e.printStackTrace();
             LOG.error("getClientByAppid excetion [{}]",appid);

@@ -8,8 +8,8 @@ import org.david.rain.pay.client.service.PayService;
 import org.david.rain.pay.utils.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.ui.ModelMap;
 
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,11 +28,11 @@ public class BasePayAction implements BasePayInterface {
 
     @Value("#{configProperties['mol.applicationCode']}")
     private String applicationCode;
-    @Value("#{configProperties['mol.test.payUrl']}")
+    @Value("#{configProperties['mol.payUrl']}")
     protected String payUrl;
     @Value("#{configProperties['mol.version']}")
     private String version;
-    @Value("#{configProperties['mol.test.returnUrl']}")
+    @Value("#{configProperties['mol.returnUrl']}")
     private String returnUrl;
     @Value("#{configProperties['mol.SecretKey']}")
     protected String secretKey;
@@ -41,39 +41,8 @@ public class BasePayAction implements BasePayInterface {
         return getErrorRedirect(type, null);
     }
 
-    protected String getErrorRedirect(Integer type, String error) {
-//		if(null == type){
-//			return errorRedirect;
-//		}
-//		if(null == type || type.byteValue() != CashConstants.CASH_TYPE_QUICK_INCOME){
-//			return errorRedirect;
-//		}
-//		return quickErrorRedirect;
-        error = StringUtils.trimToEmpty(error);
-        if (null != type) {
-            return "redirect:/cash/fail?type=" + type + "&error=" + error;
-        } else {
-            return "redirect:/cash/fail?error=" + error;
-        }
-    }
-
-    protected String getSuccessRedirect(OpayOrder cashOrder, ModelMap modelMap) {
-        int type = cashOrder.getType();
-        modelMap.put("cashOrder", cashOrder);
-        String orderId = cashOrder.getOrderid();
-       /* if(null != type && type.byteValue() == CashConstants.CASH_TYPE_QUICK_INCOME){ //直充
-            //执行直充
-            Integer gameClientId = cashOrder.getGameId();
-            ConsumeClient consumeClient = GameInfoSupport.consumeGameMap().get(gameClientId);
-            modelMap.put("consumeClientName", consumeClient.getName());
-            modelMap.put("yuanbao", cashOrder.getGoodAmount());
-//			return quickSuccessRedirect;
-        }else if(null != type && type.byteValue() == CashConstants.CASH_TYPE_INCOME){
-            modelMap.put("gcoins", cashOrder.getGoodAmount());
-//			return successRedirect;
-        }*/
-        return "redirect:/cash/success?orderId=" + orderId;
-//		return successRedirect;
+    protected String getErrorRedirect(Integer code, String error) {
+            return "redirect:/mol/fail?code=" + code + "&error=" + error;
     }
 
 
@@ -84,7 +53,7 @@ public class BasePayAction implements BasePayInterface {
      * @return
      */
     protected String check(OpayOrder opayOrder) {
-        if (opayOrder.getAppid() == null || opayOrder.getAppid() < 1000) {
+        if (opayOrder.getApplicationCode() == null || opayOrder.getApplicationCode() < 1000) {
             return " appid is illegal ";
         }
         if (StringUtils.isEmpty(opayOrder.getIp())) {
@@ -102,13 +71,13 @@ public class BasePayAction implements BasePayInterface {
     protected Map<String, Object> transfer2Map(OpayOrder opayOrder) {
 
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("appid", opayOrder.getAppid());
-        resultMap.put("channelid", opayOrder.getChannelid());
+        resultMap.put("applicationCode", opayOrder.getApplicationCode());
+        resultMap.put("channelId", opayOrder.getChannelId());
         resultMap.put("amount", opayOrder.getAmount());
-        resultMap.put("currencycode", opayOrder.getCurrencycode());
-        resultMap.put("orderid", opayOrder.getOrderid());
-        resultMap.put("returnurl", opayOrder.getReturnurl());
-        resultMap.put("userid", opayOrder.getUserid());
+        resultMap.put("currencyCode", opayOrder.getCurrencyCode());
+        resultMap.put("referenceId", opayOrder.getReferenceId());
+        resultMap.put("returnUrl", opayOrder.getReturnUrl());
+        resultMap.put("customerId", opayOrder.getCustomerId());
         resultMap.put("ip", opayOrder.getIp());
         return resultMap;
     }
@@ -118,15 +87,31 @@ public class BasePayAction implements BasePayInterface {
 
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("applicationCode", applicationCode);
-        resultMap.put("referenceId", opayOrder.getOrderid());
+        resultMap.put("referenceId", opayOrder.getReferenceId());
         resultMap.put("version", version);
-        resultMap.put("channelId", opayOrder.getChannelid());
+        resultMap.put("channelId", opayOrder.getChannelId());
         resultMap.put("amount", opayOrder.getAmount());
-        resultMap.put("currencyCode", opayOrder.getCurrencycode());
-        resultMap.put("returnurl", returnUrl);
-        resultMap.put("customerId", opayOrder.getUserid());
+        resultMap.put("currencyCode", opayOrder.getCurrencyCode());
+        resultMap.put("returnUrl", MessageFormat.format(returnUrl,opayOrder.getReferenceId()));
+        resultMap.put("customerId", opayOrder.getCustomerId());
         return resultMap;
     }
 
+
+protected Map<String, Object> transferMol2ClientMap(OpayOrder opayOrder) {
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("applicationCode", applicationCode);
+        resultMap.put("referenceId", opayOrder.getReferenceId());
+        resultMap.put("version", version);
+        resultMap.put("amount", opayOrder.getAmount());
+        resultMap.put("currencyCode", opayOrder.getCurrencyCode());
+        resultMap.put("paymentId", opayOrder.getPaymentId());
+        resultMap.put("paymentStatusCode", opayOrder.getPaymentStatusCode());
+        resultMap.put("paymentStatusDate", opayOrder.getPaymentStatusDate());
+        resultMap.put("channelId", opayOrder.getCustomerId());
+        resultMap.put("customerId", opayOrder.getCustomerId());
+        return resultMap;
+    }
 
 }

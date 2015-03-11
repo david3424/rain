@@ -13,21 +13,22 @@ public class OpayOrder implements Serializable {
 
 
     private Integer id;
-    private Integer appid;
-    private Integer channelid;
+    private Integer applicationCode;
+    private Integer channelId;
     private Integer amount;
-    private String currencycode;
-    private String version;
-    private String orderid;
-    private String paymentid;
-    private String paymenturl;
-    private String returnurl;
-    private Integer userid;
-    private Integer type;
+    private String currencyCode;
+    private String version;//暂时不用传 默认1.0
+    private String referenceId;
+    private String paymentId;
+    private String paymentUrl;
+    private String returnUrl;
+    private String paymentStatusCode;
+    private Integer customerId;
+    private Integer type;//暂时不用传 默认0
     private String createtime;
-    private String finishtime;
+    private String paymentStatusDate;
     private String ip;
-    private Integer status;
+    private Integer status;//默认是0
 
 
     public Integer getId() {
@@ -38,20 +39,20 @@ public class OpayOrder implements Serializable {
         this.id = id;
     }
 
-    public Integer getAppid() {
-        return appid;
+    public Integer getApplicationCode() {
+        return applicationCode;
     }
 
-    public void setAppid(Integer appid) {
-        this.appid = appid;
+    public void setApplicationCode(Integer applicationCode) {
+        this.applicationCode = applicationCode;
     }
 
-    public Integer getChannelid() {
-        return channelid;
+    public Integer getChannelId() {
+        return channelId;
     }
 
-    public void setChannelid(Integer channelid) {
-        this.channelid = channelid;
+    public void setChannelId(Integer channelId) {
+        this.channelId = channelId;
     }
 
     public Integer getAmount() {
@@ -62,12 +63,12 @@ public class OpayOrder implements Serializable {
         this.amount = amount;
     }
 
-    public String getCurrencycode() {
-        return currencycode;
+    public String getCurrencyCode() {
+        return currencyCode;
     }
 
-    public void setCurrencycode(String currencycode) {
-        this.currencycode = currencycode;
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
     }
 
     public String getVersion() {
@@ -78,44 +79,44 @@ public class OpayOrder implements Serializable {
         this.version = version;
     }
 
-    public String getOrderid() {
-        return orderid;
+    public String getReferenceId() {
+        return referenceId;
     }
 
-    public void setOrderid(String orderid) {
-        this.orderid = orderid;
+    public void setReferenceId(String referenceId) {
+        this.referenceId = referenceId;
     }
 
-    public String getPaymentid() {
-        return paymentid;
+    public String getPaymentId() {
+        return paymentId;
     }
 
-    public void setPaymentid(String paymentid) {
-        this.paymentid = paymentid;
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
     }
 
-    public String getPaymenturl() {
-        return paymenturl;
+    public String getPaymentUrl() {
+        return paymentUrl;
     }
 
-    public void setPaymenturl(String paymenturl) {
-        this.paymenturl = paymenturl;
+    public void setPaymentUrl(String paymentUrl) {
+        this.paymentUrl = paymentUrl;
     }
 
-    public String getReturnurl() {
-        return returnurl;
+    public String getPaymentStatusCode() {
+        return paymentStatusCode;
     }
 
-    public void setReturnurl(String returnurl) {
-        this.returnurl = returnurl;
+    public void setPaymentStatusCode(String paymentStatusCode) {
+        this.paymentStatusCode = paymentStatusCode;
     }
 
-    public Integer getUserid() {
-        return userid;
+    public Integer getCustomerId() {
+        return customerId;
     }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     public Integer getType() {
@@ -134,12 +135,12 @@ public class OpayOrder implements Serializable {
         this.createtime = createtime;
     }
 
-    public String getFinishtime() {
-        return finishtime;
+    public String getPaymentStatusDate() {
+        return paymentStatusDate;
     }
 
-    public void setFinishtime(String finishtime) {
-        this.finishtime = finishtime;
+    public void setPaymentStatusDate(String paymentStatusDate) {
+        this.paymentStatusDate = paymentStatusDate;
     }
 
     public String getIp() {
@@ -158,24 +159,32 @@ public class OpayOrder implements Serializable {
         this.status = status;
     }
 
+    public String getReturnUrl() {
+        return returnUrl;
+    }
+
+    public void setReturnUrl(String returnUrl) {
+        this.returnUrl = returnUrl;
+    }
 
     @Override
     public String toString() {
         return "OpayOrder{" +
                 "id=" + id +
-                ", appid=" + appid +
-                ", channelid=" + channelid +
+                ", applicationCode=" + applicationCode +
+                ", channelId=" + channelId +
                 ", amount=" + amount +
-                ", currencycode='" + currencycode + '\'' +
+                ", currencyCode='" + currencyCode + '\'' +
                 ", version='" + version + '\'' +
-                ", orderid='" + orderid + '\'' +
-                ", paymentid='" + paymentid + '\'' +
-                ", paymenturl='" + paymenturl + '\'' +
-                ", returnurl='" + returnurl + '\'' +
-                ", userid=" + userid +
+                ", referenceId='" + referenceId + '\'' +
+                ", paymentId='" + paymentId + '\'' +
+                ", paymentUrl='" + paymentUrl + '\'' +
+                ", returnUrl='" + returnUrl + '\'' +
+                ", paymentStatusCode='" + paymentStatusCode + '\'' +
+                ", customerId=" + customerId +
                 ", type=" + type +
                 ", createtime='" + createtime + '\'' +
-                ", finishtime='" + finishtime + '\'' +
+                ", paymentStatusDate='" + paymentStatusDate + '\'' +
                 ", ip='" + ip + '\'' +
                 ", status=" + status +
                 '}';
