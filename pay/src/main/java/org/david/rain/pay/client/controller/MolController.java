@@ -43,7 +43,7 @@ public class MolController extends BasePayAction {
     @RequestMapping(value = "payout")
     public String query(OpayOrder opayOrder, String signature, HttpServletRequest request, Model model) {
         ObjectMapper objectMapper = new ObjectMapper();
-        Integer applicationCode = opayOrder.getApplicationCode();
+        String applicationCode = opayOrder.getApplicationCode();
         String checkMsg = check(opayOrder);
         if (StringUtils.isNotEmpty(checkMsg)) { //统一下参数有误接口
             return getErrorRedirect(1001, "checkMsg");//参数有误
@@ -178,7 +178,7 @@ public class MolController extends BasePayAction {
             query_re.put("message", "Invalid referenceId. ");
             return query_re;
         }
-        switch (opayOrder.getStatus()) {
+        switch (oPayOrder_client.getStatus()) {
             case 0:
                 query_re.put("status", 1004);//正在处理
                 query_re.put("message", "in process. ");
@@ -195,11 +195,12 @@ public class MolController extends BasePayAction {
                 break;
             case 2:
                 //去查询
+                opayOrder.setApplicationCode(applicationCode);
                 Map<String, Object> params_mol = transfer2MolQueryMap(opayOrder);
                 String mol_sign = SignatureUtil.signature(params_mol, secretKey);
                 params_mol.put("signature", mol_sign);
                 String mol_re = httpUtil.getRequest(payUrl, params_mol);
-                LOG.info("result of mol request :{}", mol_re);
+                LOG.info("result of mol query :{}", mol_re);
                 Map map ;
                 ObjectMapper objectMapper = new ObjectMapper();
                 try {

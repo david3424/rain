@@ -13,7 +13,7 @@ public class OpayOrder implements Serializable {
 
 
     private Integer id;
-    private Integer applicationCode;
+    private String applicationCode;
     private Integer channelId;
     private Integer amount;
     private String currencyCode;
@@ -39,11 +39,11 @@ public class OpayOrder implements Serializable {
         this.id = id;
     }
 
-    public Integer getApplicationCode() {
+    public String getApplicationCode() {
         return applicationCode;
     }
 
-    public void setApplicationCode(Integer applicationCode) {
+    public void setApplicationCode(String applicationCode) {
         this.applicationCode = applicationCode;
     }
 

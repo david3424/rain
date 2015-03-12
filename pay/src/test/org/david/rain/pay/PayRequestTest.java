@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * Created by david on 2015/3/9.
@@ -20,9 +22,10 @@ import java.util.Map;
 @ContextConfiguration("classpath:spring/applicationContext.xml")
 public class PayRequestTest {
 public static final String PAYURL = "http://103.23.44.239/mol/payout" ;
+public static final String QUERYURL = "http://103.23.44.239/mol/query" ;
 public static final String RETURNURL = "http://www.baidu.com" ; //测试用
 public static final String PRIVATEKEY = "T0AxQypxcVdJR0Et" ;
-public static final String REFERENCEID = "1000-testcode-number9" ;
+public static final String REFERENCEID = "1000-testcode-number8" ;
 public static final String CURRENCYCODE = "THB" ;
 public static final int CHANNELID = 1 ;
 public static final int AMOUNT = 100 ;
@@ -34,7 +37,7 @@ public static final int AMOUNT = 100 ;
 
         OpayOrder opayOrder = new OpayOrder();
         opayOrder.setAmount(AMOUNT);
-        opayOrder.setApplicationCode(1000);
+        opayOrder.setApplicationCode("1000");
         opayOrder.setChannelId(CHANNELID);
         opayOrder.setReturnUrl(RETURNURL);
         opayOrder.setCurrencyCode(CURRENCYCODE);
@@ -46,6 +49,17 @@ public static final int AMOUNT = 100 ;
         System.out.println("signature:" + mol_sign);
         return mol_sign;
 //        String mol_re = httpUtil.postRequest(PAYURL,params_mol);
+
+    }
+ private String signQuery() throws Exception {
+
+        OpayOrder opayOrder = new OpayOrder();
+        opayOrder.setApplicationCode("1000");
+        opayOrder.setReferenceId(REFERENCEID);
+        Map<String, Object> params_mol = transfer2MolMap(opayOrder);
+        String mol_sign = SignatureUtil.signature(params_mol,PRIVATEKEY);
+        System.out.println("signature-query:" + mol_sign);
+        return mol_sign;
 
     }
 
@@ -77,6 +91,15 @@ public static final int AMOUNT = 100 ;
         System.out.println(redirect);
     }
 
+  @Test
+    public void testQueryURL() throws Exception {
+              String redirect = QUERYURL
+                + "?applicationCode=" + 1000
+                + "&referenceId=" + REFERENCEID
+                + "&signature=" + signQuery();
+        System.out.println(redirect);
+    }
+
     @Test
     public void testCount() throws Exception {
 
@@ -86,6 +109,14 @@ public static final int AMOUNT = 100 ;
     @Test
     public void testName() throws Exception {
         System.out.println(payService.getApplicationCodeByReferenceId("1000-testcode-number1"));
+    }
+
+    @Test
+    public void testUTC() throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        SimpleDateFormat dfs = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+        System.out.println(dfs.format(df.parse("2015-03-11T08:08:41Z")));
 
     }
 }

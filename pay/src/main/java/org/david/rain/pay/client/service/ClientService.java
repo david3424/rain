@@ -69,7 +69,7 @@ public class ClientService {
         }
     }
 
-    public OpayDic getClientByAppid(Integer appid) {
+    public OpayDic getClientByAppid(String appid) {
         try {
 //            LOG.debug("getClientByAppid by appid [{}]",appid);
             return wdao.queryObject(OpayDic.class, "select * from o_pay_dic where appid = ? ", appid);

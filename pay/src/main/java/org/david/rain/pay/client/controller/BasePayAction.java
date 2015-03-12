@@ -27,7 +27,7 @@ public class BasePayAction implements BasePayInterface {
     protected HttpUtil httpUtil;
 
     @Value("#{configProperties['mol.applicationCode']}")
-    private String applicationCode;
+    protected String applicationCode;
     @Value("#{configProperties['mol.payUrl']}")
     protected String payUrl;
     @Value("#{configProperties['mol.version']}")
@@ -53,7 +53,7 @@ public class BasePayAction implements BasePayInterface {
      * @return
      */
     protected String check(OpayOrder opayOrder) {
-        if (opayOrder.getApplicationCode() == null || opayOrder.getApplicationCode() < 1000) {
+        if (opayOrder.getApplicationCode() == null) {
             return " appid is illegal ";
         }
         if (StringUtils.isEmpty(opayOrder.getIp())) {
@@ -70,7 +70,7 @@ public class BasePayAction implements BasePayInterface {
      * @return
      */
     protected String checkQuery(OpayOrder opayOrder) {
-        if (opayOrder.getApplicationCode() == null || opayOrder.getApplicationCode() < 1000) {
+        if (opayOrder.getApplicationCode() == null ) {
             return " appid is illegal ";
         }
         if (StringUtils.isEmpty(opayOrder.getReferenceId())) {
@@ -80,7 +80,7 @@ public class BasePayAction implements BasePayInterface {
         return null;
     }
 
-    protected OpayDic getClientByAppid(Integer appid) {
+    protected OpayDic getClientByAppid(String appid) {
 
         return clientService.getClientByAppid(appid);
     }
