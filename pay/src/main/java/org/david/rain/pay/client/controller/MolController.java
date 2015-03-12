@@ -46,35 +46,35 @@ public class MolController extends BasePayAction {
         String applicationCode = opayOrder.getApplicationCode();
         String checkMsg = check(opayOrder);
         if (StringUtils.isNotEmpty(checkMsg)) { //统一下参数有误接口
-            return getErrorRedirect(1001, "checkMsg");//参数有误
+            return getErrorRedirect(10001, "checkMsg");//参数有误
         }
         OpayDic dsysDic = getClientByAppid(applicationCode);
         if (dsysDic == null) {
-            return getErrorRedirect(1002, "invalid applicationCode ");//applicationCode无效
+            return getErrorRedirect(10002, "invalid applicationCode ");//applicationCode无效
         }
         String clientIp = IpUtils.getRealIp(request);
         if (!StringUtils.contains(dsysDic.getIp(), clientIp)) {
-            return getErrorRedirect(4001, "Unauthorized Server IP Address ");//ip不合法
+            return getErrorRedirect(10003, "Unauthorized Server IP Address ");//ip不合法
         }
         if (dsysDic.getStatus() == -1) {
-            return getErrorRedirect(4002, "Service is in maintenance。");
+            return getErrorRedirect(10004, "Service is in maintenance。");
         }
         String privatekey = dsysDic.getPrivatekey().trim();
         Map<String, Object> params_sign = transfer2Map(opayOrder);
         String local_sign = SignatureUtil.signature(params_sign, privatekey);
         if (!StringUtils.equalsIgnoreCase(local_sign, signature)) {
-            return getErrorRedirect(4003, "Invalid Signature. ");//签名有误
+            return getErrorRedirect(10005, "Invalid Signature. ");//签名有误
         }
         opayOrder.setCreatetime(DateUtils.getCurrentFormatDateTime());
         if (!payService.ifFirstOrder(opayOrder.getReferenceId())) {
-            return getErrorRedirect(4004, "duplicatied orderid ");
+            return getErrorRedirect(10006, "duplicatied referenceId ");
         }
         opayOrder.setVersion("v1.0");
         opayOrder.setType(0);
         opayOrder.setStatus(0);
         int saveOrder_r = payService.saveOrder(opayOrder);
         if (saveOrder_r != 1) {
-            return getErrorRedirect(5001, "System Error2.");//系统保存数据有误
+            return getErrorRedirect(10007, "System Error2.");//系统保存数据有误
         }
         //进入支付流程
         Map<String, Object> params_mol = transfer2MolMap(opayOrder);
@@ -88,10 +88,10 @@ public class MolController extends BasePayAction {
         } catch (IOException e) {
             LOG.error("objectMapper error :{}", e.getMessage());
             e.printStackTrace();
-            return getErrorRedirect(5001, "System Error1.");
+            return getErrorRedirect(10007, "System Error1.");
         }
         if (null != map.get("message")) {
-            return getErrorRedirect(503, (String) map.get("message"));
+            return getErrorRedirect(10008, (String) map.get("message"));
         }
         String paymentId = (String) map.get("paymentId");
         String paymentUrl = (String) map.get("paymentUrl");
@@ -103,7 +103,7 @@ public class MolController extends BasePayAction {
 //        opayOrder.setPaymenturl(paymentUrl);
         int updateOrder_r = payService.updateOrder(opayOrder, "request");
         if (updateOrder_r <= 0) {
-            return getErrorRedirect(5001, "System Error3.");
+            return getErrorRedirect(10007, "System Error3.");
         }
         return "redirect:" + paymentUrl;
     }
@@ -129,14 +129,14 @@ public class MolController extends BasePayAction {
     @RequestMapping(value = "/callback")
     public String callback(OpayOrder opayOrder, String signature) {
         if (null == opayOrder.getReferenceId()) {
-            return getErrorRedirect(5001, "System Error6.");
+            return getErrorRedirect(10007, "System Error6.");
         }
         LOG.info("opayorder of callback is {}", opayOrder);
         Map<String, Object> params_client = transferMol2ClientMap(opayOrder);
         String callback_sign = SignatureUtil.signature(params_client, secretKey);
         if (!StringUtils.equals(callback_sign, signature)) {
             LOG.error("callback_sign is :{},but signature from mol is {}", callback_sign, signature);
-            return getErrorRedirect(5001, "System Error7.");
+            return getErrorRedirect(10007, "System Error7.");
         }
         payService.updateOrder(opayOrder, "callback");
         String callbackUrl = payService.getApplicationCodeByReferenceId(opayOrder.getReferenceId());
@@ -152,13 +152,13 @@ public class MolController extends BasePayAction {
         Map<String, Object> query_re = new HashMap<>();
         String checkMsg = checkQuery(opayOrder);
         if (StringUtils.isNotEmpty(checkMsg)) { //统一下参数有误接口
-            query_re.put("status", 1001);
+            query_re.put("status", 10001);
             query_re.put("message", "checkMsg");
             return query_re;
         }
         OpayDic dsysDic = getClientByAppid(opayOrder.getApplicationCode());
         if (dsysDic == null) {
-            query_re.put("status", 1002);
+            query_re.put("status", 10002);
             query_re.put("message", "invalid applicationCode ");
             return query_re;
         }
@@ -167,29 +167,29 @@ public class MolController extends BasePayAction {
         Map<String, Object> params_sign = transfer2QueryMap(opayOrder);
         String local_sign = SignatureUtil.signature(params_sign, privatekey);
         if (!StringUtils.equalsIgnoreCase(local_sign, signature)) {
-            query_re.put("status", 4003);//签名有误
+            query_re.put("status", 10005);//签名有误
             query_re.put("message", "Invalid Signature. ");
             return query_re;
         }
 
         OpayOrder oPayOrder_client = payService.getOpayOrderByOrderId(opayOrder.getReferenceId());
         if (null == oPayOrder_client) {
-            query_re.put("status", 1003);//refrenceId 有误
+            query_re.put("status", 10009);//refrenceId 有误
             query_re.put("message", "Invalid referenceId. ");
             return query_re;
         }
         switch (oPayOrder_client.getStatus()) {
             case 0:
-                query_re.put("status", 1004);//正在处理
-                query_re.put("message", "in process. ");
+                query_re.put("status", 2);//正在处理
+                query_re.put("message", "in  processing");
                 break;
             case 1:
-                query_re.put("status", 200);//成功
+                query_re.put("status", 1);//成功
                 query_re.put("message", "successful ");
                 query_re.put("detail",oPayOrder_client);
                 break;
             case 3:
-                query_re.put("status", 201);
+                query_re.put("status", 3);
                 query_re.put("message", "failed");
                 query_re.put("detail",oPayOrder_client);
                 break;
@@ -206,7 +206,7 @@ public class MolController extends BasePayAction {
                 try {
                     map = objectMapper.readValue(mol_re, Map.class);
                     if (null != map.get("message")) {
-                        query_re.put("status", 503);//MOL错误
+                        query_re.put("status", 10008);//MOL错误
                         query_re.put("message", map.get("message"));
                     }else{
                         opayOrder.setAmount((Integer) map.get("amount"));
@@ -215,12 +215,16 @@ public class MolController extends BasePayAction {
                         opayOrder.setPaymentStatusDate((String) map.get("paymentStatusDate"));
                         if(StringUtils.equals(pamentStatus,"00")){
                             opayOrder.setStatus(1);
-                            query_re.put("status", 200);
-                            query_re.put("message", "successful ");
+                            query_re.put("status", 1);
+                            query_re.put("message", "successful");
+                            query_re.put("detail",opayOrder);
+                        }else if(StringUtils.equals(pamentStatus,"01")){
+                            query_re.put("status", 2);
+                            query_re.put("message", "in middle of processing");
                             query_re.put("detail",opayOrder);
                         }else{
                             opayOrder.setStatus(3);
-                            query_re.put("status", 201);
+                            query_re.put("status", 3);
                             query_re.put("message", "failed");
                             query_re.put("detail",opayOrder);
                         }
@@ -229,7 +233,7 @@ public class MolController extends BasePayAction {
                 } catch (IOException e) {
                     LOG.error("objectMapper error :{}", e.getMessage());
                     e.printStackTrace();
-                    query_re.put("status", 5001);
+                    query_re.put("status", 10007);
                     query_re.put("message", "System Error1. ");
                 }
                 break;
