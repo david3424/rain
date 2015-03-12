@@ -76,6 +76,7 @@ public static final String PAY_TABLE = "o_pay_order";
     public  String getApplicationCodeByReferenceId(String referenceId){
         String query = "select  b.callbackUrl from "+PAY_TABLE+" a ,o_pay_dic b where a.applicationCode = b.appid and a.referenceId = ? ";
         try {
+            LOG.info("refeid:{}",referenceId);
             return wdao.queryScalar(query,referenceId);
         } catch (SQLException e) {
             LOG.error("getApplicationCodeByReferenceId[ referenceId:{}] === failed :{}", referenceId,e.getMessage());
