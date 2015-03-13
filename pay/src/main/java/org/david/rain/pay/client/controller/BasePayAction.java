@@ -42,7 +42,7 @@ public class BasePayAction implements BasePayInterface {
     }
 
     protected String getErrorRedirect(Integer code, String error) {
-            return "redirect:/mol/fail?code=" + code + "&error=" + error;
+        return "redirect:/mol/fail?code=" + code + "&error=" + error;
     }
 
 
@@ -63,14 +63,14 @@ public class BasePayAction implements BasePayInterface {
         return null;
     }
 
-/**
+    /**
      * 验证参数完整性
      *
      * @param opayOrder
      * @return
      */
     protected String checkQuery(OpayOrder opayOrder) {
-        if (opayOrder.getApplicationCode() == null ) {
+        if (opayOrder.getApplicationCode() == null) {
             return " appid is illegal ";
         }
         if (StringUtils.isEmpty(opayOrder.getReferenceId())) {
@@ -99,7 +99,7 @@ public class BasePayAction implements BasePayInterface {
         return resultMap;
     }
 
-  protected Map<String, Object> transfer2QueryMap(OpayOrder opayOrder) {
+    protected Map<String, Object> transfer2QueryMap(OpayOrder opayOrder) {
 
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("applicationCode", opayOrder.getApplicationCode());
@@ -107,13 +107,13 @@ public class BasePayAction implements BasePayInterface {
         return resultMap;
     }
 
-  protected Map<String, Object> transfer2MolQueryMap(OpayOrder opayOrder) {
+    protected Map<String, Object> transfer2MolQueryMap(OpayOrder opayOrder) {
 
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("applicationCode", opayOrder.getApplicationCode());
         resultMap.put("referenceId", opayOrder.getReferenceId());
         resultMap.put("version", version);
-      return resultMap;
+        return resultMap;
     }
 
 
@@ -126,25 +126,41 @@ public class BasePayAction implements BasePayInterface {
         resultMap.put("channelId", opayOrder.getChannelId());
         resultMap.put("amount", opayOrder.getAmount());
         resultMap.put("currencyCode", opayOrder.getCurrencyCode());
-        resultMap.put("returnUrl", MessageFormat.format(returnUrl,opayOrder.getReferenceId()));
+        resultMap.put("returnUrl", MessageFormat.format(returnUrl, opayOrder.getReferenceId()));
         resultMap.put("customerId", opayOrder.getCustomerId());
         return resultMap;
     }
 
 
-protected Map<String, Object> transferMol2ClientMap(OpayOrder opayOrder) {
+    protected Map<String, Object> transferMol2ClientMap(OpayOrder opayOrder) {
 
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("applicationCode", applicationCode);
+        resultMap.put("applicationCode", opayOrder.getApplicationCode());
         resultMap.put("referenceId", opayOrder.getReferenceId());
-        resultMap.put("version", version);
+        resultMap.put("version", opayOrder.getVersion());
         resultMap.put("amount", opayOrder.getAmount());
         resultMap.put("currencyCode", opayOrder.getCurrencyCode());
         resultMap.put("paymentId", opayOrder.getPaymentId());
         resultMap.put("paymentStatusCode", opayOrder.getPaymentStatusCode());
         resultMap.put("paymentStatusDate", opayOrder.getPaymentStatusDate());
-        resultMap.put("channelId", opayOrder.getCustomerId());
+        resultMap.put("channelId", opayOrder.getChannelId());
         resultMap.put("customerId", opayOrder.getCustomerId());
+        return resultMap;
+    }
+
+    protected Map<String, Object> transfer2CallbackMap(OpayOrder opayOrder) {
+
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("applicationCode", opayOrder.getApplicationCode());
+        resultMap.put("referenceId", opayOrder.getReferenceId());
+        resultMap.put("channelId", opayOrder.getChannelId());
+        resultMap.put("amount", opayOrder.getAmount());
+        resultMap.put("currencyCode", opayOrder.getCurrencyCode());
+        resultMap.put("customerId", opayOrder.getCustomerId());
+        resultMap.put("paymentId", opayOrder.getPaymentId());
+        resultMap.put("paymentStatusCode", opayOrder.getPaymentStatusCode());
+        resultMap.put("paymentStatusDate", opayOrder.getPaymentStatusDate());
+        resultMap.put("status", opayOrder.getStatus());
         return resultMap;
     }
 

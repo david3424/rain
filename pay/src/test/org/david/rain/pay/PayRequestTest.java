@@ -23,9 +23,9 @@ import java.util.TimeZone;
 public class PayRequestTest {
 public static final String PAYURL = "http://103.23.44.239/mol/payout" ;
 public static final String QUERYURL = "http://103.23.44.239/mol/query" ;
-public static final String RETURNURL = "http://www.baidu.com" ; //测试用
+public static final String RETURNURL = "http://www.baidu.com?query=xxx" ; //测试用
 public static final String PRIVATEKEY = "T0AxQypxcVdJR0Et" ;
-public static final String REFERENCEID = "1000-testcode-number8" ;
+public static final String REFERENCEID = "1000-testcode-number10" ;
 public static final String CURRENCYCODE = "THB" ;
 public static final int CHANNELID = 1 ;
 public static final int AMOUNT = 100 ;

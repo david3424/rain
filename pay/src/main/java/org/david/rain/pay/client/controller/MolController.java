@@ -138,10 +138,29 @@ public class MolController extends BasePayAction {
             LOG.error("callback_sign is :{},but signature from mol is {}", callback_sign, signature);
             return getErrorRedirect(10007, "System Error7.");
         }
+        switch(opayOrder.getPaymentStatusCode()){
+            case "00":opayOrder.setStatus(1);break;
+            case "01":opayOrder.setStatus(2);break;
+            case "02":opayOrder.setStatus(3);break; //failed as expired
+            case "99":opayOrder.setStatus(3);break; //Payment for the given transaction failed
+            default:opayOrder.setStatus(3);
+        }
+        opayOrder.setPaymentStatusDate(payService.transUTC2Date(opayOrder.getPaymentStatusDate()));
         payService.updateOrder(opayOrder, "callback");
-        String callbackUrl = payService.getApplicationCodeByReferenceId(opayOrder.getReferenceId());
+        OpayDic dsysDic = getClientByAppid(opayOrder.getApplicationCode());
+        if (dsysDic == null) {
+            return getErrorRedirect(10002, "invalid applicationCode ");//applicationCode无效
+        }
+        String callbackUrl = dsysDic.getCallbackurl();
         LOG.info("callbackurl in db is {}", callbackUrl);
-        return "redirect:" + callbackUrl;//得把参数带过去
+
+        //进入支付流程
+        Map<String, Object> params_callback = transfer2CallbackMap(opayOrder);
+        String callback_sign_client = SignatureUtil.signature(params_callback, dsysDic.getPrivatekey());
+        params_client.put("signature", callback_sign_client);
+        String callback_re = httpUtil.postRequest(callbackUrl, params_callback);
+        LOG.info("result of mol-callback request :{}", callback_re);
+        return getErrorRedirect(200, "callback successful");
     }
 
 
@@ -182,6 +201,7 @@ public class MolController extends BasePayAction {
             case 0:
                 query_re.put("status", 2);//正在处理
                 query_re.put("message", "in  processing");
+                query_re.put("detail",oPayOrder_client);
                 break;
             case 1:
                 query_re.put("status", 1);//成功
@@ -217,17 +237,16 @@ public class MolController extends BasePayAction {
                             opayOrder.setStatus(1);
                             query_re.put("status", 1);
                             query_re.put("message", "successful");
-                            query_re.put("detail",opayOrder);
                         }else if(StringUtils.equals(pamentStatus,"01")){
                             query_re.put("status", 2);
                             query_re.put("message", "in middle of processing");
-                            query_re.put("detail",opayOrder);
                         }else{
                             opayOrder.setStatus(3);
                             query_re.put("status", 3);
                             query_re.put("message", "failed");
-                            query_re.put("detail",opayOrder);
                         }
+                        opayOrder.setPaymentStatusDate(payService.transUTC2Date(opayOrder.getPaymentStatusDate()));
+                        query_re.put("detail",opayOrder);
                         payService.updateOrder(opayOrder, "callback");
                     }
                 } catch (IOException e) {

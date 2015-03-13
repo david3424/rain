@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 /**
  * User: david
@@ -83,5 +86,20 @@ public static final String PAY_TABLE = "o_pay_order";
             e.printStackTrace();
             return null;
         }
+    }
+
+    public String transUTC2Date(String paymentStatusDate) {
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        SimpleDateFormat dfs = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+        try {
+            return  dfs.format(df.parse(paymentStatusDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            LOG.error("transUTC2Date error:{}",e.getMessage());
+            return  paymentStatusDate;
+        }
+
     }
 }
