@@ -32,11 +32,11 @@ public class HttpUtil {
                    url = url + "&" + key + "=" + rawParams.get(key).toString();
                 }
             }
-            System.out.println("url in HttpUtil is :" + url);
+            logger.info("url in HttpUtil getRequest is :{}" , url);
             HttpGet get = new HttpGet(url);
             CloseableHttpResponse httpResponse = httpclient.execute(get);
             String msg = EntityUtils.toString(httpResponse.getEntity());
-            System.out.println("returned of httpPost:"+ msg);
+            logger.info("returned of getRequest :{}", msg);
             int returncode = httpResponse.getStatusLine().getStatusCode();
             if (returncode == 200) {
                 return msg;
@@ -65,14 +65,16 @@ public class HttpUtil {
             if (rawParams != null && rawParams.size() > 0) {
                 List<NameValuePair> params = new ArrayList<>();
                 for (String key : rawParams.keySet()) {
+                    if(null != rawParams.get(key)){
                     params.add(new BasicNameValuePair(key, rawParams.get(key).toString()));
+                    }
                 }
                 post.setEntity(new UrlEncodedFormEntity(params, "utf-8"));
             }
             CloseableHttpResponse httpResponse = httpclient.execute(post);
             int returncode = httpResponse.getStatusLine().getStatusCode();
             String msg = EntityUtils.toString(httpResponse.getEntity());
-            System.out.println("returned of httpPost:"+ msg);
+            logger.info("returned of httpPost:{}", msg);
             if (returncode == 200) {
                 return msg;
             } else {

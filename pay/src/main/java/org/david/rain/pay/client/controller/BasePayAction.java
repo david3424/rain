@@ -86,7 +86,6 @@ public class BasePayAction implements BasePayInterface {
     }
 
     protected Map<String, Object> transfer2Map(OpayOrder opayOrder) {
-
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("applicationCode", opayOrder.getApplicationCode());
         resultMap.put("channelId", opayOrder.getChannelId());
@@ -120,6 +119,10 @@ public class BasePayAction implements BasePayInterface {
     protected Map<String, Object> transfer2MolMap(OpayOrder opayOrder) {
 
         Map<String, Object> resultMap = new HashMap<>();
+        if(StringUtils.equals(opayOrder.getCurrencyCode(),"0")){
+            opayOrder.setAmount(null);
+            opayOrder.setCurrencyCode(null);
+        }
         resultMap.put("applicationCode", applicationCode);
         resultMap.put("referenceId", opayOrder.getReferenceId());
         resultMap.put("version", version);

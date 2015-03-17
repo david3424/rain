@@ -55,7 +55,7 @@ public static final String PAY_TABLE = "o_pay_order";
     public int updateOrder(OpayOrder opayOrder,String type) {
         try {
         if(StringUtils.equals(type,"callback")){
-                return wdao.update("update " + PAY_TABLE + " set status = ? , paymentStatusCode = ?, paymentStatusDate = ? where referenceId = ? ",opayOrder.getStatus(),opayOrder.getPaymentStatusCode(),opayOrder.getPaymentStatusDate(),opayOrder.getReferenceId());
+                return wdao.update("update " + PAY_TABLE + " set amount = ?, status = ? , paymentStatusCode = ?, paymentStatusDate = ? where referenceId = ? ",opayOrder.getAmount(), opayOrder.getStatus(),opayOrder.getPaymentStatusCode(),opayOrder.getPaymentStatusDate(),opayOrder.getReferenceId());
             }else{
                 return wdao.update("update " + PAY_TABLE + " set status = ? , paymentId = ? where referenceId = ? ",opayOrder.getStatus(),opayOrder.getPaymentId(),opayOrder.getReferenceId());
         }

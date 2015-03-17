@@ -23,7 +23,7 @@ public class OpayOrder implements Serializable {
     private String paymentUrl;
     private String returnUrl;
     private String paymentStatusCode;
-    private Integer customerId;
+    private String customerId;
     private Integer type;//暂时不用传 默认0
     private String createtime;
     private String paymentStatusDate;
@@ -111,11 +111,11 @@ public class OpayOrder implements Serializable {
         this.paymentStatusCode = paymentStatusCode;
     }
 
-    public Integer getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 

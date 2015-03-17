@@ -1,5 +1,8 @@
 package org.david.rain.pay.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
@@ -13,6 +16,7 @@ public class SignatureUtil {
      * @param secret
      * @return
      */
+    private final static Logger logger = LoggerFactory.getLogger(SignatureUtil.class);
     public static String signature(Map<String, ?> params, String secret) {
         StringBuilder sbuf = new StringBuilder();
         if (null != params) {
@@ -31,7 +35,7 @@ public class SignatureUtil {
             }
             //把私钥放在最后
             sbuf.append(secret);
-            System.out.println(" subf md5str:" + sbuf.toString());
+            logger.info(" singed md5str:{}", sbuf.toString());
             return getMd5str(sbuf.toString());
         }
         return "";

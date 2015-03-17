@@ -25,10 +25,10 @@ public static final String PAYURL = "http://103.23.44.239/mol/payout" ;
 public static final String QUERYURL = "http://103.23.44.239/mol/query" ;
 public static final String RETURNURL = "http://www.baidu.com?query=xxx" ; //测试用
 public static final String PRIVATEKEY = "T0AxQypxcVdJR0Et" ;
-public static final String REFERENCEID = "1000-testcode-number10" ;
-public static final String CURRENCYCODE = "THB" ;
-public static final int CHANNELID = 1 ;
-public static final int AMOUNT = 100 ;
+public static final String REFERENCEID = "1000-testcode-number14" ;
+public static final String CURRENCYCODE = "0" ;
+public static final int CHANNELID = 3 ;
+public static final int AMOUNT = 0 ;
 
     @Autowired
     PayService payService;
@@ -42,7 +42,7 @@ public static final int AMOUNT = 100 ;
         opayOrder.setReturnUrl(RETURNURL);
         opayOrder.setCurrencyCode(CURRENCYCODE);
         opayOrder.setReferenceId(REFERENCEID);
-        opayOrder.setCustomerId(100001);
+        opayOrder.setCustomerId("100001");
         opayOrder.setIp("127.0.0.1");
         Map<String, Object> params_mol = transfer2MolMap(opayOrder);
         String mol_sign = SignatureUtil.signature(params_mol,PRIVATEKEY);
@@ -85,7 +85,7 @@ public static final int AMOUNT = 100 ;
                 + "&currencyCode=" + CURRENCYCODE
                 + "&referenceId=" + REFERENCEID
                 + "&returnUrl=" + RETURNURL
-                + "&customerId=" + 100001
+                + "&customerId=" + "100001"
                 + "&ip=" + "127.0.0.1"
                 + "&signature=" + sign();
         System.out.println(redirect);
