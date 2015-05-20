@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="3 seconds">
+	<contextName>spring-rain</contextName>
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>
+				%d{yy/MM/dd-HH:mm:ss} [%thread] %-5level %logger{32}[%L] --> %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 综合时间与大小的滚动策略，先按小时滚动，小时内的文件大于10mb时再按大小滚动 -->
+	<appender name="payLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/export/logs/${file.name}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/export/logs/${file.name}-%d{yyyy-MM-dd_HH}.%i.zip</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS},%msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+	<jmxConfigurator />
+	<root level="WARN">
+		<appender-ref ref="console" />
+		<appender-ref ref="payLogFile" />
+	</root>
+
+	<logger name="com.wanmei.games" level="${logger.level}" />
+</configuration>

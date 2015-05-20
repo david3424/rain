@@ -3,18 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.david.rain</groupId>
-    <artifactId>rain</artifactId>
+
+    <groupId>com.wanmei.games</groupId>
+    <artifactId>games</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>rain</name>
 
     <modules>
-    <!--<module>bhhd</module>-->
-    <module>activity</module>
-        <!--<module>parent</module>-->
-    <!--<module>dubbox-demo</module>-->
-    <module>games</module>
+        <module>pay</module>
     </modules>
     <properties>
         <java-version>1.7</java-version>
@@ -172,6 +168,29 @@
                 <version>${org.aspectj-version}</version>
             </dependency>
             <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${org.aspectj-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib</artifactId>
+                <scope>runtime</scope>
+                <version>${cglib_version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cglib</groupId>
+                <artifactId>cglib-nodep</artifactId>
+                <version>${cglib_version}</version>
+            </dependency>
+           <!-- <dependency>
+                <groupId>asm</groupId>
+                <artifactId>asm</artifactId>
+                <version>3.3.1</version>
+                <scope>runtime</scope>
+            </dependency>-->
+
+            <dependency>
                 <groupId>com.thoughtworks.xstream</groupId>
                 <artifactId>xstream</artifactId>
                 <version>${xstream_version}</version>
@@ -308,63 +327,53 @@
                 <artifactId>logback-classic</artifactId>
                 <version>${logback_version}</version>
             </dependency>
-           <!-- <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>${slf4j_version}</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-logging</groupId>
-                <artifactId>commons-logging-api</artifactId>
-                <version>${jcl_version}</version>
-            </dependency>
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>${log4j_version}</version>
-            </dependency>-->
+            <!-- <dependency>
+                 <groupId>org.slf4j</groupId>
+                 <artifactId>slf4j-log4j12</artifactId>
+                 <version>${slf4j_version}</version>
+             </dependency>
+             <dependency>
+                 <groupId>commons-logging</groupId>
+                 <artifactId>commons-logging-api</artifactId>
+                 <version>${jcl_version}</version>
+             </dependency>
+             <dependency>
+                 <groupId>log4j</groupId>
+                 <artifactId>log4j</artifactId>
+                 <version>${log4j_version}</version>
+             </dependency>-->
             <!-- old Test libs -->
-          <!--  <dependency>
-                <groupId>org.easymock</groupId>
-                <artifactId>easymock</artifactId>
-                <version>${easymock_version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.googlecode.jmockit</groupId>
-                <artifactId>jmockit</artifactId>
-                <version>${jmockit_version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.easymock</groupId>
-                <artifactId>easymockclassextension</artifactId>
-                <version>${easymock_version}</version>
-                <scope>test</scope>
-            </dependency>-->
+            <!--  <dependency>
+                  <groupId>org.easymock</groupId>
+                  <artifactId>easymock</artifactId>
+                  <version>${easymock_version}</version>
+                  <scope>test</scope>
+              </dependency>
+              <dependency>
+                  <groupId>com.googlecode.jmockit</groupId>
+                  <artifactId>jmockit</artifactId>
+                  <version>${jmockit_version}</version>
+                  <scope>test</scope>
+              </dependency>
+              <dependency>
+                  <groupId>org.easymock</groupId>
+                  <artifactId>easymockclassextension</artifactId>
+                  <version>${easymock_version}</version>
+                  <scope>test</scope>
+              </dependency>-->
             <!--杂乱-->
-            <dependency>
-                <groupId>cglib</groupId>
-                <artifactId>cglib</artifactId>
-                <version>${cglib_version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cglib</groupId>
-                <artifactId>cglib-nodep</artifactId>
-                <version>${cglib_version}</version>
-            </dependency>
             <dependency>
                 <groupId>commons-pool</groupId>
                 <artifactId>commons-pool</artifactId>
                 <version>${commons_pool_version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>commons-dbutils</groupId>
                 <artifactId>commons-dbutils</artifactId>
                 <version>${commons-dbutils}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.apache.tomcat.embed</groupId>
                 <artifactId>tomcat-embed-core</artifactId>
@@ -413,11 +422,6 @@
                 <version>1.3</version>
                 <scope>test</scope>
             </dependency>
-           <!-- <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-test</artifactId>
-                <scope>test</scope>
-            </dependency>-->
         </dependencies>
     </dependencyManagement>
 
@@ -468,5 +472,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
 </project>

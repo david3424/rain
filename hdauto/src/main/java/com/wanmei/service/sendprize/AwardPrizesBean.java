@@ -6,8 +6,8 @@ import com.wanmei.entity.PrizeLogBean;
 import com.wanmei.entity.PrizeOpenBean;
 import com.wanmei.entity.PrizeTableBean;
 import com.wanmei.repository.Idao;
-import com.wanmei.wmeovg.request.service.IPrizeService;
-import com.wanmei.wmeovg.request.service.PrizeServiceManager;
+//import com.wanmei.wmeovg.request.service.IPrizeService;
+//import com.wanmei.wmeovg.request.service.PrizeServiceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,8 +72,7 @@ public class AwardPrizesBean implements IAwardPrizes {
 //					System.out.println("表" + tableName + "  准备发奖id---------------------------------" + id);
                     String gid = hashtable.get("gid");
                     try {
-                        //flag = ServiceManage.activityService.presentGoods2(_UserName, server, _RoleName, prizeid, new LogInfo());
-                        IPrizeService prizeService = PrizeServiceManager.prizeService;
+                      /*  IPrizeService prizeService = PrizeServiceManager.prizeService;
                         if (!this.ifCoupon) {
                             if (!this.ifMz) {//非梦诛
                                 flag = prizeService.sendByRoleId(tableName, gid, server, _UserName, roleid.intValue(), prizeid, callback);
@@ -81,33 +80,8 @@ public class AwardPrizesBean implements IAwardPrizes {
                                 flag = prizeService.sendByMZRoleId(tableName, gid, server, _UserName, roleid, prizeid, callback);
                             }
                         } else {
-                            /*System.out.println("coupon发奖-----------------");
-                            Long orderid = Long.valueOf(hashtable.get("orderid"));
-                            Integer userid = Integer.valueOf(hashtable.get("userid"));
-                            Integer score = Integer.valueOf(hashtable.get("score"));
-                            String rolename = hashtable.get("rolename");
-                            GoodsLog goodsLog = new GoodsLog();
-                            goodsLog.setAppid(tableName);
-                            goodsLog.setCallback(callback);
-                            goodsLog.setPriority(new Byte((byte) 1));
-                            goodsLog.setCount(new Integer(1));
-                            goodsLog.setZoneid(server);
-                            goodsLog.setUserid(userid);
-                            goodsLog.setRoleid(roleid);
-//                            goodsLog.setRolename(rolename);
-                            goodsLog.setPrizeid(prizeid);
-                            goodsLog.setAttachMoney(new Integer(0));
-                            goodsLog.setGoodsFlag(new Integer(1));
-                            goodsLog.setGoodsPrice(score);
-                            goodsLog.setGoodsPriceBeforeDiscount(new Integer(0));
-                            goodsLog.setReserved1(new Integer(0));
-                            goodsLog.setReserved2(new Integer(0));
-                            goodsLog.setGid(gid);
-                            goodsLog.setCouponOrderid(orderid);
-                            flag = prizeService.send(goodsLog);
-                            System.out.println("coupon发奖------------flag is-----" + flag);*/
                         }
-                        // System.out.println("申请结果：---------------------------------" + flag);
+                        // System.out.println("申请结果：---------------------------------" + flag);*/
                         if (0 == flag) {
                             // 申请成功
                             updateStatus(id, 8);
@@ -240,7 +214,7 @@ public class AwardPrizesBean implements IAwardPrizes {
      * @throws Exception
      */
     private List<Hashtable<String, String>> getRecordsByCount() throws Exception {
-        IPrizeService prizeService = PrizeServiceManager.prizeService;
+//        IPrizeService prizeService = PrizeServiceManager.prizeService;
         String sql = "select * from " + this.getTableName().trim() + " where status = 0   limit " + this.getCounts();
         //  System.out.println("-------------------------sql demo s-----------------------------------"+sql);
         List<Hashtable<String, String>> list = new ArrayList<Hashtable<String, String>>();
@@ -253,9 +227,9 @@ public class AwardPrizesBean implements IAwardPrizes {
             hashtable.put("prize", prizeTableBean.getPrize() + "");
             hashtable.put("id", prizeTableBean.getId() + "");
             hashtable.put("server", prizeTableBean.getServer() + "");
-            String gid = prizeService.genGid();
-            hashtable.put("gid", gid);
-            updateGIdAndStatus(prizeTableBean.getId(), 2, gid);
+//            String gid = prizeService.genGid();
+//            hashtable.put("gid", gid);
+//            updateGIdAndStatus(prizeTableBean.getId(), 2, gid);
             list.add(hashtable);
         }
         /*try {

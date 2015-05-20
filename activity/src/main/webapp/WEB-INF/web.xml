@@ -57,14 +57,14 @@
     </servlet-mapping>
 
     <!--验证码-->
-    <!--<servlet>
+    <servlet>
        <servlet-name>AuthImageServlet</servlet-name>
        <servlet-class>org.david.rain.common.servlet.AuthImageServlet</servlet-class>
      </servlet>
      <servlet-mapping>
        <servlet-name>AuthImageServlet</servlet-name>
        <url-pattern>/servlet/AuthImageServlet</url-pattern>
-     </servlet-mapping>-->
+     </servlet-mapping>
 
 
     <!-- Shiro filter-->
