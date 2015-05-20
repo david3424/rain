@@ -85,8 +85,9 @@
         <maven_war_plugin_version>2.1.1</maven_war_plugin_version>
         <maven_install_plugin_version>2.3.1</maven_install_plugin_version>
         <maven_deploy_plugin_version>2.7</maven_deploy_plugin_version>
-
         <maven-surefire-plugin_version>2.17</maven-surefire-plugin_version>
+        <bonecp.version>0.7.1.RELEASE</bonecp.version>
+        <jdbc.driver.version>5.1.21</jdbc.driver.version>
     </properties>
 
     <dependencyManagement>
@@ -327,40 +328,6 @@
                 <artifactId>logback-classic</artifactId>
                 <version>${logback_version}</version>
             </dependency>
-            <!-- <dependency>
-                 <groupId>org.slf4j</groupId>
-                 <artifactId>slf4j-log4j12</artifactId>
-                 <version>${slf4j_version}</version>
-             </dependency>
-             <dependency>
-                 <groupId>commons-logging</groupId>
-                 <artifactId>commons-logging-api</artifactId>
-                 <version>${jcl_version}</version>
-             </dependency>
-             <dependency>
-                 <groupId>log4j</groupId>
-                 <artifactId>log4j</artifactId>
-                 <version>${log4j_version}</version>
-             </dependency>-->
-            <!-- old Test libs -->
-            <!--  <dependency>
-                  <groupId>org.easymock</groupId>
-                  <artifactId>easymock</artifactId>
-                  <version>${easymock_version}</version>
-                  <scope>test</scope>
-              </dependency>
-              <dependency>
-                  <groupId>com.googlecode.jmockit</groupId>
-                  <artifactId>jmockit</artifactId>
-                  <version>${jmockit_version}</version>
-                  <scope>test</scope>
-              </dependency>
-              <dependency>
-                  <groupId>org.easymock</groupId>
-                  <artifactId>easymockclassextension</artifactId>
-                  <version>${easymock_version}</version>
-                  <scope>test</scope>
-              </dependency>-->
             <!--杂乱-->
             <dependency>
                 <groupId>commons-pool</groupId>
@@ -368,6 +335,23 @@
                 <version>${commons_pool_version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.jolbox</groupId>
+                <artifactId>bonecp-spring</artifactId>
+                <version>${bonecp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jolbox</groupId>
+                <artifactId>bonecp</artifactId>
+                <version>${bonecp.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${jdbc.driver.version}</version>
+            </dependency>
+            
             <dependency>
                 <groupId>commons-dbutils</groupId>
                 <artifactId>commons-dbutils</artifactId>
