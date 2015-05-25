@@ -7,33 +7,33 @@ import java.util.concurrent.TimeUnit;
 
 public class Client {
 	public static void main(String[] args) throws Exception {
-		//Éú³ÉÒ»¸öµ¥Ïß³ÌµÄÒì²½Ö´ĞĞÆ÷
+		//ç”Ÿæˆä¸€ä¸ªå•çº¿ç¨‹çš„å¼‚æ­¥æ‰§è¡Œå™¨
 		ExecutorService es = Executors.newSingleThreadExecutor();
-		//Ïß³ÌÖ´ĞĞºóµÄÆÚÍûÖµ
+		//çº¿ç¨‹æ‰§è¡Œåçš„æœŸæœ›å€¼
 		Future<Integer> future = es.submit(new TaxCalculator(100));
 		while(!future.isDone()){
-			//»¹Ã»ÓĞÔËËãÍê³É£¬µÈ´ı10ºÁÃë
+			//è¿˜æ²¡æœ‰è¿ç®—å®Œæˆï¼Œç­‰å¾…10æ¯«ç§’
 			TimeUnit.MILLISECONDS.sleep(2000);
-			//Êä³ö½ø¶È·ûºÅ
+			//è¾“å‡ºè¿›åº¦ç¬¦å·
 			System.out.print("#");
 		}
-		System.out.printf("%n¼ÆËãÍê³É£¬Ë°½ğÊÇ£º%d Ôª", future.get());
-		//¹Ø±ÕÒì²½Ö´ĞĞÆ÷
+		System.out.printf("%nè®¡ç®—å®Œæˆï¼Œç¨é‡‘æ˜¯ï¼š%d å…ƒ", future.get());
+		//å…³é—­å¼‚æ­¥æ‰§è¡Œå™¨
 		es.shutdown();
 	}
 }
 
-//Ë°¿î¼ÆËãÆ÷
+//ç¨æ¬¾è®¡ç®—å™¨
 class TaxCalculator implements Callable<Integer> {
-	//±¾½ğ
+	//æœ¬é‡‘
 	private int seedMoney;
-	//½ÓÊÕÖ÷Ïß³ÌÌá¹©µÄ²ÎÊı
+	//æ¥æ”¶ä¸»çº¿ç¨‹æä¾›çš„å‚æ•°
 	public TaxCalculator(int _seedMoney) {
 		seedMoney = _seedMoney;
 	}
 	@Override
 	public Integer call() throws Exception {
-		//¸´ÔÓ¼ÆËã£¬ÔËĞĞÒ»´ÎĞèÒª10Ãë
+		//å¤æ‚è®¡ç®—ï¼Œè¿è¡Œä¸€æ¬¡éœ€è¦10ç§’
 		TimeUnit.MILLISECONDS.sleep(10000);
 		return seedMoney /10;
 	}

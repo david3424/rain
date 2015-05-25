@@ -1,34 +1,34 @@
 package java151.item9_06;
 
 /**
- * ¼ì²âvolatile²»ÄÜ±£Ö¤Ïß³Ì°²È«£¬Ö»ÄÜ±£Ö¤µ±Ç°Ïß³Ì»ñÈ¡µÄÖµÊÇ×îĞÂ
+ * æ£€æµ‹volatileä¸èƒ½ä¿è¯çº¿ç¨‹å®‰å…¨ï¼Œåªèƒ½ä¿è¯å½“å‰çº¿ç¨‹è·å–çš„å€¼æ˜¯æœ€æ–°
  */
 public class Client {
 	public static void main(String[] args) throws Exception {
-		// ÀíÏëÖµ£¬²¢×öÎª×î´óÑ­»·´ÎÊı
+		// ç†æƒ³å€¼ï¼Œå¹¶åšä¸ºæœ€å¤§å¾ªç¯æ¬¡æ•°
 		int value = 1000;
-		// Ñ­»·´ÎÊı£¬·ÀÖ¹³öÏÖÎŞÏŞÑ­»·Ôì³ÉËÀ»úÇé¿ö
+		// å¾ªç¯æ¬¡æ•°ï¼Œé˜²æ­¢å‡ºç°æ— é™å¾ªç¯é€ æˆæ­»æœºæƒ…å†µ
 		int loops = 0;
-		//Ö÷Ïß³Ì×é£¬ÓÃÓÚ¹À¼Æ»î¶¯Ïß³ÌÊı
+		//ä¸»çº¿ç¨‹ç»„ï¼Œç”¨äºä¼°è®¡æ´»åŠ¨çº¿ç¨‹æ•°
 		ThreadGroup tg = Thread.currentThread().getThreadGroup();
 		while (loops++ < value) {
-			// ¹²Ïí×ÊÔ´ÇåÁã
+			// å…±äº«èµ„æºæ¸…é›¶
 			UnsafeThread ut = new UnsafeThread();
-			System.out.println("1µ±Ç°»î¶¯µÄÏß³ÌÊıÁ¿£º" + tg.activeCount());
+			System.out.println("1å½“å‰æ´»åŠ¨çš„çº¿ç¨‹æ•°é‡ï¼š" + tg.activeCount());
 			for (int i = 0; i < value; i++) {
 				new Thread(ut).start();
-				System.out.println("2µ±Ç°»î¶¯µÄÏß³ÌÊıÁ¿£º" + tg.activeCount());
+				System.out.println("2å½“å‰æ´»åŠ¨çš„çº¿ç¨‹æ•°é‡ï¼š" + tg.activeCount());
 			}
-			System.out.println("3µ±Ç°»î¶¯µÄÏß³ÌÊıÁ¿£º" + tg.activeCount());
-			// ÏÈµÈ15ºÁÃë£¬µÈ´ı»î¶¯Ïß³ÌÊıÁ¿³ÉÎª1
+			System.out.println("3å½“å‰æ´»åŠ¨çš„çº¿ç¨‹æ•°é‡ï¼š" + tg.activeCount());
+			// å…ˆç­‰15æ¯«ç§’ï¼Œç­‰å¾…æ´»åŠ¨çº¿ç¨‹æ•°é‡æˆä¸º1
 			do {
 				Thread.sleep(15);
 			} while (tg.activeCount() != 1);
-			// ¼ì²éÊµ¼ÊÖµÓëÀíÂÛÖµÊÇ·ñÒ»ÖÂ
+			// æ£€æŸ¥å®é™…å€¼ä¸ç†è®ºå€¼æ˜¯å¦ä¸€è‡´
 			if (ut.getCount() != value) {
-				// ³öÏÖÏß³Ì²»°²È«µÄÇé¿ö
-				System.out.println("Ñ­»·µ½µÚ " + loops + " ±é£¬³öÏÖÏß³Ì²»°²È«Çé¿ö");
-				System.out.println("´ËÊ±£¬count=" + ut.getCount());
+				// å‡ºç°çº¿ç¨‹ä¸å®‰å…¨çš„æƒ…å†µ
+				System.out.println("å¾ªç¯åˆ°ç¬¬ " + loops + " éï¼Œå‡ºç°çº¿ç¨‹ä¸å®‰å…¨æƒ…å†µ");
+				System.out.println("æ­¤æ—¶ï¼Œcount=" + ut.getCount());
 				System.exit(0);
 			}
 		}
@@ -36,16 +36,16 @@ public class Client {
 }
 
 class UnsafeThread implements Runnable {
-	// ¹²Ïí×ÊÔ´
+	// å…±äº«èµ„æº
 	private volatile int count = 0;
 
 	@Override
 	public void run() {
-		// ÎªÁËÔö¼ÓCPUµÄ·±Ã¦³Ì¶È
+		// ä¸ºäº†å¢åŠ CPUçš„ç¹å¿™ç¨‹åº¦
 		for (int i = 0; i < 1000; i++) {
 			Math.hypot(Math.pow(92456789, i), Math.cos(i));
 		}
-		// ×ÔÔöÔËËã
+		// è‡ªå¢è¿ç®—
 		count++;
 	}
 

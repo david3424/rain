@@ -207,8 +207,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
     </plugin>
     </plugins>
-        <finalName>pay</finalName>
 
+        <finalName>pay</finalName>
         <filters> <!-- 指定使用的 filter -->
             <filter>src/main/filters/filter-${env}-env.properties</filter>
         </filters>
