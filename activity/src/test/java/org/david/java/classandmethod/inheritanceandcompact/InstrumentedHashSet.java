@@ -1,4 +1,4 @@
-package effectivejava.ch4i16;// Broken - Inappropriate use of inheritance!
+package org.david.java.classandmethod.inheritanceandcompact;// Broken - Inappropriate use of inheritance!
 
 import java.util.*;
 

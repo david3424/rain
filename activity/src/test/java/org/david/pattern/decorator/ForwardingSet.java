@@ -1,4 +1,4 @@
-package effectivejava.ch4i16;// Reusable forwarding class - Page 84
+package org.david.pattern.decorator;// Reusable forwarding class - Page 84
 
 import java.util.*;
 

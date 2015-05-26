@@ -1,4 +1,4 @@
-package effectivejava.ch4i16;// Wrapper class - uses composition in place of inheritance - Page 84
+package org.david.pattern.decorator;// Wrapper class - uses composition in place of inheritance - Page 84
 
 import java.util.*;
 
