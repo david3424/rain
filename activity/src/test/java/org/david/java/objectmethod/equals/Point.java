@@ -1,4 +1,4 @@
-package effectivejava.ch3i8;// Simple immutable two-dimensional integer point class - Page 37
+package org.david.java.objectmethod.equals;// Simple immutable two-dimensional integer point class - Page 37
 
 
 public class Point {

@@ -1,4 +1,4 @@
-package effectivejava.ch3i8;
+package org.david.java.objectmethod.equals;
 
 /**
  * Created by mac on 15-4-12.
@@ -32,6 +32,6 @@ public final class CaseInsensitiveString {
     public static void main(String[] args) {
         CaseInsensitiveString cis = new CaseInsensitiveString("Polish");
         String s = "polish";
-        System.out.println(cis.equals(s) + "  " + s.equals(cis));
+        System.out.println(cis.equals(s) + "  " + s.equals(cis));//因为String的equals没有做过处理
     }
 }

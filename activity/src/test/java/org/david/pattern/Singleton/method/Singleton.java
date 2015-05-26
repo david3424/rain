@@ -1,12 +1,14 @@
-package effectivejava.ch2i3.singleton.method;
+package org.david.pattern.Singleton.method;
 
 /**
  * Created by mac on 15-4-7.
+ * 懒汉模式，会有并发问题
+ * 饿汉模式不会，是直接定义时初始化singleton* * *
  */
 public class Singleton {
     
 //    私有域
-    private static final  Singleton singleton = null ;
+    private static final Singleton singleton = null ;
 //    私有构造
     private Singleton(){}
     

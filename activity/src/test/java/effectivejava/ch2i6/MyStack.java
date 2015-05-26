@@ -24,7 +24,7 @@ public class MyStack {
         if (size == 0)
             throw new EmptyStackException();
         Object obj = elements[--size];
-        elements[size] = null;
+        elements[size] = null; //防止内存溢出
         return obj;
     }
 

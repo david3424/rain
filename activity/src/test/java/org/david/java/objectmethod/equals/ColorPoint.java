@@ -1,4 +1,4 @@
-package effectivejava.ch3i8;// Attempting to add a value component to Point - Pages 37 - 38
+package org.david.java.objectmethod.equals;// Attempting to add a value component to Point - Pages 37 - 38
 
 public class ColorPoint extends Point {
     private final Color color;
@@ -30,9 +30,11 @@ public class ColorPoint extends Point {
 
     public static void main(String[] args) {
         // First equals function violates symmetry
-        Point p = new Point(1, 2);
+        Point p11 = new Point(1, 2);
+        Point p22 = new Point(3, 4);
+        System.out.println(p11.equals(p22) + "" + p22.equals(p11));
         ColorPoint cp = new ColorPoint(1, 2, Color.RED);
-        System.out.println(p.equals(cp) + " " + cp.equals(p));
+        System.out.println(p11.equals(cp) + " " + cp.equals(p11));
 
         // Second equals function violates transitivity
         ColorPoint p1 = new ColorPoint(1, 2, Color.RED);

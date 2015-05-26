@@ -1,4 +1,4 @@
-package effectivejava.ch2i3.singleton.field;
+package org.david.pattern.Singleton.field;
 
 /**
  * Created by mac on 15-4-7.

@@ -1,7 +1,12 @@
-package effectivejava.ch3i9;// Shows the need for overriding hashcode when you override equals - Pages 45-46
+package org.david.java.objectmethod.hashcode;// Shows the need for overriding hashcode when you override equals - Pages 45-46
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
+
+/**
+ * 覆盖equals必须要覆盖hashcode方法，否则会影响某些集合，比入hashmap*
+ */
 public final class PhoneNumber {
     private final short areaCode;
     private final short prefix;
@@ -37,13 +42,13 @@ public final class PhoneNumber {
     // Broken - no hashCode method!
 
     // A decent hashCode method - Page 48
-//  @Override public int hashCode() {
-//      int result = 17;
-//      result = 31 * result + areaCode;
-//      result = 31 * result + prefix;
-//      result = 31 * result + lineNumber;
-//      return result;
-//  }
+  @Override public int hashCode() {
+      int result = 17;
+      result = 31 * result + areaCode;
+      result = 31 * result + prefix;
+      result = 31 * result + lineNumber;
+      return result;
+  }
 
 
     // Lazily initialized, cached hashCode - Page 49

@@ -1,4 +1,4 @@
-package effectivejava.ch2i3.singleton.num;
+package org.david.pattern.Singleton.num;
 
 /**
  * Created by mac on 15-4-7.

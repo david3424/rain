@@ -1,4 +1,5 @@
-package effectivejava.ch2i2.builder;
+package org.david.pattern.builder;
+
 
 /**
  * 多个参数时，利用构造器模式
@@ -6,14 +7,14 @@ package effectivejava.ch2i2.builder;
  * 不直接生成想要的对象，客户端利用所有必要的参数调用构造器，得到一个builder对象，然后客户端调用类似setter方法* *
  * Created by mac on 15-4-7.
  */
-public class Mybuilder {
+public class PersonalInfo {
 
     private final String username;
     private final int userid;
     private final String address;
     private final int age;
-    
-    public static class Builder implements IBuilder<Mybuilder>{
+
+    public static class PersonalInfoBuilder implements IBuilder<PersonalInfo>{
 //        必选参数
         private final String username;
         private final int userid;
@@ -21,29 +22,29 @@ public class Mybuilder {
 //        可选参数，所以给个初始值
         private  String address = null;
         private  int age = 0 ;
-        
-        
-        public Builder(String username,int userid){
+
+
+        public PersonalInfoBuilder(String username,int userid){
             this.username = username;
             this.userid = userid;
         }
-        
-        private Builder age(int age){
+
+        private PersonalInfoBuilder age(int age){
             this.age = age;
             return  this;
         }
-        
-        Builder address(String address){
+
+        PersonalInfoBuilder address(String address){
             this.address = address;
             return this;
         }
 
-       public  Mybuilder build(){
-            return new Mybuilder(this);
+       public PersonalInfo build(){
+            return new PersonalInfo(this);
         }
     }
-    
-        private  Mybuilder(Builder builder){
+
+        private PersonalInfo(PersonalInfoBuilder builder){
         username = builder.username;
         userid = builder.userid;
         age = builder.age;
@@ -61,8 +62,8 @@ public class Mybuilder {
     }
 
     public static void main(String[] args) {
-        Mybuilder mybuilder = new  Builder("david",100054).age(30).address("北京").build();
-        System.out.println(mybuilder);
+        PersonalInfo personalInfonfo = new  PersonalInfoBuilder("david",100054).age(30).address("北京").build();
+        System.out.println(personalInfonfo);
     }
     
 }
