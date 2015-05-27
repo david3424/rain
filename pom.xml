@@ -91,6 +91,12 @@
         <maven_deploy_plugin_version>2.7</maven_deploy_plugin_version>
 
         <maven-surefire-plugin_version>2.17</maven-surefire-plugin_version>
+
+        <!-- 项目属性 -->
+        <jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+        <jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
+        <jdbc.driver.version>5.1.21</jdbc.driver.version>
+
     </properties>
 
     <dependencyManagement>
@@ -169,6 +175,11 @@
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjrt</artifactId>
+                <version>${org.aspectj-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
                 <version>${org.aspectj-version}</version>
             </dependency>
             <dependency>
@@ -365,6 +376,13 @@
                 <version>${commons-dbutils}</version>
             </dependency>
 
+            <dependency>
+                <groupId>${jdbc.driver.groupId}</groupId>
+                <artifactId>${jdbc.driver.artifactId}</artifactId>
+                <version>${jdbc.driver.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
             <!--mybatis-->
             <dependency>
                 <groupId>org.mybatis</groupId>
@@ -430,6 +448,19 @@
                 <artifactId>spring-test</artifactId>
                 <scope>test</scope>
             </dependency>-->
+
+            <dependency>
+                <groupId>org.jdom</groupId>
+                <artifactId>jdom</artifactId>
+                <version>2.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>dom4j</groupId>
+                <artifactId>dom4j</artifactId>
+                <version>1.6.1</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -458,6 +489,11 @@
                     <version>${maven_war_plugin_version}</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.tomcat.maven</groupId>
+                    <artifactId>tomcat7-maven-plugin</artifactId>
+                    <version>2.2</version>
+                </plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-install-plugin</artifactId>
                     <version>${maven_install_plugin_version}</version>
@@ -467,16 +503,23 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${maven_deploy_plugin_version}</version>
                 </plugin>
+
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven_compiler_plugin_version}</version>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.5</version>
                     <configuration>
-                        <source>${java_source_version}</source>
-                        <target>${java_target_version}</target>
-                        <encoding>${file_encoding}</encoding>
+                        <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                </plugin>
+
+
             </plugins>
         </pluginManagement>
     </build>

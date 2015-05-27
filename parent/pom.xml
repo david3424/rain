@@ -15,15 +15,13 @@
     <name>parent</name>
     <modules>
         <module>common</module>
-        <module>hdauto</module>
-        <module>wmeovg</module>
+        <!--<module>hdauto</module>-->
+        <!--<module>wmeovg</module>-->
     </modules>
 
     <properties>
         <project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
         <org.aspectj-version>1.7.4</org.aspectj-version>
-        <org.slf4j-version>1.7.5</org.slf4j-version>
-        <ch.qos.logback-version>1.0.13</ch.qos.logback-version>
         <bonecp.version>0.7.1.RELEASE</bonecp.version>
         <shiro.version>1.2.2</shiro.version>
         <commons-lang3.version>3.1</commons-lang3.version>
@@ -32,10 +30,7 @@
         <junit.version>4.11</junit.version>
         <mockito.version>1.9.5</mockito.version>
 
-        <!-- 项目属性 -->
-        <jdbc.driver.groupId>mysql</jdbc.driver.groupId>
-        <jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
-        <jdbc.driver.version>5.1.21</jdbc.driver.version>
+
     </properties>
 
     <!--    <repositories>
@@ -128,7 +123,6 @@
         <dependency>
             <groupId>${jdbc.driver.groupId}</groupId>
             <artifactId>${jdbc.driver.artifactId}</artifactId>
-            <version>${jdbc.driver.version}</version>
             <scope>runtime</scope>
         </dependency>
         <!--mybatis-->
@@ -152,18 +146,15 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${org.slf4j-version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>${org.slf4j-version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${ch.qos.logback-version}</version>
         </dependency>
 
         <!-- Servlet -->
@@ -177,12 +168,10 @@
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
-            <version>1.7.0</version>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.7.0</version>
         </dependency>
         <dependency>
             <groupId>cglib</groupId>
@@ -208,24 +197,20 @@
         <dependency>
             <groupId>org.jdom</groupId>
             <artifactId>jdom</artifactId>
-            <version>2.0.0</version>
         </dependency>
         <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
-            <version>1.6.1</version>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
-            <version>1.8.3</version>
         </dependency>
 
         <!--cached-->
         <dependency>
             <groupId>com.googlecode.xmemcached</groupId>
             <artifactId>xmemcached</artifactId>
-            <version>2.0.0</version>
         </dependency>
         <!-- Test -->
         <dependency>
@@ -274,13 +259,11 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
                 <configuration>
                     <warName>rain</warName>
                 </configuration>
@@ -301,10 +284,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>2.5</version>
-                <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
             </plugin>
 
          <!--   <plugin>
@@ -333,11 +312,12 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <inherited>true</inherited>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
                 <configuration>
-                    <skip>true</skip>
-                    <skipTests>true</skipTests>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
 
