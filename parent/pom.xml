@@ -14,10 +14,9 @@
     <version>1.0.0</version>
     <name>parent</name>
     <modules>
-        <module>../common</module>
-        <module>../activity</module>
-        <module>../hdauto</module>
-        <module>../wmeovg</module>
+        <module>common</module>
+        <module>hdauto</module>
+        <module>wmeovg</module>
     </modules>
 
     <properties>

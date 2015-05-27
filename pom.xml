@@ -12,7 +12,7 @@
     <modules>
     <!--<module>bhhd</module>-->
     <module>activity</module>
-        <!--<module>parent</module>-->
+        <module>parent</module>
     <!--<module>dubbox-demo</module>-->
     <module>games</module>
     </modules>
