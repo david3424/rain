@@ -2,7 +2,7 @@
 *  时间： 2007-8-13 11:57:32
 *  北京完美时空网络技术有限公司
 */
-package com.wanmei.common;
+package com.david.web.wanmei.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

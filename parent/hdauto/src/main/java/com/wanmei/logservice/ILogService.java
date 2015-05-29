@@ -1,4 +1,4 @@
-package com.wanmei.logservice;
+package com.david.web.wanmei.service.logservice;
 
 /**
  * User: Changel

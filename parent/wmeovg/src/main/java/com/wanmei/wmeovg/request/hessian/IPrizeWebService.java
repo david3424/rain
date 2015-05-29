@@ -3,10 +3,10 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   IPrizeWebService.java
 
-package com.wanmei.wmeovg.request.hessian;
+package com.david.web.wanmei.wmeovg.request.hessian;
 
-import com.wanmei.wmeovg.request.entity.GoodsLog;
-import com.wanmei.wmeovg.request.entity.PrizeLog;
+import com.david.web.wanmei.wmeovg.request.entity.GoodsLog;
+import com.david.web.wanmei.wmeovg.request.entity.PrizeLog;
 import java.util.Date;
 import java.util.List;
 

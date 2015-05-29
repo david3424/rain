@@ -20,7 +20,7 @@
         <property name="from" value="bigdata.delivery@pwrd.com"/>
     </bean>
 	
-	<bean id="mailSupport" class="com.wanmei.webgame.mail.MailSupport">
+	<bean id="mailSupport" class="com.david.web.wanmei.webgame.mail.MailSupport">
 		<property name="mailSender" ref="mailSender"/>
 		<property name="freeMarkerConfigurer" ref="freeMarkerConfigurer"/>
     </bean>

@@ -1,6 +1,6 @@
-package com.wanmei.controller.test;
+package com.david.web.wanmei.controller.test;
 
-import com.wanmei.service.test.MessageInterface;
+import com.david.web.wanmei.service.test.MessageInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,9 +1,9 @@
-package com.wanmei.repository;
+package com.david.web.wanmei.repository;
 
 
-import com.wanmei.common.CommonList;
-import com.wanmei.common.search.Search;
-import com.wanmei.entity.Task;
+import com.david.web.wanmei.common.CommonList;
+import com.david.web.wanmei.common.search.Search;
+import com.david.web.wanmei.entity.Task;
 
 import java.sql.SQLException;
 import java.util.List;

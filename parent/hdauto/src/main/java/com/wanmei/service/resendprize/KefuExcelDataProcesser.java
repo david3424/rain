@@ -1,9 +1,9 @@
-package com.wanmei.service.resendprize;
+package com.david.web.wanmei.service.resendprize;
 
-import com.wanmei.entity.ExcelParseExceptInfo;
-import com.wanmei.entity.ReSendPrizeBean;
-import com.wanmei.service.ServiceException;
-import com.wanmei.util.excel.parser.DataProcesser;
+import com.david.web.wanmei.entity.ExcelParseExceptInfo;
+import com.david.web.wanmei.entity.ReSendPrizeBean;
+import com.david.web.wanmei.service.ServiceException;
+import com.david.web.wanmei.util.excel.parser.DataProcesser;
 
 import java.util.ArrayList;
 import java.util.HashMap;

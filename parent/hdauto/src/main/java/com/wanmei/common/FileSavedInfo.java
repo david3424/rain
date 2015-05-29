@@ -1,4 +1,4 @@
-package com.wanmei.common;
+package com.david.web.wanmei.common;
 
 import java.util.ArrayList;
 import java.util.List;

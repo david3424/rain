@@ -4,9 +4,9 @@
 
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="com.wanmei.wmeovg.request.service.IPrizeService"%>
-<%@page import="com.wanmei.wmeovg.request.service.PrizeServiceManager"%>
-<%@page import="com.wanmei.wmeovg.request.entity.PrizeLog"%>
+<%@page import="com.david.web.wanmei.wmeovg.request.service.IPrizeService"%>
+<%@page import="com.david.web.wanmei.wmeovg.request.service.PrizeServiceManager"%>
+<%@page import="com.david.web.wanmei.wmeovg.request.entity.PrizeLog"%>
 <%@page import="java.util.Iterator"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">

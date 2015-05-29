@@ -1,4 +1,4 @@
-package com.wanmei.logservice;
+package com.david.web.wanmei.service.logservice;
 
 /**
  * Created by czw on 14-2-18.

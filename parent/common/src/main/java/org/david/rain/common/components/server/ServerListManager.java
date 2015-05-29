@@ -7,10 +7,9 @@ import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.net.URL;
@@ -24,22 +23,26 @@ import java.util.Map;
  * Date: 12-10-29
  * Time: 上午9:27
  */
-@Component
-@PropertySource("classpath:/common.properties")
+@Configuration
+@PropertySource("classpath:common.properties")
 public class ServerListManager implements InitializingBean {
 
 
     static Logger logger = LoggerFactory.getLogger(ServerListManager.class);
 
-    @Autowired
     private Environment environment;
 
+    public ServerListManager(){}
+    public ServerListManager(Environment environment){
+        this.environment = environment;
+
+    }
 
     @Override
     public void afterPropertiesSet() throws Exception {
         String xmlPath = environment.getProperty("serverlist.xmlpath");
         if (xmlPath == null || xmlPath.isEmpty()) {
-            this.serverXmlPath = "http://public.david.com/serverlist.xml";
+            this.serverXmlPath = "http://t.rain.com/serverlist.xml";
         } else {
             this.serverXmlPath = xmlPath;
         }
@@ -96,6 +99,7 @@ public class ServerListManager implements InitializingBean {
     }
 
     private List<Map<String, Object>> iterateZones(Element root)  {
+        @SuppressWarnings("unchecked")
         List<Element> zones = root.elements("zone");
         List<Map<String, Object>> result = new ArrayList<>();
         for (Element zone : zones) {

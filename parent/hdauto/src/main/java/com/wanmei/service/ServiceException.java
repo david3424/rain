@@ -1,4 +1,4 @@
-package com.wanmei.service;
+package com.david.web.wanmei.service;
 
 /**
  * Service层公用的Exception.

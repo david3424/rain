@@ -1,10 +1,10 @@
-package com.wanmei.extend.hdswitch.remote.impl;
+package com.david.web.wanmei.extend.hdswitch.remote.impl;
 
 import com.caucho.services.server.ServiceContext;
-import com.wanmei.entity.SendProperty;
-import com.wanmei.extend.hdswitch.remote.SendSwitchInterface;
-import com.wanmei.service.task.SendPropertyService;
-import com.wanmei.util.PaginationCList;
+import com.david.web.wanmei.entity.SendProperty;
+import com.david.web.wanmei.extend.hdswitch.remote.SendSwitchInterface;
+import com.david.web.wanmei.service.task.SendPropertyService;
+import com.david.web.wanmei.util.PaginationCList;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;

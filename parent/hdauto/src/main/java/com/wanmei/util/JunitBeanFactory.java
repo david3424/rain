@@ -1,4 +1,4 @@
-package com.wanmei.util;
+package com.david.web.wanmei.util;
 
 import org.springframework.context.ApplicationContext;
 

@@ -1,8 +1,8 @@
-package com.wanmei.repository;
+package com.david.web.wanmei.repository;
 
-import com.wanmei.common.CommonList;
-import com.wanmei.common.search.Search;
-import com.wanmei.entity.SendProperty;
+import com.david.web.wanmei.common.CommonList;
+import com.david.web.wanmei.common.search.Search;
+import com.david.web.wanmei.entity.SendProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;

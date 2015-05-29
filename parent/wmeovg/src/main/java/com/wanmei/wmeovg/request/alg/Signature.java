@@ -3,7 +3,7 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   Signature.java
 
-package com.wanmei.wmeovg.request.alg;
+package com.david.web.wanmei.wmeovg.request.alg;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;

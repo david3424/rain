@@ -1,10 +1,10 @@
-package com.wanmei.service.account;
+package com.david.web.wanmei.service.account;
 
-import com.wanmei.entity.User;
-import com.wanmei.repository.TaskDao;
-import com.wanmei.repository.UserDao;
-import com.wanmei.service.ServiceException;
-import com.wanmei.service.account.ShiroDbRealm.ShiroUser;
+import com.david.web.wanmei.entity.User;
+import com.david.web.wanmei.repository.TaskDao;
+import com.david.web.wanmei.repository.UserDao;
+import com.david.web.wanmei.service.ServiceException;
+import com.david.web.wanmei.service.account.ShiroDbRealm.ShiroUser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;

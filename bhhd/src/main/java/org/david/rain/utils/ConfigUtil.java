@@ -82,9 +82,9 @@ public class ConfigUtil {
             String s = c.getName().replace('.', '/') + ".class";
 
             //当资源class放在/WEB-INF/classs中时，
-            //url=file:/e:/test/project/defaultroot/WEB-INF/classes/com.world2.util.ConfigUtil.class
+            //url=file:/e:/test/project/defaultroot/WEB-INF/classes/com.david.web.world2.util.ConfigUtil.class
             //当资源class打成jar包放在/WEB-INF/lib中时，
-            //url=jar:file:/e:/test/project/defaultroot/WEB-INF/lib/res.jar!/com.world2.util.ConfigUtil.class
+            //url=jar:file:/e:/test/project/defaultroot/WEB-INF/lib/res.jar!/com.david.web.world2.util.ConfigUtil.class
             java.net.URL url = c.getClassLoader().getResource(s);
             String upath = url.toString();
 

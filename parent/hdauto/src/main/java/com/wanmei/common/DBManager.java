@@ -1,4 +1,4 @@
-package com.wanmei.common;
+package com.david.web.wanmei.common;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;

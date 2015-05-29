@@ -1,18 +1,18 @@
-package com.wanmei.service.sendprize;
+package com.david.web.wanmei.service.sendprize;
 
-import com.wanmei.common.Constant;
-import com.wanmei.common.DateUtils;
-import com.wanmei.entity.PrizeLogBean;
-import com.wanmei.entity.PrizeTableBean;
-import com.wanmei.entity.SendProperty;
-import com.wanmei.logservice.OperationLog;
-import com.wanmei.logservice.OperationLogger;
-import com.wanmei.logservice.SendPrizeBean;
-import com.wanmei.repository.DaoManager;
-import com.wanmei.repository.Idao;
-import com.wanmei.wmeovg.request.entity.GoodsLog;
-import com.wanmei.wmeovg.request.service.IPrizeService;
-import com.wanmei.wmeovg.request.service.PrizeServiceManager;
+import com.david.web.wanmei.common.Constant;
+import com.david.web.wanmei.common.DateUtils;
+import com.david.web.wanmei.entity.PrizeLogBean;
+import com.david.web.wanmei.entity.PrizeTableBean;
+import com.david.web.wanmei.entity.SendProperty;
+import com.david.web.wanmei.service.logservice.OperationLog;
+import com.david.web.wanmei.service.logservice.OperationLogger;
+import com.david.web.wanmei.service.logservice.SendPrizeBean;
+import com.david.web.wanmei.repository.DaoManager;
+import com.david.web.wanmei.repository.Idao;
+import com.david.web.wanmei.wmeovg.request.entity.GoodsLog;
+import com.david.web.wanmei.wmeovg.request.service.IPrizeService;
+import com.david.web.wanmei.wmeovg.request.service.PrizeServiceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

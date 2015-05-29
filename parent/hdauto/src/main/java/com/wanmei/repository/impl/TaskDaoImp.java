@@ -1,10 +1,10 @@
-package com.wanmei.repository.impl;
+package com.david.web.wanmei.repository.impl;
 
-import com.wanmei.common.CommonList;
-import com.wanmei.common.search.Search;
-import com.wanmei.entity.Task;
-import com.wanmei.repository.Idao;
-import com.wanmei.repository.TaskDao;
+import com.david.web.wanmei.common.CommonList;
+import com.david.web.wanmei.common.search.Search;
+import com.david.web.wanmei.entity.Task;
+import com.david.web.wanmei.repository.Idao;
+import com.david.web.wanmei.repository.TaskDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

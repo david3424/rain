@@ -3,15 +3,15 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   SignatureUtil.java
 
-package com.wanmei.wmeovg.request.util;
+package com.david.web.wanmei.wmeovg.request.util;
 
-import com.wanmei.wmeovg.request.alg.Signature;
-import com.wanmei.wmeovg.request.bean.PrizeBean;
+import com.david.web.wanmei.wmeovg.request.alg.Signature;
+import com.david.web.wanmei.wmeovg.request.bean.PrizeBean;
 import org.apache.commons.codec.binary.Hex;
 
 import java.security.NoSuchAlgorithmException;
 
-// Referenced classes of package com.wanmei.wmeovg.request.util:
+// Referenced classes of package com.david.web.wanmei.wmeovg.request.util:
 //			Priority
 
 public class SignatureUtil

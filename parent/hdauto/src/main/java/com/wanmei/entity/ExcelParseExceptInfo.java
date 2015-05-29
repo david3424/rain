@@ -1,4 +1,4 @@
-package com.wanmei.entity;
+package com.david.web.wanmei.entity;
 
 /**
  * Created with IntelliJ IDEA.

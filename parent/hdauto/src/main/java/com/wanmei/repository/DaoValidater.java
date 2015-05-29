@@ -1,7 +1,7 @@
-package com.wanmei.repository;
+package com.david.web.wanmei.repository;
 
 
-import com.wanmei.entity.HdTable;
+import com.david.web.wanmei.entity.HdTable;
 
 /**
  * 数据库操作对象时校验类.

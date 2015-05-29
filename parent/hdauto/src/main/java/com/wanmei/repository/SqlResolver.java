@@ -1,8 +1,8 @@
-package com.wanmei.repository;
+package com.david.web.wanmei.repository;
 
 
-import com.wanmei.entity.HdTable;
-import com.wanmei.entity.ThisIgnore;
+import com.david.web.wanmei.entity.HdTable;
+import com.david.web.wanmei.entity.ThisIgnore;
 import org.apache.commons.beanutils.PropertyUtils;
 
 import java.lang.reflect.Field;

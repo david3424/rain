@@ -1,4 +1,4 @@
-package com.wanmei.servlet;
+package com.david.web.wanmei.init.servlet;
 
 import javax.servlet.http.HttpServlet;
 

@@ -1,6 +1,6 @@
-package com.wanmei.entity;
+package com.david.web.wanmei.entity;
 
-import com.wanmei.common.DateUtils;
+import com.david.web.wanmei.common.DateUtils;
 
 import java.io.Serializable;
 

@@ -1,6 +1,6 @@
-package com.wanmei.service.sendprize;
+package com.david.web.wanmei.service.sendprize;
 
-import com.wanmei.entity.PrizeTableBean;
+import com.david.web.wanmei.entity.PrizeTableBean;
 
 import java.sql.SQLException;
 

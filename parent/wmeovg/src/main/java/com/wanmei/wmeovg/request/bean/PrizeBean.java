@@ -3,11 +3,11 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   PrizeBean.java
 
-package com.wanmei.wmeovg.request.bean;
+package com.david.web.wanmei.wmeovg.request.bean;
 
-import com.wanmei.wmeovg.request.alg.Signature;
-import com.wanmei.wmeovg.request.util.Priority;
-import com.wanmei.wmeovg.request.util.WmeovgProperties;
+import com.david.web.wanmei.wmeovg.request.alg.Signature;
+import com.david.web.wanmei.wmeovg.request.util.Priority;
+import com.david.web.wanmei.wmeovg.request.util.WmeovgProperties;
 import java.io.Serializable;
 
 public class PrizeBean

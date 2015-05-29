@@ -16,9 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.wanmei.service.account;
+package com.david.web.wanmei.service.account;
 
-import com.wanmei.entity.User;
+import com.david.web.wanmei.entity.User;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.shiro.authc.*;

@@ -13,12 +13,12 @@
 	</bean>
 
 	<!-- 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 -->
-	<bean id="shiroDbRealm" class="com.wanmei.service.account.ShiroDbRealm" depends-on="userDao2Imp,taskDaoImp">
+	<bean id="shiroDbRealm" class="com.david.web.wanmei.service.account.ShiroDbRealm" depends-on="userDao2Imp,taskDaoImp">
 		<property name="accountService" ref="accountService"/>
 	</bean>
-   <!-- <bean id="loginFilter" class="com.wanmei.filter.LoginFilter"/>
+   <!-- <bean id="loginFilter" class="com.david.web.wanmei.init.servlet.filter.LoginFilter"/>
 
-    <bean id="multiRoleFilter" class="com.wanmei.filter.MultiRoleFilter"/>-->
+    <bean id="multiRoleFilter" class="com.david.web.wanmei.init.servlet.filter.MultiRoleFilter"/>-->
 	
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">

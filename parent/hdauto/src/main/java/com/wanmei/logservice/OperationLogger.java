@@ -1,7 +1,7 @@
-package com.wanmei.logservice;
+package com.david.web.wanmei.service.logservice;
 
-import com.wanmei.common.DateUtils;
-import com.wanmei.entity.SendProperty;
+import com.david.web.wanmei.common.DateUtils;
+import com.david.web.wanmei.entity.SendProperty;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

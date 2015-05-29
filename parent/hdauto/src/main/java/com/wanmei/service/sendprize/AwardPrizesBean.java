@@ -1,13 +1,13 @@
-package com.wanmei.service.sendprize;
+package com.david.web.wanmei.service.sendprize;
 
-import com.wanmei.common.Constant;
-import com.wanmei.common.DateUtils;
-import com.wanmei.entity.PrizeLogBean;
-import com.wanmei.entity.PrizeOpenBean;
-import com.wanmei.entity.PrizeTableBean;
-import com.wanmei.repository.Idao;
-//import com.wanmei.wmeovg.request.service.IPrizeService;
-//import com.wanmei.wmeovg.request.service.PrizeServiceManager;
+import com.david.web.wanmei.common.Constant;
+import com.david.web.wanmei.common.DateUtils;
+import com.david.web.wanmei.entity.PrizeLogBean;
+import com.david.web.wanmei.entity.PrizeOpenBean;
+import com.david.web.wanmei.entity.PrizeTableBean;
+import com.david.web.wanmei.repository.Idao;
+//import com.david.web.wanmei.wmeovg.request.service.IPrizeService;
+//import com.david.web.wanmei.wmeovg.request.service.PrizeServiceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+
+    <bean id="combinedServiceInterface" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceInterface" value="org.david.rain.web.service.hdinterface.CombinedServiceInterface"/>
+        <property name="serviceUrl" value="${switch.server_url}/combinedService"/>
+    </bean>
+
+
+    <bean id="logService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceInterface" value="org.david.rain.web.service.logservice.ILogService"/>
+        <property name="serviceUrl" value="${log.server_url}/logservice"/>
+    </bean>
+
+    <!-- 图片上传接口 sergviceUrl 为接口地址 -->
+    <bean id="hdongImageService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceUrl" value="${img.server_url}/imageservice.ao"/>
+        <property name="serviceInterface" value="org.david.rain.web.service.hdinterface.HdongImageService"/>
+    </bean>
+
+
+</beans>

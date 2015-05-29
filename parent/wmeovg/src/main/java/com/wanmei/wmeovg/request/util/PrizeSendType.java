@@ -3,7 +3,7 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   PrizeSendType.java
 
-package com.wanmei.wmeovg.request.util;
+package com.david.web.wanmei.wmeovg.request.util;
 
 
 public class PrizeSendType

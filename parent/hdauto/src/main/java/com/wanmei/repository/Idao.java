@@ -1,7 +1,7 @@
-package com.wanmei.repository;
+package com.david.web.wanmei.repository;
 
-import com.wanmei.common.CommonList;
-import com.wanmei.common.search.Search;
+import com.david.web.wanmei.common.CommonList;
+import com.david.web.wanmei.common.search.Search;
 import org.apache.commons.dbutils.QueryRunner;
 
 import java.sql.Connection;

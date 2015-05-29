@@ -3,10 +3,10 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   PrizeServiceManager.java
 
-package com.wanmei.wmeovg.request.service;
+package com.david.web.wanmei.wmeovg.request.service;
 
 
-// Referenced classes of package com.wanmei.wmeovg.request.service:
+// Referenced classes of package com.david.web.wanmei.wmeovg.request.service:
 //			PrizeServiceImpl, AbroadPrizeServiceImpl, IPrizeService
 
 public class PrizeServiceManager

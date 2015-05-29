@@ -1,9 +1,9 @@
-package com.wanmei.repository.impl;
+package com.david.web.wanmei.repository.impl;
 
-import com.wanmei.entity.HdTable;
-import com.wanmei.entity.User;
-import com.wanmei.repository.DbUtilsTemplate;
-import com.wanmei.repository.UserDao;
+import com.david.web.wanmei.entity.HdTable;
+import com.david.web.wanmei.entity.User;
+import com.david.web.wanmei.repository.DbUtilsTemplate;
+import com.david.web.wanmei.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

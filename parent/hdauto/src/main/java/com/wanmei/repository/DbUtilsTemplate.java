@@ -1,4 +1,4 @@
-package com.wanmei.repository;
+package com.david.web.wanmei.repository;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.*;

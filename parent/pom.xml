@@ -15,6 +15,7 @@
     <name>parent</name>
     <modules>
         <module>common</module>
+        <module>hd-web</module>
         <!--<module>hdauto</module>-->
         <!--<module>wmeovg</module>-->
     </modules>
@@ -33,44 +34,40 @@
 
     </properties>
 
-    <!--    <repositories>
-            <repository>
-                <id>java.net2</id>
-                <name>Repository hosting the jee6 artifacts</name>
-                <url>http://download.java.net/maven/2</url>
-            </repository>
-            <repository>
-                <id>sonatype-oss-repository</id>
-                <url>https://oss.sonatype.org/content/groups/public/</url>
-                <releases>
-                    <enabled>true</enabled>
-                </releases>
-                <snapshots>
-                    <enabled>true</enabled>
-                </snapshots>
-            </repository>
-            <repository>
-                <id>repository.spring.milestone</id>
-                <name>Spring Milestone Repository</name>
-                <url>http://repo.spring.io/milestone</url>
-            </repository>
-        </repositories>-->
-
-    <dependencyManagement>
+  <!--  <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
-                <!--<version>4.0.3.RELEASE</version>-->
                 <version>3.2.9.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
         </dependencies>
-    </dependencyManagement>
+    </dependencyManagement>-->
+
 
     <dependencies>
+
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
+
         <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <exclusions>
+                <!-- Exclude Commons Logging in favor of SLF4j -->
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -87,6 +84,17 @@
             <artifactId>spring-webmvc</artifactId>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <!-- Persistence -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -135,13 +143,15 @@
             <artifactId>mybatis</artifactId>
         </dependency>
 
-        <!-- <dependency>
-             <groupId>org.hibernate</groupId>
-             <artifactId>hibernate-entitymanager</artifactId>
-             <version>4.2.5.Final</version>
-         </dependency>-->
-        <!--mysql、mongodb 位置-->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+        </dependency>
 
+        <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+        </dependency>
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -159,11 +169,15 @@
 
         <!-- Servlet -->
         <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-servlet_3.0_spec</artifactId>
-            <version>1.0</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+
         <!-- AOP -->
         <dependency>
             <groupId>org.aspectj</groupId>
@@ -295,7 +309,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.wanmei.wmeovg</mainClass>
+                            <mainClass>com.david.web.wanmei.wmeovg</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -3,9 +3,9 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   PrizeLog.java
 
-package com.wanmei.wmeovg.request.entity;
+package com.david.web.wanmei.wmeovg.request.entity;
 
-import com.wanmei.wmeovg.request.entity.base.BasePrizeLog;
+import com.david.web.wanmei.wmeovg.request.entity.base.BasePrizeLog;
 import java.util.Date;
 
 public class PrizeLog extends BasePrizeLog

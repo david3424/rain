@@ -3,10 +3,10 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   CallbackServlet.java
 
-package com.wanmei.wmeovg.callback.servlet;
+package com.david.web.wanmei.wmeovg.callback.servlet;
 
-import com.wanmei.wmeovg.request.util.SignatureUtil;
-import com.wanmei.wmeovg.request.util.WmeovgProperties;
+import com.david.web.wanmei.wmeovg.request.util.SignatureUtil;
+import com.david.web.wanmei.wmeovg.request.util.WmeovgProperties;
 import sun.misc.BASE64Decoder;
 
 import javax.servlet.ServletConfig;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.NoSuchAlgorithmException;
 
-// Referenced classes of package com.wanmei.wmeovg.callback.servlet:
+// Referenced classes of package com.david.web.wanmei.wmeovg.callback.servlet:
 //			ICallbackService
 
 public class CallbackServlet extends HttpServlet

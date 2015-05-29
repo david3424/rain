@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="com.wanmei.common.TempDBManager"%>
+<%@ page import="com.david.web.wanmei.common.TempDBManager"%>
 
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>

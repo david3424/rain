@@ -1,4 +1,4 @@
-package com.wanmei.common.page;
+package com.david.web.wanmei.common.page;
 
 
 import org.json.JSONObject;

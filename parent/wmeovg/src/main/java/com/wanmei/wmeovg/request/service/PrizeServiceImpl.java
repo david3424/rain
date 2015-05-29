@@ -3,16 +3,16 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   PrizeServiceImpl.java
 
-package com.wanmei.wmeovg.request.service;
+package com.david.web.wanmei.wmeovg.request.service;
 
 import com.caucho.hessian.client.HessianProxyFactory;
-import com.wanmei.wmeovg.request.bean.PrizeBean;
-import com.wanmei.wmeovg.request.entity.GoodsLog;
-import com.wanmei.wmeovg.request.entity.PrizeLog;
-import com.wanmei.wmeovg.request.hessian.IPrizeWebService;
-import com.wanmei.wmeovg.request.util.Priority;
-import com.wanmei.wmeovg.request.util.SignatureUtil;
-import com.wanmei.wmeovg.request.util.WmeovgProperties;
+import com.david.web.wanmei.wmeovg.request.bean.PrizeBean;
+import com.david.web.wanmei.wmeovg.request.entity.GoodsLog;
+import com.david.web.wanmei.wmeovg.request.entity.PrizeLog;
+import com.david.web.wanmei.wmeovg.request.hessian.IPrizeWebService;
+import com.david.web.wanmei.wmeovg.request.util.Priority;
+import com.david.web.wanmei.wmeovg.request.util.SignatureUtil;
+import com.david.web.wanmei.wmeovg.request.util.WmeovgProperties;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-// Referenced classes of package com.wanmei.wmeovg.request.service:
+// Referenced classes of package com.david.web.wanmei.wmeovg.request.service:
 //			IPrizeService
 
 public final class PrizeServiceImpl

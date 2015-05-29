@@ -62,7 +62,7 @@ CREATE TABLE `event_send_prize_properties` (
   `table_name` varchar(100) NOT NULL DEFAULT '',
   `datasource` varchar(16) NOT NULL,
   `role_id_type` int(11) NOT NULL,
-  `send_type` int(11) NOT NULL COMMENT '1:ÆÕÍ¨·¢½±£¬2£ºÍÅ¹º·¢½±',
+  `send_type` int(11) NOT NULL COMMENT '1:ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½Å¹ï¿½ï¿½ï¿½ï¿½ï¿½',
   `send_interface` int(11) NOT NULL,
   `send_check` int(11) NOT NULL,
   `prizememo` varchar(128) DEFAULT NULL,
@@ -581,7 +581,7 @@ CREATE TABLE `qrtz_job_details` (
 
 LOCK TABLES `qrtz_job_details` WRITE;
 /*!40000 ALTER TABLE `qrtz_job_details` DISABLE KEYS */;
-INSERT INTO `qrtz_job_details` VALUES ('jobDetail','DEFAULT',NULL,'com.wanmei.service.quartz.MyQuartzJobBean','0','0','0','0','¬í\0sr\0org.quartz.JobDataMapŸ°ƒè¿©°Ë\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap‚èÃûÅ](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMapæ.­(v\nÎ\0Z\0dirtyL\0mapt\0Ljava/util/Map;xp\0sr\0java.util.HashMapÚÁÃ`Ñ\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0\0x\0');
+INSERT INTO `qrtz_job_details` VALUES ('jobDetail','DEFAULT',NULL,'com.david.web.wanmei.service.quartz.MyQuartzJobBean','0','0','0','0','ï¿½ï¿½\0sr\0org.quartz.JobDataMapï¿½ï¿½ï¿½è¿©ï¿½ï¿½\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMapï¿½ï¿½ï¿½ï¿½ï¿½](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMapï¿½.ï¿½(v\nï¿½\0Z\0dirtyL\0mapt\0Ljava/util/Map;xp\0sr\0java.util.HashMapï¿½ï¿½ï¿½`ï¿½\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0\0x\0');
 /*!40000 ALTER TABLE `qrtz_job_details` ENABLE KEYS */;
 UNLOCK TABLES;
 

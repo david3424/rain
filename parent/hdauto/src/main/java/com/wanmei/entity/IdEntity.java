@@ -1,4 +1,4 @@
-package com.wanmei.entity;
+package com.david.web.wanmei.entity;
 
 /**
  * 统一定义id的entity基类.

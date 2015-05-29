@@ -1,6 +1,6 @@
-package com.wanmei.util;
+package com.david.web.wanmei.util;
 
-import com.wanmei.common.CommonList;
+import com.david.web.wanmei.common.CommonList;
 
 import java.util.List;
 

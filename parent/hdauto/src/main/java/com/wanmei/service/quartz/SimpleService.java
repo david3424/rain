@@ -1,10 +1,10 @@
-package com.wanmei.service.quartz;
+package com.david.web.wanmei.service.quartz;
 
-import com.wanmei.entity.SendProperty;
-import com.wanmei.logservice.OperationLogger;
-import com.wanmei.repository.SendPrizeDao;
-import com.wanmei.service.ServiceException;
-import com.wanmei.service.sendprize.AwardPrizesService;
+import com.david.web.wanmei.entity.SendProperty;
+import com.david.web.wanmei.service.logservice.OperationLogger;
+import com.david.web.wanmei.repository.SendPrizeDao;
+import com.david.web.wanmei.service.ServiceException;
+import com.david.web.wanmei.service.sendprize.AwardPrizesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

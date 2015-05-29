@@ -1,6 +1,6 @@
-package com.wanmei.filter;
+package com.david.web.wanmei.init.servlet.filter;
 
-import com.wanmei.common.SessionConst;
+import com.david.web.wanmei.common.SessionConst;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.CollectionUtils;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;

@@ -17,7 +17,6 @@ public class ServerRestrictSupport {
     public ServerRestrictSupport() {
     }
 
-
     public ServerRestrictSupport(ServerRestrictService serverRestrictService) {
         this.serverRestrictService = serverRestrictService;
     }

@@ -1,11 +1,11 @@
-package com.wanmei.service.task;
+package com.david.web.wanmei.service.task;
 
-import com.wanmei.common.CommonList;
-import com.wanmei.common.search.Search;
-import com.wanmei.entity.SendProperty;
-import com.wanmei.entity.Task;
-import com.wanmei.repository.SendPrizeDao;
-import com.wanmei.repository.TaskDao;
+import com.david.web.wanmei.common.CommonList;
+import com.david.web.wanmei.common.search.Search;
+import com.david.web.wanmei.entity.SendProperty;
+import com.david.web.wanmei.entity.Task;
+import com.david.web.wanmei.repository.SendPrizeDao;
+import com.david.web.wanmei.repository.TaskDao;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

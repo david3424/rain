@@ -13,7 +13,7 @@
     <description>Spring公共配置</description>
     <import resource="classpath*:spring/applicationContext-quartz.xml"/>
     <import resource="classpath*:spring/applicationContext-shiro.xml"/>
-    <context:component-scan base-package="com.wanmei">
+    <context:component-scan base-package="com.david.web.wanmei">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 

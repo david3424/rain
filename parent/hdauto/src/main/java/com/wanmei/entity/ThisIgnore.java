@@ -1,4 +1,4 @@
-package com.wanmei.entity;
+package com.david.web.wanmei.entity;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

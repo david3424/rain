@@ -1,8 +1,8 @@
-package com.wanmei.service.task;
+package com.david.web.wanmei.service.task;
 
-import com.wanmei.common.CommonList;
-import com.wanmei.entity.SendProperty;
-import com.wanmei.repository.SendPrizeDao;
+import com.david.web.wanmei.common.CommonList;
+import com.david.web.wanmei.entity.SendProperty;
+import com.david.web.wanmei.repository.SendPrizeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
