@@ -1,4 +1,4 @@
-package com.david.web.wanmei.games;
+package com;
 
 import org.david.rain.games.pay.client.dao.entity.OpayOrder;
 import org.david.rain.games.pay.client.dao.entity.OpayQuery;
