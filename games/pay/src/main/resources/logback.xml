@@ -32,5 +32,5 @@
 		<appender-ref ref="payLogFile" />
 	</root>
 
-	<logger name="com.wanmei.games" level="${logger.level}" />
+	<logger name="com.david.web.wanmei.games" level="${logger.level}" />
 </configuration>

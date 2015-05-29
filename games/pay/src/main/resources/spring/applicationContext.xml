@@ -21,7 +21,7 @@
     <property name="properties" ref="configProperties" />
     </bean>
     <!--排除Controller 交给MVC-->
-    <context:component-scan base-package="com.wanmei.games">
+    <context:component-scan base-package="com.david.web.wanmei.games">
         <context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>

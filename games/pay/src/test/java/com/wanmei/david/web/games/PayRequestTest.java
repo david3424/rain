@@ -1,9 +1,9 @@
-package com.wanmei.games;
+package com.david.web.wanmei.games;
 
-import com.wanmei.games.client.dao.entity.OpayOrder;
-import com.wanmei.games.client.dao.entity.OpayQuery;
-import com.wanmei.games.client.service.PayService;
-import com.wanmei.games.utils.SignatureUtil;
+import org.david.rain.games.pay.client.dao.entity.OpayOrder;
+import org.david.rain.games.pay.client.dao.entity.OpayQuery;
+import org.david.rain.games.pay.client.service.PayService;
+import org.david.rain.games.pay.utils.SignatureUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

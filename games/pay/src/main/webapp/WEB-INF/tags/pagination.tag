@@ -1,5 +1,5 @@
 <%@tag pageEncoding="UTF-8"%>
-<%@ attribute name="page" type="com.wanmei.games.client.dao.dbutils.CommonList" required="true"%>
+<%@ attribute name="page" type="org.david.rain.games.pay.client.dao.dbutils.CommonList" required="true"%>
 <%@ attribute name="paginationSize" type="java.lang.Integer" required="true"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

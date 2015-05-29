@@ -26,11 +26,11 @@
 
     <!--构造注入 dbutils操作-->
     <!--注入queryNewRunner的为W数据库，spring管理事务-->
-    <bean id="queryNewRunner" class="com.wanmei.games.utils.QueryNewRunner">
+    <bean id="queryNewRunner" class="org.david.rain.games.pay.utils.QueryNewRunner">
         <constructor-arg ref="dataSource_W"/>
     </bean>
     <!--dao层操作基础类-->
-    <bean id="commonWriterImp" class="com.wanmei.games.client.dao.dbutils.CommonWriterImp">
+    <bean id="commonWriterImp" class="org.david.rain.games.pay.client.dao.dbutils.CommonWriterImp">
         <constructor-arg ref="queryNewRunner"/>
     </bean>
     <!--transction on writer datasource -->
