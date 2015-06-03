@@ -23,7 +23,7 @@ public abstract class AbstractMapEntry<K,V>
         return equals(getKey(),   arg.getKey()) &&
                equals(getValue(), arg.getValue());
     }
-    private static boolean equals(Object o1, Object o2) {
+    private  boolean equals(Object o1, Object o2) { //这里为什么之前用private static
         return o1 == null ? o2 == null : o1.equals(o2);
     }
 
@@ -31,7 +31,7 @@ public abstract class AbstractMapEntry<K,V>
     @Override public int hashCode() {
         return hashCode(getKey()) ^ hashCode(getValue());
     }
-    private static int hashCode(Object obj) {
+    private  int hashCode(Object obj) {
         return obj == null ? 0 : obj.hashCode();
     }
 }

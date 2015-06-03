@@ -1,6 +1,8 @@
-package effectivejava.ch4i18;// Concrete implementation built atop skeletal implementation - Page 95
+package org.david.pattern.adapter;// Concrete implementation built atop skeletal implementation - Page 95
 
-import java.util.*;
+import java.util.AbstractList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 适配器模式类似：把int数组适配成Integer实例列表List

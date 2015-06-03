@@ -1,11 +1,12 @@
-package effectivejava.ch4i18;// Concrete implementation built atop skeletal implementation - Page 95
+package org.david.java.classandmethod.interfaceandabstract;// Concrete implementation built atop skeletal implementation - Page 95
 
-import java.util.*;
+import java.util.AbstractList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 适配器模式类似：把int数组适配成Integer实例列表List
- * 匿名内部类，自动拆箱装箱效率差* * 其实就是定义一个AbstractList的子类，组合引用数组a[]，返回标准的List
- * 方法*
+ * 匿名内部类，自动拆箱装箱效率差* *
  */
 public class IntArrays {
     static List<Integer> intArrayAsList(final int[] a) {
