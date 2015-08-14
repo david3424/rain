@@ -9,7 +9,7 @@
     </context-param>
     <context-param>
         <param-name>webAppRootKey</param-name>
-        <param-value>webApp.root</param-value>
+        <param-value>hd.web</param-value>
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>

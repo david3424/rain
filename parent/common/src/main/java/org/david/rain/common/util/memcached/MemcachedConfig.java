@@ -30,6 +30,9 @@ public class MemcachedConfig {
     @Scope
     public MemcachedManager memcachedManager() {
         return new MemcachedManager(env.getProperty("memcached.server_url"),
-                env.getProperty("memcached.server_weight", Integer.class));
+                env.getProperty("memcached.server_weight", Integer.class),
+                env.getProperty("memcached.init_conn_num", Integer.class),
+                env.getProperty("memcached.min_conn_num", Integer.class),
+                env.getProperty("memcached.max_conn_num", Integer.class));
     }
 }

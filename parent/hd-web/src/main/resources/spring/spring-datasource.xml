@@ -45,60 +45,7 @@
         <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
     </bean>
 
-    <bean id="imgDataSourceRead" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-        <!-- Connection Info -->
-        <property name="driverClass" value="${jdbc.driverClassName}"/>
-        <property name="jdbcUrl" value="${jdbc.url.img.r}"/>
-        <property name="username" value="${jdbc.username.img}"/>
-        <property name="password" value="${jdbc.password.img}"/>
 
-        <!-- Connection Pooling Info -->
-        <!-- Connection Pooling Info -->
-        <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idletest.minutes}"/>
-        <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}"/>
-        <property name="minConnectionsPerPartition" value="${bonecp.minConnectionsPerPartition}"/>
-        <property name="partitionCount" value="${bonecp.partitionCount}"/>
-        <property name="acquireIncrement" value="${bonecp.acquireIncrement}"/>
-        <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}"/>
-        <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
-    </bean>
-
-
-    <bean id="imgDataSourceWrite" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-        <!-- Connection Info -->
-        <property name="driverClass" value="${jdbc.driverClassName}"/>
-        <property name="jdbcUrl" value="${jdbc.url.img.r}"/>
-        <property name="username" value="${jdbc.username.img}"/>
-        <property name="password" value="${jdbc.password.img}"/>
-
-        <!-- Connection Pooling Info -->
-        <!-- Connection Pooling Info -->
-        <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idletest.minutes}"/>
-        <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}"/>
-        <property name="minConnectionsPerPartition" value="${bonecp.minConnectionsPerPartition}"/>
-        <property name="partitionCount" value="${bonecp.partitionCount}"/>
-        <property name="acquireIncrement" value="${bonecp.acquireIncrement}"/>
-        <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}"/>
-        <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
-    </bean>
-
-    <bean id="dota2matchDataSourceRead" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-        <!-- Connection Info -->
-        <property name="driverClass" value="${jdbc.driverClassName}"/>
-        <property name="jdbcUrl" value="${jdbc.url.dota2match.r}"/>
-        <property name="username" value="${jdbc.username.dota2match}"/>
-        <property name="password" value="${jdbc.password.dota2match}"/>
-
-        <!-- Connection Pooling Info -->
-        <!-- Connection Pooling Info -->
-        <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idletest.minutes}"/>
-        <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}"/>
-        <property name="minConnectionsPerPartition" value="${bonecp.minConnectionsPerPartition}"/>
-        <property name="partitionCount" value="${bonecp.partitionCount}"/>
-        <property name="acquireIncrement" value="${bonecp.acquireIncrement}"/>
-        <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}"/>
-        <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
-    </bean>
 
     <!--注入queryRunner的为R数据库-->
     <bean id="queryRunner" class="org.apache.commons.dbutils.QueryRunner">
@@ -109,7 +56,6 @@
     <bean id="queryNewRunner" class="org.david.rain.common.repository.QueryNewRunner">
         <constructor-arg ref="dataSource_W"/>
     </bean>
-
 
     <bean id="daoImp" class="org.david.rain.common.repository.impl.DaoImp">
         <constructor-arg ref="queryRunner"/>
@@ -124,14 +70,10 @@
     </bean>
 
 
-
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource_W"/>
     </bean>
 
-    <bean id="imgTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="imgDataSourceWrite"/>
-    </bean>
 
 
     <!-- 使用annotation定义事务 -->

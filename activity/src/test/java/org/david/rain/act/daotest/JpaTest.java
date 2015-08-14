@@ -30,6 +30,6 @@ public class JpaTest {
     public void testSave() throws Exception {
 
 //        em.persist(new TaskJpa("测试","描述",11l));
-        System.out.println(userDao.findybyId(11l));
+        System.out.println(userDao.findById(11l));
     }
 }

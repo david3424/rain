@@ -6,7 +6,6 @@ import java.io.IOException;
 
 /**
  * Created by IDEA.
- * User: 沈凡
  * Date: 13-12-26
  */
 public interface CombinedServiceInterface {

@@ -3,22 +3,26 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
 
-    <bean id="combinedServiceInterface" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
-        <property name="serviceInterface" value="org.david.rain.web.service.hdinterface.CombinedServiceInterface"/>
-        <property name="serviceUrl" value="${switch.server_url}/combinedService"/>
-    </bean>
+    <!--<bean id="combinedServiceInterface" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">-->
+        <!--<property name="serviceInterface" value="org.david.rain.web.service.hdinterface.CombinedServiceInterface"/>-->
+        <!--<property name="serviceUrl" value="${switch.server_url}/combinedService"/>-->
+    <!--</bean>-->
 
 
-    <bean id="logService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
-        <property name="serviceInterface" value="org.david.rain.web.service.logservice.ILogService"/>
-        <property name="serviceUrl" value="${log.server_url}/logservice"/>
-    </bean>
+    <!--<bean id="logService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">-->
+        <!--<property name="serviceInterface" value="org.david.rain.web.service.logservice.ILogService"/>-->
+        <!--<property name="serviceUrl" value="${log.server_url}/logservice"/>-->
+    <!--</bean>-->
 
-    <!-- 图片上传接口 sergviceUrl 为接口地址 -->
-    <bean id="hdongImageService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
-        <property name="serviceUrl" value="${img.server_url}/imageservice.ao"/>
-        <property name="serviceInterface" value="org.david.rain.web.service.hdinterface.HdongImageService"/>
-    </bean>
+    <!--&lt;!&ndash; 图片上传接口 sergviceUrl 为接口地址 &ndash;&gt;-->
+    <!--<bean id="hdongImageService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="${img.server_url}/imageservice.ao"/>-->
+        <!--<property name="serviceInterface" value="org.david.rain.web.service.hdinterface.HdongImageService"/>-->
+    <!--</bean>-->
 
+
+    <bean id="hdIscoreServiceInterface" class="org.david.rain.web.service.hdinterface.testimpl.HdIscoreServiceInterfaceImpl"/>
+    <bean id="activityServiceInterface" class="org.david.rain.web.service.hdinterface.testimpl.ActivityServiceInterfaceImpl" />
+    <bean id="combinedServiceInterface" class="org.david.rain.web.service.hdinterface.testimpl.CombinedServiceInterfaceImpl" />
 
 </beans>

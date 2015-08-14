@@ -6,7 +6,6 @@
 <body>
 <%
     String url = request.getRequestURL().toString();
-    response.sendRedirect("http://www.baidu.com");
 %>
 </body>
 </html>

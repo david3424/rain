@@ -47,7 +47,7 @@ public interface Idao {
      * 根据Sql查询单个字段值
      *
      * @param sql select count(xxx)/sum(xxx)/id/username from .....
-     * @return count()函数返回Long sum()函数返回BigDecimal 其他返回字段对应的类型
+     * @return count()函数返回Long,无数据返回0; sum()函数返回BigDecimal 无数据返回null 其他返回字段对应的类型
      */
     public <T> T queryScalar(String sql, Object... paramValues) throws SQLException;
 

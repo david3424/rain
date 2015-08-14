@@ -19,11 +19,12 @@ public class ActionUtil {
      * @return String ip地址
      */
     public static String getRealIp() {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        return IpUtils.gerRealIp(request);
+      /*  HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        return IpUtils.gerRealIp(request);*/
+        return "127.0.0.1" ;
     }
 
     public static String getUserName() {
-        return null;
+        return "david3424";
     }
 }

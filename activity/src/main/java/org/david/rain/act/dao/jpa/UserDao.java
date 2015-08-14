@@ -12,9 +12,9 @@ import org.springframework.data.repository.RepositoryDefinition;
 //public interface  UserDao extends Repository<TaskJpa, Long> {
 public interface  UserDao {
 
-    public void save(TaskJpa accountInfo);
+     void save(TaskJpa accountInfo);
 
     // 你需要做的，仅仅是新增如下一行方法声明
     @Query("select a from TaskJpa a where a.id = ?1")
-    public TaskJpa findybyId(Long id);
+     TaskJpa findById(Long id);
 }
