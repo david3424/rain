@@ -1,6 +1,9 @@
 package org.david.rain.web.controller.demo;
 
 import org.apache.commons.lang.StringUtils;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.node.ObjectNode;
 import org.david.rain.common.components.util.ActionUtil;
 import org.david.rain.common.util.DateUtils;
 import org.david.rain.common.util.ObjectResponseWrapper;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,7 +29,7 @@ import java.util.Map;
 /**
  */
 @Controller
-@RequestMapping("/hex/webmall")
+@RequestMapping("/demo/webmall")
 public class WebMallController {
 
     Logger logger = LoggerFactory.getLogger(WebMallController.class);
@@ -219,6 +223,17 @@ public class WebMallController {
             e.printStackTrace();
             return ObjectResponseWrapper.commonResponse(false, -1, "兑换失败，请稍后重试！");
         }
+    }
+
+
+    @RequestMapping(value = "/serverlist", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    Map<String,Object> serverlist(int serverid) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String re = "{data=[{\"roleId\":\"4307\",\"roleLevel\":\"71\",\"roleName\":\"S16.杀毒用瑞星\",\"serverId\":\"16\",\"serverName\":\"双线16区\"},{\"roleId\":\"8135\",\"roleLevel\":\"48\",\"roleName\":\"S16.我是小号\",\"serverId\":\"16\",\"serverName\":\"双线16区\"}], code=0, success=true, msg=成功}" ;
+        ObjectNode objectNode = objectMapper.readValue(re,ObjectNode.class);
+
     }
 
 }
