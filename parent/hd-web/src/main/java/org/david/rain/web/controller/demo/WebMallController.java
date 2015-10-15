@@ -229,11 +229,10 @@ public class WebMallController {
     @RequestMapping(value = "/serverlist", method = RequestMethod.GET)
     public
     @ResponseBody
-    Map<String,Object> serverlist(int serverid) throws IOException {
+    String  serverlist(int serverid) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String re = "{data=[{\"roleId\":\"4307\",\"roleLevel\":\"71\",\"roleName\":\"S16.杀毒用瑞星\",\"serverId\":\"16\",\"serverName\":\"双线16区\"},{\"roleId\":\"8135\",\"roleLevel\":\"48\",\"roleName\":\"S16.我是小号\",\"serverId\":\"16\",\"serverName\":\"双线16区\"}], code=0, success=true, msg=成功}" ;
+        String re = "{\"data\":[{\"roleId\":\"4307\",\"roleLevel\":\"71\",\"roleName\":\"S16杀毒用瑞星\",\"serverId\":\"16\",\"serverName\":\"双线16区\"},{\"roleId\":\"8135\",\"roleLevel\":\"48\",\"roleName\":\"S16.我是小号\",\"serverId\":\"16\",\"serverName\":\"双线16区\"}],\"code\":\"0\",\"success\":\"true\",\"msg\":\"成功\"}" ;
         ObjectNode objectNode = objectMapper.readValue(re,ObjectNode.class);
-
+        return objectNode.findPath("data").toString();
     }
-
 }

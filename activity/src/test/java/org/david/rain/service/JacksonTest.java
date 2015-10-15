@@ -25,7 +25,7 @@ public class JacksonTest {
     private JsonGenerator jsonGenerator = null;
     private ObjectMapper objectMapper = null;
     private AccountBean bean = null;
-    private static final String TREE_MODEL_BINDING = "{\"treekey1\":\"treevalue1\",\"treekey2\":\"treevalue2\",\"children\":[{\"childkey1\":\"childkey1\"}]}";
+    private static final String TREE_MODEL_BINDING = "{\"treekey1\":\"treevalue1\",\"treekey2\":\"treevalue2\",\"children\":[{\"childkey1\":\"childkey1\"},{\"childkey2\":\"childkey1\"},{\"childkey3\":\"childkey1\"}]}";
 
     @Before
     public void init() {
@@ -184,4 +184,9 @@ public class JacksonTest {
     }
 
 
+    @Test
+    public void testTime() throws Exception {
+        Long nowtime  = System.currentTimeMillis();
+        
+    }
 }

@@ -11,17 +11,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8"/>
-    <meta name="author" content="Design:; Web Layout:liangweiming;"/>
-    <meta name="keywords"
-          content="hex,HEX,集换英雄,hex官网,hex激活码,什么是hex,hex下载,hex官方网站,hex卡牌,HEX卡组,hex论坛,集换卡牌,卡牌游戏,卡牌网游,完美世界,休闲游戏,免费游戏,hexipad版"/>
-    <meta name="description"
-          content="欢迎来到hex官网，hex集换英雄是首款免费在线集换式卡牌游戏，由完美世界代理，灵活的卡牌交易与卡组构筑，在hex官方网站领取hex激活码，带你走进hex卡牌游戏新世界。"/>
     <link href="${ctx}/static/styles/boxy.css" type="text/css" rel="stylesheet">
     <link href="http://event51.wanmei.com/hex/201507/moshi/style/master.css" rel="stylesheet" type="text/css"/>
     <script type="text/javascript" src="http://www.wanmei.com/public/js/wm.js" top="false" bottom="false"></script>
     <script type="text/javascript" src="http://www.wanmei.com/public/js/jq_171.js"></script>
-    <title>骇星魔石商城 -《HEX》官方网站</title>
+    <title>个人中心</title>
     <style>
     	.msg{ margin-left:75px;}
     </style>
@@ -30,19 +24,18 @@
 <div class="bg">
     <!--left-->
     <div class="left">
-        <div class="wm-public" logo="{name:'hex',skin:2,top:20,left:-5,zindex:500}" title="HEX官方网站">HEX官方网站</div>
+        <%--<div class="wm-public" logo="{name:'hex',skin:2,top:20,left:-5,zindex:500}" title="HEX官方网站">HEX官方网站</div>--%>
         <!--left_nav-->
         <div class="left_nav">
-            <a id="nav1" href="${ctx}/hex/webmall/index"></a>
-            <a id="nav2" href="${ctx}/hex/webmall/toexchange"></a>
+            <a id="nav1" href="${ctx}/demo/webmall/index"></a>
+            <a id="nav2" href="${ctx}/demo/webmall/toexchange"></a>
             <a id="nav3" href="javascript:alert('敬请期待！')"></a>
-            <a id="nav4" class="on" href="${ctx}/hex/webmall/mycenter"></a>
-            <a id="nav5" href="http://hex.wanmei.com/" target="_blank"></a>
+            <a id="nav4" class="on" href="${ctx}/demo/webmall/mycenter"></a>
         </div>
     </div>
     <!--right-->
     <div class="right">
-        <div class="title"><img src="http://event51.wanmei.com/hex/201507/moshi/images/title01.png"/></div>
+        <div class="title"><img src="" alt="title1"/></div>
         <!--login or logout-->
         <div class="loginbox">
             <!--登录前-->
@@ -52,7 +45,7 @@
                 </c:when>
                 <c:otherwise>
                     <p class="logoutbtn">欢迎您，<span
-                            class="username">${sessionScope.USER.account}</span>当前魔石数量：<span>${stoneCount}</span>个<a
+                            class="username">${sessionScope.USER.account}</span>当前数量：<span>${stoneCount}</span>个<a
                             href="javascript:void(0)" id="logout">【退出】</a></p>
                 </c:otherwise>
             </c:choose>
@@ -64,7 +57,7 @@
         <!--地址，明细，已兑换物品-->
         <ul class="list_list">
             <li>邮寄地址</li>
-            <li class="on">魔石明细</li>
+            <li class="on"> 明细</li>
             <li onClick="aa();">已兑换物品</li>
         </ul>
         <div class="conbox">
@@ -73,7 +66,7 @@
                 <h1>邮寄地址</h1>
 
                 <div class="formbox">
-                    <form id="form1" name="form1" class="formaddress" method="post" action="${ctx}/hex/webmall/submit">
+                    <form id="form1" name="form1" class="formaddress" method="post" action="${ctx}/demo/webmall/submit">
                         <div class="bin">
                             <p>姓名：</p>
                             <input class="name" id="truename" name="truename" type="text" placeholder="10字以内"
@@ -124,7 +117,6 @@
                                    <br/>
                             <span class="msg"></span>
 
-                            <%--<div id="currentAddress">当前地址：<span id="curAddress"></span></div>--%>
                         </div>
                         <p class="textmsg">* 请确保所填信息无误，我们将按此邮寄礼品。因地址错误寄送失败需您自行承担责任。</p>
 
@@ -140,31 +132,22 @@
                 </ul>
                 <div class="page" id="page"></div>
             </div>
-            <!--已兑换物品-->
-            <!--<div class="conbox01 convert">
-
-            </div>-->
         </div>
 
     </div>
 
 </div>
 <div class="footer">
-    <iframe src="http://hex.wanmei.com/footer.html" width="100%" height="135" frameborder="0" scrolling="no"
-            allowtransparency="true"></iframe>
 </div>
 <script type="text/javascript" src="${ctx}/static/jquery/event/jquery.boxy.js"></script>
 <script type="text/javascript" src="${ctx}/static/jquery/plugin/jquery.validate.js"></script>
 <script type="text/javascript" src="${ctx}/static/jquery/plugin/jquery.placeholder.js"></script>
 <script type="text/javascript" src="${ctx}/static/jquery/plugin/jquery.form.js"></script>
-<script type="text/javascript" src="${ctx}/extend/wmpassport2/wanmei.passport.js"></script>
 <script type="text/javascript" src="${ctx}/static/jquery/plugin/jquery.tmpl.js"></script>
 <script type="text/javascript" src="${ctx}/static/jquery/plugin/jquery.pagination.js"></script>
 <script type="text/javascript" src="${ctx}/static/jquery/event/ajaxpage-jqplugin.js"></script>
 <script type="text/javascript" src="${ctx}/static/js/GetArea_new.js"></script>
 <script type="text/javascript" src="${ctx}/static/js/Province_new_inland.js"></script>
-<%--<script type="text/javascript" src="http://www.wanmei.com/public/js/modules/boxy/jquery.boxy.js"></script>--%>
-<script src="http://www.wanmei.com/public/js/swfobject.js "></script>
 <script type="text/javascript">
     function aa() {
         alert("敬请期待！");
@@ -189,7 +172,7 @@
 
 <%--业务函数--%>
 <script type="text/javascript">
-    var username = "${sessionScope.USER.account}";
+    var username = "david3424";
     var isEmpty = function (arg) {
         return arg == "undefined" || arg == null || arg == "" || arg == "null";
     };
@@ -215,12 +198,8 @@
     };
 
     function login() {
-        wanmei.passport.islogin({session: 'USER', _false: function () {
-            wanmei.passport.login({session: 'USER', hdid: 'hex_webmall_status'});
-        }});
     }
     function logout() {
-        wanmei.passport.logout({session: 'USER'})
     }
     function initLoginLogout() {
         $('#login').click(function () {
@@ -238,7 +217,7 @@
             login();
             return false;
         }
-        window.location.href = "/hex/webshop/view";
+//        window.location.href = "/hex/webshop/view";
     });
 
     var initMyInfo = function () {
@@ -246,7 +225,7 @@
             return;
         }
 
-        var url = "/hex/webmall/getUser";
+        var url = "/demo/webmall/getUser";
         $.getJSON(url, {t: Math.random()}, function (json) {
             if (json.success) {
                 $("#truename").val(json.bean.truename);
@@ -267,7 +246,6 @@
                 GetCounty('document.form1', 'provinceName', 'cityName', 'countryName', '');
                 initSelect("country", json.bean.country);
             }
-
         });
     }
 
@@ -310,7 +288,6 @@
             }
             $('#form1').submit();
             return false;
-
         });
     }
 
@@ -322,7 +299,7 @@
               <li>
                 <div class="left_li"><img src="http://event51.wanmei.com/hex/201507/moshi/images/baoshi.jpg"/></div>
                 <div class="mid_li">
-                    <h1>魔石*{{= obj.score}}</h1>
+                    <h1> *{{= obj.score}}</h1>
                     <p><strong>来自：</strong>{{= obj.hdname}}</p>
                 </div>
                 <div class="rihgt_li">
@@ -334,7 +311,7 @@
 </script>
 <script type="text/javascript">
     var paginationOptions = {
-        url: "/hex/webmall/detailList",
+        url: "/demo/webmall/detailList",
         pageSize: 5,
         current_page: 0,
         params: {key: new Date().getTime()},

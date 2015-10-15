@@ -43,13 +43,14 @@ class Calculator {
     }
 }
 
-//加法计算
+//匿名类等价于以下
 class Add extends Calculator {
     {
         setOperator(Ops.ADD);
     }
     //智能的调用父类的有参构造方法
     public Add(int _i, int _j) {
-        super(_i,_j);
+        //不加super方法也会默认的调用
+//        super(_i,_j);
     }
 }

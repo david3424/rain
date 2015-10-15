@@ -42,13 +42,22 @@ class Son extends FatherImpl implements Mother{
 
     @Override
     public int kind(){
+        
         return new MotherSpecial().kind();
+        //匿名内部类一样可以实现
+      /*  return new MotherImpl(){
+            @Override
+        public int kind(){
+                return super.kind()-1;
+            }
+        }.kind();*/
     }
 
     /**
      * 实例内部类* 
      */
     private class MotherSpecial extends MotherImpl{
+        @Override
         public int kind(){
             //儿子温柔指数降低了
             return super.kind() - 1;
