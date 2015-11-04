@@ -29,6 +29,18 @@
     <import resource="classpath*:spring/spring-*xml"/>
 
 <!-- common -->
+
+    <!-- common -->
+
+    <bean id="probabilityInterface" class="org.david.rain.common.components.lottery.probability.ProbabilityService">
+        <constructor-arg ref="daoImp"/>
+    </bean>
+
+    <bean id="probabilityLotteryService"
+          class="org.david.rain.common.components.lottery.probability.ProbabilityLotteryService">
+        <constructor-arg ref="probabilityInterface"/>
+    </bean>
+
     <!-- xml列表相关-->
         <!--注入数据源-->
     <bean id="serverRestrictService" class="org.david.rain.common.components.server.restrict.ServerRestrictService">
@@ -40,7 +52,6 @@
     <bean id="serverListManager" class="org.david.rain.common.components.server.ServerListManager" >
         <constructor-arg ref="environment"/>
     </bean>
-
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 

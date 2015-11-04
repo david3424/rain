@@ -27,4 +27,8 @@ public class ActionUtil {
     public static String getUserName() {
         return "david3424";
     }
+
+    public static Integer getUserId() {
+        return 1111;
+    }
 }

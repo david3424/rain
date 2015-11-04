@@ -5,7 +5,6 @@ package org.david.rain.common.lang;
  * User: david
  * Date: 13-10-24
  * Time: 下午2:09
- * To change this template use File | Settings | File Templates.
  */
 public class Tuple<L, R> {
     public final L l;

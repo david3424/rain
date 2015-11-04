@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
  * Created by IDEA.
  * Date: 13-10-31
  * Time: 下午3:21
- * 活动开发平台V3
  */
 @Component
 public class ServiceManager {
