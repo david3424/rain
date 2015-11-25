@@ -26,7 +26,7 @@ $(document).ready(function() {
 });
 
 function getUserTables() {
-	var url = basePath + "wanmei/system/get_user_table";
+	var url = basePath + "pppppp/system/get_user_table";
 	var columns = [{"sTitle": "登陆帐号", "mData": "account"},
 	       	       {"sTitle": "用户姓名", "mData": "userName"},
 	    	       {"sTitle": "角色名称", "mData": "roleName"},
@@ -134,7 +134,7 @@ function addUserProcess(_account, _userName, _userPwd, _roleId, _userStatus, _ag
 	}
 
     $.ajax({
-    	url : basePath + "wanmei/system/add_user",
+    	url : basePath + "pppppp/system/add_user",
     	data : {
     		'account' : _account,
 			'userName' : _userName,
@@ -194,7 +194,7 @@ function editUserProcess(_userId, _account, _userName, _userPwd, _roleId, _userS
 	}
 
     $.ajax({
-    	url : basePath + "wanmei/system/edit_user",
+    	url : basePath + "pppppp/system/edit_user",
     	data : {
     		'userId' : _userId,
     		'account' : _account,
@@ -241,7 +241,7 @@ function changeDialogInform() {
 
 function deleteUserProcess(_userId) {
 	$.ajax({
-		url : basePath + "wanmei/system/delete_user",
+		url : basePath + "pppppp/system/delete_user",
 		data : {
 			'userId' : _userId
 		},

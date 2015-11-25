@@ -1,8 +1,8 @@
-package com.david.web.wanmei.init.servlet.filter;
+package com.david.web.pppppp.init.servlet.filter;
 
-import com.david.web.wanmei.common.SessionConst;
-import com.david.web.wanmei.entity.User;
-import com.david.web.wanmei.service.account.AccountService;
+import com.david.web.pppppp.common.SessionConst;
+import com.david.web.pppppp.entity.User;
+import com.david.web.pppppp.service.account.AccountService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;

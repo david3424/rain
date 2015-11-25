@@ -1,12 +1,12 @@
-package com.david.web.wanmei.controller.task;
+package com.david.web.pppppp.controller.task;
 
 import com.google.common.collect.Maps;
-import com.david.web.wanmei.common.CommonList;
-import com.david.web.wanmei.common.search.Search;
-import com.david.web.wanmei.entity.SendProperty;
-import com.david.web.wanmei.entity.Task;
-import com.david.web.wanmei.service.account.ShiroDbRealm;
-import com.david.web.wanmei.service.task.TaskService;
+import com.david.web.pppppp.common.CommonList;
+import com.david.web.pppppp.common.search.Search;
+import com.david.web.pppppp.entity.SendProperty;
+import com.david.web.pppppp.entity.Task;
+import com.david.web.pppppp.service.account.ShiroDbRealm;
+import com.david.web.pppppp.service.task.TaskService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;

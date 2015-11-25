@@ -1,8 +1,8 @@
-package com.david.web.wanmei.service.sendcheck;
+package com.david.web.pppppp.service.sendcheck;
 
-import com.david.web.wanmei.entity.Task;
-import com.david.web.wanmei.repository.DaoManager;
-import com.david.web.wanmei.repository.Idao;
+import com.david.web.pppppp.entity.Task;
+import com.david.web.pppppp.repository.DaoManager;
+import com.david.web.pppppp.repository.Idao;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

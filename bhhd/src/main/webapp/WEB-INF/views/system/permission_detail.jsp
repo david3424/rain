@@ -23,8 +23,8 @@
 			<div class="span10">
 				<div id="content" class="container-fluid">
 					<ul class="breadcrumb">
-						<li><a href="<%=basePath%>wanmei/system/show_role_page">用户角色</a><span class="divider">/</span></li>
-						<li><a href="<%=basePath%>wanmei/system/show_role_game_page?roleId=${roleDetail.roleId}">用户商品绑定</a><span class="divider">/</span></li>
+						<li><a href="<%=basePath%>pppppp/system/show_role_page">用户角色</a><span class="divider">/</span></li>
+						<li><a href="<%=basePath%>pppppp/system/show_role_game_page?roleId=${roleDetail.roleId}">用户商品绑定</a><span class="divider">/</span></li>
 						<li class="active">角色权限管理</li>
 					</ul>
 		            <!-- 表格box -->

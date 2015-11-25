@@ -1,4 +1,4 @@
-package com.david.web.wanmei.controller.account;
+package com.david.web.pppppp.controller.account;
 
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.springframework.stereotype.Controller;

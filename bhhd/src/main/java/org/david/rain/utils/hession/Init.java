@@ -20,9 +20,9 @@ public class Init {
 		javaxNetSslKeyStoreType = "PKCS12";
 
 		javaxNetSslKeyStore = ConfigUtil.defaultConfigPath() + "/serverXml/"
-				+ "webgame.report.sys.wanmei.com.p12";
+				+ "webgame.report.sys.pppppp.com.p12";
 		
-		javaxNetSslKeyStorePassword = "webgame.report.sys.wanmei.com";
+		javaxNetSslKeyStorePassword = "webgame.report.sys.pppppp.com";
 
 		logger.info("init parameter 'java.protocol.handler.pkgs' is : "
 				+ javaProtocolHandlerPkgs);

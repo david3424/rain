@@ -80,11 +80,11 @@
         <servlet-class>com.caucho.hessian.server.HessianServlet</servlet-class>
         <init-param>
             <param-name>home-class</param-name>
-            <param-value>com.david.web.wanmei.extend.hdswitch.remote.impl.SwitchService</param-value>
+            <param-value>com.david.web.pppppp.extend.hdswitch.remote.impl.SwitchService</param-value>
         </init-param>
         <init-param>
             <param-name>home-api</param-name>
-            <param-value>com.david.web.wanmei.extend.hdswitch.remote.SendSwitchInterface</param-value>
+            <param-value>com.david.web.pppppp.extend.hdswitch.remote.SendSwitchInterface</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
@@ -106,11 +106,11 @@
     <!-- wmeovg -->
     <servlet>
         <servlet-name>wmeovgCallbackServlet</servlet-name>
-        <servlet-class>com.david.web.wanmei.wmeovg.callback.servlet.CallbackServlet</servlet-class>
-        <!--<servlet-class>com.david.web.wanmei.init.servlet.CallbackServlet</servlet-class>-->
+        <servlet-class>com.david.web.pppppp.wmeovg.callback.servlet.CallbackServlet</servlet-class>
+        <!--<servlet-class>com.david.web.pppppp.init.servlet.CallbackServlet</servlet-class>-->
         <init-param>
             <param-name>callback</param-name>
-            <param-value>com.david.web.wanmei.service.sendprize.CallbackImpl</param-value>
+            <param-value>com.david.web.pppppp.service.sendprize.CallbackImpl</param-value>
         </init-param>
         <load-on-startup>4</load-on-startup>
     </servlet>

@@ -1,8 +1,8 @@
-package com.david.web.wanmei.repository.impl;
+package com.david.web.pppppp.repository.impl;
 
 
-import com.david.web.wanmei.repository.ResendPrizeIdao;
-import com.david.web.wanmei.service.ServiceException;
+import com.david.web.pppppp.repository.ResendPrizeIdao;
+import com.david.web.pppppp.service.ServiceException;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.springframework.beans.factory.annotation.Qualifier;

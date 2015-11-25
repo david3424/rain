@@ -1,8 +1,8 @@
-<%@ page import="com.david.web.wanmei.entity.Task" %>
+<%@ page import="com.david.web.pppppp.entity.Task" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.springframework.web.context.WebApplicationContext" %>
 <%@ page import="org.springframework.web.context.ContextLoader" %>
-<%@ page import="com.david.web.wanmei.service.task.TaskService" %>
+<%@ page import="com.david.web.pppppp.service.task.TaskService" %>
 <%--
   Created by IntelliJ IDEA.
   User: czw

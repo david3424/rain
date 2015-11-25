@@ -1,4 +1,4 @@
-package com.david.web.wanmei.service.logservice;
+package com.david.web.pppppp.service.logservice;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -14,7 +14,7 @@ $(document).ready(function() {
 });
 
 function getRoleTables() {
-	var url = basePath + "wanmei/system/get_role_table";
+	var url = basePath + "pppppp/system/get_role_table";
 	var columns = [
 //				   {"sTitle": "角色名称", "mData": "roleName", "mRender": function(data, type, row) {return linkedFat(data, type, row);}},
 				   {"sTitle": "角色名称", "mData": "roleName"},
@@ -35,7 +35,7 @@ function linkedFat(cellvalue, options, rowObject) {
 }
 
 function showPermissionDetail(_roleId) {
-	window.location.href = basePath + "wanmei/system/show_permission_detail_page?roleId=" + _roleId;
+	window.location.href = basePath + "pppppp/system/show_permission_detail_page?roleId=" + _roleId;
 }
 
 function operateButton(cellvalue, options, rowObject) {
@@ -64,7 +64,7 @@ function operateButton(cellvalue, options, rowObject) {
 }
 
 function setRoleGame(_roleId) {
-	window.location.href = basePath + "wanmei/system/show_role_game_page?roleId=" + _roleId;
+	window.location.href = basePath + "pppppp/system/show_role_game_page?roleId=" + _roleId;
 }
 
 function closeDialog() {
@@ -137,7 +137,7 @@ function addUserRoleProcess(_roleName, _roleCode, _roleDescribe) {
 	}
 
     $.ajax({
-    	url : basePath + "wanmei/system/add_user_role",
+    	url : basePath + "pppppp/system/add_user_role",
     	data : {
     		'roleName' : _roleName,
     		'roleCode' : _roleCode,
@@ -204,7 +204,7 @@ function editUserRoleProcess(_roleId, _roleName, _roleCode, _roleDescribe) {
 	}
 
     $.ajax({
-    	url : basePath + "wanmei/system/edit_user_role",
+    	url : basePath + "pppppp/system/edit_user_role",
     	data : {
     		'roleId' : _roleId,
     		'roleName' : _roleName,
@@ -252,7 +252,7 @@ function changeDialogInform() {
 
 function deleteUserRoleProcess(_roleId) {
 	$.ajax({
-		url : basePath + "wanmei/system/delete_user_role",
+		url : basePath + "pppppp/system/delete_user_role",
 		data : {
 			'roleId' : _roleId
 		},

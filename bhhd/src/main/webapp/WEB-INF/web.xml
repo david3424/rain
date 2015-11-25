@@ -73,7 +73,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>springMVC</servlet-name>
-        <url-pattern>/wanmei/*</url-pattern>
+        <url-pattern>/pppppp/*</url-pattern>
     </servlet-mapping>
 
     <servlet>

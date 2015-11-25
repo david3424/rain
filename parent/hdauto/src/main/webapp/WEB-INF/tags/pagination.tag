@@ -1,5 +1,5 @@
 <%@tag pageEncoding="UTF-8"%>
-<%@ attribute name="page" type="com.david.web.wanmei.common.CommonList" required="true"%>
+<%@ attribute name="page" type="com.david.web.pppppp.common.CommonList" required="true"%>
 <%@ attribute name="paginationSize" type="java.lang.Integer" required="true"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

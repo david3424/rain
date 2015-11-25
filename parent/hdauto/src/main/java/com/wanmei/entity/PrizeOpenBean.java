@@ -1,4 +1,4 @@
-package com.david.web.wanmei.entity;
+package com.david.web.pppppp.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 

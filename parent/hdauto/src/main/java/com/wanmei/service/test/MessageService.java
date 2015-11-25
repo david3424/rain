@@ -1,7 +1,7 @@
-package com.david.web.wanmei.service.test;
+package com.david.web.pppppp.service.test;
 
-import com.david.web.wanmei.service.webservice.ServiceManage;
-import com.david.web.wanmei.service.webservice.textmessage.server.webservice.WSTextMessageBean;
+import com.david.web.pppppp.service.webservice.ServiceManage;
+import com.david.web.pppppp.service.webservice.textmessage.server.webservice.WSTextMessageBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

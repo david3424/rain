@@ -26,7 +26,7 @@ class CustomAuthenticationSuccessHandler extends
 
 	private boolean verifyIpFlg = false;
 
-	private static final String URL_SPRING_KEY = "/wanmei/";
+	private static final String URL_SPRING_KEY = "/pppppp/";
 
 	private static final String SYSTEM_URL = "system";
 

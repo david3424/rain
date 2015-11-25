@@ -1,4 +1,4 @@
-package com.david.web.wanmei.service.webservice.textmessage.server.webservice;
+package com.david.web.pppppp.service.webservice.textmessage.server.webservice;
 
 import java.io.Serializable;
 import java.util.List;

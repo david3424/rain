@@ -23,7 +23,7 @@
 				<div id="content" class="container-fluid">
 
 					<ul class="breadcrumb">
-						<li><a href="<%=basePath%>wanmei/system/show_role_page">用户角色</a><span class="divider">/</span></li>
+						<li><a href="<%=basePath%>pppppp/system/show_role_page">用户角色</a><span class="divider">/</span></li>
 						<li class="active">用户商品绑定</li>
 					</ul>
 

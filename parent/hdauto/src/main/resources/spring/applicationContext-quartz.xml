@@ -9,7 +9,7 @@
     </bean>
 
     <bean id="jobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
-        <property name="jobClass" value="com.david.web.wanmei.service.quartz.MyQuartzJobBean"/>
+        <property name="jobClass" value="com.david.web.pppppp.service.quartz.MyQuartzJobBean"/>
     </bean>
 
     <!--&lt;!&ndash; 以下是检查发奖流程的定时器 &ndash;&gt;-->
@@ -36,7 +36,7 @@
         <!--</property>-->
     <!--</bean>-->
 
-    <!--<bean id="sendChecker" class="com.david.web.wanmei.service.sendcheck.SimpleSendChecker">-->
+    <!--<bean id="sendChecker" class="com.david.web.pppppp.service.sendcheck.SimpleSendChecker">-->
         <!--<property name="dataSourceList">-->
             <!--<list>-->
                 <!--<value>huodong218</value>-->

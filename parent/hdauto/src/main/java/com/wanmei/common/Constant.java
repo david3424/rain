@@ -1,4 +1,4 @@
-package com.david.web.wanmei.common;
+package com.david.web.pppppp.common;
 
 import java.util.HashMap;
 import java.util.HashSet;

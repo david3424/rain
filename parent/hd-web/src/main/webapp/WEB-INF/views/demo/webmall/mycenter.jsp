@@ -12,9 +12,9 @@
 <html>
 <head>
     <link href="${ctx}/static/styles/boxy.css" type="text/css" rel="stylesheet">
-    <link href="http://event51.wanmei.com/hex/201507/moshi/style/master.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="http://www.wanmei.com/public/js/wm.js" top="false" bottom="false"></script>
-    <script type="text/javascript" src="http://www.wanmei.com/public/js/jq_171.js"></script>
+    <link href="http://event51.pppppp.com/hex/201507/moshi/style/master.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="http://www.pppppp.com/public/js/wm.js" top="false" bottom="false"></script>
+    <script type="text/javascript" src="http://www.pppppp.com/public/js/jq_171.js"></script>
     <title>个人中心</title>
     <style>
     	.msg{ margin-left:75px;}
@@ -297,7 +297,7 @@
 
         {{each(i,obj) records}}
               <li>
-                <div class="left_li"><img src="http://event51.wanmei.com/hex/201507/moshi/images/baoshi.jpg"/></div>
+                <div class="left_li"><img src="http://event51.pppppp.com/hex/201507/moshi/images/baoshi.jpg"/></div>
                 <div class="mid_li">
                     <h1> *{{= obj.score}}</h1>
                     <p><strong>来自：</strong>{{= obj.hdname}}</p>

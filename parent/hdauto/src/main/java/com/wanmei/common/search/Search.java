@@ -2,7 +2,7 @@
 * 时间： 2007-5-18 16:37:42
 *  北京完美时空网络技术有限公司
 */
-package com.david.web.wanmei.common.search;
+package com.david.web.pppppp.common.search;
 
 
 import javax.servlet.http.HttpServletRequest;

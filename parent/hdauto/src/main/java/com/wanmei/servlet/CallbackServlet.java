@@ -1,4 +1,4 @@
-package com.david.web.wanmei.init.servlet;
+package com.david.web.pppppp.init.servlet;
 
 import javax.servlet.http.HttpServlet;
 
@@ -39,9 +39,9 @@ public class CallbackServlet extends HttpServlet {
             }
             if (!(callbackObject instanceof ICallbackService)) {
 
-                System.err.println("虚拟物品兑换回调接口实例化失败：没有继承com.wanmei.wmeovg.callback.servlet.ICallbackService接口");
+                System.err.println("虚拟物品兑换回调接口实例化失败：没有继承com.pppppp.wmeovg.callback.servlet.ICallbackService接口");
                 throw new ServletException(
-                        "虚拟物品兑换回调接口没有继承com.wanmei.wmeovg.callback.servlet.ICallbackService接口");
+                        "虚拟物品兑换回调接口没有继承com.pppppp.wmeovg.callback.servlet.ICallbackService接口");
             }
 
             callbackService = (ICallbackService) callbackObject;

@@ -21,7 +21,7 @@ function bindPermissionUpdate(_permissionIds) {
 	}
 
 	$.ajax({
-		url : basePath + "wanmei/system/bind_permissions",
+		url : basePath + "pppppp/system/bind_permissions",
 		data : {
 			'roleId' : pageRoleId,
 			'permissionIds' : _permissionIds.toString()
@@ -31,10 +31,10 @@ function bindPermissionUpdate(_permissionIds) {
 		async : true,
 		success : function(response) {
 			if (response > 0) {
-				window.location.href = basePath + "wanmei/system/show_permission_detail_page?roleId=" + pageRoleId + "&gameId=" + pageGameId;
+				window.location.href = basePath + "pppppp/system/show_permission_detail_page?roleId=" + pageRoleId + "&gameId=" + pageGameId;
 			} else {
 				alert("绑定权限失败！");
-				window.location.href = basePath + "wanmei/system/show_permission_detail_page?roleId=" + pageRoleId + "&gameId=" + pageGameId;
+				window.location.href = basePath + "pppppp/system/show_permission_detail_page?roleId=" + pageRoleId + "&gameId=" + pageGameId;
 			}
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -51,7 +51,7 @@ function unbindPermissionUpdate(_permissionIds) {
 	}
 
 	$.ajax({
-		url : basePath + "wanmei/system/unbind_permissions",
+		url : basePath + "pppppp/system/unbind_permissions",
 		data : {
 			'roleId' : pageRoleId,
 			'permissionIds' : _permissionIds.toString()
@@ -61,10 +61,10 @@ function unbindPermissionUpdate(_permissionIds) {
 		async : true,
 		success : function(response) {
 			if (response > 0) {
-				window.location.href = basePath + "wanmei/system/show_permission_detail_page?roleId=" + pageRoleId + "&gameId=" + pageGameId;
+				window.location.href = basePath + "pppppp/system/show_permission_detail_page?roleId=" + pageRoleId + "&gameId=" + pageGameId;
 			} else {
 				alert("解除权限失败！");
-				window.location.href = basePath + "wanmei/system/show_permission_detail_page?roleId=" + pageRoleId + "&gameId=" + pageGameId;
+				window.location.href = basePath + "pppppp/system/show_permission_detail_page?roleId=" + pageRoleId + "&gameId=" + pageGameId;
 			}
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {

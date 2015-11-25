@@ -45,7 +45,7 @@ public class MyFirstServlet extends HttpServlet {
             }
             if (!(callbackObject instanceof Idao)) {
 
-                System.err.println("虚拟物品兑换回调接口实例化失败：没有继承com.wanmei.wmeovg.callback.servlet.ICallbackService接口");
+                System.err.println("虚拟物品兑换回调接口实例化失败：没有继承com.pppppp.wmeovg.callback.servlet.ICallbackService接口");
             }
 
             idao = (Idao) callbackObject;

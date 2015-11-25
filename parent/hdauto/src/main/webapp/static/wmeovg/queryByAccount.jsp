@@ -3,9 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@page import="java.util.List"%>
-<%@page import="com.david.web.wanmei.wmeovg.request.service.IPrizeService"%>
-<%@page import="com.david.web.wanmei.wmeovg.request.service.PrizeServiceManager"%>
-<%@page import="com.david.web.wanmei.wmeovg.request.entity.PrizeLog"%>
+<%@page import="com.david.web.pppppp.wmeovg.request.service.IPrizeService"%>
+<%@page import="com.david.web.pppppp.wmeovg.request.service.PrizeServiceManager"%>
+<%@page import="com.david.web.pppppp.wmeovg.request.entity.PrizeLog"%>
 <%@page import="java.util.Iterator"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">

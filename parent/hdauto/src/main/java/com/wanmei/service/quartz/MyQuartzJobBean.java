@@ -1,6 +1,6 @@
-package com.david.web.wanmei.service.quartz;
+package com.david.web.pppppp.service.quartz;
 
-import com.david.web.wanmei.util.SpringContextSupport;
+import com.david.web.pppppp.util.SpringContextSupport;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.Trigger;

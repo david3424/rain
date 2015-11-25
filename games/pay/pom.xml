@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.david.web.wanmei.games</groupId>
+        <groupId>org.david.rain.games</groupId>
         <artifactId>games</artifactId>
         <version>1.0.0</version>
     </parent>

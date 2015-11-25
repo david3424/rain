@@ -120,7 +120,7 @@ CREATE TABLE `t_sys_permission` (
 
 LOCK TABLES `t_sys_permission` WRITE;
 /*!40000 ALTER TABLE `t_sys_permission` DISABLE KEYS */;
-INSERT INTO `t_sys_permission` VALUES (49,'/wanmei/system/show_menu_page','菜单管理','平台管理',0,9,0),(46,'/wanmei/system/show_user_page','用户管理','平台管理',0,9,0),(47,'/wanmei/system/show_role_page','权限管理','平台管理',0,9,0),(48,'/wanmei/system/show_log_page','操作日志','平台管理',0,9,0);
+INSERT INTO `t_sys_permission` VALUES (49,'/pppppp/system/show_menu_page','菜单管理','平台管理',0,9,0),(46,'/pppppp/system/show_user_page','用户管理','平台管理',0,9,0),(47,'/pppppp/system/show_role_page','权限管理','平台管理',0,9,0),(48,'/pppppp/system/show_log_page','操作日志','平台管理',0,9,0);
 /*!40000 ALTER TABLE `t_sys_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 

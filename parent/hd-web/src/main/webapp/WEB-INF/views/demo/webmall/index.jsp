@@ -48,7 +48,7 @@
         <div class="boxcon">
             <!--签到-->
             <div class="signIn">
-                <div class="left_ll"><img src="http://event51.wanmei.com/hex/201507/moshi/images/l01.jpg"/></div>
+                <div class="left_ll"><img src="http://event51.pppppp.com/hex/201507/moshi/images/l01.jpg"/></div>
                 <div class="mid_ll">
                     <h1>每日签到</h1>
                     <p><strong>活动说明：</strong>点击进行每日签到，获取奖励。</p>
@@ -63,7 +63,7 @@
             </div>
             <!--个人信息-->
             <div class="weixin">
-                <div class="left_ll"><img src="http://event51.wanmei.com/hex/201507/moshi/images/l02.jpg"/></div>
+                <div class="left_ll"><img src="http://event51.pppppp.com/hex/201507/moshi/images/l02.jpg"/></div>
                 <div class="mid_ll">
                     <h1>完善个人信息</h1>
                     <p><strong>活动说明：</strong>完善个人信息，获取奖励。</p>
@@ -78,7 +78,7 @@
             </div>
             <!--百科问答-->
             <div class="question">
-                <div class="left_ll"><img src="http://event51.wanmei.com/hex/201507/moshi/images/l04.jpg"/></div>
+                <div class="left_ll"><img src="http://event51.pppppp.com/hex/201507/moshi/images/l04.jpg"/></div>
                 <div class="mid_ll">
                     <h1>百科问答</h1>
 
@@ -105,7 +105,7 @@
 </div>
 <!-- 签到 pop-->
 <div class="pop1" id="pop1">
-    <img src="http://event51.wanmei.com/hex/201507/moshi/images/close.jpg" class="closebtn01"/>
+    <img src="http://event51.pppppp.com/hex/201507/moshi/images/close.jpg" class="closebtn01"/>
 
     <div class="title02">2015-09</div>
     <div class="weeknum">
@@ -155,7 +155,7 @@
 </div>
 <!-- 百科问答 pop-->
 <div class="pop3" id="pop3">
-    <img src="http://event51.wanmei.com/hex/201507/moshi/images/close.jpg" class="closebtn03"/>
+    <img src="http://event51.pppppp.com/hex/201507/moshi/images/close.jpg" class="closebtn03"/>
 
     <div class="title02">HEX百科问答</div>
     <div class="wenjuan">

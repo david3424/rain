@@ -26,7 +26,7 @@ $(document).ready(function() {
 });
 
 function getMenuTables() {
-	var url = basePath + "wanmei/system/get_menu_table";
+	var url = basePath + "pppppp/system/get_menu_table";
 	var columns = [{"sTitle": "所属商品", "mData": "gameName"},
 	       	       {"sTitle": "菜单类型", "mData": "menuTypeName"},
 	    	       {"sTitle": "菜单名称", "mData": "resourceName"},
@@ -130,7 +130,7 @@ function addMenuProcess(_resourceName, _resourceUrl, _gameId, _menuTypeId, _desc
 	}
 
     $.ajax({
-    	url : basePath + "wanmei/system/add_menu",
+    	url : basePath + "pppppp/system/add_menu",
     	data : {
     		'resourceName' : _resourceName,
 			'resourceUrl' : _resourceUrl,
@@ -189,7 +189,7 @@ function editMenuProcess(_permissionId, _resourceName, _resourceUrl, _gameId, _m
 	}
 
     $.ajax({
-    	url : basePath + "wanmei/system/edit_menu",
+    	url : basePath + "pppppp/system/edit_menu",
     	data : {
     		'permissionId' : _permissionId,
     		'resourceName' : _resourceName,
@@ -235,7 +235,7 @@ function changeDialogInform() {
 
 function deleteMenuProcess(_permissionId) {
 	$.ajax({
-		url : basePath + "wanmei/system/delete_menu",
+		url : basePath + "pppppp/system/delete_menu",
 		data : {
 			'permissionId' : _permissionId
 		},

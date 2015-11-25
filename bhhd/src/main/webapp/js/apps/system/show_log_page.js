@@ -22,7 +22,7 @@ $(document).ready(function() {
 });
 
 function getLogTables() {
-	var url = basePath + "wanmei/system/get_log_table";
+	var url = basePath + "pppppp/system/get_log_table";
 	var columns = [{"sTitle": "时间", "mData": "optionTimeStr"},
 	       	       {"sTitle": "帐号", "mData": "account"},
 	    	       {"sTitle": "IP", "mData": "loginIp"},

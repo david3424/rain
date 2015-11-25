@@ -1,8 +1,8 @@
-package com.david.web.wanmei.service.sendcheck;
+package com.david.web.pppppp.service.sendcheck;
 
-import com.david.web.wanmei.entity.Task;
-import com.david.web.wanmei.service.task.TaskService;
-import com.david.web.wanmei.service.test.MessageInterface;
+import com.david.web.pppppp.entity.Task;
+import com.david.web.pppppp.service.task.TaskService;
+import com.david.web.pppppp.service.test.MessageInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

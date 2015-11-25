@@ -24,6 +24,6 @@
 <body>
 <h2>500 - 系统发生内部错误.</h2>
 
-<p><a href="<c:url value="http://www.wanmei.com"/>">返回首页</a></p>
+<p><a href="<c:url value="http://www.pppppp.com"/>">返回首页</a></p>
 </body>
 </html>

@@ -28,7 +28,7 @@
 
 <div><h3>对不期，来到这里是你的一个错误</h3></div>
 <script type="text/javascript" src="${ctx}/static/jquery/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="${ctx}/extend/wmpassport2/wanmei.passport.js"></script>
+<script type="text/javascript" src="${ctx}/extend/wmpassport2/pppppp.passport.js"></script>
 <script type="text/javascript">
     var username = "${sessionScope.USER.account}";
 
@@ -46,13 +46,13 @@
         });
     }
     function login() {
-        wanmei.passport.islogin({session: 'USER', _true: function () {
+        pppppp.passport.islogin({session: 'USER', _true: function () {
         }, _false: function () {
-            wanmei.passport.login({session: 'USER',hdid: "world2_login_status"})
+            pppppp.passport.login({session: 'USER',hdid: "world2_login_status"})
         }});
     }
     function logout() {
-        wanmei.passport.logout({opacity: 60, session: 'USER'});
+        pppppp.passport.logout({opacity: 60, session: 'USER'});
     }
     var isEmpty = function (arg) {
         return arg == "undefined" || arg == null || arg == "" || arg == "null";

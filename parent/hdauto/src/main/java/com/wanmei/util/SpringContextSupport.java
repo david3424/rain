@@ -1,4 +1,4 @@
-package com.david.web.wanmei.util;
+package com.david.web.pppppp.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

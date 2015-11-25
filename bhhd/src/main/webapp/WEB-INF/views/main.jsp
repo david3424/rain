@@ -15,7 +15,7 @@
 	else if( authorityGameListSize == 1 ){ //只有一个访问权限，直接跳转到对应的商品
 %>
 <head>
-	<meta http-equiv="refresh" content="0; url=<c:url value='<%=basePath + "wanmei/" + authorityGameList.get(0)%>'/>">
+	<meta http-equiv="refresh" content="0; url=<c:url value='<%=basePath + "pppppp/" + authorityGameList.get(0)%>'/>">
 </head>
 <%
 	}else{ //不止一个商品的访问权限，进入到商品选择页面
@@ -56,30 +56,30 @@
 	<c:if test="${not empty authorityGameList}">
 		<c:forEach items="${authorityGameList}" var="gm" varStatus="status">
 				<c:if test="${gm == 'hzxf'}">
-					<a href="<c:url value='<%=basePath + "wanmei/hzxf"%>'/>"><img alt="" src="<c:url value='/img/hzxf.jpg'/>"/></a>
+					<a href="<c:url value='<%=basePath + "pppppp/hzxf"%>'/>"><img alt="" src="<c:url value='/img/hzxf.jpg'/>"/></a>
 				</c:if>
 				<c:if test="${gm == 'bhphs'}">
-					<a href="<c:url value='<%=basePath + "wanmei/bhphs"%>'/>"><img alt="" src="<c:url value='/img/bhphs.jpg'/>"/></a>
+					<a href="<c:url value='<%=basePath + "pppppp/bhphs"%>'/>"><img alt="" src="<c:url value='/img/bhphs.jpg'/>"/></a>
 				</c:if>
 				
 				<c:if test="${gm == 'mslrly'}">
-					<a href="<c:url value='<%=basePath + "wanmei/mslrly"%>'/>"><img alt="" src="<c:url value='/img/mslrly.jpg'/>"/></a>
+					<a href="<c:url value='<%=basePath + "pppppp/mslrly"%>'/>"><img alt="" src="<c:url value='/img/mslrly.jpg'/>"/></a>
 				</c:if>
 				
 				<c:if test="${gm == 'touchly'}">
-					<a href="<c:url value='<%=basePath + "wanmei/touchly"%>'/>"><img alt="" src="<c:url value='/img/touchly.jpg'/>"/></a>
+					<a href="<c:url value='<%=basePath + "pppppp/touchly"%>'/>"><img alt="" src="<c:url value='/img/touchly.jpg'/>"/></a>
 				</c:if>
 				<c:if test="${gm == 'yt'}">
-					<a href="<c:url value='<%=basePath + "wanmei/yt"%>'/>"><img alt="" src="<c:url value='/img/yt.jpg'/>"/></a>
+					<a href="<c:url value='<%=basePath + "pppppp/yt"%>'/>"><img alt="" src="<c:url value='/img/yt.jpg'/>"/></a>
 				</c:if>
 				<c:if test="${gm == 'touch'}">
-					<a href="<c:url value='<%=basePath + "wanmei/touch"%>'/>"><img alt="" src="<c:url value='/img/touch.jpg'/>"/></a>
+					<a href="<c:url value='<%=basePath + "pppppp/touch"%>'/>"><img alt="" src="<c:url value='/img/touch.jpg'/>"/></a>
 				</c:if>
 				<c:if test="${gm == 'tgmslr'}">
-					<a href="<c:url value='<%=basePath + "wanmei/tgmslr"%>'/>"><img alt="" src="<c:url value='/img/tgmslr.jpg'/>"/></a>
+					<a href="<c:url value='<%=basePath + "pppppp/tgmslr"%>'/>"><img alt="" src="<c:url value='/img/tgmslr.jpg'/>"/></a>
 				</c:if>
 				<c:if test="${gm == 'bhphshw'}">
-					<a href="<c:url value='<%=basePath + "wanmei/bhphshw"%>'/>"><img alt="" src="<c:url value='/img/bhphshw.jpg'/>"/></a>
+					<a href="<c:url value='<%=basePath + "pppppp/bhphshw"%>'/>"><img alt="" src="<c:url value='/img/bhphshw.jpg'/>"/></a>
 				</c:if>
 		</c:forEach>
 	</c:if>	

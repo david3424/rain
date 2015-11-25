@@ -1,4 +1,4 @@
-package com.david.web.wanmei.service.sendcheck;
+package com.david.web.pppppp.service.sendcheck;
 
 /**
  * Created with IntelliJ IDEA.

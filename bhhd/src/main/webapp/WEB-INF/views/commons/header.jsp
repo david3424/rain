@@ -109,7 +109,7 @@
         }
 
         $.ajax({
-            url: basePath + "wanmei/system/change_password",
+            url: basePath + "pppppp/system/change_password",
             data: {
                 'oldPassword': _oldPassword,
                 'newPassword': _newPassword

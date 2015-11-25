@@ -22,6 +22,8 @@ import java.util.Map;
 @Component
 public class HttpUtil {
     private final Logger logger = LoggerFactory.getLogger(HttpUtil.class);
+    private String root = this.getClass().getResource("/").getPath();
+    
 
     //get方法封装
     public String getRequest(String url,Map<String, Object> rawParams) {

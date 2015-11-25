@@ -1,6 +1,6 @@
-package com.david.web.wanmei.service.logservice;
+package com.david.web.pppppp.service.logservice;
 
-import com.david.web.wanmei.service.webservice.ServiceManage;
+import com.david.web.pppppp.service.webservice.ServiceManage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

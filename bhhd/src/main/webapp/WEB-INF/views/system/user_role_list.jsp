@@ -53,7 +53,7 @@
 									<c:forEach items="${roleDetailList}" var="roleDetail" varStatus="status">
 									<tr>
 										<td><c:out value="${status.count}"></c:out></td>
-										<td><a href="<c:url value='wanmei/system/show_permission_detail_page?roleId=${roleDetail.roleId}'/>"><c:out value="${roleDetail.roleName}"></c:out></a></td>
+										<td><a href="<c:url value='pppppp/system/show_permission_detail_page?roleId=${roleDetail.roleId}'/>"><c:out value="${roleDetail.roleName}"></c:out></a></td>
 										<td><c:out value="${roleDetail.roleCode}"></c:out></td>
 										<td><c:out value="${roleDetail.roleDescribe}"></c:out></td>
 										<td><button class="btn btn-link" onclick="editUserRole(${roleDetail.roleId}, '${roleDetail.roleName}', '${roleDetail.roleCode}', '${roleDetail.roleDescribe}');">编辑</button>

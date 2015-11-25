@@ -1,14 +1,14 @@
-package com.david.web.wanmei.service.sendprize;
+package com.david.web.pppppp.service.sendprize;
 
-import com.david.web.wanmei.common.DateUtils;
-import com.david.web.wanmei.entity.PrizeTableBean;
-import com.david.web.wanmei.entity.SendProperty;
-import com.david.web.wanmei.service.logservice.OperationLog;
-import com.david.web.wanmei.service.logservice.OperationLogger;
-import com.david.web.wanmei.service.logservice.SendPrizeBean;
-import com.david.web.wanmei.service.task.SendPropertyService;
-import com.david.web.wanmei.util.SpringContextSupport;
-import com.david.web.wanmei.wmeovg.callback.servlet.ICallbackService;
+import com.david.web.pppppp.common.DateUtils;
+import com.david.web.pppppp.entity.PrizeTableBean;
+import com.david.web.pppppp.entity.SendProperty;
+import com.david.web.pppppp.service.logservice.OperationLog;
+import com.david.web.pppppp.service.logservice.OperationLogger;
+import com.david.web.pppppp.service.logservice.SendPrizeBean;
+import com.david.web.pppppp.service.task.SendPropertyService;
+import com.david.web.pppppp.util.SpringContextSupport;
+import com.david.web.pppppp.wmeovg.callback.servlet.ICallbackService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,8 +1,8 @@
-package com.david.web.wanmei.controller.account;
+package com.david.web.pppppp.controller.account;
 
-import com.david.web.wanmei.entity.User;
-import com.david.web.wanmei.service.account.AccountService;
-import com.david.web.wanmei.service.account.ShiroDbRealm;
+import com.david.web.pppppp.entity.User;
+import com.david.web.pppppp.service.account.AccountService;
+import com.david.web.pppppp.service.account.ShiroDbRealm;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

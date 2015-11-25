@@ -1,4 +1,4 @@
-package com.david.web.wanmei.extend.hdswitch.remote;
+package com.david.web.pppppp.extend.hdswitch.remote;
 
 /**
  * Created by czw on 13-12-16.

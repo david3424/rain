@@ -1,12 +1,12 @@
-package com.david.web.wanmei.controller.resendprize;
+package com.david.web.pppppp.controller.resendprize;
 
 import com.google.common.collect.Maps;
-import com.david.web.wanmei.common.CommonList;
-import com.david.web.wanmei.common.Constant;
-import com.david.web.wanmei.common.search.Search;
-import com.david.web.wanmei.entity.*;
-import com.david.web.wanmei.service.ServiceException;
-import com.david.web.wanmei.service.resendprize.ResendPrizeService;
+import com.david.web.pppppp.common.CommonList;
+import com.david.web.pppppp.common.Constant;
+import com.david.web.pppppp.common.search.Search;
+import com.david.web.pppppp.entity.*;
+import com.david.web.pppppp.service.ServiceException;
+import com.david.web.pppppp.service.resendprize.ResendPrizeService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

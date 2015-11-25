@@ -1,6 +1,6 @@
-package com.david.web.wanmei.entity;
+package com.david.web.pppppp.entity;
 
-import com.david.web.wanmei.service.ServiceException;
+import com.david.web.pppppp.service.ServiceException;
 
 import java.util.Date;
 import java.util.HashMap;

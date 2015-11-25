@@ -1,6 +1,6 @@
-package com.david.web.wanmei.repository;
+package com.david.web.pppppp.repository;
 
-import com.david.web.wanmei.repository.impl.DaoJndiImp;
+import com.david.web.pppppp.repository.impl.DaoJndiImp;
 import org.apache.commons.dbutils.QueryRunner;
 
 import javax.naming.Context;

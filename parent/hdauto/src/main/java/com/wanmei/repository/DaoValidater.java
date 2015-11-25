@@ -1,7 +1,7 @@
-package com.david.web.wanmei.repository;
+package com.david.web.pppppp.repository;
 
 
-import com.david.web.wanmei.entity.HdTable;
+import com.david.web.pppppp.entity.HdTable;
 
 /**
  * 数据库操作对象时校验类.
@@ -14,7 +14,7 @@ public class DaoValidater {
     public static void assertHasHdTable(Class clazz) {
 //        if (null == clazz.getAnnotation(HdTable.class)) {
         if (!clazz.isAnnotationPresent(HdTable.class)) {
-            StringBuilder sb = new StringBuilder("类").append(clazz.getName()).append("缺少com.wanmei.hdutil.table.annotations.HdTable注解");
+            StringBuilder sb = new StringBuilder("类").append(clazz.getName()).append("缺少com.pppppp.hdutil.table.annotations.HdTable注解");
             throw new RuntimeException(sb.toString());
         }
     }

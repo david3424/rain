@@ -1,7 +1,7 @@
-package com.david.web.wanmei.common.page;
+package com.david.web.pppppp.common.page;
 
 
-import com.david.web.wanmei.common.CommonList;
+import com.david.web.pppppp.common.CommonList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-import static com.david.web.wanmei.common.page.MessageConst.RECORDS;
+import static com.david.web.pppppp.common.page.MessageConst.RECORDS;
 
 /**
  * 分页查询message

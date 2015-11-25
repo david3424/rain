@@ -89,7 +89,7 @@
 <script type="text/javascript" src="${ctx}/static/jquery/plugin/jquery.placeholder.js"></script>
 <script type="text/javascript" src="${ctx}/static/jquery/plugin/jquery.form.js"></script>
 <script type="text/javascript" src="${ctx}/static/jquery/event/serverlist.js"></script>
-<script type="text/javascript" src="${ctx}/extend/wmpassport2/wanmei.passport.js"></script>
+<script type="text/javascript" src="${ctx}/extend/wmpassport2/pppppp.passport.js"></script>
 <script type="text/javascript">
     var username = "${sessionScope.USER.account}";
 
@@ -110,13 +110,13 @@
         });
     }
     function login() {
-        wanmei.passport.islogin({session: 'USER', _true: function () {
+        pppppp.passport.islogin({session: 'USER', _true: function () {
         }, _false: function () {
-            wanmei.passport.login({session: 'USER'})
+            pppppp.passport.login({session: 'USER'})
         }});
     }
     function logout() {
-        wanmei.passport.logout({opacity: 60, session: 'USER'});
+        pppppp.passport.logout({opacity: 60, session: 'USER'});
     }
     var isEmpty = function (arg) {
         return arg == "undefined" || arg == null || arg == "" || arg == "null";

@@ -13,7 +13,7 @@ public class DaoValidater {
     public static void assertHasHdTable(Class clazz) {
 //        if (null == clazz.getAnnotation(HdTable.class)) {
         if (!clazz.isAnnotationPresent(HdTable.class)) {
-            throw new RuntimeException("类" + clazz.getName() + "缺少com.david.hdutil.table.annotations.HdTable注解");
+            throw new RuntimeException("类" + clazz.getName() + "缺少org.david.rain.games.pay.utils.entity.HdTable注解");
         }
     }
 }

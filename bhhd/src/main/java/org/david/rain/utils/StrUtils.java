@@ -125,8 +125,8 @@ public class StrUtils {
 		int endposition = url.indexOf("/", 10);
 		endposition = (endposition < 0) ? url.length() : endposition;
 		url = url.substring(startposition, endposition);
-		if (url.startsWith("wanmei")) {
-			url = url.replaceFirst("wanmei", "www");
+		if (url.startsWith("pppppp")) {
+			url = url.replaceFirst("pppppp", "www");
 		}
 		return url;
 	}
@@ -176,7 +176,7 @@ public class StrUtils {
 			int startPosition = url.indexOf("/");
 			int endPosition = url.indexOf("/", startPosition + 1);
 			String event = url.substring(startPosition + 1, endPosition);
-			if (event.equals("wanmei")) {
+			if (event.equals("pppppp")) {
 				event = "www";
 				url = url.substring(0, startPosition + 1) + event
 						+ url.substring(endPosition);

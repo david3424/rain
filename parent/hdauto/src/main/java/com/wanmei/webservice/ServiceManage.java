@@ -2,11 +2,11 @@
 *  时间： 2007-8-17 11:30:08
 *  北京完美时空网络技术有限公司
 */
-package com.david.web.wanmei.service.webservice;
+package com.david.web.pppppp.service.webservice;
 
 import com.caucho.hessian.client.HessianProxyFactory;
-import com.david.web.wanmei.service.logservice.ILogService;
-import com.david.web.wanmei.service.webservice.textmessage.server.webservice.WSTextMessageService;
+import com.david.web.pppppp.service.logservice.ILogService;
+import com.david.web.pppppp.service.webservice.textmessage.server.webservice.WSTextMessageService;
 //import common.CouponServiceInterface;
 
 /**

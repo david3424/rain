@@ -3,9 +3,9 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   GoodsLog.java
 
-package com.david.web.wanmei.wmeovg.request.entity;
+package com.david.web.pppppp.wmeovg.request.entity;
 
-import com.david.web.wanmei.wmeovg.request.util.DateUtil;
+import com.david.web.pppppp.wmeovg.request.util.DateUtil;
 import java.io.Serializable;
 import java.util.Date;
 

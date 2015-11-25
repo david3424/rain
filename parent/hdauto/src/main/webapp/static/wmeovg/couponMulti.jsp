@@ -3,12 +3,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 
-<%@page import="com.david.web.wanmei.wmeovg.request.service.IPrizeService" %>
-<%@page import="com.david.web.wanmei.wmeovg.request.service.PrizeServiceManager" %>
-<%@page import="com.david.web.wanmei.wmeovg.request.util.Priority" %>
+<%@page import="com.david.web.pppppp.wmeovg.request.service.IPrizeService" %>
+<%@page import="com.david.web.pppppp.wmeovg.request.service.PrizeServiceManager" %>
+<%@page import="com.david.web.pppppp.wmeovg.request.util.Priority" %>
 <%@page import="java.util.Random" %>
-<%@ page import="com.david.web.wanmei.wmeovg.request.entity.GoodsLog" %>
-<%@ page import="com.david.web.wanmei.wmeovg.request.util.PrizeSendType" %>
+<%@ page import="com.david.web.pppppp.wmeovg.request.entity.GoodsLog" %>
+<%@ page import="com.david.web.pppppp.wmeovg.request.util.PrizeSendType" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 
 <%

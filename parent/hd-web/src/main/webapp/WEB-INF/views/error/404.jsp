@@ -11,6 +11,6 @@
 
 <body>
 	<h2>404 - 页面不存在.</h2>
-	<p><a href="<c:url value="http://www.wanmei.com"/>">返回首页</a></p>
+	<p><a href="<c:url value="http://www.pppppp.com"/>">返回首页</a></p>
 </body>
 </html>

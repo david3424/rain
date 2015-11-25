@@ -1,4 +1,4 @@
-package com.david.web.wanmei.entity;
+package com.david.web.pppppp.entity;
 
 
 @HdTable("QRTZ_TRIGGERS")

@@ -6,7 +6,7 @@
 <body>
 <%
     if (false) {
-        response.sendRedirect("http://www.wanmei.com");
+        response.sendRedirect("http://www.pppppp.com");
     } else {
         session.setAttribute("now", new Date());
         out.println("<br> SESSION ID:" + session.getId() + "<br>");

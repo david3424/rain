@@ -36,7 +36,7 @@
 	String menuPath;
     menuPath =  path;
     basePath =  path +"/";
-    gamePath =  path + "/wanmei/"+currentGameShort+"/";
+    gamePath =  path + "/pppppp/"+currentGameShort+"/";
 %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

@@ -1,7 +1,7 @@
-package com.david.web.wanmei.repository;
+package com.david.web.pppppp.repository;
 
 
-import com.david.web.wanmei.entity.User;
+import com.david.web.pppppp.entity.User;
 
 import java.sql.SQLException;
 import java.util.List;

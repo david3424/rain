@@ -2,7 +2,7 @@
 *  时间： 2008-7-29 11:11:49<br>
 *  北京完美时空网络技术有限公司<br>
 */
-package com.david.web.wanmei.common;
+package com.david.web.pppppp.common;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;

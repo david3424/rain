@@ -3,7 +3,7 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   WmeovgProperties.java
 
-package com.david.web.wanmei.wmeovg.request.util;
+package com.david.web.pppppp.wmeovg.request.util;
 
 import java.io.IOException;
 import java.io.InputStream;

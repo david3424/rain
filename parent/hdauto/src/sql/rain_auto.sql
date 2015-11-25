@@ -581,7 +581,7 @@ CREATE TABLE `qrtz_job_details` (
 
 LOCK TABLES `qrtz_job_details` WRITE;
 /*!40000 ALTER TABLE `qrtz_job_details` DISABLE KEYS */;
-INSERT INTO `qrtz_job_details` VALUES ('jobDetail','DEFAULT',NULL,'com.david.web.wanmei.service.quartz.MyQuartzJobBean','0','0','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xp\0sr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0\0x\0');
+INSERT INTO `qrtz_job_details` VALUES ('jobDetail','DEFAULT',NULL,'com.david.web.pppppp.service.quartz.MyQuartzJobBean','0','0','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xp\0sr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0\0x\0');
 /*!40000 ALTER TABLE `qrtz_job_details` ENABLE KEYS */;
 UNLOCK TABLES;
 

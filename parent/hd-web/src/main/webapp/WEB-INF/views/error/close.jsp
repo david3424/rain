@@ -21,7 +21,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="refresh" content="5;url=http://www.wanmei.com">
+    <meta http-equiv="refresh" content="5;url=http://www.pppppp.com">
     <title>活动暂时关闭</title>
     <script type="text/javascript" src="${ctx}/static/jquery/jquery-1.8.2.min.js"></script>
     <script type="text/javascript">

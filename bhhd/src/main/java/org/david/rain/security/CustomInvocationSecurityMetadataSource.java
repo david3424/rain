@@ -27,7 +27,7 @@ public class CustomInvocationSecurityMetadataSource implements
 
 	private static final String SYSTEM_URL = "system";
 
-	private static final String URL_SPRING_KEY = "/wanmei/";
+	private static final String URL_SPRING_KEY = "/pppppp/";
 
 	private static final String BIND_PERMISSIONS_URL = URL_SPRING_KEY + "system/bind_permissions";
 

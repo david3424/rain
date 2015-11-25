@@ -1,4 +1,4 @@
-package com.david.web.wanmei.repository;
+package com.david.web.pppppp.repository;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package com.david.web.wanmei.repository.impl;
+package com.david.web.pppppp.repository.impl;
 
-import com.david.web.wanmei.common.CommonList;
-import com.david.web.wanmei.common.search.Search;
-import com.david.web.wanmei.entity.HdTable;
-import com.david.web.wanmei.repository.DaoValidater;
-import com.david.web.wanmei.repository.Idao;
-import com.david.web.wanmei.repository.SqlResolver;
+import com.david.web.pppppp.common.CommonList;
+import com.david.web.pppppp.common.search.Search;
+import com.david.web.pppppp.entity.HdTable;
+import com.david.web.pppppp.repository.DaoValidater;
+import com.david.web.pppppp.repository.Idao;
+import com.david.web.pppppp.repository.SqlResolver;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;

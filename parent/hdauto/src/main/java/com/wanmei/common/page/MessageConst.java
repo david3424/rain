@@ -1,4 +1,4 @@
-package com.david.web.wanmei.common.page;
+package com.david.web.pppppp.common.page;
 
 /**
  * User: gameuser

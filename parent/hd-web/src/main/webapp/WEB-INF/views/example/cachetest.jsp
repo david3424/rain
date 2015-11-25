@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.Map"%>
-<%@page import="com.david.web.wanmei.common.util.memcached.MemcachedManager"%>
+<%@page import="com.david.web.pppppp.common.util.memcached.MemcachedManager"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.springframework.web.context.support.WebApplicationContextUtils" %>

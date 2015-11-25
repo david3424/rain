@@ -315,7 +315,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.david.web.wanmei.wmeovg</mainClass>
+                            <mainClass>com.david.web.pppppp.wmeovg</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

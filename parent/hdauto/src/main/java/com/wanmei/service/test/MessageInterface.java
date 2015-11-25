@@ -1,4 +1,4 @@
-package com.david.web.wanmei.service.test;
+package com.david.web.pppppp.service.test;
 
 /**
  * Created with IntelliJ IDEA.

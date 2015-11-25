@@ -3,7 +3,7 @@
 *  北京完美时空网络技术有限公司
 */
 
-package com.david.web.wanmei.common.search;
+package com.david.web.pppppp.common.search;
 
 /**
  * Created by IntelliJ IDEA.

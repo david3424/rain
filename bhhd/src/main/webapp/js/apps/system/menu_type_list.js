@@ -30,7 +30,7 @@ function addMenuType() {
         return false;
     }
         var option = {
-            url: basePath + 'wanmei/system/addMenuType',
+            url: basePath + 'pppppp/system/addMenuType',
             type: "post",
             dataType: "json",
             success: function (response) {
@@ -62,7 +62,7 @@ function queryData() {
 }
 /*进入时加载数据*/
 function queryDataTables(list, aoColumns) {
-    var url = basePath + 'wanmei/system/getMenuTypeTableData';
+    var url = basePath + 'pppppp/system/getMenuTypeTableData';
     commonDataTables("dataTables", url, aoColumns, list);
 }
 
@@ -85,7 +85,7 @@ function closeDialogInform() {
 function doDelMenuType() {
     var menuTypeId = $("#params").val();
     var option = {
-        url: basePath + 'wanmei/system/deleteMenuType',
+        url: basePath + 'pppppp/system/deleteMenuType',
         type: "get",
         dataType: "json",
         data: {

@@ -8,7 +8,7 @@ $(document).ready(function() {
 });
 
 function getRoleGameTables() {
-	var url = basePath + "wanmei/system/get_role_game_table";
+	var url = basePath + "pppppp/system/get_role_game_table";
 	var columns = [{"sTitle": "商品名称", "mData": "gameName", "sWidth": "25%"},
 	       	       {"sTitle": "商品缩写", "mData": "gameAb", "sWidth": "25%"},
 	    	       {"sTitle": "操作", "mData": "roleId", "sWidth": "50%", "mRender": function(data, type, row) {return operateButton(data, type, row);}}];
@@ -44,7 +44,7 @@ function operateButton(cellvalue, options, rowObject) {
 }
 
 function permitReSource(_roleId, _gameId) {
-	window.location.href = basePath + "wanmei/system/show_permission_detail_page?roleId=" + _roleId + "&gameId=" + _gameId;
+	window.location.href = basePath + "pppppp/system/show_permission_detail_page?roleId=" + _roleId + "&gameId=" + _gameId;
 }
 
 function bindGame(_roleId, _gameId) {
@@ -79,7 +79,7 @@ function changeDialogInform() {
 
 function bindProcess(_gameId) {
 	$.ajax({
-		url : basePath + "wanmei/system/bind_role_game",
+		url : basePath + "pppppp/system/bind_role_game",
 		data : {
 			'roleId' : pageRoleId,
 			'gameId' : _gameId
@@ -107,7 +107,7 @@ function bindProcess(_gameId) {
 
 function unbindProcess(_gameId) {
 	$.ajax({
-		url : basePath + "wanmei/system/unbind_role_game",
+		url : basePath + "pppppp/system/unbind_role_game",
 		data : {
 			'roleId' : pageRoleId,
 			'gameId' : _gameId

@@ -3,7 +3,7 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   ICallbackService.java
 
-package com.david.web.wanmei.wmeovg.callback.servlet;
+package com.david.web.pppppp.wmeovg.callback.servlet;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;

@@ -3,11 +3,11 @@
 // Decompiler options: packimports(3) fieldsfirst ansi space 
 // Source File Name:   IPrizeService.java
 
-package com.david.web.wanmei.wmeovg.request.service;
+package com.david.web.pppppp.wmeovg.request.service;
 
-import com.david.web.wanmei.wmeovg.request.entity.GoodsLog;
-import com.david.web.wanmei.wmeovg.request.entity.PrizeLog;
-import com.david.web.wanmei.wmeovg.request.util.Priority;
+import com.david.web.pppppp.wmeovg.request.entity.GoodsLog;
+import com.david.web.pppppp.wmeovg.request.entity.PrizeLog;
+import com.david.web.pppppp.wmeovg.request.util.Priority;
 
 import java.util.Date;
 import java.util.List;
