@@ -27,7 +27,7 @@
 
 
 	<jmxConfigurator />
-	<root level="WARN">
+	<root level="debug">
 		<appender-ref ref="console" />
 		<appender-ref ref="payLogFile" />
 	</root>

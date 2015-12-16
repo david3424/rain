@@ -3,12 +3,12 @@
          xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
          monitoring="autodetect" dynamicConfig="true">
 
-    <cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+    <!--<cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
                                      properties="peerDiscovery=automatic,
                                                     multicastGroupAddress=230.0.0.1,
                                                     multicastGroupPort=4446"/>
 
-    <cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"/>
+    <cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"/>-->
 
     <!-- 注释里面是未验证的最佳实践， 自己根据自己的缓存时间来选择 cache ，可以有利于测试，得出真实的最佳实践 -->
 
@@ -45,7 +45,7 @@
            overflowToDisk="false" maxBytesLocalHeap="67108864" overflowToOffHeap="false"
            diskPersistent="false" statistics="true"
            memoryStoreEvictionPolicy="LRU">
-        <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>-->
     </cache>
 
     <!--
@@ -57,8 +57,8 @@
            overflowToDisk="false" maxBytesLocalHeap="67108864" overflowToOffHeap="false"
            diskPersistent="false" statistics="true"
            memoryStoreEvictionPolicy="LRU">
-        <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-                                   properties="replicateUpdateViaCopy=false,replicateAsynchronously=false"/>
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"-->
+                                   <!--properties="replicateUpdateViaCopy=false,replicateAsynchronously=false"/>-->
     </cache>
 
     <cache name="cache30min" eternal="false"
@@ -66,7 +66,7 @@
            overflowToDisk="false" overflowToOffHeap="false"
            diskPersistent="false" statistics="true"
            memoryStoreEvictionPolicy="LRU">
-        <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>-->
     </cache>
 
     <cache name="cache2hour" eternal="false"
@@ -74,7 +74,7 @@
            overflowToDisk="false" overflowToOffHeap="false"
            diskPersistent="false" statistics="true"
            memoryStoreEvictionPolicy="LRU">
-        <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>-->
     </cache>
 
 </ehcache>

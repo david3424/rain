@@ -4,6 +4,7 @@ import common.UserInfo;
 import org.david.rain.common.components.lottery.AbstractPrize;
 import org.david.rain.common.components.lottery.LotteryService;
 import org.david.rain.common.components.lottery.NullLotteryPrize;
+import org.david.rain.common.repository.Idao;
 import org.david.rain.web.controller.lottery.LotteryDemoService;
 import org.david.rain.web.controller.lottery.LotteryPrize;
 import org.junit.Test;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by user on 2015/10/20.
@@ -19,6 +22,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
+@Transactional
+@TransactionConfiguration(transactionManager ="transactionManager",defaultRollback = false)
 @ContextConfiguration(locations = {"classpath:spring/applicationContext.xml"})
 public class LotteryTest {
 
@@ -31,6 +36,11 @@ public class LotteryTest {
 
     @Autowired
     private LotteryDemoService lotteryDemoService;
+
+    @Qualifier("writeDaoImp")
+    @Autowired
+    Idao dao;
+    
 
     @Test
     public void testLottery() throws Exception {
@@ -51,5 +61,12 @@ public class LotteryTest {
     @Test
     public void testSignIn() throws Exception {
         System.out.println(lotteryDemoService.signIn("david3424","2015-10-21"));
+    }
+
+    @Test
+    public void testTransaction() throws Exception {
+
+        dao.update("update hd_test_log set ip = ? where id = 515 ","127.0.0.1");
+
     }
 }
