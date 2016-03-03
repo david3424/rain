@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.david.rain.monitor.monitor.persistence.ServerItemMapper">
+    <select id="getAllListPage" parameterType="org.david.rain.monitor.monitor.domain.ServerItem"
+            resultType="org.david.rain.monitor.monitor.domain.ServerItem">
+        SELECT a.id, a.item_name as itemName,
+        a.item_name_ch as itemNameCh,
+        a.item_url as itemUrl,
+        a.return_type as returnType,
+        a.change_time as changeTime,
+        a.create_time as createTime,
+        a.memo,
+        a.job_status as jobStatus,
+        a.job_cron as jobCron,
+        a.user_id as userId,
+        b.username as username,
+        b.email as email,
+        b.phone as phone,
+        b.ch_name as chName,
+        a.status
+        from monitor_item a, monitor_user b
+        <where>
+            a.user_id = b.id
+            <if test="itemService != null and itemService.itemName != null and itemService.itemName != ''">
+                and a.item_name = #{itemService.itemName}
+            </if>
+            <if test="itemService != null and itemService.itemUrl != null and itemService.itemUrl != ''">
+                and a.item_url like '%${itemService.itemUrl}%'
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="serverItem" type="org.david.rain.monitor.monitor.domain.ServerItem">
+        <id property="id" column="id"/>
+        <result property="itemName" column="item_name"/>
+        <result property="itemUrl" column="item_url"/>
+        <result property="returnType" column="return_type"/>
+        <result property="changeTime" column="change_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="jobStatus" column="job_status"/>
+        <result property="jobCron" column="job_cron"/>
+        <result property="status" column="status"/>
+
+        <association property="creator" column="user_id" javaType="org.david.rain.monitor.monitor.domain.User"/>
+    </resultMap>
+
+    <resultMap id="richServerItem" type="org.david.rain.monitor.monitor.domain.RichServerItem">
+        <id property="id" column="id"/>
+        <result property="itemName" column="item_name"/>
+        <result property="itemNameCh" column="item_name_ch"/>
+        <result property="itemUrl" column="item_url"/>
+        <result property="returnType" column="return_type"/>
+        <result property="jobStatus" column="job_status"/>
+        <result property="jobCron" column="job_cron"/>
+        <result property="memo" column="memo"/>
+        <result property="status" column="status"/>
+
+        <association property="creator" column="user_id" javaType="org.david.rain.monitor.monitor.domain.User"/>
+
+    </resultMap>
+
+    <select id="getExceptionList" resultMap="serverItem">
+        select a.id, a.item_name,a.item_name_ch,a.item_url,a.return_type,a.change_time,a.create_time,
+         a.job_status,a.job_cron,a.user_id ,a.status, b.username, b.ch_name, b.email, b.phone
+         from monitor_item a, monitor_user b where a.user_id = b.id and a.status in(3,4)
+    </select>
+
+    <select id="getRichServerItemById" parameterType="int" resultMap="richServerItem">
+       SELECT a.id,
+       a.item_name,
+       a.item_name_ch,
+        a.item_url,
+        a.return_type,
+        a.job_status,
+        a.job_cron,
+        a.user_id,
+        a.memo,
+        a.status,
+        b.username,
+        b.ch_name,
+        b.email,
+        b.phone
+        from monitor_item a,monitor_user b  where a.user_id = b.id  and a.id = #{id}
+    </select>
+
+    <select id="getTypeSettingByTypeCode" parameterType="java.lang.String"
+            resultType="org.david.rain.monitor.monitor.domain.TypeSetting">
+        select id,type_code as TypeCode,
+        attribute_name as attributeName,
+        judge_method as judgeMethod,
+        health_value as healthValue,
+        default_level as defaultLevel,
+        status
+        from server_monitor_return_type_settings
+        where type_code = #{typeCode}
+    </select>
+
+</mapper>

@@ -13,34 +13,34 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class DWRScriptSessionListener implements ScriptSessionListener {
 
-	// Î¬»¤Ò»¸öMap keyÎªsessionµÄId£¬ valueÎªScriptSession¶ÔÏó
+	// ç»´æŠ¤ä¸€ä¸ªMap keyä¸ºsessionçš„Idï¼Œ valueä¸ºScriptSessionå¯¹è±¡
 	public static final Map<String, ScriptSession> SCRIPT_SESSION_MAP = new ConcurrentHashMap<String, ScriptSession>();
 
 	/**
-	 * ScriptSession´´½¨ÊÂ¼ş
+	 * ScriptSessionåˆ›å»ºäº‹ä»¶
 	 */
 	public void sessionCreated(ScriptSessionEvent event) {
 		WebContext webContext = WebContextFactory.get();
 		HttpSession session = webContext.getSession();
 		ScriptSession scriptSession = event.getSession();
-        SCRIPT_SESSION_MAP.put(session.getId(), scriptSession); // Ìí¼ÓscriptSession
+        SCRIPT_SESSION_MAP.put(session.getId(), scriptSession); // æ·»åŠ scriptSession
 		System.out.println("session: " + session.getId() + " scriptSession: "
 				+ scriptSession.getId() + "is created!");
 	}
 
 	/**
-	 * ScriptSessionÏú»ÙÊÂ¼ş
+	 * ScriptSessioné”€æ¯äº‹ä»¶
 	 */
 	public void sessionDestroyed(ScriptSessionEvent event) {
 		WebContext webContext = WebContextFactory.get();
 		HttpSession session = webContext.getSession();
-		ScriptSession scriptSession = SCRIPT_SESSION_MAP.remove(session.getId()); // ÒÆ³ıscriptSession
+		ScriptSession scriptSession = SCRIPT_SESSION_MAP.remove(session.getId()); // ç§»é™¤scriptSession
 		System.out.println("session: " + session.getId() + " scriptSession: "
 				+ scriptSession.getId() + "is destroyed!");
 	}
 
 	/**
-	 * »ñÈ¡ËùÓĞScriptSession
+	 * è·å–æ‰€æœ‰ScriptSession
 	 */
 	public static Collection<ScriptSession> getScriptSessions() {
 		return SCRIPT_SESSION_MAP.values();

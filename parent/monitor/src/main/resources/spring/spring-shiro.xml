@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+       default-lazy-init="true">
+    <description>Spring-shiro</description>
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="myRealm"/>
+        <property name="cacheManager" ref="shiroEhcacheManager"/>
+    </bean>
+    <!--类似于一个userdao-->
+    <bean id="myRealm" class="org.david.rain.monitor.monitor.shiro.MyRealm"/>
+
+
+    <!-- Shiro Filter -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login"/>
+        <property name="successUrl" value="/user/index"/>
+        <property name="unauthorizedUrl" value="/login/unchecked" />
+        <property name="filterChainDefinitions">
+            <value>
+                /login = authc
+                /user/index = authc
+                /logout = logout
+                /static/** = anon
+                /favicon.ico=anon
+                /api/** = anon
+                /register/** = anon
+                /model/tree = roles[admin]
+                <!--/role/** = roles[admin]-->
+                /user/** = roles[admin]
+                /** = user
+                <!--/role/edit/* = perms[role:edit]
+                /role/save = perms[role:edit]
+                /role/list = perms[role:view]-->
+            </value>
+        </property>
+    </bean>
+
+
+    <!-- 用户授权信息Cache, 采用EhCache -->
+    <bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:ehcache/ehcache-shiro.xml"/>
+    </bean>
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+
+    <!-- AOP式方法级权限检查  -->
+    <!--@RequiresRoles 注解控制权限，还可以是@RequirePermissions-->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true" />
+    </bean>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+           <property name="securityManager" ref="securityManager"/>
+       </bean>
+</beans>

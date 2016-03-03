@@ -4,7 +4,7 @@ import org.directwebremoting.impl.DefaultScriptSessionManager;
 
 public class DWRScriptSessionManager extends DefaultScriptSessionManager {
 	public DWRScriptSessionManager() {
-		// °ó¶¨Ò»¸öScriptSessionÔö¼ÓÏú»ÙÊÂ¼şµÄ¼àÌıÆ÷
+		// ç»‘å®šä¸€ä¸ªScriptSessionå¢åŠ é”€æ¯äº‹ä»¶çš„ç›‘å¬å™¨
 		this.addScriptSessionListener(new DWRScriptSessionListener());
 		System.out.println("bind DWRScriptSessionListener");
 	}

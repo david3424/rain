@@ -31,5 +31,13 @@ public class ReflectTask {
         return task;
     }
 
+        public static void main(String[] args) {
+            ReflectTask t = new ReflectTask();
+            System.out.println(ReflectTask.class.getResource("")); //相对路径
+            System.out.println(ReflectTask.class.getResource("/"));//获取root路径
+            System.out.println(ReflectTask.class.getResource("/jdbc.properties"));//获取root路径
+            System.out.println(t.getClass().getClassLoader().getResource(""));//同上 获取root路径
+            System.out.println(t.getClass().getClassLoader().getResource("/"));// null 注意区分
+        }
 
 }

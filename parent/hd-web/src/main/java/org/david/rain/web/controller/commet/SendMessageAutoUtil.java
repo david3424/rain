@@ -16,7 +16,7 @@ public class SendMessageAutoUtil {
 		final String autoMessage = message;
 		final String autoShowScriptMethod = showScriptMethod;
 		Browser.withAllSessionsFiltered(new ScriptSessionFilter() {
-			public boolean match(ScriptSession scriptSession) { //µü´úËùÓĞµÄscriptSession£¬ÅĞ¶ÏÊÇ·ñĞèÒªÍÆËÍ
+			public boolean match(ScriptSession scriptSession) { //è¿­ä»£æ‰€æœ‰çš„scriptSessionï¼Œåˆ¤æ–­æ˜¯å¦éœ€è¦æ¨é€
 				String goodsId = (String) scriptSession.getAttribute("goodsId");
 				if (goodsId != null) {
 					return yhId.equals(goodsId);

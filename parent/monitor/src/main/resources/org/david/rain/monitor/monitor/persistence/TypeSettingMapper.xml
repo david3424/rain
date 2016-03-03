@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.david.rain.monitor.monitor.persistence.TypeSettingMapper">
+    <select id="getTypeSettings" parameterType="org.david.rain.monitor.monitor.domain.ReturnType"
+            resultType="org.david.rain.monitor.monitor.domain.TypeSetting">
+        SELECT id, type_code as typeCode,
+        attribute_name as attributeName,
+        judge_method as judgeMethod,
+        health_value as healthValue,
+        default_level as defaultLevel,
+        status
+        from server_monitor_return_type_settings
+        <where>
+            <if test="typeCode != null">
+                type_code = #{typeCode}
+            </if>
+        </where>
+    </select>
+</mapper>

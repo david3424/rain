@@ -10,14 +10,13 @@ import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * User: joeytang
  * Date: 2012-06-05 02:11
  * 属性文件工具类
  */
 public class PropertiesUtil {
 
     //文件名key value是文件里包含的所有属性
-    private static Map<String, Properties> propertiesMap = new ConcurrentHashMap<String, Properties>();
+    private static Map<String, Properties> propertiesMap = new ConcurrentHashMap<>();
 
     public static Properties getProperties(String filename) {
         Properties p = new Properties();

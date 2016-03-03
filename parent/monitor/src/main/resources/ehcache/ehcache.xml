@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+         monitoring="autodetect" dynamicConfig="true">
+
+    <cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+                                     properties="peerDiscovery=automatic,
+                                                    multicastGroupAddress=230.0.0.1,
+                                                    multicastGroupPort=4446"/>
+
+    <cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"/>
+
+    <!-- 3秒缓存 采取同步措施更新缓存 同步策略直接copy  一般用于活动配置信息，比如活动开关，要求变化反应敏捷
+         特点 3秒钟之内只会取一次数据库，数据查询较为频繁，更新的时候通知其他tomcat缓存，通过copy的方式
+         如果不同步 3秒钟内去12次数据库平均
+         同步的性能消耗待线上才能知道该配置是否理解了ehcache，目前是有点担心新能问题
+    -->
+    <cache name="cache3sec" eternal="false"
+           timeToIdleSeconds="3" timeToLiveSeconds="3"
+           overflowToDisk="false" maxBytesLocalHeap="33554432" overflowToOffHeap="false"
+           diskPersistent="false" statistics="true"
+           memoryStoreEvictionPolicy="LRU">
+        <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+
+    <!-- 10秒缓存  不采取服务器同步措施，推荐用于奖品配置信息，变化不快，访问数据为12次/10s
+          3s 和 10s 的缓存的同步策略用的不一样是一个测试阶段-->
+    <cache name="cache1min" eternal="false"
+           timeToIdleSeconds="60" timeToLiveSeconds="60"
+           overflowToDisk="false" maxBytesLocalHeap="67108864" overflowToOffHeap="false"
+           diskPersistent="false" statistics="true"
+           memoryStoreEvictionPolicy="LRU">
+    </cache>
+
+
+    <cache name="cache3min" eternal="false"
+           timeToIdleSeconds="180" timeToLiveSeconds="180"
+           overflowToDisk="false" maxBytesLocalHeap="67108864" overflowToOffHeap="false"
+           diskPersistent="false" statistics="true"
+           memoryStoreEvictionPolicy="LRU">
+        <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+    </cache>
+
+</ehcache>

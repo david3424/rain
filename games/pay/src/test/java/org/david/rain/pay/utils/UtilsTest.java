@@ -48,6 +48,6 @@ public class UtilsTest {
     @Test
     public void testRootPath() throws Exception {
 
-        System.out.println(httpUtil.getRoot());
+//        System.out.println(httpUtil.getRoot());
     }
 }

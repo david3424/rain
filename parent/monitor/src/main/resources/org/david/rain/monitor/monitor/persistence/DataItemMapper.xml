@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.david.rain.monitor.monitor.persistence.DataItemMapper">
+
+    <resultMap id="dataItem" type="org.david.rain.monitor.monitor.domain.DataItem">
+        <id property="id" column="id"/>
+        <result property="itemName" column="item_name"/>
+        <result property="itemNameCh" column="item_name_ch"/>
+        <result property="beginTime" column="begin_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="changeTime" column="change_time"/>
+        <result property="jobStatus" column="job_status"/>
+        <result property="jobCron" column="job_corn"/>
+        <result property="dataSource" column="data_source"/>
+        <result property="userId" column="user_id"/>
+        <association property="user" column="user_id" javaType="org.david.rain.monitor.monitor.domain.User"/>
+    </resultMap>
+
+    <select id="getAllListPage" parameterType="org.david.rain.monitor.monitor.domain.DataItem"
+            resultMap="dataItem">
+        SELECT a.id, a.item_name, a.item_name_ch, a.change_time,
+        a.create_time,a.begin_time,a.end_time,a.memo,a.job_status, a.job_cron,a.user_id,
+        b.username,b.email,b.phone,b.ch_name,a.status
+        from data_monitor_item a, monitor_user b
+        <where>
+            a.user_id = b.id
+            and a.status >= 0
+            <if test="dataItem != null and dataItem.itemName != null and dataItem.itemName != ''">
+                and a.item_name = #{itemService.itemName}
+            </if>
+        </where>
+        order by a.create_time desc
+    </select>
+
+    <select id="selectAllDataItem" resultMap="dataItem">
+        select a.id,a.item_name,a.item_name_ch,a.change_time,a.job_status,a.job_cron,
+        a.turns,a.memo,
+        b.id,b.phone,b.ch_name,b.email
+        from data_monitor_item a , monitor_user b
+         where a.user_id =  b.id
+    </select>
+
+
+    <select id="getExceptionList" resultMap="dataItem">
+         select a.id,a.item_name,a.item_name_ch,a.change_time,a.job_status,a.job_cron,
+        a.turns,a.memo,a.data_source,a.user_id,
+        b.id,b.phone,b.username,b.ch_name,b.email
+        from data_monitor_item a , monitor_user b
+         where a.user_id =  b.id and a.status in (3,4)
+    </select>
+
+    <select id="getDataItemList" resultMap="dataItem">
+         select a.id,a.item_name,a.item_name_ch,a.change_time,a.job_status,a.job_cron,
+        a.turns,a.memo,a.data_source,a.user_id,
+        b.id,b.phone,b.username,b.ch_name,b.email
+        from data_monitor_item a , monitor_user b
+         where a.user_id =  b.id
+    </select>
+
+    <select id="queryDataItemById" resultMap="dataItem" parameterType="Integer">
+         select a.id,a.item_name,a.item_name_ch,a.change_time,a.job_status,a.job_cron,
+        a.turns,a.status,a.begin_time,a.end_time,
+        b.id,b.phone,b.ch_name,b.email
+        from data_monitor_item a , monitor_user b
+         where a.user_id =  b.id and a.id = #{itemId}
+    </select>
+</mapper>

@@ -1,0 +1,36 @@
+[
+    {
+        "id": "layout",
+        "text": "功能管理",
+        "children": [
+            {
+                "id": "item",
+                "text": "服务监控",
+                "attributes": {
+                    "url": "/server/item/manage"
+                }
+            },
+            {
+                "id": "user",
+                "text": "用户管理",
+                "attributes": {
+                    "url": "/user/manage"
+                }
+            },
+            {
+                "id": "role",
+                "text": "角色管理",
+                "attributes": {
+                    "url": "/role/manage"
+                }
+            },
+            {
+                "id": "response",
+                "text": "监控规则",
+                "attributes": {
+                    "url": "/server/response/manage"
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.david.rain.monitor.monitor.persistence.RoleMapper">
+    <resultMap type="Role" id="roleMap">
+        <id property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="permissions" column="permissions" />
+    </resultMap>
+
+    <resultMap type="Role" id="roleUserMap" extends="roleMap">
+        <collection property="userList" ofType="User">              <!--user中关联的字段-->
+            <id property="id" column="userId" />
+            <result property="username" column="username" />
+            <result property="chName" column="chName" />
+        </collection>
+    </resultMap>
+
+
+    <select id="selectRoleUsers" parameterType="long"
+            resultMap="roleUserMap">
+        select r.id,r.name,r.permissions,u.id,u.username,u.ch_name as chName from ss_role r left join ss_user_role ur on r.id = ur.role_id
+         left join monitor_user u on ur.user_id = u.id where r.id = #{id}
+    </select>
+
+</mapper>

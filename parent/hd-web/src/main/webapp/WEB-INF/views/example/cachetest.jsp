@@ -1,18 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.util.Map"%>
-<%@page import="com.david.web.pppppp.common.util.memcached.MemcachedManager"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.springframework.web.context.support.WebApplicationContextUtils" %>
 <%@ page import="org.springframework.web.context.WebApplicationContext" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: zhaozhiyong
-  Date: 2011-10-25
-  Time: 13:38:56
-  完美时空 游戏活动管理平台
-  作者：赵智勇
---%>
+<%@ page import="org.david.rain.common.util.memcached.MemcachedManager" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head><title>memcached  Test页</title></head>

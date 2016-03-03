@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.david.rain.monitor.monitor.persistence.OscillationMapper">
+
+    <resultMap id="oscillation" type="org.david.rain.monitor.monitor.domain.OscillationCheckSetting">
+        <result column="phase_strategy" property="phaseStrategy"/>
+        <association property="dateTimeItem" column="phase_strategy" javaType="org.david.rain.monitor.monitor.domain.DateTimeItem"/>
+        <collection property="phaseDetailList" column="phase_strategy"
+                    javaType="ArrayList" ofType="org.david.rain.monitor.monitor.domain.PhaseDetail" select="selectPhaseDetail"/>
+    </resultMap>
+
+    <select id="selectPhaseDetail" resultType="org.david.rain.monitor.monitor.domain.PhaseDetail">
+            select * from data_phase_detail where strategy_id = #{phaseStrategy}
+        </select>
+
+    <!-- 如果检查不用了可以直接标记status为 -1 -->
+    <select id="querySettingList" resultMap="oscillation">
+            select a.item_id,a.attr_name,a.oscillation,a.memo,a.phase_strategy,
+            a.check_strategy,a.time_step,a.abn_level,a.status ,b.strategy_name,
+            b.memo,b.id
+            from data_oscillation_check a,data_phase_strategy b
+            where a.phase_strategy = b.id and item_id = #{itemId} and a.status >= 0
+        </select>
+
+    <resultMap id="oscillationLog" type="org.david.rain.monitor.monitor.domain.OscillationLog">
+        <id property="id" column="id"/>
+        <result property="itemId" column="item_id"/>
+        <result property="attrName" column="attr_name"/>
+        <result property="itemTurns" column="item_turns"/>
+        <result property="total" column="total"/>
+        <result property="currentNum" column="current_num"/>
+        <result property="phaseStrategyId" column="phase_strategy_id"/>
+        <result property="phaseDetail" column="phase_detail"/>
+        <result property="times" column="times"/>
+        <result property="createTime" column="createtime"/>
+
+        <result property="createTimeLong" column="create_time_long"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+
+    <select id="getAllListPageLog" parameterType="org.david.rain.monitor.monitor.domain.OscillationLog"
+            resultType="oscillationLog">
+        SELECT *
+        from data_oscillation_log a
+        <where>
+            <if test="oscillationLog != null and oscillationLog.attrName != null and oscillationLog.itemId != ''">
+                a.item_id = #{oscillationLog.itemId} and  a.attr_name = #{oscillationLog.attrName}
+            </if>
+        </where>
+    </select>
+
+    <select id="getSearchListPage" parameterType="org.david.rain.monitor.monitor.domain.OscillationLog"
+            resultType="oscillationLog">
+        SELECT *
+        from data_oscillation_log a
+        <where>
+            <if test="attrName != null and attrName != ''">
+                a.attr_name = #{attrName}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -38,7 +38,7 @@ public class MsgController {
 	@RemoteMethod
 	public void onPageLoad( String yhId) {
 		ScriptSession scriptSession = WebContextFactory.get().getScriptSession();
-        scriptSession.setAttribute("goodsId", yhId); //ÎïÆ·id¼ÇÂ¼µ½scriptSessionÖĞ   Ã¿¿ªÒ»¸öĞÂ´°¿Ú»òÕßË¢ĞÂ¶¼ÊÇÒ»¸öĞÂµÄscriptSession¶ÔÏó
+        scriptSession.setAttribute("goodsId", yhId); //ç‰©å“idè®°å½•åˆ°scriptSessionä¸­   æ¯å¼€ä¸€ä¸ªæ–°çª—å£æˆ–è€…åˆ·æ–°éƒ½æ˜¯ä¸€ä¸ªæ–°çš„scriptSessionå¯¹è±¡
 //        sendMessage.sendMessageAuto(yhId, yhId, "registerSuccess");
 	}
 	@RemoteMethod
