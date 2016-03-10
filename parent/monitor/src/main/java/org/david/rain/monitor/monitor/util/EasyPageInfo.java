@@ -1,15 +1,18 @@
 package org.david.rain.monitor.monitor.util;
+
 import java.io.Serializable;
 
+
+/*页面端传入时 带入rows、page,totalResult 回传到页面用*/
 public class EasyPageInfo implements Serializable {
 
     private static final long serialVersionUID = 587754556498974978L;
 
-    private int rows = 1;
+    private int rows = 1; //每页条数 pageSize
     private int totalPage;
     private int totalResult;
-    private int page;
-    private int currentResult;
+    private int page;//当前页pageNo
+    private int currentResult; //当前记录开始数  (page-1)*rows 计算出来
     private String sort;
     private String order;
 
@@ -50,7 +53,7 @@ public class EasyPageInfo implements Serializable {
     }
 
     public int getCurrentResult() {
-        return (page-1)*rows;
+        return (page - 1) * rows;
     }
 
     public void setCurrentResult(int currentResult) {

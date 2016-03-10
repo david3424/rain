@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+/*从参数中取出pageinfobean和sql 添加limit串再放回 取total并放入bean中再放回*/
 @Intercepts({@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class})})
 public class PagePlugin implements Interceptor {
 
@@ -104,7 +105,7 @@ public class PagePlugin implements Interceptor {
     }
 
     /**
-     *org.apache.ibatis.executor.parameter.
+     * org.apache.ibatis.executor.parameter.
      * DefaultParameterHandler
      *
      * @param ps
@@ -168,7 +169,6 @@ public class PagePlugin implements Interceptor {
     }
 
     /**
-     *
      * @param sql
      * @param page
      * @return

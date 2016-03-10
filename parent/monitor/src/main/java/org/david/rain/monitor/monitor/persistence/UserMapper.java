@@ -23,8 +23,8 @@ public interface UserMapper {
     @Delete("delete from monitor_user where id = #{id}")
     public int deleteUser(Integer id);
 
-    @Select("select id,username,ch_name as chName,email,phone,create_time as createTime,status,roles from monitor_user")
-    public List<User> getAllUserListPage(@Param("page") EasyPageInfo page);
+//    @Select("select id,username,ch_name as chName,email,phone,create_time as createTime,status,roles from monitor_user")
+    public List<User> getAllUserListPage(@Param("page") EasyPageInfo page, @Param("user") User user);
 
     @Select("select id,username,ch_name as chName,email,phone,create_time as createTime,status from monitor_user")
     public List<User> getAllUserList();
@@ -36,7 +36,8 @@ public interface UserMapper {
 
     @Insert("insert into ss_user_role (user_id,role_id) values (#{0},#{1})")
     void saveUserRoles(Integer userid, String roleid);
-    @Delete("delete from ss_user_role where user_id = #{id} " )
+
+    @Delete("delete from ss_user_role where user_id = #{id} ")
     void deleteUserRoles(Integer id);
 
 

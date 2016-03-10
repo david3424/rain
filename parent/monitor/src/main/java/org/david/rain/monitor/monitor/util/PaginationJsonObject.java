@@ -3,9 +3,10 @@ package org.david.rain.monitor.monitor.util;
 import java.io.Serializable;
 import java.util.List;
 
+/*easyui分页识别的参数 page、records、rows*/
 public class PaginationJsonObject<T> implements Serializable {
     /**
-     * Current page
+     * Current page pageNo
      */
     private int page;
 
@@ -15,7 +16,7 @@ public class PaginationJsonObject<T> implements Serializable {
     private int total;
 
     /**
-     * Total number of records
+     * Total number of records total
      */
     private int records;
 

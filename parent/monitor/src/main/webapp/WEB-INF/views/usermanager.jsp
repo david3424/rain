@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@include file="top.jsp"%>
+<%@include file="top.jsp" %>
 <table id="user_grid" class="easyui-datagrid"
        data-options="idField:'id',toolbar:'#user_manage_bar',collapsible:true,url:'/user/list/page',fitColumns:'true',rownumbers:'true', singleSelect:'true', method:'post',pagination:true,pageList:[10,20,30] ">
     <thead>
@@ -25,19 +25,15 @@
            onclick="deleteUser();">删除</a>
     </div>
     <%--search area--%>
-   <%-- <div>
-        Date From: <input class="easyui-datebox" style="width:80px">
-        To: <input class="easyui-datebox" style="width:80px">
-        Language:
-        <select class="easyui-combobox" panelHeight="auto" style="width:100px">
-            <option value="java">Java</option>
-            <option value="c">C</option>
-            <option value="basic">Basic</option>
-            <option value="perl">Perl</option>
-            <option value="python">Python</option>
+    <div>
+        创建时间 From: <input class="easyui-datebox" id="start" name="start" style="width:120px">
+        To: <input class="easyui-datebox" id="end" style="width:120px">
+        角色:
+        <select class="easyui-combobox" panelHeight="auto" id="roles" name="roles" style="width:100px"
+                data-options="valueField:'name',textField:'name',url:'/role/list'">
         </select>
-        <a href="#" class="easyui-linkbutton" iconCls="icon-search">Search</a>
-    </div>--%>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="searchUser();">Search</a>
+    </div>
 </div>
 
 <%--弹出表单框-name与bean字段一致--%>
@@ -65,15 +61,16 @@
         <%--rolelist--%>
         <div class="fitem">
             <label for="roles">角色:</label>
+
             <div id="roles">
                 <%--<input id="roleList1" name="roleList" type="checkbox" value="1" checked="checked">admin--%>
                 <%--<input id="roleList2" name="roleList" type="checkbox" value="1" checked="checked">user--%>
             </div>
         </div>
-       <%-- <div class="fitem">
-            <label for="input_status">状态</label>
-            <input id="input_status" name="status" class="easyui-validatebox" required="true"/>
-        </div>--%>
+        <%-- <div class="fitem">
+             <label for="input_status">状态</label>
+             <input id="input_status" name="status" class="easyui-validatebox" required="true"/>
+         </div>--%>
 
     </form>
 </div>

@@ -39,35 +39,47 @@ public class ModelController {
         List<Node> nodeList = userMapper.getAllModelNode();
 
         Map<Integer, List<Node>> childrenMap = new HashMap<>();
-
+        List<Node> result = new ArrayList<>();
         for (Node node : nodeList) {
+            if (node.getParentId() == 0) {
+                result.add(node); //存入根节点
+            }
             List<Node> sibblings = childrenMap.get(node.getParentId());
             if (sibblings == null) {
                 sibblings = new ArrayList<>();
-                childrenMap.put(node.getParentId(),sibblings);
+                childrenMap.put(node.getParentId(), sibblings);
             }
             sibblings.add(node);
-
         }
-        List<Node> result = new ArrayList<>();
-        List<Node> roots = childrenMap.get(0);
-        for (Node root : roots) {
-            buildNode(root, childrenMap);
-            result.add(root);
+        //因为必须等childrenMap构建完才能set到node children中，需要再次遍历
+        for (Node node : nodeList) {
+//            buildNode(root, childrenMap);
+            node.setChildren(childrenMap.get(node.getId()));
         }
+        buildNode(result, 5); //打印测试
         return result;
     }
 
-    private void buildNode(Node root, Map<Integer, List<Node>> childrenMap) {
-        List<Node> childrens = childrenMap.get(root.getId());
-        if(childrens != null)
-        {
-            for (Node node : childrens) {
-                buildNode(node, childrenMap);
-                root.setChildren(childrens);
+    /**
+     * 递归的作用是遍历输出*
+     */
+    private void buildNode(List<Node> result, int count) {
+        for (Node n : result) {
+            n.setText(n.getText() + "@" + n.getUrl());
+            for (int i = 0; i < count; i++) {
+                System.out.print("-");
+            }
+            System.out.println(n.getText());
+            List<Node> children = n.getChildren();
+            if (children != null && children.size() > 0) {
+                buildNode(children, 2 * count);
+            } else {
+                logger.info("root【{}】子节点为null，跳出递归", n.getText());
             }
         }
+        logger.info("list 迭代结束");
     }
+
     @RequestMapping(value = "url", method = RequestMethod.POST)
     @ResponseBody
     public String getUrl(@RequestParam Integer id) throws Exception {
@@ -93,8 +105,8 @@ public class ModelController {
     @ResponseBody
     public Map<String, Object> selectRoles() {
         Map<String, Object> result = new HashMap<>();
-        result.put("allparent",userMapper.getAllListModelId());
-        result.put("success",true);
+        result.put("allparent", userMapper.getAllListModelId());
+        result.put("success", true);
         return result;
 
     }

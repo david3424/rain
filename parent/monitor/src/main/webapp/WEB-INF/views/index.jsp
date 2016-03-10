@@ -9,26 +9,26 @@
 <html>
 <head>
     <title>首页</title>
-    <%@include file="top.jsp"%>
+    <%@include file="top.jsp" %>
 </head>
 <body class="easyui-layout">
 <%--导航条--%>
-<%@include file="north.jsp"%>
+<%@include file="north.jsp" %>
 <%--树导航--%>
 <div data-options="region:'west', title:'导航',split: true, minWidth: 150, maxWidth:250">
-                        <ul id="tt" class="easyui-tree"></ul>
-                </div>
-                <div data-options="region:'south', minHeight: 30, maxHeight: 30">
-                    <div style="text-align: center; padding-top: 5px;">
-                        @完美世界
-                    </div>
-                </div>
+    <ul id="tt" class="easyui-tree"></ul>
+</div>
+<div data-options="region:'south', minHeight: 30, maxHeight: 30">
+    <div style="text-align: center; padding-top: 5px;">
+        @完美世界
+    </div>
+</div>
 <%--tabs--%>
 <div region="center" border="false">
-			<div id="ttx" class="easyui-tabs" fit="true" border="false" plain="true">
-				<div title="welcome" href="">welcome</div>
-			</div>
-		</div>
+    <div id="ttx" class="easyui-tabs" fit="true" border="false" plain="true">
+        <div title="welcome" href="">welcome</div>
+    </div>
+</div>
 
 </body>
 </html>

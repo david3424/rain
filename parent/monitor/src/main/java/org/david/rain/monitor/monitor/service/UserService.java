@@ -41,8 +41,8 @@ public class UserService {
         return userMapper.deleteUser(id);
     }
 
-    public List<User> getUserPageList(EasyPageInfo pageInfo) {
-        return userMapper.getAllUserListPage(pageInfo);
+    public List<User> getUserPageList(EasyPageInfo pageInfo,User user) {
+        return userMapper.getAllUserListPage(pageInfo,user);
     }
 
 

@@ -48,8 +48,8 @@ public class UserController {
 
     @RequestMapping(value = "list/page", method = RequestMethod.POST)
     @ResponseBody
-    public PaginationJsonObject<User> pageList(EasyPageInfo pageInfo) {
-        List<User> list = userService.getUserPageList(pageInfo);
+    public PaginationJsonObject<User> pageList(EasyPageInfo pageInfo,User user) {
+        List<User> list = userService.getUserPageList(pageInfo,user);
         return new PaginationJsonObject<>(list, pageInfo);
     }
 
