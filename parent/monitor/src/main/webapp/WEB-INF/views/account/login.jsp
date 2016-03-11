@@ -24,7 +24,6 @@
             padding: 0 20px;
             border: 1px solid #fff;
             color: #000;
-            margin-top: 40px;
             border-radius: 8px;
             background: white;
             box-shadow: 0 0 15px #222;
