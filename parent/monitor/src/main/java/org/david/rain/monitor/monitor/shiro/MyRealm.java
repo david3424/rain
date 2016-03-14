@@ -66,8 +66,7 @@ public class MyRealm extends AuthorizingRealm {
     /**
      * 认证回调函数,登录时调用.
      */
-    protected AuthenticationInfo doGetAuthenticationInfo (
-            AuthenticationToken authcToken) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo (  AuthenticationToken authcToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         User user = null; //认证
         try {
