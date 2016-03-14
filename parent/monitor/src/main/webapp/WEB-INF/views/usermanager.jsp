@@ -1,9 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="top.jsp" %>
 <table id="user_grid" class="easyui-datagrid"
-       data-options="idField:'id',toolbar:'#user_manage_bar',collapsible:true,url:'/user/list/page',fitColumns:'true',rownumbers:'true', singleSelect:'true', method:'post',pagination:true,pageList:[10,20,30] ">
+       data-options="idField:'id',toolbar:'#user_manage_bar',collapsible:true,url:'/user/list/page',fitColumns:'true',rownumbers:'true', singleSelect:false, method:'post',pagination:true,pageList:[10,20,30] ">
     <thead>
     <tr>
+        <th field="ck" checkbox="true">用户名</th>
         <th field="username">用户名</th>
         <th field="chName">中文名</th>
         <th field="email">邮箱</th>

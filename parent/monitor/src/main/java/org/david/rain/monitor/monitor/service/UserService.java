@@ -37,8 +37,8 @@ public class UserService {
         return userMapper.updateUser(user);
     }
 
-    public int deleteUser(Integer id) {
-        return userMapper.deleteUser(id);
+    public int deleteUser(Integer[] ids) {
+        return userMapper.deleteUser(ids);
     }
 
     public List<User> getUserPageList(EasyPageInfo pageInfo,User user) {

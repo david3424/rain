@@ -24,21 +24,6 @@
         <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
     </bean>
 
-
-    <!--mybatis conf-->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource_W"/>
-        <property name="configLocation" value="classpath:spring/mybatis-conf.xml"/>
-        <property name="typeAliasesPackage" value="org.david.rain.entity"/>
-    </bean>
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory"/>
-    </bean>
-    <!-- scan for mappers and let them be autowired -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="org.david.rain.persistence"/>
-    </bean>
-
     <!--构造注入 dbutils操作-->
     <!--注入queryNewRunner的为W数据库，spring管理事务-->
     <bean id="queryNewRunner" class="org.david.rain.act.utils.QueryNewRunner">
@@ -52,21 +37,35 @@
     <!--jdbctemplate-->
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"  p:dataSource-ref="dataSource_W"/>
 
+    <!--mybatis config-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource_W" />
+        <property name="configLocation" value="classpath:spring/mybatis-conf.xml" />
+        <!--<property name="mapperLocations" value="classpath*:org/david/rain/act/persistence/**/*Mapper.xml" />-->
+        <property name="typeAliasesPackage" value="org.david.rain.act.entity" />
+    </bean>
+    <!--<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+    </bean>-->
+    <!-- scan for mappers and let them be autowired -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.david.rain.act.persistence" />
+    </bean>
+    
     <!--transction on writer datasource -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource_W" />
     <!--编码的方式加入事务-->
-    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate" p:transactionManager-ref="transactionManager"/>
+    <!--<bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate" p:transactionManager-ref="transactionManager"/>-->
     <!-- 使用annotation定义事务 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
-
     <!--jpa-->
-
-    <!-- JPA实体管理工厂的配置 -->
+<!--
+    &lt;!&ndash; JPA实体管理工厂的配置 &ndash;&gt;
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     <property name="dataSource" ref="dataSource_W" />
         <property name="packagesToScan" value="org.david.rain.act.entity" />
-        <!--jpa适配器-->
+        &lt;!&ndash;jpa适配器&ndash;&gt;
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
         </property>
@@ -81,19 +80,12 @@
         </property>
     </bean>
 
-    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/spring_jpa" />
-        <property name="username" value="tutorialuser" />
-        <property name="password" value="tutorialmy5ql" />
-    </bean>-->
-
     <bean id="transactionManager1" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
     <tx:annotation-driven transaction-manager="transactionManager1" proxy-target-class="true" />
 
-    <!-- JSR303 Validator定义 -->
+    &lt;!&ndash; JSR303 Validator定义 &ndash;&gt;
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
     <bean id="persistenceExceptionTranslationPostProcessor"
@@ -101,6 +93,22 @@
 
     <jpa:repositories base-package="org.david.rain.act.dao.jpa"
                       entity-manager-factory-ref="entityManagerFactory"
-                      transaction-manager-ref="transactionManager"/>
+                      transaction-manager-ref="transactionManager1"/>-->
 
+
+    <!-- sessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource_W"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${dataSource.hibernate.dialect}</prop>
+                <prop key="format_sql">${dataSource.format_sql}</prop>
+                <prop key="show_sql">${dataSource.show_sql}</prop>
+                <prop key="hbm2ddl.auto">${dataSource.hbm2ddl.auto}</prop>
+                <prop key="cache.use_query_cache">${dataSource.cache.use_query_cache}</prop>
+                <prop key="cache.use_second_level_cache">${dataSource.cache.use_second_level_cache}</prop>
+                <prop key="cache.use_structured_entries">${dataSource.cache.use_structured_entries}</prop>
+            </props>
+        </property>
+    </bean>
 </beans>

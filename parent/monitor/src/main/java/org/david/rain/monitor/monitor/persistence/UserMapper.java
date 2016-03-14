@@ -20,8 +20,8 @@ public interface UserMapper {
             " where id = #{id}")
     public int updateUser(User user);
 
-    @Delete("delete from monitor_user where id = #{id}")
-    public int deleteUser(Integer id);
+//    @Delete("delete from monitor_user where id = #{id}")
+    public int deleteUser(Integer[] ids);
 
 //    @Select("select id,username,ch_name as chName,email,phone,create_time as createTime,status,roles from monitor_user")
     public List<User> getAllUserListPage(@Param("page") EasyPageInfo page, @Param("user") User user);

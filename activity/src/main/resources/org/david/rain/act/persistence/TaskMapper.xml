@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.david.rain.act.persistence.TaskMapper">
+
+  <select id="getTaskList" resultType="org.david.rain.act.entity.Task">
+    select
+      id,user_id,title,description
+    from ss_task t
+  </select>
+
+    <select id="getMemberListPage" resultType="Task">
+        select * from ss_task
+    </select>
+
+  <select id="getTask" parameterType="long" resultType="Task">
+    select
+      id,user_id,title,description
+      from ss_task t
+    where t.id= #{value}
+  </select>
+
+</mapper>

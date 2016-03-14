@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,8 +50,8 @@ public class UserController {
 
     @RequestMapping(value = "list/page", method = RequestMethod.POST)
     @ResponseBody
-    public PaginationJsonObject<User> pageList(EasyPageInfo pageInfo,User user) {
-        List<User> list = userService.getUserPageList(pageInfo,user);
+    public PaginationJsonObject<User> pageList(EasyPageInfo pageInfo, User user) {
+        List<User> list = userService.getUserPageList(pageInfo, user);
         return new PaginationJsonObject<>(list, pageInfo);
     }
 
@@ -77,12 +79,12 @@ public class UserController {
     @ResponseBody
     public Map<String, Object> selectRoles(Integer id) {
         Map<String, Object> result = new HashMap<>(3);
-        if(null !=id && id>0){
-        User user = userService.selectUserRoles(id);
-        result.put("uroles",user.getRoleList());
+        if (null != id && id > 0) {
+            User user = userService.selectUserRoles(id);
+            result.put("uroles", user.getRoleList());
         }
-        result.put("allroles",userService.getAllRoles());
-        result.put("success",true);
+        result.put("allroles", userService.getAllRoles());
+        result.put("success", true);
         return result;
 
     }
@@ -99,17 +101,17 @@ public class UserController {
             /*调用两次插入ss_user_role,有么有更好的办法？*/
 //            先删除userid对应的所有roles
             userService.deleteUserRoles(user.getId());
-            if(StringUtils.isNotEmpty(user.getRoles())){
-            for(String id:user.getRoles().split(",")){
-                if(StringUtils.isEmpty(id)){//roles 为空
-                    break;
+            if (StringUtils.isNotEmpty(user.getRoles())) {
+                for (String id : user.getRoles().split(",")) {
+                    if (StringUtils.isEmpty(id)) {//roles 为空
+                        break;
+                    }
+                    userService.saveUserRoles(user.getId(), id);
+                    r = userService.getRoleById(Integer.parseInt(id));
+                    sb.append(r.getName()).append(",");
                 }
-                userService.saveUserRoles(user.getId(),id);
-                r = userService.getRoleById(Integer.parseInt(id));
-                sb.append(r.getName()).append(",");
-            }
-            user.setRoles(StringUtils.stripEnd(sb.toString(), ","));
-            }else{
+                user.setRoles(StringUtils.stripEnd(sb.toString(), ","));
+            } else {
                 user.setRoles("");
             }
             re = userService.updateUser(user);
@@ -127,9 +129,10 @@ public class UserController {
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> deleteUser(Integer id) {
+    public Map<String, Object> deleteUser(@RequestParam(value = "ids[]") Integer[] ids) {
 
-        int re = userService.deleteUser(id);
+//        logger.debug("{}" + Arrays.toString(ids));
+        int re = userService.deleteUser(ids);
         if (re > 0) {
             return JsonUtil.commonResponse(true, "删除成功。");
         } else {

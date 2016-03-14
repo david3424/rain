@@ -272,13 +272,13 @@ var pCancelSaveUser = function () {
 };
 
 var updateUser = function () {
-    var row = $("#user_grid").datagrid("getSelected");
+    var row = $("#user_grid").datagrid("getSelections");
     itemFormUrl = "/user/update";
     $("#input_username").removeAttr("required").attr("readonly", "true");
-    $("#user_form").form("load", row);
+    $("#user_form").form("load", row[0]);
     $("#add_user_dlg").dialog("open").dialog("setTitle", "修改用户信息");
 
-    $.get(itemFormUrl, {id: row.id}, function (result) {
+    $.get(itemFormUrl, {id: row[0].id}, function (result) {
         if (result.success) {
             var temp = [];
             $.each(result.uroles, function (index, field) {
@@ -305,16 +305,20 @@ var updateUser = function () {
 };
 
 var deleteUser = function () {
-    var row = $("#user_grid").datagrid("getSelected");
-    if (row == undefined) {
+    var selRow = $("#user_grid").datagrid("getSelections");
+    if (selRow.length == 0) {
         $.messager.alert('警告', "请选择一行后删除。", 'warning');
         return false;
     }
-    $.messager.confirm('确认框', "确定要删除：[" + row.chName + "]？", function (r) {
+    var ids = [];
+    for (var i = 0; i < selRow.length; i++) {
+        ids.push(selRow[i].id);
+    }
+    $.messager.confirm('确认框', "确定要删除：[" + selRow.length + "]条？", function (r) {
         if (r) {
             var _url = "/user/delete";
-            $.post(_url, {id: row.id}, function (result) {
-                $.messager.alert(result.message, 'info');
+            $.post(_url, {'ids[]': ids}, function (result) {
+                $.messager.alert('info', result.message);
                 if (result.success) {
                     $("#user_grid").datagrid("reload");
                 }

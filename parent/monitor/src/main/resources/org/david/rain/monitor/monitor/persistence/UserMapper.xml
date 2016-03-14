@@ -19,6 +19,12 @@
             <result property="permissions" column="permissions"/>
         </collection>
     </resultMap>
+    <delete id="deleteUser">
+        delete from monitor_user where id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 
 
     <select id="selectUserRoles" parameterType="int"
@@ -44,7 +50,7 @@
                 roles = #{user.roles}
             </if>
             <if test="user != null and user.createTime != null and user.createTime != ''">
-              and   create_time &gt; #{user.createTime}
+                and create_time &gt; #{user.createTime}
             </if>
         </where>
     </select>
