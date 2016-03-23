@@ -20,7 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by czw on 13-12-25.
+ * Created by david
+ * * on 13-12-25.
  */
 public class CommonResponseChecker extends ResponseChecker {
 

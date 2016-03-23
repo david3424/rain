@@ -28,25 +28,27 @@ public class ProbabilityLotteryService implements LotteryService {
             return true;
         }
         int todayCount = probabilityInteface.getTodayPrizeSendedCount(prize);
-        logger.debug("todaycouhnt=="+todayCount);
+        logger.debug("todaycouhnt==" + todayCount);
         if (todayCount >= prize.getTodayLimit()) {
             return false;
         }
         int allCount = probabilityInteface.getPrizeSendedCount(prize);
-        logger.debug("allCount=="+allCount);
+        logger.debug("allCount==" + allCount);
         return allCount < prize.getStepLimit() && allCount < prize.getTotalLimit();
     }
 
 
     @Override
     public AbstractPrize lottery(String lotteryKey) throws Exception {
+        //根据表名(key)提取奖品列表 和 抽奖精度(为方便个性化)
         ProbabilityLotteryPrize prize = ProbabilityAlgorithm.drawPrize(probabilityInteface.prizeInfoConfig(lotteryKey), probabilityInteface.lotteryAccuracy(lotteryKey));
-        logger.debug("prizeis null or not:"+prize);
-        if (prize == null) {
+        logger.debug("prizeis null or not:" + prize);
+        if (prize == null) {//返回阳光普照
+            logger.debug("返回阳光普照");
             return new NullLotteryPrizeImpl();
         }
-        if (!checkConfigLimit(prize)) {
-            logger.debug("!checkConfigLimit(prize");
+        if (!checkConfigLimit(prize)) { //虽然抽中，数据达上限，依然阳光普照
+            logger.debug("虽然抽中，数据达上限，依然阳光普照");
             return new NullLotteryPrizeImpl();
         }
         return prize;

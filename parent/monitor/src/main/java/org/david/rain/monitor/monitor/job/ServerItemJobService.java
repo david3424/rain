@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by czw on 13-12-27.
+ * Created by david
+ * * on 13-12-27.
  */
 @Component
 public class ServerItemJobService {
@@ -47,13 +48,17 @@ public class ServerItemJobService {
         addItemJobAndStart(serverItem);
     }
 
+
+    /**
+     * 添加一个item的job*
+     *
+     * @param serverItem 某个服务item
+     * @throws SchedulerException
+     */
     public void addItemJobAndStart(ServerItem serverItem) throws SchedulerException {
-        JobDetail job = JobBuilder.newJob(ServerItemJob.class).withIdentity(serverItem.getItemName(), JOB_GROUP_NAME)
-                .usingJobData(ServerItemJob.JOB_DATA_MAP_KEY, serverItem.getId())
-                .build();
-        Trigger trigger = TriggerBuilder.newTrigger().
-                withSchedule(CronScheduleBuilder.cronSchedule(serverItem.getJobCron()))
-                .forJob(job).build();
+        /*利用jobdetail 自带的jobDataMap 传递severId*/
+        JobDetail job = JobBuilder.newJob(ServerItemJob.class).withIdentity(serverItem.getItemName(), JOB_GROUP_NAME).usingJobData(ServerItemJob.JOB_DATA_MAP_KEY, serverItem.getId()).build();
+        Trigger trigger = TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule(serverItem.getJobCron())).forJob(job).build();
         scheduler.scheduleJob(job, trigger);
         MonitorSchedulerContext.jobKeyMap.put(serverItem.getId(), job.getKey());
     }

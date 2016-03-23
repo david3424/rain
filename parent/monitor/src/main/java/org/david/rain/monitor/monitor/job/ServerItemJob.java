@@ -17,7 +17,8 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 
 /**
- * Created by czw on 13-12-25.
+ * Created by
+ * david* on 13-12-25.
  */
 
 public class ServerItemJob implements Job {
@@ -35,14 +36,15 @@ public class ServerItemJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        logger.info("执行job任务");
-       /* ItemService itemService = SpringContextSupport.getSpringBean(ItemService.class);
+//        logger.info("执行job任务");
+        ItemService itemService = SpringContextSupport.getSpringBean(ItemService.class);
         RichServerItem item = itemService.getRichServerItemById(serverItemId);
 
         if (item.getJobStatus() == MonitorConst.JobStatus.STOP.value) {
             return;
         }
 
+        //检测逻辑
         Tuple<Integer, String> response = send(item.getItemUrl());
 
         ResponseChecker responseChecker = ResponseChecker.CHECKER_MAP.get(item.getReturnType());
@@ -50,7 +52,7 @@ public class ServerItemJob implements Job {
             logger.error("there is no response checker registed for monitor item: " + item.getItemName());
         } else {
             responseChecker.execute(item, response);
-        }*/
+        }
     }
 
     public Tuple<Integer, String> send(String url) {
@@ -66,11 +68,11 @@ public class ServerItemJob implements Job {
         }
     }
 
-    public int getServerItemId() {
+  /*  public int getServerItemId() {
         return serverItemId;
     }
 
     public void setServerItemId(int serverItemId) {
         this.serverItemId = serverItemId;
-    }
+    }*/
 }

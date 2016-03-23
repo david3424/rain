@@ -22,7 +22,7 @@
 DROP TABLE IF EXISTS `auto_game_prize_roleid_newlogs_new`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `auto_game_prize_roleid_newlogs_new` (
+CREATE TABLE `sendprize_local_logs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(150) DEFAULT NULL,
   `tablename` varchar(150) DEFAULT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE `event_send_prize_properties` (
   `table_name` varchar(100) NOT NULL DEFAULT '',
   `datasource` varchar(16) NOT NULL,
   `role_id_type` int(11) NOT NULL,
-  `send_type` int(11) NOT NULL COMMENT '1:��ͨ������2���Ź�����',
+  `send_type` int(11) NOT NULL COMMENT '1:roleid,2:rolename',
   `send_interface` int(11) NOT NULL,
   `send_check` int(11) NOT NULL,
   `prizememo` varchar(128) DEFAULT NULL,

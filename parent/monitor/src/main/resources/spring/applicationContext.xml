@@ -17,11 +17,6 @@
 
     <context:annotation-config/>
 
-
-    <!--<import resource="classpath*:spring/spring-datasource.xml"/>
-    <import resource="classpath*:spring/spring-common.xml"/>
-    <import resource="classpath*:spring/spring-switch-client.xml"/>
-    <import resource="classpath*:spring/spring-cache-anno.xml"/>-->
     <import resource="classpath*:spring/spring-*xml"/>
 
 </beans>

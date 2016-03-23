@@ -31,7 +31,7 @@ public class ItemService {
     ServerItemJobService serverItemJobService;
 
     @Autowired
-    ServerMonitorValueMapper monitorValueMapper;
+    ServerMonitorValueMapper monitorValueMapper;//因为没有xml报错，忽视
 
 
     @Autowired

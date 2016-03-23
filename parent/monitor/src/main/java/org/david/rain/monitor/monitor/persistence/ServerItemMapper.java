@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * Created by czw on 13-12-10.
+ * Created by david on 13-12-10.
  */
 public interface ServerItemMapper {
 

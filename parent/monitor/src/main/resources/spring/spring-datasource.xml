@@ -43,129 +43,6 @@
         <property name="password" value="${jdbc.password}"/>
 
         <!-- Connection Pooling Info -->
-        <!-- Connection Pooling Info -->
-        <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idletest.minutes}"/>
-        <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}"/>
-        <property name="minConnectionsPerPartition" value="${bonecp.minConnectionsPerPartition}"/>
-        <property name="partitionCount" value="${bonecp.partitionCount}"/>
-        <property name="acquireIncrement" value="${bonecp.acquireIncrement}"/>
-        <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}"/>
-        <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
-    </bean>
-
-    <bean id="eventDataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-        <!-- Connection Info -->
-        <property name="driverClass" value="${jdbc.driverClassName}"/>
-        <property name="jdbcUrl" value="${jdbc.url.w}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
-
-        <!-- Connection Pooling Info -->
-        <!-- Connection Pooling Info -->
-        <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idletest.minutes}"/>
-        <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}"/>
-        <property name="minConnectionsPerPartition" value="${bonecp.minConnectionsPerPartition}"/>
-        <property name="partitionCount" value="${bonecp.partitionCount}"/>
-        <property name="acquireIncrement" value="${bonecp.acquireIncrement}"/>
-        <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}"/>
-        <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
-    </bean>
-
-    <bean id="huodong218" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-        <!-- Connection Info -->
-        <property name="driverClass" value="${jdbc.driverClassName}"/>
-        <property name="jdbcUrl" value="${event20.jdbc.url.r}"/>
-        <property name="username" value="${event20.jdbc.username}"/>
-        <property name="password" value="${event20.jdbc.password}"/>
-
-        <!-- Connection Pooling Info -->
-        <!-- Connection Pooling Info -->
-        <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idletest.minutes}"/>
-        <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}"/>
-        <property name="minConnectionsPerPartition" value="${bonecp.minConnectionsPerPartition}"/>
-        <property name="partitionCount" value="${bonecp.partitionCount}"/>
-        <property name="acquireIncrement" value="${bonecp.acquireIncrement}"/>
-        <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}"/>
-        <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
-    </bean>
-    <bean id="huodong226" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-        <!-- Connection Info -->
-        <property name="driverClass" value="${jdbc.driverClassName}"/>
-        <property name="jdbcUrl" value="${jdbc.url.w}"/>
-        <property name="username" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
-
-        <!-- Connection Pooling Info -->
-        <!-- Connection Pooling Info -->
-        <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idletest.minutes}"/>
-        <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}"/>
-        <property name="minConnectionsPerPartition" value="${bonecp.minConnectionsPerPartition}"/>
-        <property name="partitionCount" value="${bonecp.partitionCount}"/>
-        <property name="acquireIncrement" value="${bonecp.acquireIncrement}"/>
-        <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}"/>
-        <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
-    </bean>
-    <bean id="huodong164" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-        <!-- Connection Info -->
-        <property name="driverClass" value="${jdbc.driverClassName}"/>
-        <property name="jdbcUrl" value="${eventie.jdbc.url.r}"/>
-        <property name="username" value="${eventie.jdbc.username}"/>
-        <property name="password" value="${eventie.jdbc.password}"/>
-
-        <!-- Connection Pooling Info -->
-        <!-- Connection Pooling Info -->
-        <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idletest.minutes}"/>
-        <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}"/>
-        <property name="minConnectionsPerPartition" value="${bonecp.minConnectionsPerPartition}"/>
-        <property name="partitionCount" value="${bonecp.partitionCount}"/>
-        <property name="acquireIncrement" value="${bonecp.acquireIncrement}"/>
-        <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}"/>
-        <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
-    </bean>
-    <bean id="huodong108" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-        <!-- Connection Info -->
-        <property name="driverClass" value="${jdbc.driverClassName}"/>
-        <property name="jdbcUrl" value="${eventhk.jdbc.url.r}"/>
-        <property name="username" value="${eventhk.jdbc.username}"/>
-        <property name="password" value="${eventhk.jdbc.password}"/>
-
-        <!-- Connection Pooling Info -->
-        <!-- Connection Pooling Info -->
-        <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idletest.minutes}"/>
-        <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}"/>
-        <property name="minConnectionsPerPartition" value="${bonecp.minConnectionsPerPartition}"/>
-        <property name="partitionCount" value="${bonecp.partitionCount}"/>
-        <property name="acquireIncrement" value="${bonecp.acquireIncrement}"/>
-        <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}"/>
-        <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
-    </bean>
-    <bean id="hdbase" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-        <!-- Connection Info -->
-        <property name="driverClass" value="${jdbc.driverClassName}"/>
-        <property name="jdbcUrl" value="${hdbase.jdbc.url.r}"/>
-        <property name="username" value="${hdbase.jdbc.username}"/>
-        <property name="password" value="${hdbase.jdbc.password}"/>
-
-        <!-- Connection Pooling Info -->
-        <!-- Connection Pooling Info -->
-        <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idletest.minutes}"/>
-        <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}"/>
-        <property name="minConnectionsPerPartition" value="${bonecp.minConnectionsPerPartition}"/>
-        <property name="partitionCount" value="${bonecp.partitionCount}"/>
-        <property name="acquireIncrement" value="${bonecp.acquireIncrement}"/>
-        <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}"/>
-        <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
-    </bean>
-
-    <bean id="img" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-        <!-- Connection Info -->
-        <property name="driverClass" value="${jdbc.driverClassName}"/>
-        <property name="jdbcUrl" value="${img.jdbc.url.r}"/>
-        <property name="username" value="${img.jdbc.username}"/>
-        <property name="password" value="${img.jdbc.password}"/>
-
-        <!-- Connection Pooling Info -->
-        <!-- Connection Pooling Info -->
         <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idletest.minutes}"/>
         <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}"/>
         <property name="minConnectionsPerPartition" value="${bonecp.minConnectionsPerPartition}"/>
@@ -182,7 +59,6 @@
         <property name="username" value="${event.jdbc.username}"/>
         <property name="password" value="${event.jdbc.password}"/>
 
-        <!-- Connection Pooling Info -->
         <!-- Connection Pooling Info -->
         <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idletest.minutes}"/>
         <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}"/>

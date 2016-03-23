@@ -5,6 +5,7 @@ import org.david.rain.common.components.lottery.AbstractPrize;
 import org.david.rain.common.components.lottery.LotteryService;
 import org.david.rain.common.components.lottery.NullLotteryPrize;
 import org.david.rain.common.repository.Idao;
+import org.david.rain.common.util.DateUtils;
 import org.david.rain.web.controller.lottery.LotteryDemoService;
 import org.david.rain.web.controller.lottery.LotteryPrize;
 import org.junit.Test;
@@ -16,14 +17,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.assertj.core.api.Assertions.*;
+
 /**
  * Created by user on 2015/10/20.
- *
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-@TransactionConfiguration(transactionManager ="transactionManager",defaultRollback = false)
+@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
 @ContextConfiguration(locations = {"classpath:spring/applicationContext.xml"})
 public class LotteryTest {
 
@@ -40,12 +42,13 @@ public class LotteryTest {
     @Qualifier("writeDaoImp")
     @Autowired
     Idao dao;
-    
+
 
     @Test
     public void testLottery() throws Exception {
-        String username = "david3424";
+        String username = "david3425";
         UserInfo userInfo = lotteryDemoService.getUserInfo(username);
+        assertThat(userInfo).isNotNull();
         AbstractPrize abstractPrize = lotteryService.lottery("lottery_demo_prize");
         System.out.println("lottery result in  testCase:" + abstractPrize);
         LotteryPrize prize;
@@ -54,19 +57,19 @@ public class LotteryTest {
         } else {
             prize = lotteryDemoService.setCommonValue(abstractPrize, username, userInfo);
         }
-        System.out.println(lotteryDemoService.savePrizeAndWriteLog(prize, abstractPrize.getPageId()));
+        System.out.println(lotteryDemoService.savePrize(prize));
     }
 
 
     @Test
     public void testSignIn() throws Exception {
-        System.out.println(lotteryDemoService.signIn("david3424","2015-10-21"));
+        System.out.println(lotteryDemoService.signIn("david3424", DateUtils.getCurrentFormatDate()));
     }
 
     @Test
     public void testTransaction() throws Exception {
 
-        dao.update("update hd_test_log set ip = ? where id = 515 ","127.0.0.1");
+        dao.update("update hd_test_log set ip = ? where id = 515 ", "127.0.0.1");
 
     }
 }

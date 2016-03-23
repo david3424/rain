@@ -15,11 +15,13 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Created by czw on 13-12-26.
+ * Created by david
+ * * on 13-12-26.
  */
 @Configuration
 public class MonitorSchedulerContext {
 
+    /*itemid与job-key对应map*/
     public static Map<Integer, JobKey> jobKeyMap = new ConcurrentHashMap<>();
     public static Map<Integer, JobKey> dataJobKeyMap = new ConcurrentHashMap<>();
 

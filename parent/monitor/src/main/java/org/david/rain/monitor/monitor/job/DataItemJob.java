@@ -21,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Created by czw on 14-2-24.
  * <p/>
  * 目前数据监控是直接读取数据库，这样子好像是不能设置超时的，也就是说如果访问有问题job就会出问题
  * 如果是用接口的话，吧sql传过去，那边来查询数据库，接口返回，这样子可以控制超时，感觉还不错，

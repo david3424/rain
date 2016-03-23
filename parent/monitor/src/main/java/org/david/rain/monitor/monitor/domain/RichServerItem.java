@@ -1,7 +1,8 @@
 package org.david.rain.monitor.monitor.domain;
 
 /**
- * Created by czw on 13-12-25.
+ * Created by david
+ * * on 13-12-25.
  */
 public class RichServerItem {
     private Integer id;

@@ -17,28 +17,8 @@ import java.util.Map;
 @Lazy(false)
 public class DataSourceContext implements InitializingBean {
     @Autowired
-    @Qualifier("huodong218")
-    DataSource huodong218;
-    @Autowired
-    @Qualifier("huodong226")
-    DataSource huodong226;
-    @Autowired
-    @Qualifier("huodong164")
-    DataSource huodong164;
-    @Autowired
-    @Qualifier("huodong108")
-    DataSource huodong108;
-    @Autowired
-    @Qualifier("event")
-    DataSource event;
-    @Autowired
-    @Qualifier("hdbase")
-    DataSource hdbase;
-    @Autowired
-    @Qualifier("img")
-    DataSource img;
-
-
+//    @Qualifier("event")
+            DataSource event;
     Map<String, DataSource> dataSourceMap;
 
     public DataSourceContext() {
@@ -51,12 +31,6 @@ public class DataSourceContext implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         dataSourceMap = new HashMap<>();
-        dataSourceMap.put("huodong218", huodong218);
-        dataSourceMap.put("huodong226", huodong226);
-        dataSourceMap.put("huodong164", huodong164);
-        dataSourceMap.put("huodong108", huodong108);
         dataSourceMap.put("event", event);
-        dataSourceMap.put("hdbase", hdbase);
-        dataSourceMap.put("img", img);
     }
 }

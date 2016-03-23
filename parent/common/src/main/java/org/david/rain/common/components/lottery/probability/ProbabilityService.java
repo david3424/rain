@@ -25,8 +25,7 @@ public class ProbabilityService  implements ProbabilityInteface{
     //由具体的项目注入
     private Idao dao;
 
-    public ProbabilityService()
-    {}
+    public ProbabilityService() {}
 
     //构造注入
     public ProbabilityService(Idao dao) {

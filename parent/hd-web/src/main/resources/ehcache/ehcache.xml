@@ -28,7 +28,7 @@
            overflowToDisk="false" maxBytesLocalHeap="67108864" overflowToOffHeap="false"
            diskPersistent="false" statistics="true"
            memoryStoreEvictionPolicy="LRU">
-        <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>
+        <!--<cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"/>-->
     </cache>
 
     <!-- 10秒缓存  不采取服务器同步措施，推荐用于奖品配置信息，变化不快，访问数据为12次/10s

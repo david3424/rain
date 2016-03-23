@@ -74,10 +74,10 @@ public class ModelController {
             if (children != null && children.size() > 0) {
                 buildNode(children, 2 * count);
             } else {
-                logger.info("root【{}】子节点为null，跳出递归", n.getText());
+//                logger.info("root【{}】子节点为null，跳出递归", n.getText());
             }
         }
-        logger.info("list 迭代结束");
+//        logger.info("list 迭代结束");
     }
 
     @RequestMapping(value = "url", method = RequestMethod.POST)

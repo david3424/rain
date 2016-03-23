@@ -7,47 +7,45 @@ $(function () {
         formatter: function (node) {
             return node.text.split('@')[0];
         },
-        onClick: function (node) {
-            /*  $.post('/model/url', {id: node.id}, function (data) {
-             if (data != "" && data != null && data != 0) {
-             }
-             });*/
-            var data = node.text.split('@')[1];
-            if (data != "" && data != null && data != 0) {
-                open1(node.text.split('@')[0], data);
-            }
-        }
+        onClick: open1
     });
 });
 //打开节点内容
-function open1(name, url) {
-    if ($('#ttx').tabs('exists', name)) {
-        $('#ttx').tabs('select', name);
-    } else {
-        var content = '<iframe scrolling="no" frameborder="0"' +
-            'src="' + url + '" style="width:100%;height:100%;"></iframe>';
-        $('#ttx').tabs('add', {
-            id: name,
-            title: name,
-            content: content,
+function open1(node) {
+    //if ($("#tt").tree("isLeaf", node.target) == false)
+    //    return;
+    var url = node.text.split('@')[1];
+    var name = node.text.split('@')[0];
+    if (url != "" && url != null && url != 0) {
+        var $_tabs = $('#ttx');
+        if ($_tabs.tabs('exists', name)) {
+            $_tabs.tabs('select', name);
+        } else {
+            var content = '<iframe scrolling="no" frameborder="0"' +
+                'src="' + url + '" style="width:100%;height:100%;"></iframe>';
+            $_tabs.tabs('add', {
+                id: name,
+                title: name,
+                content: content,
 //            href: url,
-            closable: true,
-            tools: [
-                {
-                    iconCls: 'icon-mini-refresh',
-                    handler: function () {
-                        var tab = $('#ttx').tabs('getSelected');
-                        $("#ttx").tabs('update', {
-                            tab: tab,
-                            options: {
-                                content: content
-                            }
-                        });
-                        tab.panel('refresh');
+                closable: true,
+                tools: [
+                    {
+                        iconCls: 'icon-mini-refresh',
+                        handler: function () {
+                            var tab = $_tabs.tabs('getSelected');
+                            $_tabs.tabs('update', {
+                                tab: tab,
+                                options: {
+                                    content: content
+                                }
+                            });
+                            tab.panel('refresh');
+                        }
                     }
-                }
-            ]
-        });
+                ]
+            });
+        }
     }
 }
 /*   function doExpand(){
