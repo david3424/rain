@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by czw on 14-1-3.
+ * Created by david
+ * * on 14-1-3.
  */
 public class User {
     private Integer id;

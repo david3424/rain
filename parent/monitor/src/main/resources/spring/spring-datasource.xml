@@ -77,13 +77,23 @@
         <property name="configLocation" value="classpath:spring/mybatis-conf.xml"/>
         <property name="typeAliasesPackage" value="org.david.rain.monitor.monitor.domain"/>
     </bean>
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory"/>
-    </bean>
-    <!-- scan for mappers and let them be autowired -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="org.david.rain.monitor.monitor.persistence"/>
+        <property name="properties">
+            <value>
+                mappers=tk.mybatis.mapper.common.Mapper
+                dialect=mysql
+            </value>
+        </property>
     </bean>
+    <!-- <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+         <constructor-arg index="0" ref="sqlSessionFactory"/>
+     </bean>-->
+    <!-- scan for mappers and let them be autowired -->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.david.rain.monitor.monitor.persistence"/>
+    </bean>-->
     <!--<tx:jta-transaction-manager />-->
     <!-- 使用annotation定义事务 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>

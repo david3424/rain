@@ -9,7 +9,7 @@
 
     <description>Spring公共配置</description>
     <!--排除Controller 交给MVC-->
-    <context:component-scan base-package="org.david.rain.monitor">
+    <context:component-scan base-package="org.david.rain.monitor,org.david.rain.service">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 

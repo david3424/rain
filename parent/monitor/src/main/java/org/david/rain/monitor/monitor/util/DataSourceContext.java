@@ -11,14 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by czw on 14-2-27.
+ * 启动时把数据源放入MAP*
  */
 @Component
 @Lazy(false)
 public class DataSourceContext implements InitializingBean {
     @Autowired
-//    @Qualifier("event")
-            DataSource event;
+    DataSource event;
     Map<String, DataSource> dataSourceMap;
 
     public DataSourceContext() {

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.david.rain.monitor.monitor.persistence.SendPrizeMapper">
+    <select id="getAllListPage" resultType="org.david.rain.monitor.monitor.domain.SendPrize">
+        SELECT
+        id AS id,
+        table_name AS tableName,
+        datasource AS datasource,
+        role_id_type AS roleIdType,
+        send_type AS sendType,
+        job_cron AS jobCron,
+        create_time AS createTime,
+        update_time AS updateTime,
+        status AS status
+        FROM send_prize_properties
+        <where>
+            <if test=" sendPrize!=null and  sendPrize.tableName != null and sendPrize.tableName != ''">
+                and table_name = #{sendPrize.tableName}
+            </if>
+            <if test="  sendPrize!=null and sendPrize.datasource != null and sendPrize.datasource != ''">
+                <!--and datasource like '%${sendPrize.datasource}%' sql注入 -->
+                and datasource like "%"#{datasource}"%"
+            </if>
+        </where>
+    </select>
+</mapper>

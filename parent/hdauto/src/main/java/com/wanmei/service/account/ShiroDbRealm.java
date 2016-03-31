@@ -30,7 +30,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springside.modules.utils.Encodes;
+//import org.springside.modules.utils.Encodes;
 
 import javax.annotation.PostConstruct;
 import java.io.Serializable;

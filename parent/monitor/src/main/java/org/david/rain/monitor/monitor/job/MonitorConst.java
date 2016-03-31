@@ -1,7 +1,13 @@
 package org.david.rain.monitor.monitor.job;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+import org.david.rain.monitor.monitor.shiro.MyRealm;
+import org.quartz.JobKey;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by david
@@ -11,6 +17,11 @@ public class MonitorConst {
 
 
     public static int SERVER_UNREACHABLE = -1;
+
+    /*itemid与job-key对应map*/
+    public static Map<Integer, JobKey> jobKeyMap = new ConcurrentHashMap<>();
+    public static Map<Integer, JobKey> dataJobKeyMap = new ConcurrentHashMap<>();
+    public static Map<Integer, JobKey> sendPrizeJobKeyMap = new ConcurrentHashMap<>();
 
     public static enum InfoLevel {
         ERROR(4),
@@ -70,5 +81,10 @@ public class MonitorConst {
     }
 
     public static String MESSAGE_KEY = "EVENT_MONITOR";
+
+    public static MyRealm.ShiroUser getCurrentUser() {
+        Subject currentUser = SecurityUtils.getSubject();
+        return (MyRealm.ShiroUser) currentUser.getPrincipals().getPrimaryPrincipal();
+    }
 
 }

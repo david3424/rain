@@ -1,9 +1,11 @@
 package org.david.rain.monitor.monitor.job;
 
 import org.david.rain.monitor.monitor.domain.DataItem;
+import org.david.rain.monitor.monitor.domain.SendPrize;
 import org.david.rain.monitor.monitor.domain.ServerItem;
 import org.david.rain.monitor.monitor.service.data.DataItemService;
 import org.david.rain.monitor.monitor.service.server.ItemService;
+import org.david.rain.monitor.monitor.service.server.SendPrizeService;
 import org.david.rain.monitor.monitor.util.SpringContextSupport;
 import org.quartz.*;
 import org.slf4j.Logger;
@@ -16,7 +18,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * Created by czw on 13-12-23.
  */
 
 @Component
@@ -35,6 +36,10 @@ public class ServerMonitor implements InitializingBean {
 
     @Autowired
     DataItemService dataItemService;
+    @Autowired
+    SendPrizeService sendPrizeService;
+    @Autowired
+    SendPrizeJobService sendPrizeJobService;
 
 
     @Autowired
@@ -45,8 +50,21 @@ public class ServerMonitor implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        initServerItemJob();
-        initDataItemJob();
+//        initServerItemJob();
+//        initDataItemJob();
+        initSendPrizeJob();
+    }
+
+    private void initSendPrizeJob() {
+
+        List<SendPrize> prizeList = sendPrizeService.getAllSendPrize();
+        for (SendPrize sendPrize : prizeList) {
+            try {
+                sendPrizeJobService.addsendPrizeJobAndStart(sendPrize);
+            } catch (SchedulerException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void initServerItemJob() {

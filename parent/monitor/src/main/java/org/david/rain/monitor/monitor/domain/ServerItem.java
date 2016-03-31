@@ -6,7 +6,7 @@ package org.david.rain.monitor.monitor.domain;
 public class ServerItem {
 
 
-    public static enum JobStatus {
+    public enum JobStatus {
         STOP(0),
         START(1);
         public final int value;

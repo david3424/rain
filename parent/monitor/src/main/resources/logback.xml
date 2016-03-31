@@ -29,9 +29,9 @@
     <jmxConfigurator/>
     <root level="warn">
         <appender-ref ref="console"/>
-        <appender-ref ref="payLogFile"/>
+        <!--<appender-ref ref="payLogFile"/>-->
     </root>
 
     <logger name="org.david.rain" level="debug"/>
-    <logger name="org.david.rain.monitor.monitor.persistence" level="info"/>
+    <logger name="org.david.rain.monitor.monitor.persistence" level="debug"/>
 </configuration>

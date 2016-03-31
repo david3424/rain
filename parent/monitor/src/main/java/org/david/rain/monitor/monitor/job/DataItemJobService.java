@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by czw on 14-2-24.
+ * Created by david
+ * * on 14-2-24.
  */
 @Service
 public class DataItemJobService {
@@ -24,7 +25,7 @@ public class DataItemJobService {
 
     public boolean deleteItemJob(DataItem dataItem) {
         try {
-            return scheduler.deleteJob(MonitorSchedulerContext.dataJobKeyMap.get(dataItem.getId()));
+            return scheduler.deleteJob(MonitorConst.dataJobKeyMap.get(dataItem.getId()));
         } catch (SchedulerException e) {
             logger.error(e.getMessage());
             e.printStackTrace();
@@ -34,7 +35,7 @@ public class DataItemJobService {
 
     public boolean deleteItemJobByItemId(Integer itemId) {
         try {
-            return scheduler.deleteJob(MonitorSchedulerContext.dataJobKeyMap.get(itemId));
+            return scheduler.deleteJob(MonitorConst.dataJobKeyMap.get(itemId));
         } catch (SchedulerException e) {
             logger.error(e.getMessage());
             e.printStackTrace();
@@ -55,6 +56,6 @@ public class DataItemJobService {
                 withSchedule(CronScheduleBuilder.cronSchedule(dataItem.getJobCron()))
                 .forJob(job).build();
         scheduler.scheduleJob(job, trigger);
-        MonitorSchedulerContext.dataJobKeyMap.put(dataItem.getId(), job.getKey());
+        MonitorConst.dataJobKeyMap.put(dataItem.getId(), job.getKey());
     }
 }

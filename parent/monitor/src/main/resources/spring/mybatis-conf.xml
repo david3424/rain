@@ -18,5 +18,10 @@
             <property name="dialect" value="mysql" />
             <property name="pageSqlId" value=".*ListPage.*" />
         </plugin>
+       <!-- <plugin interceptor="tk.mybatis.mapper.mapperhelper.MapperInterceptor">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper" />
+            <property name="IDENTITY" value="MYSQL" />
+            <property name="notEmpty" value="true" />
+        </plugin>-->
     </plugins>
 </configuration>

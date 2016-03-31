@@ -5,6 +5,7 @@
 package org.david.rain.monitor.dbutils.repository.impl;
 
 import org.david.rain.monitor.dbutils.repository.DaoValidater;
+import org.david.rain.monitor.dbutils.repository.Idao;
 import org.david.rain.monitor.dbutils.repository.SqlResolver;
 import org.david.rain.monitor.dbutils.repository.anotation.HdTable;
 import org.david.rain.monitor.util.CommonList;
@@ -27,16 +28,14 @@ public class CommonDao {
 
     private QueryRunner runner;
 
+    //autowired需要默认无参构造函数
     public CommonDao() {
-
     }
 
-    public CommonDao(QueryRunner runner) {
-        this.runner = runner;
-    }
-
-    public CommonDao(DataSource dataSource)
-    {
+    /*  public CommonDao(QueryRunner runner) {
+          this.runner = runner;
+      }*/
+    public CommonDao(DataSource dataSource) {
         this.runner = new QueryRunner(dataSource);
     }
 
@@ -422,6 +421,7 @@ public class CommonDao {
 
     /**
      * 查询单行列表
+     *
      * @param sql
      * @param <T>
      * @return

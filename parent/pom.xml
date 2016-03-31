@@ -142,6 +142,16 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
         </dependency>
+        <!--mybatis插件-->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+        </dependency>
+        <!-- Spring Data -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>net.sf.ehcache</groupId>
@@ -198,12 +208,16 @@
             <artifactId>jackson-mapper-asl</artifactId>
         </dependency>
         <!-- WEB begin -->
-       <!-- <dependency>
-            <groupId>commons-httpclient</groupId>
-            <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
-        </dependency>-->
+        <!-- <dependency>
+             <groupId>commons-httpclient</groupId>
+             <artifactId>commons-httpclient</artifactId>
+             <version>3.1</version>
+         </dependency>-->
         <!-- Utilities -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -307,29 +321,29 @@
                 <artifactId>maven-resources-plugin</artifactId>
             </plugin>
 
-         <!--   <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.david.web.pppppp.wmeovg</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>assembly</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
+            <!--   <plugin>
+                   <artifactId>maven-assembly-plugin</artifactId>
+                   <configuration>
+                       <appendAssemblyId>false</appendAssemblyId>
+                       <descriptorRefs>
+                           <descriptorRef>jar-with-dependencies</descriptorRef>
+                       </descriptorRefs>
+                       <archive>
+                           <manifest>
+                               <mainClass>com.david.web.pppppp.wmeovg</mainClass>
+                           </manifest>
+                       </archive>
+                   </configuration>
+                   <executions>
+                       <execution>
+                           <id>make-assembly</id>
+                           <phase>package</phase>
+                           <goals>
+                               <goal>assembly</goal>
+                           </goals>
+                       </execution>
+                   </executions>
+               </plugin>-->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

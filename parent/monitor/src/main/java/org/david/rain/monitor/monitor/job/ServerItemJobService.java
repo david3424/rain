@@ -24,7 +24,7 @@ public class ServerItemJobService {
 
     public boolean deleteItemJob(ServerItem serverItem) {
         try {
-            return scheduler.deleteJob(MonitorSchedulerContext.jobKeyMap.get(serverItem.getId()));
+            return scheduler.deleteJob(MonitorConst.jobKeyMap.get(serverItem.getId()));
         } catch (SchedulerException e) {
             logger.error(e.getMessage());
             e.printStackTrace();
@@ -35,7 +35,7 @@ public class ServerItemJobService {
     public boolean deleteItemJobByItemId(Integer itemId) {
 
         try {
-            return scheduler.deleteJob(MonitorSchedulerContext.jobKeyMap.get(itemId));
+            return scheduler.deleteJob(MonitorConst.jobKeyMap.get(itemId));
         } catch (SchedulerException e) {
             logger.error(e.getMessage());
             e.printStackTrace();
@@ -60,7 +60,7 @@ public class ServerItemJobService {
         JobDetail job = JobBuilder.newJob(ServerItemJob.class).withIdentity(serverItem.getItemName(), JOB_GROUP_NAME).usingJobData(ServerItemJob.JOB_DATA_MAP_KEY, serverItem.getId()).build();
         Trigger trigger = TriggerBuilder.newTrigger().withSchedule(CronScheduleBuilder.cronSchedule(serverItem.getJobCron())).forJob(job).build();
         scheduler.scheduleJob(job, trigger);
-        MonitorSchedulerContext.jobKeyMap.put(serverItem.getId(), job.getKey());
+        MonitorConst.jobKeyMap.put(serverItem.getId(), job.getKey());
     }
 
 }

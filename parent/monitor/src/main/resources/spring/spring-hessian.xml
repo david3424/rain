@@ -5,4 +5,9 @@
         <property name="serviceInterface" value="org.david.rain.monitor.hdinterface.ShortMessageInterface"/>
         <property name="serviceUrl" value="http://127.0.0.1:8383/shortMessageService"/>
     </bean>
+
+    <bean id="logServiceInterface" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+        <property name="serviceInterface" value="org.david.rain.service.logservice.ILogService"/>
+        <property name="serviceUrl" value="http://127.0.0.1:8383/logService"/>
+    </bean>
 </beans>

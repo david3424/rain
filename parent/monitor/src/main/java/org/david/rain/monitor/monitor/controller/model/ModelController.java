@@ -41,6 +41,7 @@ public class ModelController {
         Map<Integer, List<Node>> childrenMap = new HashMap<>();
         List<Node> result = new ArrayList<>();
         for (Node node : nodeList) {
+            node.setText(node.getText() + "@" + node.getUrl());
             if (node.getParentId() == 0) {
                 result.add(node); //存入根节点
             }
@@ -56,7 +57,7 @@ public class ModelController {
 //            buildNode(root, childrenMap);
             node.setChildren(childrenMap.get(node.getId()));
         }
-        buildNode(result, 5); //打印测试
+//        buildNode(result, 5); //打印测试
         return result;
     }
 

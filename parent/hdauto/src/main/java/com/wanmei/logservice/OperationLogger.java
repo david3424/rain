@@ -1,7 +1,5 @@
 package com.david.web.pppppp.service.logservice;
 
-import com.david.web.pppppp.common.DateUtils;
-import com.david.web.pppppp.entity.SendProperty;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -80,7 +78,7 @@ public class OperationLogger {
         }
 
         String result = status.toString();
-        OperationLog log = OperationLog.LogBuilder.init(getGidByPrizeTableName(sendProperty.getTable_name()), sendProperty.getTable_name(),logType)
+        OperationLog log = com.david.web.pppppp.service.logservice.OperationLog.LogBuilder.init(getGidByPrizeTableName(sendProperty.getTable_name()), sendProperty.getTable_name(),logType)
                 .setCreatetime(DateUtils.getCurrentFormatDateTime())
                 .setUsername(sendPrizeBean.getUsername())
                 .setParams(params).setResult(status)

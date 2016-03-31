@@ -93,6 +93,30 @@ var jobStatusFormat = function (value, row) {
     }
 };
 
+
+var sendPrizeStatusFormat = function (value, row) {
+    if (row.status == 1) {
+        return "<span style='color:green;font-family:Monaco'>运行</span>";
+    } else {
+        return '暂停';
+    }
+};
+
+var roleTypeFormat = function (value, row) {
+    if (row.roleIdType == 1) {
+        return "角色ID发奖";
+    } else {
+        return '角色名发奖';
+    }
+};
+var sendTypeFormat = function (value, row) {
+    if (row.sendType == 1) {
+        return "接口2";
+    } else {
+        return '接口1';
+    }
+};
+
 var itemUrlFormat = function (value, row) {
     return "<a href='" + value + "' title='" + row.itemNameCh + "' class='easyui-tooltip' target='_blank'>" + value + "</a>";
 };
@@ -169,7 +193,7 @@ var searchItem = function () {
     return false;
 };
 
-
+/*用户操作区*/
 var searchUser = function () {
     var _role = $("input[name='roles']").val();
     var _start = $("input[name='start']").val();
@@ -326,7 +350,7 @@ var deleteUser = function () {
     return false;
 };
 
-
+/*角色操作区*/
 var newRole = function () {
     itemFormUrl = "/role/add";
     $("#input_rolename").removeAttr("readonly").attr("required", "true");
@@ -408,8 +432,7 @@ var deleteRole = function () {
     return false;
 };
 
-//model tree的增删改查
-
+//model 操作区
 var newModel = function () {
     itemFormUrl = "/model/add";
     $("#input_text").removeAttr("readonly").attr("required", "true");
@@ -428,8 +451,6 @@ var newModel = function () {
     }, "json");
     return false;
 };
-
-
 //select onChange
 function onSelect() {
     if ($('#parentId').val() == 0) {
@@ -569,6 +590,7 @@ var cancelSaveSettingAttr = function () {
     return false;
 };
 
+
 /******************************提醒列表的代码****************************/
 
 var remindFormUrl = "";
@@ -622,63 +644,180 @@ var saveRemind = function () {
 };
 
 
-/*提醒操作按钮*/
-var cancelSaveRemind = function () {
-    $("#remind_dialog").dialog("close");
+/*发奖操作区*/
+var sendPrizeFormUrl = "";
+
+var newSendPrize = function () {
+    sendPrizeFormUrl = "/sendprize/add";
+    $('#sendprize_id').val(null);
+    $("#tableName").removeAttr("readonly").attr("required", "true");
+    $("#dialog_add_prize_send").dialog("open").dialog("setTitle", "增加一个发奖选项");
     return false;
 };
-var remindFormUrl = "";
-var addRemind = function () {
-    remindFormUrl = "/server/item/remind/add";
-    $("#item_id").val(nowItem);
-    $("#input_remind_user").removeAttr("readonly");
-    $("#remind_dialog").dialog("open").dialog("setTitle", "增加一个提醒");
+
+var pSaveSendPrize = function () {
+    $("#form_send_prize").form("submit",
+        {
+            url: sendPrizeFormUrl,
+            onSubmit: function () {
+                return $(this).form("validate");
+            },
+            success: function (result) {
+                result = eval('(' + result + ')');
+                alert(result.message);
+                if (result.success) {
+                    $("#dialog_add_prize_send").dialog("close");
+                    $("#datagrid_send_prize").datagrid("reload");
+                }
+            }
+        });
     return false;
 };
-var modifyRemind = function () {
-    var row = $("#remind_grid").datagrid("getSelected");
-    remindFormUrl = "/server/item/remind/update";
-    $("#input_remind_user").combo("readonly");
-    $("#remind_form").form("load", row);
-    $("#remind_dialog").dialog("open").dialog("setTitle", "修改提醒");
+
+var pCancelSaveSendPrize = function () {
+    $("#dialog_add_prize_send").dialog("close");
     return false;
 };
-var deleteRemind = function () {
-    var row = $("#remind_grid").datagrid("getSelected");
+
+var updateSendPrize = function () {
+    var row = $("#datagrid_send_prize").datagrid("getSelected"); //Return the first selected row record or null.
+    sendPrizeFormUrl = "/sendprize/update";
+    $("#form_send_prize").form("load", row);
+    $("#dialog_add_prize_send").dialog("open").dialog("setTitle", "修改发奖项目");
+    return false;
+};
+
+var deleteSendPrize = function () {
+    var row = $("#datagrid_send_prize").datagrid("getSelected");
     if (row == undefined) {
         alert("请选择一行后删除。");
         return false;
     }
-    if (confirm("确定要删除提醒：" + row.typeName + "--提醒--[" + row.chName + "]？")) {
-        var _url = "/server/item/remind/delete";
+    if (confirm("确定要删除发奖：[" + row.tableName + "]？")) {
+        var _url = "/sendprize/delete";
         $.post(_url, {id: row.id}, function (result) {
             alert(result.message);
             if (result.success) {
-                $("#remind_grid").datagrid("reload");
+                $("#datagrid_send_prize").datagrid("reload");
             }
         }, "json");
     }
     return false;
 };
-var saveRemind = function () {
-    $("#remind_form").form("submit", {
-        url: remindFormUrl, onSubmit: function () {
-            return $(this).form("validate");
-        },
-        success: function (result) {
-            result = eval('(' + result + ')');
+
+var searchSendPrize = function () {
+    var tableName = $("#table_name").val();
+    var datasource = $("#datasource").val();
+    //装入数据
+    $("#datagrid_send_prize").datagrid({
+        url: "/sendprize/list?tableName="
+        + tableName + "&datasource=" + datasource
+    }).datagrid("reload");
+    return false;
+};
+
+var startSendPrizeJob = function () {
+    var row = $("#datagrid_send_prize").datagrid("getSelected");
+    if (row == undefined) {
+        alert("请选择一行后删除。");
+        return false;
+    }
+    if (row.status == "1") {
+        alert("发奖已经是开启状态了。");
+        return false;
+    }
+    if (confirm("确定要开启发奖：[" + row.tableName + "]？")) {
+        var _url = "/sendprize/job/start";
+        $.post(_url, {id: row.id, status: 1}, function (result) {
             alert(result.message);
             if (result.success) {
-                $("#remind_dialog").dialog("close");
-                $("#remind_grid").datagrid("reload");
+                $("#datagrid_send_prize").datagrid("reload");
             }
-        }
-    });
+        }, "json");
+    }
     return false;
 };
-var cancelSaveRemind = function () {
-    $("#remind_dialog").dialog("close");
+
+var pauseSendPrizeJob = function () {
+    var row = $("#datagrid_send_prize").datagrid("getSelected");
+    if (row == undefined) {
+        alert("请选择一行后删除。");
+        return false;
+    }
+    if (row.status == "0") {
+        alert("发奖已经是暂停状态了。");
+        return false;
+    }
+
+    if (confirm("确定要关闭发奖：[" + row.tableName + "]的job？")) {
+        var _url = "/sendprize/job/pause";
+        $.post(_url, {id: row.id, status: 0}, function (result) {
+            alert(result.message);
+            if (result.success) {
+                $("#datagrid_send_prize").datagrid("reload");
+            }
+        }, "json");
+    }
     return false;
 };
+
+/*/!*提醒操作按钮*!/
+ var cancelSaveRemind = function () {
+ $("#remind_dialog").dialog("close");
+ return false;
+ };
+ var remindFormUrl = "";
+ var addRemind = function () {
+ remindFormUrl = "/server/item/remind/add";
+ $("#item_id").val(nowItem);
+ $("#input_remind_user").removeAttr("readonly");
+ $("#remind_dialog").dialog("open").dialog("setTitle", "增加一个提醒");
+ return false;
+ };
+ var modifyRemind = function () {
+ var row = $("#remind_grid").datagrid("getSelected");
+ remindFormUrl = "/server/item/remind/update";
+ $("#input_remind_user").combo("readonly");
+ $("#remind_form").form("load", row);
+ $("#remind_dialog").dialog("open").dialog("setTitle", "修改提醒");
+ return false;
+ };
+ var deleteRemind = function () {
+ var row = $("#remind_grid").datagrid("getSelected");
+ if (row == undefined) {
+ alert("请选择一行后删除。");
+ return false;
+ }
+ if (confirm("确定要删除提醒：" + row.typeName + "--提醒--[" + row.chName + "]？")) {
+ var _url = "/server/item/remind/delete";
+ $.post(_url, {id: row.id}, function (result) {
+ alert(result.message);
+ if (result.success) {
+ $("#remind_grid").datagrid("reload");
+ }
+ }, "json");
+ }
+ return false;
+ };
+ var saveRemind = function () {
+ $("#remind_form").form("submit", {
+ url: remindFormUrl, onSubmit: function () {
+ return $(this).form("validate");
+ },
+ success: function (result) {
+ result = eval('(' + result + ')');
+ alert(result.message);
+ if (result.success) {
+ $("#remind_dialog").dialog("close");
+ $("#remind_grid").datagrid("reload");
+ }
+ }
+ });
+ return false;
+ };
+ var cancelSaveRemind = function () {
+ $("#remind_dialog").dialog("close");
+ return false;
+ };*/
 
 
