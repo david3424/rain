@@ -1,6 +1,7 @@
-package org.david.rain.springtest.io;
+package spring.ioc;
 
 import org.david.rain.act.dao.Idao;
+import org.david.rain.entity.AccountBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.BeanFactory;
@@ -27,12 +28,12 @@ import java.io.InputStream;
  * Created by david on 2014/12/2.
  * 测试spring的资源接口
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
-@ContextConfiguration("classpath:spring/applicationContext.xml")
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@WebAppConfiguration
+//@ContextConfiguration("classpath:spring/applicationContext.xml")
 public class ResourceTest {
 
-    @Autowired
+//    @Autowired
     ServletContext application;
     @Test
     public void testFileSource() throws Exception {
@@ -60,7 +61,6 @@ public class ResourceTest {
     public void testResourceLoader() throws Exception {
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         Resource resources[] = resolver.getResources("classpath*:**/*.xml");
-//        Resource resources = resolver.getResource("classpath*:**/*data*.xml");
         for(Resource rsource:resources){
             System.out.println(rsource.getDescription());
             if(rsource.getDescription().contains("datasource")){
@@ -76,5 +76,18 @@ public class ResourceTest {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/**/application*.xml");
         Idao commonWriterImp = applicationContext.getBean("commonWriterImp",Idao.class);
         System.out.println(commonWriterImp);
+    }
+
+
+    /*factorybean 测试*/
+    @Test
+    public void testXmlFactoryBean() {
+
+        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        Resource resource = resolver.getResource("classpath:conf/beans.xml");
+        BeanFactory beanFactory  = new XmlBeanFactory(resource);
+        AccountBean accountBean = beanFactory.getBean("accountBean",AccountBean.class);
+        System.out.println(accountBean);
+
     }
 }

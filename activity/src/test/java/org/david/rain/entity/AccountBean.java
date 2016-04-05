@@ -57,4 +57,15 @@ public class AccountBean {
         this.email = email;
     }
     public  AccountBean(){}
+
+    @Override
+    public String toString() {
+        return "AccountBean{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", birthday=" + birthday +
+                '}';
+    }
 }
