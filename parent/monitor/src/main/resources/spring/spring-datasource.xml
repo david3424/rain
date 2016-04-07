@@ -68,6 +68,28 @@
         <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}"/>
         <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
     </bean>
+    <bean id="event_test" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+        <!-- Connection Info -->
+        <property name="driverClass" value="${jdbc.driverClassName}"/>
+        <property name="jdbcUrl" value="${event.jdbc.url.r}"/>
+        <property name="username" value="${event.jdbc.username}"/>
+        <property name="password" value="${event.jdbc.password}"/>
+        <!-- Connection Pooling Info -->
+        <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idletest.minutes}"/>
+        <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}"/>
+        <property name="minConnectionsPerPartition" value="${bonecp.minConnectionsPerPartition}"/>
+        <property name="partitionCount" value="${bonecp.partitionCount}"/>
+        <property name="acquireIncrement" value="${bonecp.acquireIncrement}"/>
+        <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}"/>
+        <property name="releaseHelperThreads" value="${bonecp.releaseHelperThreads}"/>
+    </bean>
+
+    <bean id="eventDao" class="org.david.rain.monitor.dbutils.repository.impl.CommonDao">
+        <constructor-arg ref="event"/>
+    </bean>
+    <bean id="eventTestDao" class="org.david.rain.monitor.dbutils.repository.impl.CommonDao">
+        <constructor-arg ref="event_test"/>
+    </bean>
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource_W"/>
     </bean>

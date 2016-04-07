@@ -16,7 +16,7 @@
         <java-version>1.7</java-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Common libs -->
-        <spring.bom.version>4.0.3.RELEASE</spring.bom.version>
+        <spring.bom.version>3.2.6.RELEASE</spring.bom.version>
         <javassist_version>3.15.0-GA</javassist_version>
         <netty_version>3.2.5.Final</netty_version>
         <mina_version>1.1.7</mina_version>
@@ -43,7 +43,7 @@
         <cxf_version>2.6.1</cxf_version>
         <thrift_version>0.8.0</thrift_version>
         <jfreechart_version>1.0.13</jfreechart_version>
-        <hessian_version>4.0.7</hessian_version>
+        <hessian_version>4.0.33</hessian_version>
         <servlet_version>3.1.0</servlet_version>
         <jetty_version>6.1.26</jetty_version>
         <validation_version>1.0.0.GA</validation_version>

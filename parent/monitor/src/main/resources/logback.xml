@@ -33,5 +33,5 @@
     </root>
 
     <logger name="org.david.rain" level="debug"/>
-    <logger name="org.david.rain.monitor.monitor.persistence" level="debug"/>
+    <logger name="org.david.rain.monitor.monitor.persistence" level="info"/>
 </configuration>

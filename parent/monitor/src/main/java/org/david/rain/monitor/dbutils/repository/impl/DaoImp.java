@@ -19,7 +19,6 @@ import java.util.List;
 
 /**
  * 数据库操作接口
- * User: chenzhiyi
  * Date: 12-11-20
  * Time: 上午11:44
  */

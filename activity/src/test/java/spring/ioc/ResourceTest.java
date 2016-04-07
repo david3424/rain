@@ -88,6 +88,5 @@ public class ResourceTest {
         BeanFactory beanFactory  = new XmlBeanFactory(resource);
         AccountBean accountBean = beanFactory.getBean("accountBean",AccountBean.class);
         System.out.println(accountBean);
-
     }
 }
