@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.david.rain.wmproxy.module.sys.entity">
+	<class name="Log" table="sys_log">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="ID"><generator class="native"/></id>	
+		<property name="content" column="CONTENT" type="string" not-null="false" length="255"/>
+		<property name="createtime" column="CREATETIME" type="string" not-null="false" length="20"/>
+		<property name="ip" column="IP" type="string" not-null="false" length="50"/>
+		<property name="status" column="STATUS" type="java.lang.Byte" not-null="false" length="1"/>	
+		
+		<many-to-one name="user" column="USERID" class="User" not-null="false"></many-to-one>
+	</class>
+</hibernate-mapping>

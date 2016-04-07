@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 所有的package继承wmeovg-default-->
+	<package name="export" namespace="/export" extends="wmeovg-default">
+	
+		 <!-- 兑换记录导出 -->
+        <action name="prizeLogExport" class="org.david.rain.wmproxy.module.export.action.PrizeLogExportAction">
+            <result name="success" type="stream">
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+        
+        <!-- 选中的兑换记录导出 -->
+        <action name="prizeLogSelectedExport" class="org.david.rain.wmproxy.module.export.action.PrizeLogSelectedExportAction">
+            <result name="success" type="stream">
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+        
+        
+        <!-- 兑换记录CSV导出 -->
+        <action name="prizeLogExportAsCsv" class="org.david.rain.wmproxy.module.export.action.PrizeLogExportAsCsvAction">
+            <result name="success" type="stream">
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+	</package>   
+</struts>

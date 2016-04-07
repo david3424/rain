@@ -40,7 +40,7 @@
 <div style="text-align: center">
     <img src="${ctx}/static/images/error.jpg" alt="close" />
 
-    <h3><span style="color:#ff0000" id="jump">5</span>秒钟后跳转到完美官网页面。</h3>
+    <h3><span style="color:#ff0000" id="jump">5</span>秒钟后跳转到。</h3>
 </div>
 
 

@@ -17,7 +17,7 @@
 	</bean>
 
     <bean id="mailMessage" class="org.springframework.mail.SimpleMailMessage">
-        <property name="from" value="bigdata.delivery@pwrd.com"/>
+        <property name="from" value="bigdata.delivery@xxx.com"/>
     </bean>
 	
 	<bean id="mailSupport" class="com.david.web.pppppp.webgame.mail.MailSupport">

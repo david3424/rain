@@ -1,6 +1,4 @@
 /*
-* @(#)Blah.java        时间： 2008-8-5 21:18:53
-*  北京完美时空网络技术有限公司
 */
 package org.david.rain.common.components.util;
 

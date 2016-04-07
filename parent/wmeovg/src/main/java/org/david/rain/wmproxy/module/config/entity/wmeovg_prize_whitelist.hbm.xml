@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.david.rain.wmproxy.module.config.entity">
+	<class name="WhiteList" table="wmeovg_prize_whitelist">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="int" column="id"><generator class="native"/></id>	
+		<property name="appid" column="appid" type="string" not-null="true" length="255"/>
+		<property name="prizeid" column="prizeid" type="int" not-null="true" length="11"/>
+		<property name="prizename" column="prizename" type="string" not-null="true" length="255"/>
+        <property name="title" column="title" type="string" not-null="false" length="255"/>
+        <property name="text" column="text" type="string" not-null="false" length="255"/>
+		<property name="count" column="count" type="int" not-null="true" length="11"/>
+		<property name="sendCount" column="send_count" type="int" not-null="true" length="11"/>
+		<property name="failCount" column="fail_count" type="int" not-null="true" length="11"/>
+		<property name="createtime" column="createtime" type="timestamp" not-null="true"/>
+		<property name="status" column="status" type="byte" not-null="false" length="1"/>
+		
+		<many-to-one name="user" column="user_id" class="org.david.rain.wmproxy.module.sys.entity.User" not-null="true"></many-to-one>
+		
+		<many-to-one name="clientInfo" column="client_info_id" class="ClientInfo" not-null="true"/>
+		<many-to-one name="game" column="game_id" class="Game" not-null="true"/>
+	</class>
+</hibernate-mapping>

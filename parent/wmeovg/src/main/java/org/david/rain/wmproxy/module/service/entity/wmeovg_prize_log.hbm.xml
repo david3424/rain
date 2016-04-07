@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.david.rain.wmeovg.request.entity">
+	<class name="org.david.rain.wmeovg.request.entity.PrizeLog" table="wmeovg_prize_log">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="gid" type="string" column="gid"><generator class="assigned"/></id>	
+		<property name="cid" column="cid" type="string" not-null="true" length="2"/>
+		<property name="appid" column="appid" type="string" not-null="true" length="255"/>
+		<property name="zoneid" column="zoneid" type="int" not-null="true" length="11"/>
+		<property name="account" column="account" type="string" not-null="true" length="255"/>
+		<property name="rolename" column="rolename" type="string" not-null="false" length="20"/>
+		<property name="roleid" column="roleid" type="long" not-null="false" length="20"/>
+		<property name="prizeid" column="prizeid" type="int" not-null="true" length="11"/>
+		<property name="count" column="count" type="int" not-null="true" length="11"/>
+		<property name="priority" column="priority" type="byte" not-null="true" length="1"/>
+		<property name="callback" column="callback" type="string" not-null="true" length="255"/>
+		<property name="sendStatus" column="send_status" type="byte" not-null="true" length="1"/>
+		<property name="processCount" column="process_count" type="int" not-null="true" length="11"/>
+		<property name="callbackStatus" column="callback_status" type="byte" not-null="true" length="1"/>
+		<property name="requestTime" column="request_time" type="timestamp" not-null="false"/>
+		<property name="sendTime" column="send_time" type="timestamp" not-null="false"/>
+		<property name="messageId" column="message_id" type="string" not-null="false" length="50"/>
+		<property name="prizeResendCount" column="prize_resend_count" type="byte" not-null="true" length="1"/>
+		<property name="callbackTime" column="callback_time" type="timestamp" not-null="false"/>
+		<property name="callbackHttpStatus" column="callback_httpstatus" type="int" not-null="false" length="2"/>
+		<property name="callbackCount" column="callback_count" type="byte" not-null="true" length="1"/>
+		<property name="ip" column="ip" type="string" not-null="true" length="50"/>
+		<property name="prizeSendType" column="prize_send_type" type="byte" not-null="false" length="1"/>
+	</class>
+</hibernate-mapping>

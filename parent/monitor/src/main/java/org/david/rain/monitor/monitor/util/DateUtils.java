@@ -1,6 +1,5 @@
 /*
 *  时间： 2007-12-20 17:42:48<br>
-*  北京完美时空网络技术有限公司<br>
 */
 package org.david.rain.monitor.monitor.util;
 

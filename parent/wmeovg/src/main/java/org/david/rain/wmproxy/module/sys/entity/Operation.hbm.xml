@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.david.rain.wmproxy.module.sys.entity">
+	<class name="Operation" table="sys_operation">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="java.lang.Integer" column="ID"><generator class="native"/></id>	
+		<property name="url" column="URL" type="string" not-null="true" length="200"/>
+		<property name="note" column="NOTE" type="string" not-null="false" length="255"/>
+		<property name="status" column="STATUS" type="java.lang.Byte" not-null="false" length="1"/>	
+		
+		<many-to-one name="function" column="FUNCTIONID" class="Function" not-null="false"/>
+		
+		<set name="roles" table="sys_roleoperation">
+			<key column="OPERATIONID"/>
+			<many-to-many class="Role" column="ROLEID"/>
+		</set>
+		
+		<set name="users" table="sys_useroperation">
+			<key column="OPERATIONID"/>
+			<many-to-many class="User" column="USERID"/>
+		</set>
+		
+	</class>
+</hibernate-mapping>

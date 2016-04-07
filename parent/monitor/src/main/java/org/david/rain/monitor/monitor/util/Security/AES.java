@@ -7,7 +7,6 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.SecureRandom;
 
 /**
- * Created by hddev. User: 孟佳 Date: Nov 16, 2011 Time: 2:52:46 PM 完美时空活动开发
  */
 public class AES {
 	public static String encrypt(String seed, String cleartext)

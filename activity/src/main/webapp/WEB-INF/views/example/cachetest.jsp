@@ -9,8 +9,6 @@
   Created by IntelliJ IDEA.
   Date: 2011-10-25
   Time: 13:38:56
-  完美时空 游戏活动管理平台
-  作者：赵智勇
 --%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>

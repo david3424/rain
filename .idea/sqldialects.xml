@@ -3,7 +3,6 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/bhhd/src/sql/rain_bh.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/parent/hd-web/src/main/resources/sql/mysql/event.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/parent/hdauto/src/sql/rain_auto.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/parent/monitor/src/main/resources/sql/mysql/monitor_item.sql" dialect="MySQL" />
   </component>
 </project>

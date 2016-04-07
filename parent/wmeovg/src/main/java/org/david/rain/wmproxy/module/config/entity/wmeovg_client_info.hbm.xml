@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.david.rain.wmproxy.module.config.entity">
+	<class name="ClientInfo" table="wmeovg_client_info">
+		<meta attribute="sync-DAO">false</meta>
+		<cache usage="read-write"/>
+		<id name="id" type="int" column="id"><generator class="native"/></id>	
+		<property name="cid" column="cid" type="string" not-null="true" length="2"/>
+		<property name="name" column="name" type="string" not-null="true" length="255"/>
+		<property name="privateKey" column="private_key" type="string" not-null="true" length="32"/>
+		<property name="clientIp" column="client_ip" type="string" not-null="true" length="255"/>
+		<property name="priority" column="priority" type="byte" not-null="true" length="1"/>
+		<property name="rootUrl" column="root_url" type="string" not-null="true" length="255"/>
+		<property name="createtime" column="createtime" type="timestamp" not-null="true"/>
+		<property name="status" column="status" type="byte" not-null="false" length="1"/>
+		
+		<many-to-one name="user" column="user_id" class="org.david.rain.wmproxy.module.sys.entity.User" not-null="true"></many-to-one>
+		
+		<set name="whiteLists" table="wmeovg_prize_whitelist" cascade="all-delete-orphan"  inverse="true">
+			<key column="client_info_id"/>
+			<one-to-many class="WhiteList"/>
+		</set>
+	</class>
+</hibernate-mapping>

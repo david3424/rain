@@ -20,7 +20,6 @@
                 </div>
                 <div data-options="region:'south', minHeight: 30, maxHeight: 30">
                     <div style="text-align: center; padding-top: 5px;">
-                        @完美世界
                     </div>
                 </div>
 <%--tabs--%>

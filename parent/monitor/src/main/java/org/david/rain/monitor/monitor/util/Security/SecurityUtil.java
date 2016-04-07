@@ -4,7 +4,6 @@ package org.david.rain.monitor.monitor.util.Security;
  * User: 孟佳
  * Date: Nov 16, 2011
  * Time: 3:40:25 PM
- * 完美时空活动开发 
  */
 public class SecurityUtil {
 	/**

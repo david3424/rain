@@ -9,7 +9,6 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * Created by hddev. User: 孟佳 Date: Nov 16, 2011 Time: 2:52:46 PM 完美时空活动�?��
  */
 public class AES {
 	public static final String VIPARA = "0102030405060708";  
