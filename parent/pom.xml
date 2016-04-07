@@ -17,7 +17,7 @@
         <module>common</module>
         <module>hd-web</module>
         <module>monitor</module>
-        <module>hdauto</module>
+        <!--<module>hdauto</module>-->
         <module>wmeovg</module>
     </modules>
 
