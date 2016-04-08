@@ -9,7 +9,7 @@
 		<property name="note" column="NOTE" type="string" not-null="false" length="255"/>
 		<property name="status" column="STATUS" type="java.lang.Byte" not-null="false" length="1"/>	
 		
-		<set name="users" table="sys_userrole" >
+		<set name="users"  lazy="false"   table="sys_userrole" >
 			<key column="ROLEID"/>
 			<many-to-many class="User" column="USERID"/>
 		</set>
