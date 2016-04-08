@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+    <diskStore path="java.io.tmpdir"/>
+	<cacheManagerEventListenerFactory class="" properties=""/>
+    <defaultCache maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" 
+    overflowToDisk="true" diskSpoolBufferSizeMB="30" maxElementsOnDisk="10000000" diskPersistent="false" 
+    diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU"/>
+	
+	<cache name="org.hibernate.cache.StandardQueryCache"
+        maxElementsInMemory="10000"
+        eternal="false"
+        timeToIdleSeconds="300"
+        timeToLiveSeconds="4200"
+        overflowToDisk="true"/>
+        
+    <cache name="org.hibernate.cache.UpdateTimestampsCache"
+        maxElementsInMemory="5000"
+        eternal="true"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="0"
+        overflowToDisk="false"/> 
+	  
+	<cache name="org.david.rain.wmproxy.module.config.entity.ClientInfo" maxElementsInMemory="100" eternal="true" overflowToDisk="true"/>
+	<cache name="org.david.rain.wmproxy.module.config.entity.WhiteList" maxElementsInMemory="100" eternal="true" overflowToDisk="true"/>
+	<cache name="org.david.rain.wmproxy.module.config.entity.Game" maxElementsInMemory="100" eternal="true" overflowToDisk="true"/>
+	<cache name="com.wanmei.wmeovg.request.entity.PrizeLog" maxElementsInMemory="5000" eternal="true" overflowToDisk="true"/>
+	<cache name="org.david.rain.wmproxy.module.sys.entity.User" maxElementsInMemory="100" eternal="true" overflowToDisk="true"/>
+	<cache name="org.david.rain.wmproxy.module.sys.entity.Role" maxElementsInMemory="100" eternal="true" overflowToDisk="true"/>
+	<cache name="org.david.rain.wmproxy.module.sys.entity.Operation" maxElementsInMemory="500" eternal="true" overflowToDisk="true"/>
+	<cache name="org.david.rain.wmproxy.module.sys.entity.Model" maxElementsInMemory="200" eternal="true" overflowToDisk="true"/>
+	<cache name="org.david.rain.wmproxy.module.sys.entity.Function" maxElementsInMemory="500" eternal="true" overflowToDisk="true"/>
+	<cache name="org.david.rain.wmproxy.module.sys.entity.Log" maxElementsInMemory="100" eternal="true" overflowToDisk="true"/>
+</ehcache>

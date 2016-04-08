@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    
+    <package name="wmeovg-default" abstract="true" extends="struts-default">
+		<interceptors>
+			<interceptor name="authInterceptor" class="org.david.rain.wmproxy.module.interceptor.CheckLoginInterceptor"/>
+			<interceptor-stack name="authStack">
+    			<interceptor-ref name="authInterceptor"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+		</interceptors>	 
+		<default-interceptor-ref name="authStack"/>
+    	
+    	<global-results>
+    		<result name="impermit">/error/relogin.jsp</result>
+    	</global-results> 	
+    </package>	
+    
+    <include file="org/david/rain/wmproxy/module/sys/struts.xml"/>
+    <include file="org/david/rain/wmproxy/module/config/struts.xml"/>
+    <include file="org/david/rain/wmproxy/module/service/struts.xml"/>
+    <include file="org/david/rain/wmproxy/module/export/struts.xml"/>
+    <include file="org/david/rain/wmproxy/module/upload/struts.xml"/>
+</struts>

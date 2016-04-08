@@ -1,0 +1,182 @@
+/*
+.x-grid3-header-offset{width:auto}
+*/
+#north-div{
+	vertical-align:middle;
+	font-size:20pt;
+	font-weight:bolder;
+	height: 80px;
+	line-height: 80px;
+	background-color:#d6e3f7;
+}
+
+.grid-blank{
+	position: absolute; 
+	left: 20px; 
+	top:20px;
+}
+
+.add {
+    background-image:url(/wmeovg/images/add.png) !important;
+}
+.delete {
+    background-image:url(/wmeovg/images/delete.png) !important;
+}
+.edit {
+    background-image:url(/wmeovg/images/wrench_orange.png) !important;
+}
+.accept {
+    background-image:url(/wmeovg/images/accept.png) !important;
+}
+.refresh {
+    background-image:url(/wmeovg/js/ext/resources/images/default/grid/refresh.gif) !important;
+}
+.x-combo-list-height{
+	height:auto;
+}
+#ext-gen387{
+	height:auto;
+}
+.upload-icon{
+	background:url('/wmeovg/js/ext/examples/shared/icons/fam/image_add.png') no-repeat 0 0 !important;
+}
+/*
+.editor{
+	margin-left: auto;
+	margin-right: auto;
+	height: 600px;
+	width: 800px;
+	vertical-align: middle;
+	border: 1px solid red;
+}*/
+
+.x-tree-node div.feeds-node{
+    background:#eee url(/wmeovg/js/ext/examples/feed-viewer/images/cmp-bg.gif) repeat-x;
+    margin-top:1px;
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ccc;
+    padding-top:2px;
+    padding-bottom:1px;
+}
+
+.feeds-node .x-tree-node-icon {
+    display:none;
+}
+
+.feed {
+    border:1px solid #fff;
+    margin:3px;
+}
+.feed .x-tree-ec-icon {
+    display:none;
+}
+.picture-icon{
+	background-image:url(/wmeovg/images/picture.png) !important;
+}
+.server-icon{
+	background-image:url(/wmeovg/images/server.png) !important;
+}
+.checkbox-icon{
+	background-image:url(/wmeovg/images/checked.gif) !important;
+}
+.radio-icon{
+	background-image:url(/wmeovg/images/radio.gif) !important;
+}
+.text-icon{
+	background-image:url(/wmeovg/images/field-text.gif) !important;
+}
+
+.textarea-icon{
+	background-image:url(/wmeovg/images/field-textarea.gif) !important;
+}
+.label-icon{
+	background-image:url(/wmeovg/images/label.gif) !important;
+}
+.button-icon{
+	background-image:url(/wmeovg/images/button.png) !important;
+}
+.select-icon{
+	background-image:url(/wmeovg/images/application_view_list.png) !important;
+}
+
+.database-save-icon{
+	background-image:url(/wmeovg/images/database_save.png) !important;
+}
+
+.database-delete-icon{
+	background-image:url(/wmeovg/images/database_delete.png) !important;
+}
+
+.database-gear-icon{
+	background-image:url(/wmeovg/images/database_gear.png) !important;
+}
+
+.bullet-delete-icon{
+	background-image:url(/wmeovg/images/bullet_delete.png) !important;
+}
+
+.bullet-disk-icon{
+	background-image:url(/wmeovg/images/bullet_disk.png) !important;
+}
+
+.disk-icon{
+	background-image:url(/wmeovg/images/disk.png) !important;
+}
+
+.time-icon{
+	background-image:url(/wmeovg/images/time.png) !important;
+}
+
+.cog-icon{
+	background-image:url(/wmeovg/images/cog.png) !important;
+}
+
+.link-icon{
+	background-image:url(/wmeovg/images/link_go.png) !important;
+}
+.tree-area .x-panel-header{
+	background-image: none;
+	font-weight: normal;
+}
+
+.editor-area .x-panel-body{
+	background-image:url(/wmeovg/images/grid.png) !important;
+	padding: 12.5px;
+}
+
+.item-selected{
+	cursor: move;
+	padding:1px;
+	border: solid 2px blue;
+}
+.x-tool-add{
+	background-image:url(/wmeovg/images/add.png) !important;
+}
+.x-btn-pressed button{
+	barckground-color:red
+}
+
+.attach-icon{
+	background-image:url(/wmeovg/images/attach.png) !important;
+}
+
+.tab-background{
+	background: url(/wmeovg/images/content_background.png) repeat-x #fff;
+}
+
+.excel-icon{
+	background-image:url(/wmeovg/images/page_white_excel.png) !important;
+}
+
+.magifier-zoom-out-icon{
+	background-image:url(/wmeovg/images/magifier_zoom_out.png) !important;
+}
+.magnifier-icon{
+	background-image:url(/wmeovg/images/magnifier.png) !important;
+}
+.exclamation-icon{
+	background-image:url(/wmeovg/images/exclamation.png) !important;
+}
+.export-icon{
+	background-image:url(/wmeovg/images/table_add.png) !important;
+}

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+  xmlns="http://www.springframework.org/schema/beans"
+  xmlns:amq="http://activemq.apache.org/schema/core"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+  http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
+  http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+ 
+  <broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost"
+  		persistent="true" dataDirectory="/web/JSPWeb/webapps/prize_webapps/data/temp" useJmx="true">
+        
+	<managementContext>
+	   <managementContext createConnector="true" connectorPort="1099" jmxDomainName="jmx.domain"/>
+	</managementContext>	
+    <persistenceAdapter>
+		<kahaDB directory="/web/JSPWeb/webapps/prize_webapps/data/kahadb"  />
+		<!-- <jdbcPersistenceAdapter dataSource="#mysqlDataSource"/>  -->
+	</persistenceAdapter> 
+	<systemUsage>
+		<systemUsage sendFailIfNoSpaceAfterTimeout="3000" sendFailIfNoSpace="true">
+			<memoryUsage>
+				<memoryUsage limit="200 mb"/>
+			</memoryUsage>
+			<storeUsage>
+				<storeUsage limit="50 gb"/>
+			</storeUsage>
+			<tempUsage>
+				<tempUsage limit="500 mb"/>
+			</tempUsage>
+		</systemUsage>
+	</systemUsage>
+    <transportConnectors>
+      <transportConnector uri="tcp://0.0.0.0:61616"/>  
+    </transportConnectors> 
+         
+  </broker> 
+  <!-- MySql dataSource -->
+    <!-- <bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.gjt.mm.mysql.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost/wmeovg?relaxAutoCommit=true&amp;characterEncoding=UTF8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="4252520"/>
+        <property name="validationQuery" value="SELECT 1"></property>
+        <property name="testWhileIdle" value="true"></property>
+        <property name="timeBetweenEvictionRunsMillis" value="3600000"></property>
+        <property name="minEvictableIdleTimeMillis" value="18000000"></property>
+        <property name="testOnBorrow" value="true"></property>
+        <property name="poolPreparedStatements" value="true"/>
+    </bean>
+  
+    <bean id="mysqlDataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+        <property name="driver" value="org.gjt.mm.mysql.Driver"/>
+        <property name="driverUrl" value="jdbc:mysql://localhost/wmeovg?relaxAutoCommit=true&amp;characterEncoding=UTF8"/>
+        <property name="user" value="root"/>
+        <property name="password" value="4252520"/>
+        <property name="houseKeepingTestSql" value="select CURRENT_DATE"></property>
+    </bean>
+     -->
+</beans>
