@@ -127,7 +127,7 @@ Ext.onReady(function(){
 				name:'entity.rootUrl',
 				//regex:/^https?:\/\/(([\w-]+(:[0-9]+)?)|(([\w-]+\.)+[\w-]+(:[0-9]+)?))(\/[\w-]+)*$/,
 				regex:/^https?:\/\/(([\w-]+(:[0-9]+)?)|(([\w-]+\.)+[\w-]+(:[0-9]+)?))(\/[\w-\.]+)*$/,
-				regexText:'请输入正确的URL地址(http或https)<br/>如http://www.wanmei.com 或 http://www.wanmei.com/myapp',
+				regexText:'请输入正确的URL地址(http或https)<br/>',
 				autoCreate:{tag:'input',type:'text', maxlength:'250'},
 				allowBlank:false,
 				width:250
@@ -243,7 +243,7 @@ Ext.onReady(function(){
 				name:'entity.rootUrl',
 				//regex:/^https?:\/\/(([\w-]+(:[0-9]+)?)|(([\w-]+\.)+[\w-]+(:[0-9]+)?))(\/[\w-]+)*$/,
 				regex:/^https?:\/\/(([\w-]+(:[0-9]+)?)|(([\w-]+\.)+[\w-]+(:[0-9]+)?))(\/[\w-\.]+)*$/,
-				regexText:'请输入正确的URL地址(http或https)<br/>如http://www.wanmei.com 或 http://www.wanmei.com/myapp',
+				regexText:'请输入正确的URL地址(http或https)<br/>',
 				autoCreate:{tag:'input',type:'text', maxlength:'250'},
 				allowBlank:false,
 				width:250

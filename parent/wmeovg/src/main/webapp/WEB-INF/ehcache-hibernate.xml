@@ -23,7 +23,7 @@
 	<cache name="org.david.rain.wmproxy.module.config.entity.ClientInfo" maxElementsInMemory="100" eternal="true" overflowToDisk="true"/>
 	<cache name="org.david.rain.wmproxy.module.config.entity.WhiteList" maxElementsInMemory="100" eternal="true" overflowToDisk="true"/>
 	<cache name="org.david.rain.wmproxy.module.config.entity.Game" maxElementsInMemory="100" eternal="true" overflowToDisk="true"/>
-	<cache name="com.wanmei.wmeovg.request.entity.PrizeLog" maxElementsInMemory="5000" eternal="true" overflowToDisk="true"/>
+	<cache name="org.david.rain.wmeovg.request.entity.PrizeLog" maxElementsInMemory="5000" eternal="true" overflowToDisk="true"/>
 	<cache name="org.david.rain.wmproxy.module.sys.entity.User" maxElementsInMemory="100" eternal="true" overflowToDisk="true"/>
 	<cache name="org.david.rain.wmproxy.module.sys.entity.Role" maxElementsInMemory="100" eternal="true" overflowToDisk="true"/>
 	<cache name="org.david.rain.wmproxy.module.sys.entity.Operation" maxElementsInMemory="500" eternal="true" overflowToDisk="true"/>
