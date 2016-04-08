@@ -4,15 +4,13 @@
 	"http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<!-- 所有的package继承wmeovg-default-->
 	<package name="sys" namespace="/sys" extends="wmeovg-default">
-		<!-- 后台管理 -->
-		<action name="tree"  class="com.module.sys.action.tree.TreeAction"/>    
-		<action name="node"  class="com.module.sys.action.tree.NodeAction"/>    
-		<action name="user_*"  class="com.module.sys.action.user.UserAction" method="{1}"/> 
-		<action name="model_*"  class="com.module.sys.action.model.ModelAction" method="{1}"/> 
-		<action name="fuc_*"  class="com.module.sys.action.function.FucAction" method="{1}"/> 
-		<action name="role_*"  class="com.module.sys.action.role.RoleAction" method="{1}"/> 
-		<action name="log_*"  class="com.module.sys.action.log.LogAction" method="{1}"/> 
+		<action name="tree"  class="org.david.rain.wmproxy.module.sys.action.tree.TreeAction"/>
+		<action name="node"  class="org.david.rain.wmproxy.module.sys.action.tree.NodeAction"/>    
+		<action name="user_*"  class="org.david.rain.wmproxy.module.sys.action.user.UserAction" method="{1}"/> 
+		<action name="model_*"  class="org.david.rain.wmproxy.module.sys.action.model.ModelAction" method="{1}"/> 
+		<action name="fuc_*"  class="org.david.rain.wmproxy.module.sys.action.function.FucAction" method="{1}"/> 
+		<action name="role_*"  class="org.david.rain.wmproxy.module.sys.action.role.RoleAction" method="{1}"/> 
+		<action name="log_*"  class="org.david.rain.wmproxy.module.sys.action.log.LogAction" method="{1}"/> 
 	</package>   
 </struts>

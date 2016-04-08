@@ -40,7 +40,7 @@ public class TreeIntercptor extends EmptyInterceptor {
 			String beanName = tree.getClass().getName();
 			Session session = getSession();
 			FlushMode model = session.getFlushMode();
-			session.setFlushMode(FlushMode.AUTO);
+			session.setFlushMode(FlushMode.MANUAL);
 			Integer myPosition = new Integer(0);
 			if (parentId != null) {
 				String hql = "select b.lft from " + beanName
@@ -100,7 +100,7 @@ public class TreeIntercptor extends EmptyInterceptor {
 			String beanName = tree.getClass().getName();
 			Session session = getSession();
 			FlushMode model = session.getFlushMode();
-			session.setFlushMode(FlushMode.AUTO);
+			session.setFlushMode(FlushMode.MANUAL);
 
 			// 获得节点位置
 			String hql = "select b.lft,b.rgt from " + beanName
@@ -172,7 +172,7 @@ public class TreeIntercptor extends EmptyInterceptor {
 			String beanName = tree.getClass().getName();
 			Session session = getSession();
 			FlushMode model = session.getFlushMode();
-			session.setFlushMode(FlushMode.AUTO);
+			session.setFlushMode(FlushMode.MANUAL);
 			String hql = "select b.lft from " + beanName + " b where b.id=:id";
 			Integer myPosition = (Integer) session.createQuery(hql).setLong(
 					"id", tree.getId()).uniqueResult();
