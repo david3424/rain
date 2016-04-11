@@ -47,7 +47,7 @@ Ext.onReady(function(){
 			root: 'records',
 			fields:['id','name']
 		});
-	    instance.clientInfoStore.load({params:{start:0,limit:0,query:''}});
+	    instance.clientInfoStore.load({params:{start:0,limit:20,query:''}});
 	    this.gameStore = new Ext.data.JsonStore({
 			idProperty:'id',
 			totalProperty:'totalCount',
@@ -55,7 +55,7 @@ Ext.onReady(function(){
 			root: 'records',
 			fields:['id','name']
 		});
-	    instance.gameStore.load({params:{start:0,limit:0,query:''}});
+	    instance.gameStore.load({params:{start:0,limit:20,query:''}});
 		/**
 		 * 添加
 		 */

@@ -6,6 +6,7 @@ Target Host: localhost
 Target Database: wmeovg
 Date: 2010-9-3 16:34:20
 */
+CREATE DATABASE wmeovg CHARSET = utf8;
 use wmeovg;
 SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------

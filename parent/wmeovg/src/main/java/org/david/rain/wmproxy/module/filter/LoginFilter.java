@@ -23,115 +23,104 @@ import java.util.Date;
 
 /**
  * 登陆过滤器
- * 
- *         判断权限，记录User
+ * <p/>
+ * 判断权限，记录User
  */
 public class LoginFilter implements Filter {
 
-	protected Logger log = LoggerFactory.getLogger(getClass());
+    protected Logger log = LoggerFactory.getLogger(getClass());
 
-	private static final String USER_BEAN_NAME = "userMngImpl";
-	private static final String LOG_BEAN_NAME = "logMngImpl";
-	private UserMng userMng;
-	private LogMng logMng;
+    private static final String USER_BEAN_NAME = "userMngImpl";
+    private static final String LOG_BEAN_NAME = "logMngImpl";
+    private UserMng userMng;
+    private LogMng logMng;
 
-	private static final String CERTIFICATE_KEY = "javax.servlet.request.X509Certificate";
+//	private static final String CERTIFICATE_KEY = "javax.servlet.request.X509Certificate";
 
-	public void init(FilterConfig filterConfig) throws ServletException {
-		WebApplicationContext wac = WebApplicationContextUtils
-				.getRequiredWebApplicationContext(filterConfig
-						.getServletContext());
-		userMng = (UserMng) wac.getBean(USER_BEAN_NAME, UserMng.class);
-		logMng = (LogMng) wac.getBean(LOG_BEAN_NAME, LogMng.class);
-	}
+    public void init(FilterConfig filterConfig) throws ServletException {
+        WebApplicationContext wac = WebApplicationContextUtils
+                .getRequiredWebApplicationContext(filterConfig
+                        .getServletContext());
+        userMng = wac.getBean(USER_BEAN_NAME, UserMng.class);
+        logMng = wac.getBean(LOG_BEAN_NAME, LogMng.class);
+    }
 
-	public void doFilter(ServletRequest servletRequest,
-			ServletResponse servletResponse, FilterChain filterChain)
-			throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest,
+                         ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
 
-		HttpServletRequest request = (HttpServletRequest) servletRequest;
-		HttpServletResponse response = (HttpServletResponse) servletResponse;
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
 
 		/*
-		 * ======================================================================
+         * ======================================================================
 		 * 排除发奖请求 、ws接口请求 和 action请求(action系统已配置拦截器，用于ajax访问限制)
 		 */
-		String requestURI = request.getRequestURI();
-		String ctxPath = request.getContextPath();
-		String requestServlet = "/servlet/prizerequest";
-		String wsServlet = "/hessian/prizeService";
+        String requestURI = request.getRequestURI();
+        String ctxPath = request.getContextPath();
+        String requestServlet = "/servlet/prizerequest";
+        String wsServlet = "/hessian/prizeService";
 
-		String path = requestURI.substring(ctxPath.length());
-		if (path.equals(requestServlet) || path.equals(wsServlet)
-				|| requestURI.endsWith(".action")) {
-			filterChain.doFilter(servletRequest, servletResponse);
-			return;
-		}
-		/*
+        String path = requestURI.substring(ctxPath.length());
+        if (path.equals(requestServlet) || path.equals(wsServlet)
+                || requestURI.endsWith(".action")) {
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }
+        /*
 		 * =====================================================================
 		 */
 
-		X509Certificate certs[] = (X509Certificate[]) servletRequest
-				.getAttribute(CERTIFICATE_KEY);
-		String sessionUser = (String) request.getSession().getAttribute(
-				User.LOGIN_NAME_KEY);
-		if (sessionUser == null && certs != null && certs.length > 0) {
+        String sessionUser = (String) request.getSession().getAttribute( User.LOGIN_NAME_KEY);
+        if (sessionUser == null) {
 
-			String loginName = null;
+            String loginName = null;
+            loginName = "admin";
 
-			X509Certificate certs1 = certs[0];
-			Principal principal = certs1.getSubjectDN();
-			String sName = principal.getName();
+            User user = userMng.getByLoginName(loginName);
 
-			int index = sName.indexOf("CN=");
-			int index2 = sName.indexOf(",", index);
-			if (index >= 0 && index2 > index + 3)
-				loginName = sName.substring(index + 3, index2);
-			else if (index >= 0 && index2 == -1)
-				loginName = sName.substring(index + 3);
+            if (user == null) {
 
-			User user = userMng.getByLoginName(loginName);
+                log.info("用户({})登录失败：没有权限", loginName);
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                        "==========您没有权限访问此页面==========");
+                return;
+            } else {
+                String name = user.getName();
+                log.info("用户{}({})登录成功", name, loginName);
+                Log log = new Log();
+                log.setUser(user);
+                log.setContent("登录成功");
+                log.setIp(IpUtils.gerRealIp(request));
+                log.setCreatetime(DateUtil
+                        .format(new Date(), DateUtil.DATETIME));
 
-			if (user == null) {
+                logMng.save(log);
 
-				log.info("用户({})登录失败：没有权限", loginName);
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-						"==========您没有权限访问此页面==========");
-				return;
-			} else {
-				String name = user.getName();
-				log.info("用户{}({})登录成功", name, loginName);
-				Log log = new Log();
-				log.setUser(user);
-				log.setContent("登录成功");
-				log.setIp(IpUtils.gerRealIp(request));
-				log.setCreatetime(DateUtil
-						.format(new Date(), DateUtil.DATETIME));
+                request.getSession().setAttribute(User.LOGIN_NAME_KEY,
+                        loginName);
+                response.sendRedirect(request.getContextPath() + "/index.html");
+                filterChain.doFilter(request, response);
+                return;
+            }
+        } 
+        /*else {
+            if (certs == null || certs.length == 0) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                        "==========请检查您的Key是否有效==========");
+                return;
+            } else if (request.getSession().getAttribute(User.LOGIN_NAME_KEY) == null) {
+                // 不合法；
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
+                        "==========您没有权限访问此页面==========");
+                return;
+            }
+        }*/
 
-				logMng.save(log);
+        filterChain.doFilter(servletRequest, servletResponse);
+    }
 
-				request.getSession().setAttribute(User.LOGIN_NAME_KEY,
-						loginName);
-				response.sendRedirect(request.getContextPath() + "/index.html");
-				return;
-			}
-		} else {
-			if (certs == null || certs.length == 0) {
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-						"==========请检查您的Key是否有效==========");
-				return;
-			} else if (request.getSession().getAttribute(User.LOGIN_NAME_KEY) == null) {
-				// 不合法；
-				response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
-						"==========您没有权限访问此页面==========");
-				return;
-			}
-		}
-
-		filterChain.doFilter(servletRequest, servletResponse);
-	}
-
-	public void destroy() {
-	}
+    public void destroy() {
+    }
 
 }
