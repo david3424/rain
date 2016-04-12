@@ -12,8 +12,8 @@
         <param-value>webApp.root-monitor</param-value>
     </context-param>
     <listener>
-            <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-        </listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
     <listener>
         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
     </listener>
@@ -36,6 +36,21 @@
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
     </listener>
 
+    <!--wmeovg-->
+    <servlet>
+        <servlet-name>wmeovgCallbackServlet</servlet-name>
+        <servlet-class>org.david.rain.wmeovg.callback.servlet.CallbackServlet</servlet-class>
+        <init-param>
+            <param-name>callback</param-name>
+            <param-value>org.david.rain.monitor.monitor.service.server.SendPrizeCallbackService</param-value>
+        </init-param>
+        <load-on-startup>4</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>wmeovgCallbackServlet</servlet-name>
+        <url-pattern>/servlet/wmeovg/callback</url-pattern>
+    </servlet-mapping>
+    
     <!-- Shiro filter-->
     <filter>
         <filter-name>shiroFilter</filter-name>
@@ -44,7 +59,8 @@
         </filter-class>
         <init-param>
             <!-- 该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由ServletContainer管理 -->
-            <param-name>targetFilterLifecycle</param-name><!--spring来管理filter周期 代理类作用是把请求分发到filter同名的bean中-->
+            <param-name>targetFilterLifecycle</param-name>
+            <!--spring来管理filter周期 代理类作用是把请求分发到filter同名的bean中-->
             <param-value>true</param-value>
         </init-param>
     </filter>
@@ -52,7 +68,6 @@
         <filter-name>shiroFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
 
     <servlet>
         <servlet-name>springServlet</servlet-name>
@@ -67,7 +82,6 @@
         <servlet-name>springServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
 
     <session-config>
         <session-timeout>30</session-timeout>

@@ -45,7 +45,7 @@
           class="org.david.rain.wmproxy.module.activemq.requestqueue.RequestMessageConsumer"/>
     <bean id="requestContainer"
           class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-        <property name="concurrentConsumers" value="30"/>
+        <property name="concurrentConsumers" value="3"/>
         <property name="connectionFactory" ref="connectionFactory"/>
         <property name="destination" ref="requestDestination"/>
         <property name="messageListener" ref="requestMessageListener"/>
@@ -110,17 +110,6 @@
         </property>
     </bean>
     <!--   Callback Queue  end  -->
-
-    <!--   Goods Queue  start  -->
-    <bean id="goodsDestination" class="org.apache.activemq.command.ActiveMQQueue">
-        <constructor-arg index="0" value="${jms.goods.queue}"/>
-    </bean>
-    <bean id="goodsJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-        <property name="connectionFactory" ref="connectionFactory"/>
-        <property name="defaultDestination" ref="goodsDestination"/>
-        <property name="receiveTimeout" value="6000"/>
-    </bean>
-
 
     <!--   Activemq.DLQ Queue  start  -->
     <bean id="dlqDestination" class="org.apache.activemq.command.ActiveMQQueue">

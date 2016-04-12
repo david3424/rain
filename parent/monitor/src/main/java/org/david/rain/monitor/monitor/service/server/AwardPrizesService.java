@@ -66,7 +66,7 @@ public class AwardPrizesService {
 
     private List<PrizeBean> getRecordsByCount() throws SQLException {
 
-        return commonDao.queryObjects(PrizeBean.class, "select * from " + sendPrize.getTableName() + " where status = 0 limit 30 ");
+        return commonDao.queryObjects(PrizeBean.class, "select * from " + sendPrize.getTableName() + " where status = 0 limit 1 ");
     }
 
     private boolean is_open() throws SQLException {

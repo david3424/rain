@@ -1,117 +1,110 @@
 package org.david.rain.wmeovg.callback.servlet;
 
-import java.security.NoSuchAlgorithmException;
+import org.david.rain.wmeovg.request.util.SignatureUtil;
+import org.david.rain.wmeovg.request.util.WmeovgProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sun.misc.BASE64Decoder;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
-import org.david.rain.wmeovg.request.util.SignatureUtil;
-import org.david.rain.wmeovg.request.util.WmeovgProperties;
-import sun.misc.BASE64Decoder;
+import java.security.NoSuchAlgorithmException;
 
 /**
+ * @version 1.0
  * @ClassName CallbackServlet
- * @Description ¿Í»§¶Ë»Øµ÷½Ó¿Ú
- * @date 2010-8-6 ÉÏÎç10:45:39
+ * @Description å®¢æˆ·ç«¯å›è°ƒæ¥å£
+ * @date 2010-8-6 ä¸Šåˆ10:45:39
  */
 public class CallbackServlet extends HttpServlet {
 
-	// protected static Logger log =
-	// LoggerFactory.getLogger(CallbackServlet.class);
-	private static final long serialVersionUID = 1L;
-	public static ICallbackService callbackService;
+    protected static Logger log = LoggerFactory.getLogger(CallbackServlet.class);
+    private static final long serialVersionUID = 1L;
+    public static ICallbackService callbackService;
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void init(ServletConfig config) throws ServletException {
+    @SuppressWarnings("unchecked")
+    @Override
+    public void init(ServletConfig config) throws ServletException {
 
-		String callback = config.getInitParameter("callback");
-		Object callbackObject = null;
+        String callback = config.getInitParameter("callback");
+        Object callbackObject = null;
 
-		if (null == callbackService) {
+        if (null == callbackService) {
+            try {
+                Class callbackClass = Class.forName(callback);
+                callbackObject = callbackClass.newInstance();
+            } catch (Exception e) {
+                System.err.println("è™šæ‹Ÿç‰©å“å…‘æ¢ç³»ç»Ÿå›è°ƒæ¥å£å®ä¾‹åŒ–å¤±è´¥ï¼šç±»" + callback + "ä¸å­˜åœ¨æˆ–ä¸èƒ½è¢«å®ä¾‹åŒ–");
+                throw new ServletException("è™šæ‹Ÿç‰©å“å…‘æ¢ç³»ç»Ÿå›è°ƒæ¥å£å®ä¾‹åŒ–å¤±è´¥ï¼šç±»" + callback + "ä¸å­˜åœ¨æˆ–ä¸èƒ½è¢«å®ä¾‹åŒ–");
+            }
+            if (!(callbackObject instanceof ICallbackService)) {
+                System.err.println("è™šæ‹Ÿç‰©å“å…‘æ¢å›è°ƒæ¥å£å®ä¾‹åŒ–å¤±è´¥ï¼šæ²¡æœ‰ç»§æ‰¿ICallbackServiceæ¥å£");
+                throw new ServletException(
+                        "è™šæ‹Ÿç‰©å“å…‘æ¢å›è°ƒæ¥å£æ²¡æœ‰ç»§æ‰¿callback.servlet.ICallbackServiceæ¥å£");
+            }
+            callbackService = (ICallbackService) callbackObject;
+            callbackService.init(config);
+        }
+    }
 
-			try {
-				Class callbackClass = Class.forName(callback);
-				callbackObject = callbackClass.newInstance();
-			} catch (Exception e) {
-				System.err.println("ĞéÄâÎïÆ·¶Ò»»ÏµÍ³»Øµ÷½Ó¿ÚÊµÀı»¯Ê§°Ü£ºÀà" + callback
-						+ "²»´æÔÚ»ò²»ÄÜ±»ÊµÀı»¯");
-				throw new ServletException("ĞéÄâÎïÆ·¶Ò»»ÏµÍ³»Øµ÷½Ó¿ÚÊµÀı»¯Ê§°Ü£ºÀà" + callback
-						+ "²»´æÔÚ»ò²»ÄÜ±»ÊµÀı»¯");
-				// log.error("ĞéÄâÎïÆ·¶Ò»»ÏµÍ³£º»Øµ÷½Ó¿ÚÊµÀı»¯´íÎó", gid);
-			}
-			if (!(callbackObject instanceof ICallbackService)) {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
-				System.err.println("ĞéÄâÎïÆ·¶Ò»»»Øµ÷½Ó¿ÚÊµÀı»¯Ê§°Ü£ºÃ»ÓĞ¼Ì³ĞICallbackService½Ó¿Ú");
-				throw new ServletException(
-						"ĞéÄâÎïÆ·¶Ò»»»Øµ÷½Ó¿ÚÃ»ÓĞ¼Ì³ĞICallbackService½Ó¿Ú");
-			}
+        String gid = req.getParameter("gid");
+        String cid = req.getParameter("cid");
+        String appid = req.getParameter("appid");
 
-			callbackService = (ICallbackService) callbackObject;
-			callbackService.init(config);
-		}
-	}
+        int status = -1;
+        try {
+            status = Integer.parseInt(req.getParameter("status"));
+        } catch (Exception e) {
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp){
+            // log.error("è™šæ‹Ÿç‰©å“å…‘æ¢ç³»ç»Ÿï¼šæµæ°´å·[{}]è¿”å›çŠ¶æ€é”™è¯¯", gid);
+            resp.setStatus(1001);
+            return;
+        }
+        int count = Integer.parseInt(req.getParameter("count"));
+        String callback;
+        try {
+            callback = new String((new BASE64Decoder()).decodeBuffer(req
+                    .getParameter("callback")), "UTF-8");
+            log.info("+++++++++============callback ======" + callback);
+        } catch (Exception e1) {
 
-		String gid = req.getParameter("gid");
-		String cid = req.getParameter("cid");
-		String appid = req.getParameter("appid");
-		
-		int status = -1;
-		try {
-			status = Integer.parseInt(req.getParameter("status"));
-		} catch (Exception e) {
+            // log.error("è™šæ‹Ÿç‰©å“å…‘æ¢ç³»ç»Ÿï¼šæµæ°´å·[{}]å›è°ƒå‚æ•°è§£ç é”™è¯¯", gid);
+            System.err.println("è™šæ‹Ÿç‰©å“å…‘æ¢å›è°ƒæ¥å£ï¼šå›è°ƒå‚æ•°è§£ç é”™è¯¯");
+            resp.setStatus(1002);
+            return;
+        }
 
-			// log.error("ĞéÄâÎïÆ·¶Ò»»ÏµÍ³£ºÁ÷Ë®ºÅ[{}]·µ»Ø×´Ì¬´íÎó", gid);
-			resp.setStatus(1001);
-			return;
-		}
-		int count = Integer.parseInt(req.getParameter("count"));
-		String callback;
-		try {
-			callback = new String((new BASE64Decoder()).decodeBuffer(req
-					.getParameter("callback")), "UTF-8");
-			// log.info("+++++++++============callback ======" + callback);
-		} catch (Exception e1) {
+        String sign = req.getParameter("sign");
+        // éªŒè¯ç­¾å
+        try {
+            if (null != sign
+                    && !sign.equals(SignatureUtil.sign(gid.trim() + status + callback.trim() + WmeovgProperties.getPrivateKey().trim()))) {
+                log.info("è™šæ‹Ÿç‰©å“å…‘æ¢ç³»ç»Ÿï¼šæµæ°´å·[{}]å®¢æˆ·ç«¯å›è°ƒæ¶ˆæ¯ä¸åˆæ³•", gid);
+                System.err.println("è™šæ‹Ÿç‰©å“å…‘æ¢å›è°ƒæ¥å£ï¼šå®¢æˆ·ç«¯å›è°ƒå‚æ•°ä¸åˆæ³•");
+                resp.setStatus(1001);
+                return;
+            }
+        } catch (NoSuchAlgorithmException e) {
 
-			// log.error("ĞéÄâÎïÆ·¶Ò»»ÏµÍ³£ºÁ÷Ë®ºÅ[{}]»Øµ÷²ÎÊı½âÂë´íÎó", gid);
-			System.err.println("ĞéÄâÎïÆ·¶Ò»»»Øµ÷½Ó¿Ú£º»Øµ÷²ÎÊı½âÂë´íÎó");
-			resp.setStatus(1002);
-			return;
-		}
+            System.err.println("è™šæ‹Ÿç‰©å“å…‘æ¢å›è°ƒæ¥å£ï¼šæ•°æ®ç­¾åå¤±è´¥");
+            resp.setStatus(1003);
+            return;
+        }
 
-		String sign = req.getParameter("sign");
-		// ÑéÖ¤Ç©Ãû
-		try {
-			if (null != sign
-					&& !sign.equals(SignatureUtil.sign(gid.trim() + status + callback.trim() + WmeovgProperties.getPrivateKey().trim()))) {
+        try {
+            callbackService.receive(gid, cid, appid, status, count, callback);
+        } catch (Exception e) {
 
-				// log.info("ĞéÄâÎïÆ·¶Ò»»ÏµÍ³£ºÁ÷Ë®ºÅ[{}]¿Í»§¶Ë»Øµ÷ÏûÏ¢²»ºÏ·¨", gid);
-				System.err.println("ĞéÄâÎïÆ·¶Ò»»»Øµ÷½Ó¿Ú£º¿Í»§¶Ë»Øµ÷²ÎÊı²»ºÏ·¨");
-				resp.setStatus(1001);
-				return;
-			}
-		} catch (NoSuchAlgorithmException e) {
-
-			System.err.println("ĞéÄâÎïÆ·¶Ò»»»Øµ÷½Ó¿Ú£ºÊı¾İÇ©ÃûÊ§°Ü");
-			resp.setStatus(1003);
-			return;
-		}
-
-		try {
-			callbackService.receive(gid, cid, appid, status, count, callback);
-		} catch (Exception e) {
-			
-			System.err.println("ĞéÄâÎïÆ·¶Ò»»»Øµ÷½Ó¿Ú£ºÊı¾İ½ÓÊÕ´¦ÀíÒì³£");
-			e.printStackTrace();
-			resp.setStatus(1004);
-			return ;
-		}
-	}
+            System.err.println("è™šæ‹Ÿç‰©å“å…‘æ¢å›è°ƒæ¥å£ï¼šæ•°æ®æ¥æ”¶å¤„ç†å¼‚å¸¸");
+            e.printStackTrace();
+            resp.setStatus(1004);
+            return;
+        }
+    }
 }

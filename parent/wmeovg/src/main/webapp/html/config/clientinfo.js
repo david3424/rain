@@ -350,7 +350,7 @@ Ext.onReady(function(){
 		                	              {header:'优先级',dataIndex:'priority',sortable:true,width:9},
 		                	              {header:'根目录URL', dataIndex:'rootUrl',width:40},
 		                	              {header:'回调测试', dataIndex:'',renderer:renderTestUrl, width:10},
-		                	              {header:'JMS', dataIndex:'',renderer:renderJMSCount,width:10},
+		                	              {header:'JMS(req/callback)', dataIndex:'',renderer:renderJMSCount,width:10},
 		                	              {header:'创建人', dataIndex:'user',width:10},
 		                	              {header:'创建时间', dataIndex:'createtime',width:20},
 		                	              {header:'兑换请求状态', dataIndex:'status',renderer:renderStatus,width:20,align:'center'}

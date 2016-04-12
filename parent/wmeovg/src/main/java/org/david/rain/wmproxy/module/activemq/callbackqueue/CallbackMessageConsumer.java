@@ -1,13 +1,5 @@
 package org.david.rain.wmproxy.module.activemq.callbackqueue;
 
-import java.security.NoSuchAlgorithmException;
-import java.util.Date;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
-import javax.jms.JMSException;
-import javax.jms.ObjectMessage;
-
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
@@ -15,17 +7,22 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.commons.httpclient.params.HttpMethodParams;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
+import org.david.rain.wmeovg.request.alg.Signature;
+import org.david.rain.wmeovg.request.entity.PrizeLog;
+import org.david.rain.wmeovg.request.util.SignatureUtil;
 import org.david.rain.wmproxy.module.config.entity.ClientInfo;
 import org.david.rain.wmproxy.module.config.manager.ClientInfoMng;
 import org.david.rain.wmproxy.module.service.manager.PrizeLogMng;
 import org.david.rain.wmproxy.module.util.FailToCallbackException;
-import org.david.rain.wmeovg.request.alg.Signature;
-import org.david.rain.wmeovg.request.entity.PrizeLog;
-import org.david.rain.wmeovg.request.util.SignatureUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.jms.JMSException;
+import javax.jms.ObjectMessage;
+import java.security.NoSuchAlgorithmException;
+import java.util.Date;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -62,8 +59,6 @@ public class CallbackMessageConsumer {
             return;
         }
 
-//        log.error("[{}] 555 回调队列 receive  开始 时间：[{}]", prizeLog.getGid(), System.currentTimeMillis());
-
         String gid = prizeLog.getGid();
         Byte sendStatus = prizeLog.getSendStatus();
         Integer processCount = prizeLog.getProcessCount();
@@ -88,23 +83,21 @@ public class CallbackMessageConsumer {
 
         String host = clientInfo.getRootUrl();
         //String callbackUrl = host + "/servlet/wmeovg/callback";
-        String callbackUrl = host;
 
-        HttpClient httpClient = getHttpClientByHost(callbackUrl);
-
-        HttpConnectionManagerParams managerParams = httpClient .getHttpConnectionManager().getParams();
+        HttpClient httpClient;
+        httpClient = getHttpClientByHost(host);
+        HttpConnectionManagerParams managerParams = httpClient.getHttpConnectionManager().getParams();
         // 设置连接超时时间(ms)
         managerParams.setConnectionTimeout(15000);
-        PostMethod postMethod = new PostMethod(callbackUrl);
+        PostMethod postMethod = new PostMethod(host);
         // 设置请求超时时间(ms)
         postMethod.getParams().setParameter(HttpMethodParams.SO_TIMEOUT, 15000);
-        //log.info("++++++++++++==============callback==" + new String(Signature.decryptBASE64(Signature.encryptBASE64(callback.getBytes()))));
-
+//        log.info("++++++++++++==============callback==" + new String(Signature.decryptBASE64(Signature.encryptBASE64(callback.getBytes()))));
         String callb = null;
         try {
             callb = Signature.encryptBASE64(callback.getBytes("UTF-8"));
+            log.info("++++++++++++==============callback=={}", callb);
         } catch (Exception e1) {
-
             log.error("客户端回调callback解码异常=============", e1);
         }
         // 奖品兑换参数
@@ -117,8 +110,6 @@ public class CallbackMessageConsumer {
                 new NameValuePair("sign", sign)};
 
         postMethod.setQueryString(params);
-//		postMethod.setRequestBody(params);
-
         int statusCode = -1;
         try {
             statusCode = httpClient.executeMethod(postMethod);
@@ -130,9 +121,6 @@ public class CallbackMessageConsumer {
             postMethod.releaseConnection();
         }
 
-//        log.error("[{}] 666 回调队列 receive 回调结束 时间：[{}]", prizeLog.getGid(), System.currentTimeMillis());
-
-        //statusCode =-1;//test
         if (statusCode != HttpStatus.SC_OK) {
             prizeLogMng.accumulateCallbackCountByGID(gid);
 
@@ -153,8 +141,6 @@ public class CallbackMessageConsumer {
         prizeLog.setCallbackTime(new Date());
 
         prizeLogMng.updateCallbackStatusByGID(gid, statusCode, prizeLog.getCallbackTime());
-//        log.error("[{}] 666 回调队列 receive 更新回调状态 时间：[{}]", prizeLog.getGid(), System.currentTimeMillis());
-
         log.warn("流水号[{}]：完成客户端接口调用(" + statusCode + ")", gid);
     }
 
