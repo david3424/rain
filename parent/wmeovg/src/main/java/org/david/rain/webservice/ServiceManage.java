@@ -33,11 +33,9 @@ public class ServiceManage {
             p.load(is);
             HessianProxyFactory factory = new HessianProxyFactory();
             serviceInterface = (ServiceInterface) factory.create(ServiceInterface.class, p.getProperty("activityurl"));
-
-            log.info("½Ó¿Ú³õÊ¼»¯³É¹¦¡£");
+            log.info("åˆå§‹åŒ–æˆåŠŸ");
         } catch (Exception ex) {
-
-            log.error("½Ó¿Ú³õÊ¼»¯Á¬½ÓÊ§°Ü", ex);
+            log.error("åˆå§‹åŒ–å¼‚å¸¸", ex);
         }
     }
 }

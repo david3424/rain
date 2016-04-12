@@ -8,194 +8,74 @@
 					http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd"
        default-lazy-init="true">
 
-	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
                 <value>classpath:spring.properties</value>
             </list>
         </property>
     </bean>
-    
+
     <bean id="dataSource"
-		class="org.logicalcobwebs.proxool.ProxoolDataSource"> 
-		<property name="driver" value="${jdbc.driverClassName}"/>
-		<property name="driverUrl" value="${jdbc.url}"/>
-		<property name="user" value="${jdbc.username}"/> 
-		<property name="password" value="${jdbc.password}"/> 
-		<property name="alias" value="Pool_wmeovg"/> 
-		<property name="maximumActiveTime" value="300000"/> 
-		<!--<property name="prototypeCount" value="5"/> -->
-		<property name="maximumConnectionCount" value="500"/> 
-		<property name="minimumConnectionCount" value="50"/> 
-		<property name="simultaneousBuildThrottle" value="500"/> 
-		<property name="houseKeepingTestSql" value="select CURRENT_DATE"/> 
-	</bean>
-	
-	<!--   Request Queue  start  -->
-	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
-        <property name="brokerURL" value="${jms.brokerURL}"/>
+          class="org.logicalcobwebs.proxool.ProxoolDataSource">
+        <property name="driver" value="${jdbc.driverClassName}"/>
+        <property name="driverUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="alias" value="Pool_wmeovg"/>
+        <property name="maximumActiveTime" value="300000"/>
+        <!--<property name="prototypeCount" value="5"/> -->
+        <property name="maximumConnectionCount" value="500"/>
+        <property name="minimumConnectionCount" value="50"/>
+        <property name="simultaneousBuildThrottle" value="500"/>
+        <property name="houseKeepingTestSql" value="select CURRENT_DATE"/>
     </bean>
-	<bean id="requestDestination" class="org.apache.activemq.command.ActiveMQQueue">
-        <constructor-arg index="0" value="${jms.request.queue}"/>
+
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingDirectoryLocations">
+            <list>
+                <value>classpath:org/david/rain/wmproxy/module/sys/entity</value>
+                <value>classpath:org/david/rain/wmproxy/module/service/entity</value>
+                <value>classpath:org/david/rain/wmproxy/module/config/entity</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <value>
+                hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
+                hibernate.show_sql=false
+                hibernate.format_sql=false
+                hibernate.query.substitutions=true 1, false 0
+                hibernate.jdbc.batch_size=20
+                hibernate.cache.use_second_level_cache = true
+                hibernate.cache.use_query_cache = true
+                hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider
+                hibernate.cache.provider_configuration_file_resource_path=../ehcache-hibernate.xml
+            </value>
+        </property>
+        <property name="entityInterceptor">
+            <ref local="treeInterceptor"/>
+        </property>
     </bean>
-	<bean id="requestJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="defaultDestination" ref="requestDestination" />
-		<property name="receiveTimeout" value="6000" />
-		<property name="sessionTransacted" value="true"/>
-	</bean>
-
-	<!-- RequestMessage Producer -->
-	<bean id="requestMessageProducer" class="org.david.rain.wmproxy.module.activemq.requestqueue.RequestMessageProducer">
-		<property name="template" ref="requestJmsTemplate" />
-		<property name="destination" ref="requestDestination" />
-	</bean>
-	<bean id="requestMessageBrowser" class="org.david.rain.wmproxy.module.activemq.requestqueue.RequestMessageBrowser">
-		<property name="template" ref="requestJmsTemplate" />
-		<property name="destination" ref="requestDestination" />
-	</bean>
-	<bean id="exceptionListener" class="org.david.rain.wmproxy.module.util.SpringJmsExceptionListener" />
-	<bean id="errorHandler" class="org.david.rain.wmproxy.module.util.SpringJmsErrorHandler" />
-
-	<!-- RequestMessage Consumer -->
-	<bean id="requestMessageConsumer" class="org.david.rain.wmproxy.module.activemq.requestqueue.RequestMessageConsumer" />
-	<bean id="requestContainer"
-		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="concurrentConsumers" value="30" />
-		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="destination" ref="requestDestination" />
-		<property name="messageListener" ref="requestMessageListener" />
-		<property name="sessionTransacted" value="true" />
-		<property name="exceptionListener" ref="exceptionListener" />
-		<property name="errorHandler" ref="errorHandler" />
-		<property name="autoStartup" value="false"/>
-		<!--<property name="autoStartup" value="true"/>-->
-	</bean>
-	<bean id="requestMessageListener"
-		class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
-		<property name="delegate" ref="requestMessageConsumer" />
-		<property name="defaultListenerMethod" value="receive" />
-		<property name="messageConverter">
-			<null />
-		</property>
-	</bean>
-	<!--   Request Queue  end  -->
-
-	<!--   Callback Queue  start  -->
-	<bean id="callbackDestination" class="org.apache.activemq.command.ActiveMQQueue">
-        <constructor-arg index="0" value="${jms.callback.queue}"/>
+    <bean id="treeInterceptor" class="org.david.rain.wmproxy.common.base.hibernate3.TreeIntercptor"/>
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-	<bean id="callbackJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="defaultDestination" ref="callbackDestination" />
-		<property name="receiveTimeout" value="6000" />
-	</bean>
-
-	<!-- Callback Message Producer -->
-	<bean id="callbackMessageProducer"
-		class="org.david.rain.wmproxy.module.activemq.callbackqueue.CallbackMessageProducer">
-		<property name="template" ref="callbackJmsTemplate" />
-		<property name="destination" ref="callbackDestination" />
-	</bean>
-	<bean id="callbackMessageBrowser"
-		class="org.david.rain.wmproxy.module.activemq.callbackqueue.CallbackMessageBrowser">
-		<property name="template" ref="callbackJmsTemplate" />
-		<property name="destination" ref="callbackDestination" />
-	</bean>
-	<!-- Callback Message Consumer -->
-	<bean id="callbackMessageConsumer"
-		class="org.david.rain.wmproxy.module.activemq.callbackqueue.CallbackMessageConsumer" />
-	<bean id="callbackContainer"
-		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="concurrentConsumers" value="30"/>
-		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="destination" ref="callbackDestination" />
-		<property name="messageListener" ref="callbackMessageListener" />
-		<property name="sessionTransacted" value="true" /> <!-- 使用JMS事务 -->
-		<property name="exceptionListener" ref="exceptionListener" />
-		<property name="errorHandler" ref="errorHandler" />
-		<property name="autoStartup" value="false"/>
-	</bean>
-	<bean id="callbackMessageListener"
-		class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
-		<property name="delegate" ref="callbackMessageConsumer" />
-		<property name="defaultListenerMethod" value="receive" />
-		<property name="messageConverter">
-			<null />
-		</property>
-	</bean>
-	<!--   Callback Queue  end  -->
-
-	<!--   Goods Queue  start  -->
-	<bean id="goodsDestination" class="org.apache.activemq.command.ActiveMQQueue">
-        <constructor-arg index="0" value="${jms.goods.queue}"/>
+    <!-- Hessian 启动BeanNameMapping 映射功能 -->
+    <bean
+            class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+        <property name="defaultHandler" ref="httpRequestHandlerAdapter"/>
+        <property name="order" value="2"/>
     </bean>
-	<bean id="goodsJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="defaultDestination" ref="goodsDestination" />
-		<property name="receiveTimeout" value="6000" />
-	</bean>
+    <!--  处理httpRequest的Adapter -->
+    <bean id="httpRequestHandlerAdapter"
+          class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
 
-
-	<!--   Activemq.DLQ Queue  start  -->
-	<bean id="dlqDestination" class="org.apache.activemq.command.ActiveMQQueue">
-        <constructor-arg index="0" value="${jms.dlq.queue}"/>
-    </bean>
-	<bean id="dlqJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
-		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="defaultDestination" ref="dlqDestination" />
-		<property name="receiveTimeout" value="6000" />
-	</bean>
-	<bean id="dlqMessageBrowser"
-		class="org.david.rain.wmproxy.module.activemq.dlq.DlqMessageBrowser">
-		<property name="template" ref="dlqJmsTemplate" />
-		<property name="destination" ref="dlqDestination" />
-	</bean>
-
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"/>
-		<property name="mappingDirectoryLocations">
-			<list>
-				<value>classpath:org/david/rain/wmproxy/module/sys/entity</value>
-				<value>classpath:org/david/rain/wmproxy/module/service/entity</value>
-				<value>classpath:org/david/rain/wmproxy/module/config/entity</value>
-			</list>
-		</property>
-		<property name="hibernateProperties">
-			<value>
-				hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
-				hibernate.show_sql=false
-				hibernate.format_sql=false
-				hibernate.query.substitutions=true 1, false 0
-				hibernate.jdbc.batch_size=20
-				hibernate.cache.use_second_level_cache = true
-				hibernate.cache.use_query_cache = true
-				hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider
-				hibernate.cache.provider_configuration_file_resource_path=../ehcache-hibernate.xml
-			</value>
-		</property>
-		<property name="entityInterceptor">
-			<ref local="treeInterceptor" />
-		</property>
-	</bean>
-	<bean id="treeInterceptor" class="org.david.rain.wmproxy.common.base.hibernate3.TreeIntercptor" />
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-	<!-- Hessian 启动BeanNameMapping 映射功能 -->
-	<bean
-		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
-		<property name="defaultHandler" ref="httpRequestHandlerAdapter" />
-		<property name="order" value="2" />
-	</bean>
-	<!--  处理httpRequest的Adapter -->
-	<bean id="httpRequestHandlerAdapter"
-		class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
-	
-	<!--系统上下文信息PROVIDER-->
-	<bean id="contextPvd" class="org.david.rain.wmproxy.common.base.struts2.ContextPvdImpl"/>
-	<context:component-scan base-package="org.david.rain" />
-	<tx:annotation-driven transaction-manager="transactionManager" />
+    <!--系统上下文信息PROVIDER-->
+    <bean id="contextPvd" class="org.david.rain.wmproxy.common.base.struts2.ContextPvdImpl"/>
+    <context:component-scan base-package="org.david.rain"/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <import resource="spring-jms-new.xml"/>
 </beans>

@@ -33,7 +33,7 @@ public interface IPrizeService {
 	 * @param callback 客户端请求附加信息
 	 * @throws Exception 
 	 */
-	int send(String gid, Integer zoneid, String account, String rolename, Long roleid,
+	int send(String gid, Integer zoneid, String account, String appid, Long roleid,
              Integer prizeid, String callback);
 	
 	/**

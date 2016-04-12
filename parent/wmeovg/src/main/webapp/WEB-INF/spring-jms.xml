@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--   Request Queue  start  -->
+    <bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="${jms.brokerURL}"/>
+    </bean>
+    <bean id="requestDestination" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0" value="${jms.request.queue}"/>
+    </bean>
+    <bean id="requestJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="defaultDestination" ref="requestDestination"/>
+        <property name="receiveTimeout" value="6000"/>
+        <property name="sessionTransacted" value="true"/>
+    </bean>
+
+    <!-- RequestMessage Producer -->
+    <bean id="requestMessageProducer"
+          class="org.david.rain.wmproxy.module.activemq.requestqueue.RequestMessageProducer">
+        <property name="template" ref="requestJmsTemplate"/>
+        <property name="destination" ref="requestDestination"/>
+    </bean>
+    <bean id="requestMessageBrowser" class="org.david.rain.wmproxy.module.activemq.requestqueue.RequestMessageBrowser">
+        <property name="template" ref="requestJmsTemplate"/>
+        <property name="destination" ref="requestDestination"/>
+    </bean>
+    <bean id="exceptionListener" class="org.david.rain.wmproxy.module.util.SpringJmsExceptionListener"/>
+    <bean id="errorHandler" class="org.david.rain.wmproxy.module.util.SpringJmsErrorHandler"/>
+
+    <!-- RequestMessage Consumer -->
+    <bean id="requestMessageConsumer"
+          class="org.david.rain.wmproxy.module.activemq.requestqueue.RequestMessageConsumer"/>
+    <bean id="requestContainer"
+          class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="concurrentConsumers" value="30"/>
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="requestDestination"/>
+        <property name="messageListener" ref="requestMessageListener"/>
+        <property name="sessionTransacted" value="true"/>
+        <property name="exceptionListener" ref="exceptionListener"/>
+        <property name="errorHandler" ref="errorHandler"/>
+        <property name="autoStartup" value="false"/>
+        <!--<property name="autoStartup" value="true"/>-->
+    </bean>
+    <bean id="requestMessageListener"
+          class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+        <property name="delegate" ref="requestMessageConsumer"/>
+        <property name="defaultListenerMethod" value="receive"/>
+        <property name="messageConverter">
+            <null/>
+        </property>
+    </bean>
+    <!--   Request Queue  end  -->
+
+    <!--   Callback Queue  start  -->
+    <bean id="callbackDestination" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0" value="${jms.callback.queue}"/>
+    </bean>
+    <bean id="callbackJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="defaultDestination" ref="callbackDestination"/>
+        <property name="receiveTimeout" value="6000"/>
+    </bean>
+
+    <!-- Callback Message Producer -->
+    <bean id="callbackMessageProducer"
+          class="org.david.rain.wmproxy.module.activemq.callbackqueue.CallbackMessageProducer">
+        <property name="template" ref="callbackJmsTemplate"/>
+        <property name="destination" ref="callbackDestination"/>
+    </bean>
+    <bean id="callbackMessageBrowser"
+          class="org.david.rain.wmproxy.module.activemq.callbackqueue.CallbackMessageBrowser">
+        <property name="template" ref="callbackJmsTemplate"/>
+        <property name="destination" ref="callbackDestination"/>
+    </bean>
+    <!-- Callback Message Consumer -->
+    <bean id="callbackMessageConsumer"
+          class="org.david.rain.wmproxy.module.activemq.callbackqueue.CallbackMessageConsumer"/>
+    <bean id="callbackContainer"
+          class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="concurrentConsumers" value="30"/>
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="callbackDestination"/>
+        <property name="messageListener" ref="callbackMessageListener"/>
+        <property name="sessionTransacted" value="true"/>
+        <!-- 使用JMS事务 -->
+        <property name="exceptionListener" ref="exceptionListener"/>
+        <property name="errorHandler" ref="errorHandler"/>
+        <property name="autoStartup" value="false"/>
+    </bean>
+    <bean id="callbackMessageListener"
+          class="org.springframework.jms.listener.adapter.MessageListenerAdapter">
+        <property name="delegate" ref="callbackMessageConsumer"/>
+        <property name="defaultListenerMethod" value="receive"/>
+        <property name="messageConverter">
+            <null/>
+        </property>
+    </bean>
+    <!--   Callback Queue  end  -->
+
+    <!--   Goods Queue  start  -->
+    <bean id="goodsDestination" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0" value="${jms.goods.queue}"/>
+    </bean>
+    <bean id="goodsJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="defaultDestination" ref="goodsDestination"/>
+        <property name="receiveTimeout" value="6000"/>
+    </bean>
+
+
+    <!--   Activemq.DLQ Queue  start  -->
+    <bean id="dlqDestination" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0" value="${jms.dlq.queue}"/>
+    </bean>
+    <bean id="dlqJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="defaultDestination" ref="dlqDestination"/>
+        <property name="receiveTimeout" value="6000"/>
+    </bean>
+    <bean id="dlqMessageBrowser"
+          class="org.david.rain.wmproxy.module.activemq.dlq.DlqMessageBrowser">
+        <property name="template" ref="dlqJmsTemplate"/>
+        <property name="destination" ref="dlqDestination"/>
+    </bean>
+</beans>

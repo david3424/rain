@@ -6,6 +6,7 @@ import org.david.rain.monitor.monitor.persistence.SendPrizeMapper;
 import org.david.rain.monitor.monitor.util.DataSourceContext;
 import org.david.rain.monitor.monitor.vo.PrizeBean;
 import org.david.rain.service.logservice.OperationLogger;
+import org.david.rain.wmeovg.request.service.PrizeServiceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,10 @@ public class AwardPrizesService {
         try {
             List<PrizeBean> list = this.getRecordsByCount();
             for (PrizeBean p : list) {
-                logger.info("{},{},{},{}", p.getUserName(), p.getRoleId(), p.getServer(), p.getId());
+//                logger.info("{},{},{},{}", p.getUserName(), p.getRoleId(), p.getServer(), p.getId());
+                int rr = PrizeServiceManager.prizeService.send(PrizeServiceManager.prizeService.genGid(),
+                        p.getServer(), p.getUserName(), sendPrize.getTableName(), p.getRoleId(), p.getPrize(), "callback&" + p.getId());
+                logger.info("=====result statusCode of sendprize:{}", rr);
             }
         } catch (SQLException e) {
             e.printStackTrace();

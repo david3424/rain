@@ -92,8 +92,7 @@ public class CallbackMessageConsumer {
 
         HttpClient httpClient = getHttpClientByHost(callbackUrl);
 
-        HttpConnectionManagerParams managerParams = httpClient
-                .getHttpConnectionManager().getParams();
+        HttpConnectionManagerParams managerParams = httpClient .getHttpConnectionManager().getParams();
         // 设置连接超时时间(ms)
         managerParams.setConnectionTimeout(15000);
         PostMethod postMethod = new PostMethod(callbackUrl);
