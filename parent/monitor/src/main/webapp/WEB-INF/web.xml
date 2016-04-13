@@ -48,7 +48,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>wmeovgCallbackServlet</servlet-name>
-        <url-pattern>/servlet/wmeovg/callback</url-pattern>
+        <url-pattern>/api/servlet/wmeovg/callback</url-pattern>
     </servlet-mapping>
     
     <!-- Shiro filter-->

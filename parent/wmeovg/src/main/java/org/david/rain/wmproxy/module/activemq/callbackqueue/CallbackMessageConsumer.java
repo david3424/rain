@@ -35,7 +35,7 @@ public class CallbackMessageConsumer {
     MultiThreadedHttpConnectionManager connectionManager = new MultiThreadedHttpConnectionManager();
     //HttpClient httpClient = new HttpClient(connectionManager);
 
-    ConcurrentHashMap<String, HttpClient> httpClientMap = new ConcurrentHashMap<String, HttpClient>();
+    ConcurrentHashMap<String, HttpClient> httpClientMap = new ConcurrentHashMap<>();
 
     protected Logger log = LoggerFactory.getLogger(getClass());
 

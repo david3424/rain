@@ -42,7 +42,7 @@
 
         <dependency>
             <groupId>org.david.rain</groupId>
-            <artifactId>wmeovg</artifactId>
+            <artifactId>wmeovg-client</artifactId>
             <version>1.0.0</version>
             <scope>system</scope>
             <!--本地jar的路径,相对或者绝对都可以-->
