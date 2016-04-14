@@ -33,7 +33,6 @@ public abstract class BasePayAction implements BasePayInterface {
     public static final Properties properties = PropertiesUtil.getProperties(SystemConstants.PROPERTIES_PAY_PATH);
 
 
-
     protected String getErrorRedirect(Integer code, String error) {
         return "redirect:/mol/fail?code=" + code + "&error=" + error;
     }
@@ -239,35 +238,39 @@ public abstract class BasePayAction implements BasePayInterface {
 
 }
 
+enum PayType {
+    MOL("Mol", 1), Multi("Multicard", 2), Maxis("Maxis", 3);
+    // 成员变量
+    private String name;
+    private int value;
 
-        enum PayType {
-            MOL("Mol", 1), Multi("Multicard", 2), Maxis("Maxis", 3);
-            // 成员变量
-            private String name;
-            private int value;
-            // 构造方法
-           PayType(String name, int value) {
-                this.name = name;
-                this.value = value;
-            }
-            //覆盖方法
-            @Override
-            public String toString() {
-                return this.value+"_"+this.name;
-            }
+    // 构造方法
+    PayType(String name, int value) {
+        this.name = name;
+        this.value = value;
+    }
+
+    //覆盖方法
+    @Override
+    public String toString() {
+        return this.value + "_" + this.name;
+    }
 
 
-            // get set 方法
-            public String getName() {
-                return name;
-            }
-            public void setName(String name) {
-                this.name = name;
-            }
-            public int getValue() {
-                return value;
-            }
-            public void setValue(int index) {
-                this.value = index;
-            }
-        }
+    // get set 方法
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int index) {
+        this.value = index;
+    }
+}

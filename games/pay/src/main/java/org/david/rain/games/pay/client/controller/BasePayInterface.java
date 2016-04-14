@@ -15,15 +15,15 @@ import java.util.Map;
 public interface BasePayInterface {
 
 
-    public String payout(OpayOrder opayOrder, String signature,Model model);
+     String payout(OpayOrder opayOrder, String signature,Model model);
 
-    public String returned(String referenceId);
+     String returned(String referenceId);
 
-    public String callback(OpayDTO opayDTO, String signature);
+     String callback(OpayDTO opayDTO, String signature);
 
-    public Map query(OpayOrder opayOrder, String signature);
+     Map query(OpayOrder opayOrder, String signature);
 
-    public Map search(OpayQuery opayQuery,String applicationCode,String signature, HttpServletRequest request);
+     Map search(OpayQuery opayQuery,String applicationCode,String signature, HttpServletRequest request);
 
 
 }
