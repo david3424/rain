@@ -1,18 +1,16 @@
 package org.david.rain.games.pay.client.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.david.rain.games.pay.client.dao.entity.OpayDTO;
 import org.david.rain.games.pay.client.dao.entity.OpayDic;
+import org.david.rain.games.pay.client.dao.entity.OpayOrder;
 import org.david.rain.games.pay.client.service.ClientService;
+import org.david.rain.games.pay.client.service.PayService;
 import org.david.rain.games.pay.utils.HttpUtil;
 import org.david.rain.games.pay.utils.PropertiesUtil;
-import org.david.rain.games.pay.client.dao.entity.OpayOrder;
-import org.david.rain.games.pay.client.dao.entity.OpayQuery;
-import org.david.rain.games.pay.client.service.PayService;
 import org.david.rain.games.pay.utils.constant.SystemConstants;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -86,38 +84,6 @@ public abstract class BasePayAction implements BasePayInterface {
         return clientService.getClientByAppid(appid);
     }
 
-    protected Map<String, Object> transfer2Map(OpayOrder opayOrder) {
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("applicationCode", opayOrder.getApplicationCode());
-        resultMap.put("channelId", opayOrder.getChannelId());
-        resultMap.put("amount", opayOrder.getAmount());
-        resultMap.put("currencyCode", opayOrder.getCurrencyCode());
-        resultMap.put("referenceId", opayOrder.getReferenceId());
-        resultMap.put("returnUrl", opayOrder.getReturnUrl());
-        resultMap.put("customerId", opayOrder.getCustomerId());
-        resultMap.put("ip", opayOrder.getIp());
-        return resultMap;
-    }
-
-    protected Map<String, Object> transfer2Map(OpayQuery opayQuery) {
-        Map<String, Object> resultMap = new HashMap<>();
-        if (null != opayQuery.getReferenceId()) {
-            resultMap.put("referenceId", opayQuery.getReferenceId());
-        }
-        if (null != opayQuery.getCustomerId()) {
-            resultMap.put("customerId", opayQuery.getCustomerId());
-        }
-        if (null != opayQuery.getPaymentId()) {
-            resultMap.put("paymentId", opayQuery.getPaymentId());
-        }
-        if (null != opayQuery.getBegintime()) {
-            resultMap.put("begintime", opayQuery.getBegintime());
-        }
-        if (null != opayQuery.getEndtime()) {
-            resultMap.put("endtime", opayQuery.getEndtime());
-        }
-        return resultMap;
-    }
 
     protected Map<String, Object> transfer2QueryMap(OpayOrder opayOrder) {
 
@@ -126,52 +92,6 @@ public abstract class BasePayAction implements BasePayInterface {
         resultMap.put("referenceId", opayOrder.getReferenceId());
         return resultMap;
     }
-
-    protected Map<String, Object> transfer2MolQueryMap(OpayOrder opayOrder) {
-
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("applicationCode", opayOrder.getApplicationCode());
-        resultMap.put("referenceId", opayOrder.getReferenceId());
-        resultMap.put("version", properties.getProperty("mol.version"));
-        return resultMap;
-    }
-
-
-    protected Map<String, Object> transfer2MolMap(OpayOrder opayOrder) {
-
-        Map<String, Object> resultMap = new HashMap<>();
-        if (StringUtils.equals(opayOrder.getCurrencyCode(), "0")) {
-            opayOrder.setAmount(null);
-            opayOrder.setCurrencyCode(null);
-        }
-        resultMap.put("applicationCode", properties.getProperty("mol.applicationCode"));
-        resultMap.put("referenceId", opayOrder.getReferenceId());
-        resultMap.put("version", properties.getProperty("mol.version"));
-        resultMap.put("channelId", opayOrder.getChannelId());
-        resultMap.put("amount", opayOrder.getAmount());
-        resultMap.put("currencyCode", opayOrder.getCurrencyCode());
-        resultMap.put("returnUrl", MessageFormat.format(properties.getProperty("mol.returnUrl"), opayOrder.getReferenceId()));
-        resultMap.put("customerId", opayOrder.getCustomerId());
-        return resultMap;
-    }
-
-
-    protected Map<String, Object> transferMol2ClientMap(OpayOrder opayOrder) {
-
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("applicationCode", opayOrder.getApplicationCode());
-        resultMap.put("referenceId", opayOrder.getReferenceId());
-        resultMap.put("version", opayOrder.getVersion());
-        resultMap.put("amount", opayOrder.getAmount());
-        resultMap.put("currencyCode", opayOrder.getCurrencyCode());
-        resultMap.put("paymentId", opayOrder.getPaymentId());
-        resultMap.put("paymentStatusCode", opayOrder.getPaymentStatusCode());
-        resultMap.put("paymentStatusDate", opayOrder.getPaymentStatusDate());
-        resultMap.put("channelId", opayOrder.getChannelId());
-        resultMap.put("customerId", opayOrder.getCustomerId());
-        return resultMap;
-    }
-
 
     protected OpayOrder transferDTO2Order(OpayDTO opayDTO) {
         OpayOrder opayOrder = new OpayOrder();
@@ -219,23 +139,6 @@ public abstract class BasePayAction implements BasePayInterface {
         }
         return opayOrder;
     }
-
-    protected Map<String, Object> transfer2CallbackMap(OpayOrder opayOrder) {
-
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("applicationCode", opayOrder.getApplicationCode());
-        resultMap.put("referenceId", opayOrder.getReferenceId());
-        resultMap.put("channelId", opayOrder.getChannelId());
-        resultMap.put("amount", opayOrder.getAmount());
-        resultMap.put("currencyCode", opayOrder.getCurrencyCode());
-        resultMap.put("customerId", opayOrder.getCustomerId());
-        resultMap.put("paymentId", opayOrder.getPaymentId());
-        resultMap.put("paymentStatusCode", opayOrder.getPaymentStatusCode());
-        resultMap.put("paymentStatusDate", opayOrder.getPaymentStatusDate());
-        resultMap.put("status", opayOrder.getStatus());
-        return resultMap;
-    }
-
 }
 
 enum PayType {

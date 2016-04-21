@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.david.rain.games.pay.client.dao.entity.OpayDTO;
 import org.david.rain.games.pay.client.dao.entity.OpayDic;
 import org.david.rain.games.pay.client.dao.entity.OpayOrder;
+import org.david.rain.games.pay.client.exceptions.UtilsException;
+import org.david.rain.games.pay.utils.Bean2MapUtils;
 import org.david.rain.games.pay.utils.IpUtils;
 import org.david.rain.games.pay.client.dao.entity.OpayQuery;
 import org.david.rain.games.pay.utils.DateUtils;
@@ -46,12 +48,12 @@ public class MolController extends BasePayAction {
     @RequestMapping(value = "payout")
     public String payout(OpayOrder opayOrder, String signature, Model model) {
         ObjectMapper objectMapper = new ObjectMapper();
-        String applicationCode = opayOrder.getApplicationCode();
         String checkMsg = check(opayOrder);
         if (StringUtils.isNotEmpty(checkMsg)) { //统一下参数有误接口
             LOG.error("invalid params:{}", checkMsg);
             return getErrorRedirect(10001, "checkMsg");//参数有误
         }
+        String applicationCode = opayOrder.getApplicationCode();
         OpayDic dsysDic = getClientByAppid(applicationCode);
         if (dsysDic == null) {
             LOG.error("invalid applicationCode:{}", applicationCode);
@@ -62,7 +64,12 @@ public class MolController extends BasePayAction {
             return getErrorRedirect(10004, "Service is in maintenance。");
         }
         String privatekey = dsysDic.getPrivatekey().trim();
-        Map<String, Object> params_sign = transfer2Map(opayOrder);
+        Map<String, Object> params_sign = new HashMap<>();
+        try {
+            Bean2MapUtils.bean2map(opayOrder, params_sign);
+        } catch (UtilsException e) {
+            return getErrorRedirect(10007, "System Error1.");
+        }
         String local_sign = SignatureUtil.signature(params_sign, privatekey, "md5");
         if (!StringUtils.equalsIgnoreCase(local_sign, signature)) {
             LOG.error("Invalid Signature. local:{},but signature:{}", local_sign, signature);
@@ -82,7 +89,12 @@ public class MolController extends BasePayAction {
             return getErrorRedirect(10007, "System Error2.");//系统保存数据有误
         }
         //进入支付流程
-        Map<String, Object> params_mol = transfer2MolMap(opayOrder);
+        Map<String, Object> params_mol = new HashMap<>();
+        try {
+            Bean2MapUtils.bean2map(opayOrder, params_mol);
+        } catch (UtilsException e) {
+            return getErrorRedirect(10007, "System Error1.");
+        }
         String mol_sign = SignatureUtil.signature(params_mol, properties.getProperty("mol.SecretKey"), "md5");
         params_mol.put("signature", mol_sign);
         String mol_re = httpUtil.postRequest(properties.getProperty("mol.payUrl"), params_mol);
@@ -134,9 +146,16 @@ public class MolController extends BasePayAction {
             LOG.error("System Error6. callback referenceId error: {}", opayDTO.getReferenceId());
             return getErrorRedirect(10007, "System Error6.");
         }
+
         OpayOrder opayOrder = transferDTO2Order(opayDTO);
         LOG.info("opayorder of callback is {}", opayOrder);
-        Map<String, Object> params_client = transferMol2ClientMap(opayOrder);
+        Map<String, Object> params_client = new HashMap<>();
+
+        try {
+            Bean2MapUtils.bean2map(opayOrder, params_client);
+        } catch (UtilsException e) {
+            return getErrorRedirect(10007, "System Error1.");
+        }
         String callback_sign = SignatureUtil.signature(params_client, properties.getProperty("mol.SecretKey"), "md5");
         if (!StringUtils.equals(callback_sign, signature)) {
             LOG.error("callback_sign is :{},but signature from mol is {}", callback_sign, signature);
@@ -169,7 +188,13 @@ public class MolController extends BasePayAction {
         LOG.debug("callbackurl in db is {}", callbackUrl);
 
         //进入支付流程
-        Map<String, Object> params_callback = transfer2CallbackMap(opayOrder);
+        Map<String, Object> params_callback = new HashMap<>();
+
+        try {
+            Bean2MapUtils.bean2map(opayOrder, params_callback);
+        } catch (UtilsException e) {
+            return getErrorRedirect(10007, "System Error1.");
+        }
         String callback_sign_client = SignatureUtil.signature(params_callback, dsysDic.getPrivatekey(), "md5");
         params_callback.put("signature", callback_sign_client);
         LOG.debug("params of callback is :{}", params_callback);
@@ -236,7 +261,14 @@ public class MolController extends BasePayAction {
             case 2:
                 //去查询
                 opayOrder.setApplicationCode(properties.getProperty("mol.applicationCode"));
-                Map<String, Object> params_mol = transfer2MolQueryMap(opayOrder);
+                Map<String, Object> params_mol = new HashMap<>();
+                try {
+                    Bean2MapUtils.bean2map(opayOrder, params_mol);
+                } catch (UtilsException e) {
+                    query_re.put("status", 10007);
+                    query_re.put("message", "System Error1. ");
+                    break;
+                }
                 String mol_sign = SignatureUtil.signature(params_mol, properties.getProperty("mol.SecretKey"), "md5");
                 params_mol.put("signature", mol_sign);
                 String mol_re = httpUtil.getRequest(properties.getProperty("mol.payUrl"), params_mol);
@@ -321,7 +353,12 @@ public class MolController extends BasePayAction {
             return getMapRedirect(10003, "Unauthorized Server IP Address ");//ip不合法
         }
         String privatekey = dsysDic.getPrivatekey().trim();
-        Map<String, Object> params_sign = transfer2Map(opayQuery);
+        Map<String, Object> params_sign = new HashMap<>();
+        try {
+            Bean2MapUtils.bean2map(opayQuery, params_sign);
+        } catch (UtilsException e) {
+            return getMapRedirect(10007, "System Error1.");
+        }
         params_sign.put("applicationCode", applicationCode);
         String local_sign = SignatureUtil.signature(params_sign, privatekey, "md5");
         if (!StringUtils.equalsIgnoreCase(local_sign, signature)) {
