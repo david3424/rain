@@ -1,4 +1,4 @@
-package org.david.rain.base.init;
+package org.david.rain.base;
 
 /**
  * Created by mac on 15-3-31.

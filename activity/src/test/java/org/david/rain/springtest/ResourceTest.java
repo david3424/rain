@@ -1,4 +1,4 @@
-package spring.ioc;
+package org.david.rain.springtest;
 
 import org.david.rain.act.dao.Idao;
 import org.david.rain.entity.AccountBean;
