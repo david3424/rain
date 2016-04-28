@@ -18,7 +18,16 @@ public class SignatureUtil {
      * @return
      */
     private final static Logger logger = LoggerFactory.getLogger(SignatureUtil.class);
-    public static String signature(Map<String, ?> params, String secret,String type) {
+
+    /**
+     * 加密非空参数拼接结果*
+     *
+     * @param params
+     * @param secret
+     * @param type
+     * @return
+     */
+    public static String signature(Map<String, ?> params, String secret, String type) {
         StringBuilder sbuf = new StringBuilder();
         if (null != params) {
             Map<String, Object> treeParam = new TreeMap<String, Object>();
@@ -26,11 +35,6 @@ public class SignatureUtil {
             int i = 0;
             for (Map.Entry<String, Object> e : treeParam.entrySet()) {
                 if (e.getValue() != null && !e.getValue().equals("")) {
-                   /* if (i++ != 0) {
-                        sbuf.append("&");
-                    }
-                    sbuf.append(e.getKey());
-                    sbuf.append("=");*/
                     sbuf.append(e.getValue().toString());
                 }
             }
@@ -38,11 +42,11 @@ public class SignatureUtil {
             sbuf.append(secret);
             logger.info(" singed md5str:{}", sbuf.toString());
             try {
-                return StringUtils.equals("md5", type)?getMd5str(sbuf.toString()):getSHAStr(sbuf.toString());
+                return StringUtils.equals("md5", type) ? getMd5str(sbuf.toString()) : getSHAStr(sbuf.toString());
             } catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
-                logger.error("sha error:{}",e.getMessage());
-                return "" ;
+                logger.error("sha error:{}", e.getMessage());
+                return "";
             }
         }
         return "";
@@ -94,7 +98,7 @@ public class SignatureUtil {
         return new String(tem);
     }
 
-    public static String getSHAStr(String data) throws NoSuchAlgorithmException{
+    public static String getSHAStr(String data) throws NoSuchAlgorithmException {
         return getSHA(data.getBytes());
     }
 
@@ -106,7 +110,7 @@ public class SignatureUtil {
      * @throws java.security.NoSuchAlgorithmException
      * @throws Exception
      */
-    public static String getSHA(byte[] data) throws NoSuchAlgorithmException{
+    public static String getSHA(byte[] data) throws NoSuchAlgorithmException {
 
         MessageDigest sha = MessageDigest.getInstance("SHA1");
         sha.update(data);
@@ -116,6 +120,7 @@ public class SignatureUtil {
 
     /**
      * sha1 摘要转16进制
+     *
      * @param digest
      * @return
      */

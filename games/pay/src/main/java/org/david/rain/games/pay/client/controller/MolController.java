@@ -26,16 +26,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Task管理的Controller, 使用Restful风格的Urls:
- * <p/>
- * List page     : GET /client/
- * List top100   : GET /client/list
- * Create page   : GET /client/create
- * Create action : POST /client/create
- * update page   : GET /client/update{id}
- * update action : POST /client/update
- * Delete action : get delete/{id}
+ * 支付流程：前端请求payout,验证参数及加密串，请求支付url，返回结果包含支付方式与支付页面链接*
+ * 支付完成后，点击returnurl返回经过网关记录，返回指定前端平台*
  */
+
 @Controller
 @RequestMapping(value = "/mol")
 public class MolController extends BasePayAction {
@@ -51,7 +45,7 @@ public class MolController extends BasePayAction {
         String checkMsg = check(opayOrder);
         if (StringUtils.isNotEmpty(checkMsg)) { //统一下参数有误接口
             LOG.error("invalid params:{}", checkMsg);
-            return getErrorRedirect(10001, "checkMsg");//参数有误
+            return getErrorRedirect(10001, checkMsg);//参数有误
         }
         String applicationCode = opayOrder.getApplicationCode();
         OpayDic dsysDic = getClientByAppid(applicationCode);

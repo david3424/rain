@@ -1,8 +1,11 @@
 package org.david.rain.games.pay.client.dao.entity;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.david.rain.games.pay.utils.entity.HdTable;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 
 /**
  * Created by david on 2015/3/6.
@@ -167,26 +170,17 @@ public class OpayOrder implements Serializable {
         this.returnUrl = returnUrl;
     }
 
-    @Override
+
     public String toString() {
-        return "OpayOrder{" +
-                "id=" + id +
-                ", applicationCode=" + applicationCode +
-                ", channelId=" + channelId +
-                ", amount=" + amount +
-                ", currencyCode='" + currencyCode + '\'' +
-                ", version='" + version + '\'' +
-                ", referenceId='" + referenceId + '\'' +
-                ", paymentId='" + paymentId + '\'' +
-                ", paymentUrl='" + paymentUrl + '\'' +
-                ", returnUrl='" + returnUrl + '\'' +
-                ", paymentStatusCode='" + paymentStatusCode + '\'' +
-                ", customerId=" + customerId +
-                ", type=" + type +
-                ", createtime='" + createtime + '\'' +
-                ", paymentStatusDate='" + paymentStatusDate + '\'' +
-                ", ip='" + ip + '\'' +
-                ", status=" + status +
-                '}';
+
+        return ReflectionToStringBuilder.toStringExclude(this, "paymentUrl");
+
+      /*  return (new ReflectionToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE) {
+            protected boolean accept(Field f) {
+                return super.accept(f) && !f.getName().equals("password");
+            }
+        }).toString();*/
     }
+
+
 }

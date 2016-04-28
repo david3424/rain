@@ -1,5 +1,8 @@
 package org.david.rain.pay.utils;
 
+import org.david.rain.games.pay.client.dao.entity.OpayDTO;
+import org.david.rain.games.pay.client.dao.entity.OpayOrder;
+import org.david.rain.games.pay.utils.Bean2MapUtils;
 import org.david.rain.games.pay.utils.HttpUtil;
 import org.david.rain.games.pay.utils.PropertiesUtil;
 import org.junit.Test;
@@ -15,6 +18,7 @@ import java.util.Properties;
 
 /**
  * Created by mac on 15-10-21.
+ * *
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,7 +27,7 @@ public class UtilsTest {
 
     @Autowired
     HttpUtil httpUtil;
-    
+
     @Test
     public void testPropertiesUtils() throws Exception {
 
@@ -35,7 +39,7 @@ public class UtilsTest {
     @Test
     public void testReadProperties() throws Exception {
         Properties p = new Properties();
-        String filePath = "/jdbc.properties" ;
+        String filePath = "/jdbc.properties";
         filePath = PropertiesUtil.class.getResource("/").getPath() + filePath;
         System.out.println(filePath);
         InputStream in = new BufferedInputStream(new FileInputStream(filePath));//这里需要全路径，测试Junit读取的是target/test-classes，所以必须有测试的resources才行
@@ -49,5 +53,21 @@ public class UtilsTest {
     public void testRootPath() throws Exception {
 
 //        System.out.println(httpUtil.getRoot());
+    }
+
+
+    @Test
+    public void testPropertiesCopy() throws Exception {
+
+        OpayDTO opayDTO = new OpayDTO();
+        opayDTO.setAmount(1);
+        opayDTO.setApplicationCode("testCode");
+        opayDTO.setCustomerId("david");
+        opayDTO.setPaymentId("paymentId");
+        opayDTO.setPaymentTimestamp("timeStamp");
+        opayDTO.setPaymentUrl("https://test.david.ofg");
+        OpayOrder opayOrder = new OpayOrder();
+        Bean2MapUtils.copyProperties(opayDTO, opayOrder);
+        System.out.println(opayOrder);
     }
 }
