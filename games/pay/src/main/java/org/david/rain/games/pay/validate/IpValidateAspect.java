@@ -40,6 +40,6 @@ public class IpValidateAspect {
 
     static {
         ips = new HashSet<>();
-        ips.add("124.193.167.1");
+        ips.add("127.0.0.1");
     }
 }

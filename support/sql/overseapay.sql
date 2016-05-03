@@ -1,4 +1,7 @@
-CREATE TABLE `o_pay_order` (
+create DATABASE IF NOT EXISTS overseapay CHARSET  utf8;
+
+USE overseapay;
+CREATE TABLE IF NOT EXISTS `o_pay_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `applicationCode` int(4) NOT NULL,
   `channelId` varchar(10) NOT NULL COMMENT '支付渠道id',
@@ -21,7 +24,7 @@ CREATE TABLE `o_pay_order` (
 ) ENGINE=INNODB  DEFAULT CHARSET=utf8 COMMENT='订单表';
 
 
-CREATE TABLE `o_pay_dic` (
+CREATE TABLE IF NOT EXISTS `o_pay_dic` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `appid` int(4) NOT NULL,
   `ip` varchar(100) DEFAULT NULL,
@@ -34,4 +37,4 @@ CREATE TABLE `o_pay_dic` (
   `userid` int(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uni_app` (`appid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='支付字典表'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='支付字典表';
