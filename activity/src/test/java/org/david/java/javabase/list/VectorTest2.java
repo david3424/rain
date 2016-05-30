@@ -1,4 +1,4 @@
-package org.david.rain.javabase.list;
+package org.david.java.javabase.list;
 
 import java.util.ArrayList;
 import java.util.List;

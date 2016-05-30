@@ -1,10 +1,8 @@
-package org.david.rain.javabase.reflect;
+package org.david.java.javabase.reflect;
 
 import org.david.rain.act.base.reflect.ReflectTask;
 import org.david.rain.act.entity.Task;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Created by mac on 14-12-1.

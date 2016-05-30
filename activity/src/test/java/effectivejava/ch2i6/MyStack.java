@@ -5,6 +5,7 @@ import java.util.EmptyStackException;
 
 /**
  * Created by mac on 15-4-9.
+ * *
  */
 public class MyStack {
     private Object[] elements;

@@ -33,7 +33,7 @@ public class ClientService {
         return wdao.pagination(search, taskClass);
     }
 
-    @Transactional(readOnly = false)
+    @Transactional(readOnly = false, rollbackFor = Exception.class)
     public void saveClient(OpayDic entity) throws SQLException {
         if (entity.getId() == null) {
             wdao.insert(entity);
@@ -61,8 +61,8 @@ public class ClientService {
 
     public Integer genAppid() {
         try {
-         Integer maxid =    wdao.queryScalar("select max(id) from o_pay_dic ");
-            return maxid == null ? 1000:maxid+1000;
+            Integer maxid = wdao.queryScalar("select max(id) from o_pay_dic ");
+            return maxid == null ? 1000 : maxid + 1000;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -75,7 +75,7 @@ public class ClientService {
             return wdao.queryObject(OpayDic.class, "select * from o_pay_dic where appid = ? ", appid);
         } catch (SQLException e) {
             e.printStackTrace();
-            LOG.error("getClientByAppid excetion [{}]",appid);
+            LOG.error("getClientByAppid excetion [{}]", appid);
             return null;
         }
     }

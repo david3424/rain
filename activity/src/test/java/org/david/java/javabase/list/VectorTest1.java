@@ -1,4 +1,4 @@
-package org.david.rain.javabase.list;
+package org.david.java.javabase.list;
 
 import java.util.List;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package org.david.rain.javabase.list;
+package org.david.java.javabase.list;
 
 /**
  * Created by zhangxingang on 14-10-22.

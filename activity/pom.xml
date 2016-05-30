@@ -16,7 +16,6 @@
     <packaging>war</packaging>
     <name>activity</name>
 
-    
 
     <dependencies>
         <dependency>
@@ -46,7 +45,7 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
@@ -121,7 +120,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
         </dependency>
-        
+
         <!--添加jpa测试-->
 
         <dependency>
@@ -233,9 +232,26 @@
         </dependency>
 
         <dependency>
-            <groupId>commons-dbutils</groupId>
-            <artifactId>commons-dbutils</artifactId>
-            <version>${commons-dbutils}</version>
+            <groupId>edu.princeton.cs</groupId>
+            <artifactId>algs4</artifactId>
+            <scope>system</scope>
+            <version>2.8.3</version>
+            <systemPath>${user.home}/lib/algs4.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>net.jcip</groupId>
+            <artifactId>jcip</artifactId>
+            <scope>system</scope>
+            <version>2.8.3</version>
+            <systemPath>${user.home}/lib/jcip-annotations.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>net.jcip</groupId>
+            <artifactId>example</artifactId>
+            <scope>system</scope>
+            <version>2.8.3</version>
+            <systemPath>${user.home}/lib/jcip-examples-src.jar</systemPath>
         </dependency>
     </dependencies>
 
@@ -266,7 +282,6 @@
 
         </plugins>
     </build>
-
 
 
 </project>

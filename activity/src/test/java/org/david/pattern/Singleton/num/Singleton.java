@@ -10,4 +10,6 @@ package org.david.pattern.Singleton.num;
 public enum Singleton {
 
     INSTANCE
+    
+    
 }

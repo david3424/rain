@@ -1,4 +1,4 @@
-package org.david.rain.javabase.innerclass;
+package org.david.java.javabase.innerclass;
 
 /**
  * Created by mac on 14-11-13.

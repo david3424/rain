@@ -1,4 +1,4 @@
-package org.david.rain.javabase.boot;
+package org.david.java.javabase.boot;
 
 /**
  * Created by david on 2014/11/12.
