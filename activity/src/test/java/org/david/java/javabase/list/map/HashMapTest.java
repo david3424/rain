@@ -1,7 +1,10 @@
 package org.david.java.javabase.list.map;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.junit.Test;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by mac on 14-10-27.
@@ -34,4 +37,15 @@ public class HashMapTest {
             map.put("key" + i, "vlaue" + i);
         }
     }
+
+
+    @Test
+    public void testSort(int n) {
+        List<String> list = new ArrayList<>();
+        while (n > 0) {
+            list.add("test" + n--);
+        }
+        Collections.sort(list);
+    }
+
 }

@@ -1,7 +1,9 @@
 package org.david.java.javabase.list.map;
 
+import org.david.java.javabase.innerclass.TestInner;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -67,9 +69,7 @@ public class TreeMapTest {
     @Test
     public void testName() throws Exception {
 
-        Random r = new Random() ;
-        System.out.println(r.nextInt(10));
-        System.out.println(r.nextInt(10));
-        System.out.println(r.nextInt(10));
+        BigDecimal bigDecimal = new BigDecimal(12);
+        List<BigDecimal> re = Arrays.asList(bigDecimal, bigDecimal, bigDecimal, bigDecimal, bigDecimal);
     }
 }
