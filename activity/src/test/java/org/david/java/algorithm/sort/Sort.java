@@ -106,7 +106,7 @@ public class Sort {
     }
 
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         Integer[] a = {3, 4, 3, 5, 2, 1, 10};
 
         Derived[] d_list = {new Derived(3), new Derived(4), new Derived(3), new Derived(5), new Derived(2), new Derived(1)};
@@ -121,5 +121,5 @@ public class Sort {
         List<Integer> l = Arrays.asList(3, 4, 3, 5, 2, 1, 10);
         Collections.sort(l, numberComparator);
         show(l);
-    }
+    }*/
 }

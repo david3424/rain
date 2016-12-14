@@ -157,7 +157,11 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.1</version> <!-- makesure correct version here -->
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
@@ -204,14 +208,20 @@
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>${slf4j_version}</version>
-            <scope>runtime</scope>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>1.7.5</version>
         </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback_version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.logback-extensions</groupId>
+            <artifactId>logback-ext-spring</artifactId>
+            <version>0.1.4</version>
         </dependency>
 
         <!--杂乱-->
@@ -232,27 +242,15 @@
         </dependency>
 
         <dependency>
-            <groupId>edu.princeton.cs</groupId>
-            <artifactId>algs4</artifactId>
-            <scope>system</scope>
-            <version>2.8.3</version>
-            <systemPath>${user.home}/lib/algs4.jar</systemPath>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>net.jcip</groupId>
-            <artifactId>jcip</artifactId>
-            <scope>system</scope>
-            <version>2.8.3</version>
-            <systemPath>${user.home}/lib/jcip-annotations.jar</systemPath>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
         </dependency>
-        <dependency>
-            <groupId>net.jcip</groupId>
-            <artifactId>example</artifactId>
-            <scope>system</scope>
-            <version>2.8.3</version>
-            <systemPath>${user.home}/lib/jcip-examples-src.jar</systemPath>
-        </dependency>
+
     </dependencies>
 
 

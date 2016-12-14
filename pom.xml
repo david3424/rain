@@ -238,6 +238,13 @@
                 <artifactId>cxf-rt-transports-http</artifactId>
                 <version>${cxf_version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-rt-frontend-jaxws</artifactId>
+                <version>${cxf_version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.thrift</groupId>
                 <artifactId>libthrift</artifactId>
