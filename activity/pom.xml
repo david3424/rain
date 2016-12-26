@@ -11,6 +11,10 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
+    <properties>
+        <outjar.jcip.annotations>${user.home}/lib/jcip-annotations.jar</outjar.jcip.annotations>
+    </properties>
+
     <artifactId>activity</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
@@ -18,6 +22,17 @@
 
 
     <dependencies>
+
+        <dependency>
+            <groupId>net.jcip</groupId>
+            <artifactId>annotations</artifactId>
+            <version>0.0.1</version>
+            <scope>system</scope>
+            <!--本地jar的路径,相对或者绝对都可以-->
+            <systemPath>${outjar.jcip.annotations}</systemPath>
+        </dependency>
+
+
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>

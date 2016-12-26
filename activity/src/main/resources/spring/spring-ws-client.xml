@@ -10,5 +10,5 @@
                   address="http://localhost:8080/ws/getWeather"/>
     <jaxws:client id="withdraw"
                   serviceClass="com.noah.app.webservice.withdraw.Withdraw4Php"
-                  address="http://localhost:8080/ws/withdraw"/>
+                  address="http://10.21.40.55:8085/ws/withdraw"/>
 </beans>
