@@ -216,11 +216,11 @@
         </dependency>
 
         <!-- Log libs -->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j_version}</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>log4j-over-slf4j</artifactId>
@@ -233,11 +233,11 @@
             <version>${logback_version}</version>
         </dependency>
 
-        <dependency>
+       <!-- <dependency>
             <groupId>org.logback-extensions</groupId>
             <artifactId>logback-ext-spring</artifactId>
             <version>0.1.4</version>
-        </dependency>
+        </dependency>-->
 
         <!--杂乱-->
         <dependency>
