@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration scan="true" scanPeriod="3 seconds">
 	<contextName>spring-rain</contextName>
-
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
+		<encoder class="org.david.rain.tools.logback.MyPatternLayoutEncoder">
 			<pattern>
-				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{32} - %msg%n
+				%d{HH:mm:ss.SSS} %-5level[%thread]%logger{32}:%line > %msg%n
 			</pattern>
 		</encoder>
 	</appender>
 
-	<jmxConfigurator />
-	<root level="info">
+	<root level="warn">
 		<appender-ref ref="STDOUT" />
 	</root>
 
-	<logger name="org.david.rain" level="ALL" />
+	<logger name="java151" level="ALL" />
 </configuration>
