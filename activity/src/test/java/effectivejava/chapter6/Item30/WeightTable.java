@@ -2,7 +2,8 @@ package effectivejava.chapter6.Item30;// Takes earth-weight and prints table of 
 
 public class WeightTable {
    public static void main(String[] args) {
-      double earthWeight = Double.parseDouble(args[0]);
+//      double earthWeight = Double.parseDouble(args[0]);
+      double earthWeight = 20.20;
       double mass = earthWeight / Planet.EARTH.surfaceGravity();
       for (Planet p : Planet.values())
           System.out.printf("Weight on %s is %f%n",

@@ -7,6 +7,17 @@ public enum Ensemble {
     NONET(9), DECTET(10), TRIPLE_QUARTET(12);
 
     private final int numberOfMusicians;
-    Ensemble(int size) { this.numberOfMusicians = size; }
-    public int numberOfMusicians() { return numberOfMusicians; }
+
+    Ensemble(int size) {
+        this.numberOfMusicians = size;
+    }
+
+    public int numberOfMusicians() {
+
+        return numberOfMusicians;
+    }
+
+
+    public static void main(String[] args) {
+    }
 }
