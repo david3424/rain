@@ -1,4 +1,4 @@
-package org.david.rain.tools.logback;
+package org.david.rain.common.logback;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,12 +12,12 @@ public class LoggerUtil {
 	/**
 	 * 从LoggerFactory中获取（或创建）指定类的日志记录对象.
 	 * 
-	 * @param caller
+	 * @param 
 	 *            Object 调用记录日志的类.
 	 * @return Logger
 	 */
-	private static Logger getLogger(final Class<?> caller) {
-		return LoggerFactory.getLogger(caller);
+	private static Logger getLogger(final Class<?> ) {
+		return LoggerFactory.getLogger();
 	}
 
 	/**
@@ -35,8 +35,8 @@ public class LoggerUtil {
 	 * 
 	 * @return
 	 */
-	private static Class<?> getCallerClass() {
-		return Reflection.getCallerClass(3);
+	private  Class<?> getClass() {
+		return Reflection.getClass(3);
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class LoggerUtil {
 	 * @param msg
 	 */
 	public static void trace(final String msg) {
-		Logger logger = getLogger(getCallerClass());
+		Logger logger = getLogger(getClass());
 		logger.trace(msg);
 	}
 	/**
@@ -54,7 +54,7 @@ public class LoggerUtil {
 	 * @param arguments
 	 */
 	public static void trace(final String format, Object ...arguments) {
-		Logger logger = getLogger(getCallerClass());
+		Logger logger = getLogger(getClass());
 		logger.trace(format, arguments);
 	}
 	/**
@@ -85,7 +85,7 @@ public class LoggerUtil {
 	 * @param msg
 	 */
 	public static void debug(final String msg) {
-		Logger logger = getLogger(getCallerClass());
+		Logger logger = getLogger(getClass());
 		logger.debug(msg);
 	}
 
@@ -95,7 +95,7 @@ public class LoggerUtil {
 	 * @param arguments
 	 */
 	public static void debug(final String format, Object ...arguments) {
-		Logger logger = getLogger(getCallerClass());
+		Logger logger = getLogger(getClass());
 		logger.debug(format, arguments);
 	}
 	
@@ -127,7 +127,7 @@ public class LoggerUtil {
 	 * @param msg
 	 */
 	public static void info(final String msg) {
-		Logger logger = getLogger(getCallerClass());
+		Logger logger = getLogger(getClass());
 		logger.info(msg);
 	}
 	
@@ -137,7 +137,7 @@ public class LoggerUtil {
 	 * @param arguments
 	 */
 	public static void info(final String format, Object ...arguments) {
-		Logger logger = getLogger(getCallerClass());
+		Logger logger = getLogger(getClass());
 		logger.info(format, arguments);
 	}
 	
@@ -169,7 +169,7 @@ public class LoggerUtil {
 	 * @param msg
 	 */
 	public static void warn(final String msg) {
-		Logger logger = getLogger(getCallerClass());
+		Logger logger = getLogger(getClass());
 		logger.warn(msg);
 	}
 
@@ -179,7 +179,7 @@ public class LoggerUtil {
 	 * @param arguments
 	 */
 	public static void warn(final String format, Object ...arguments) {
-		Logger logger = getLogger(getCallerClass());
+		Logger logger = getLogger(getClass());
 		logger.warn(format, arguments);
 	}
 	
@@ -211,7 +211,7 @@ public class LoggerUtil {
 	 * @param e
 	 */
 	public static void warn(final Throwable e) {
-		Logger logger = getLogger(getCallerClass());
+		Logger logger = getLogger(getClass());
 		logger.warn(e.getMessage(), e);
 	}
 
@@ -244,7 +244,7 @@ public class LoggerUtil {
 	 * @param e
 	 */
 	public static void warn(final String msg, final Exception e) {
-		Logger logger = getLogger(getCallerClass());
+		Logger logger = getLogger(getClass());
 		logger.warn(msg, e);
 	}
 
@@ -277,11 +277,10 @@ public class LoggerUtil {
 	/**
 	 * 记录错误日志信息.
 	 * 
-	 * @param caller
 	 * @param msg
 	 */
 	public static void error(final String msg) {
-		Logger logger = getLogger(getCallerClass());
+		Logger logger = getLogger(getClass());
 		logger.error(msg);
 	}
 
@@ -291,7 +290,7 @@ public class LoggerUtil {
 	 * @param arguments
 	 */
 	public static void error(final String format, Object ...arguments) {
-		Logger logger = getLogger(getCallerClass());
+		Logger logger = getLogger(getClass());
 		logger.error(format, arguments);
 	}
 	
@@ -320,11 +319,11 @@ public class LoggerUtil {
 	/**
 	 * 记录错误日志信息.
 	 * 
-	 * @param caller
+	 * @param 
 	 * @param e
 	 */
 	public static void error(final Throwable e) {
-		Logger logger = getLogger(getCallerClass());
+		Logger logger = getLogger(getClass());
 		logger.error(e.getMessage(), e);
 	}
 
@@ -357,7 +356,7 @@ public class LoggerUtil {
 	 * @param e
 	 */
 	public static void error(final String msg, final Exception e) {
-		Logger logger = getLogger(getCallerClass());
+		Logger logger = getLogger(getClass());
 		logger.error(msg, e);
 	}
 

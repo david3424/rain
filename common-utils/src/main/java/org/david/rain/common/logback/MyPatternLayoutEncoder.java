@@ -1,4 +1,4 @@
-package org.david.rain.tools.logback;
+package org.david.rain.common.logback;
 
 import ch.qos.logback.classic.PatternLayout;
 import ch.qos.logback.classic.spi.ILoggingEvent;
