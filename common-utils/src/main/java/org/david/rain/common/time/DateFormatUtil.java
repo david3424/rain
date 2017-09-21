@@ -2,7 +2,7 @@ package org.david.rain.common.time;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
-import org.springside.modules.utils.base.annotation.NotNull;
+import org.david.rain.common.base.annotation.NotNull;
 
 import java.text.ParseException;
 import java.util.Date;

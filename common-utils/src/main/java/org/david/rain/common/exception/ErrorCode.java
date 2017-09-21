@@ -4,17 +4,17 @@ package org.david.rain.common.exception;
 public enum ErrorCode implements IErrorCode {
 
 
-    UNKNOWN(500, "Unknown"),
     /**
      * SERVER_ERROR
      */
     SERVER_ERROR(500, "System error"),
+    SERVICE_EXCEPTION(600, "System error"),
 
     REQUEST_ENTITY_TOO_LARGE(10000, "Request Entity too large"),
 
     AUTH_FAILED(10001, "Authorization failure"),
 
-    PARAM_ILLEGAL(10002, "Parameter illegal"),
+    PARAM_ILLEGAL(10002, "Parameter illegal:%s"),
 
     METHOD_NOT_SUPPORED(10003, "Method is not suppored"),
 
