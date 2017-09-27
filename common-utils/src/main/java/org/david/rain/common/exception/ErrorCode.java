@@ -8,7 +8,7 @@ public enum ErrorCode implements IErrorCode {
      * SERVER_ERROR
      */
     SERVER_ERROR(500, "System error"),
-    SERVICE_EXCEPTION(600, "System error"),
+    SERVICE_EXCEPTION(600, "service exception :%s"),
 
     REQUEST_ENTITY_TOO_LARGE(10000, "Request Entity too large"),
 

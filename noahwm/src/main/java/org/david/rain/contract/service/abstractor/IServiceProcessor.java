@@ -1,4 +1,4 @@
-package org.david.rain.common.contract.service.abstractor;
+package org.david.rain.contract.service.abstractor;
 
 
 public interface IServiceProcessor {

@@ -73,7 +73,7 @@ public class StringUtil extends StringUtils {
     }
 
     public static boolean isEmpty(String... strs) {
-        for(int i = 0; i < strs.length; ++i) {
+        for (int i = 0; i < strs.length; ++i) {
             if (isEmpty(strs[i])) {
                 return true;
             }
@@ -142,7 +142,7 @@ public class StringUtil extends StringUtils {
         boolean Return = false;
         byte[] temp_t = null;
         /*-----End define-------*/
-		/*-----Begin Operate----*/
+        /*-----Begin Operate----*/
         try {
             if (isNotBlank(characterCode)) {
                 temp_t = value.getBytes(characterCode);
@@ -160,7 +160,7 @@ public class StringUtil extends StringUtils {
             Return = false;
         }
         return Return;
-		/*-----End Operate------*/
+        /*-----End Operate------*/
     }
 
     /**
@@ -174,16 +174,16 @@ public class StringUtil extends StringUtils {
      * @throws IllegalArgumentException 当maxWidth小于4时抛出
      *                                  <p>
      *                                  <pre>
-     *                                                                        Example：
-     *                                                                        StringUtil.abbreviateByByte(null, *)      = &quot;&quot;
-     *                                                                        StringUtil.abbreviateByByte(&quot;&quot;, 4)        = &quot;&quot;
-     *                                                                        StringUtil.abbreviateByByte(&quot;一二三四五六七八九十1234567890ABCDEFGHIJ&quot;, 40) = &quot;一二三四五六七八九十1234567890ABCDEFGHIJ&quot;
-     *                                                                        StringUtil.abbreviateByByte(&quot;一二三四五六七八九十1234567890ABCDEFGHIJ&quot;, 30) = &quot;一二三四五六七八九十1234567..&quot;
-     *                                                                        StringUtil.abbreviateByByte(&quot;一二三四五六七八九十1234567890ABCDEFGHIJ&quot;, 13) = &quot;一二三四五六七八九十...&quot;
-     *                                                                        StringUtil.abbreviateByByte(&quot;一二三四五六七八九十1234567890ABCDEFGHIJ&quot;, 9) = &quot;一二三四五六...&quot;
-     *                                                                        StringUtil.abbreviateByByte(&quot;一二三四五六七八九十1234567890ABCDEFGHIJ&quot;, 4) = &quot;一...&quot;
-     *                                                                        StringUtil.abbreviateByByte(&quot;一二三四五六七八九十1234567890ABCDEFGHIJ&quot;, 3) = IllegalArgumentException
-     *                                                                   </pre>
+     *                                                                                                                                                                           Example：
+     *                                                                                                                                                                           StringUtil.abbreviateByByte(null, *)      = &quot;&quot;
+     *                                                                                                                                                                           StringUtil.abbreviateByByte(&quot;&quot;, 4)        = &quot;&quot;
+     *                                                                                                                                                                           StringUtil.abbreviateByByte(&quot;一二三四五六七八九十1234567890ABCDEFGHIJ&quot;, 40) = &quot;一二三四五六七八九十1234567890ABCDEFGHIJ&quot;
+     *                                                                                                                                                                           StringUtil.abbreviateByByte(&quot;一二三四五六七八九十1234567890ABCDEFGHIJ&quot;, 30) = &quot;一二三四五六七八九十1234567..&quot;
+     *                                                                                                                                                                           StringUtil.abbreviateByByte(&quot;一二三四五六七八九十1234567890ABCDEFGHIJ&quot;, 13) = &quot;一二三四五六七八九十...&quot;
+     *                                                                                                                                                                           StringUtil.abbreviateByByte(&quot;一二三四五六七八九十1234567890ABCDEFGHIJ&quot;, 9) = &quot;一二三四五六...&quot;
+     *                                                                                                                                                                           StringUtil.abbreviateByByte(&quot;一二三四五六七八九十1234567890ABCDEFGHIJ&quot;, 4) = &quot;一...&quot;
+     *                                                                                                                                                                           StringUtil.abbreviateByByte(&quot;一二三四五六七八九十1234567890ABCDEFGHIJ&quot;, 3) = IllegalArgumentException
+     *                                                                                                                                                                      </pre>
      */
     public final static String abbreviateByByte(final String str, final int maxWidth) {
         if (isBlank(str)) {
@@ -732,7 +732,6 @@ public class StringUtil extends StringUtils {
     }
 
 
-
     /**
      * 将字符串转为BigDecimal
      */
@@ -782,7 +781,6 @@ public class StringUtil extends StringUtils {
 
     /**
      * 字符编码
-     *
      */
     public static String encode(String chinese, String charset) {
         chinese = chinese == null ? "" : chinese;
@@ -889,7 +887,6 @@ public class StringUtil extends StringUtils {
 
     /**
      * 字段位数调整
-     *
      */
     public static String getDigitAdjustment(String digital, int num) {
         if (!StringUtil.isEmpty(digital)) {
@@ -901,7 +898,6 @@ public class StringUtil extends StringUtils {
 
     /**
      * 字段位数调整
-     *
      */
     public static String getDigitAdjustment(BigDecimal digital, int num) {
         if (digital != null) {
@@ -957,6 +953,12 @@ public class StringUtil extends StringUtils {
             navg = "--";
         }
         return navg;
+    }
+
+    public static boolean isFirstCapital(String str) {
+
+        String regex = "^[A-Z]"; // 正则表达式，判断首字母大写，非首字母小写
+        return str.matches(regex);
     }
 
 }

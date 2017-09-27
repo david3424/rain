@@ -1,13 +1,12 @@
-package org.david.rain.common.contract.service;
+package org.david.rain.contract.service;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.*;
 import org.apache.commons.lang3.StringUtils;
-import org.david.rain.common.contract.pojo.ContractData;
-import org.david.rain.common.contract.pojo.GlobalConfig;
-import org.david.rain.common.contract.service.abstractor.IServiceProcessor;
+import org.david.rain.contract.pojo.ContractData;
+import org.david.rain.contract.service.abstractor.IServiceProcessor;
 import org.david.rain.common.exception.ErrorCode;
 import org.david.rain.common.exception.ServiceException;
 import org.david.rain.common.logback.LoggerUtil;
@@ -15,7 +14,7 @@ import org.david.rain.common.mapper.JsonMapper;
 import org.david.rain.common.text.StringUtil;
 import org.david.rain.common.time.ClockUtil;
 import org.david.rain.common.time.DateFormatUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -27,8 +26,15 @@ import java.util.Date;
 @Service("createContractService")
 public class CreateContractService implements IServiceProcessor {
 
-    @Autowired
-    GlobalConfig globalConfig;
+    @Value("${contract.dir.local}")
+    String contractDirLocal;
+    @Value("${wartermark.img}")
+    String warterMarkImg;
+    @Value("${template.dir.local}")
+    private String templateDirLocal;
+    @Value("${resource.url}")
+    private String resourceUrl;
+
 
     public String doHandler(String datas) {
         if (StringUtils.isEmpty(datas)) {
@@ -37,17 +43,18 @@ public class CreateContractService implements IServiceProcessor {
         String result;
         try {
             result = beginProduce(datas);
+
         } catch (ServiceException se) {
             throw se;
         } catch (Exception e) {
             throw new ServiceException(ErrorCode.SERVER_ERROR, e);
         }
+
         return result;
     }
 
     private String beginProduce(String datas) throws Exception {
         long start = ClockUtil.currentTimeMillis();
-
         LoggerUtil.info("create pdf 请求begin =====请求时间:{}========", ClockUtil.currentDate());
         LoggerUtil.info("接收到的参数：{}", datas);
         ContractData contractData;
@@ -69,7 +76,6 @@ public class CreateContractService implements IServiceProcessor {
     /**
      * 制作合同
      *
-     * @return
      */
     public String createContract(ContractData contractData) {
         String templateName = contractData.getSysTemplateName();
@@ -77,7 +83,7 @@ public class CreateContractService implements IServiceProcessor {
             throw new ServiceException(ErrorCode.PARAM_ILLEGAL, " error suffix of template");
         }
         // 如果template存在则直接使用
-        String templatePath = globalConfig.getTemplateDirLocal() + templateName;
+        String templatePath = templateDirLocal + templateName;
         File tempFile = new File(templatePath);
         if (!tempFile.exists()) { // 调用接口下载
             throw new ServiceException(ErrorCode.PARAM_ILLEGAL, "error template url");
@@ -95,11 +101,10 @@ public class CreateContractService implements IServiceProcessor {
      *
      * @param templatePath 模板路径
      * @param contractData 填充的数据
-     * @return
      */
     private String fillTagInPdf(String templatePath, ContractData contractData, boolean isWarterMark) { //UniCNS-UCS2-H
 
-        String testFile = globalConfig.getResourceUrl();
+        String testFile = resourceUrl;
         LoggerUtil.info("font name:" + testFile);
         BaseFont bf;
         try {
@@ -118,7 +123,7 @@ public class CreateContractService implements IServiceProcessor {
             throw new ServiceException(ErrorCode.PARAM_ILLEGAL, " already have  suffix of contractName ");
         }
         String date = DateFormatUtil.formatDate(DateFormatUtil.PATTERN_ISO_ON_DATE, new Date());
-        String contractPath = globalConfig.getContractDirLocal() + date + "/";
+        String contractPath = contractDirLocal + date + "/";
         File file = new File(contractPath);
         if (!file.isDirectory()) {
             file.mkdirs();
@@ -175,12 +180,12 @@ public class CreateContractService implements IServiceProcessor {
             boolean isLoan = StringUtils.isNotEmpty(contractData.getTx_LoanAmount());
             if (isWarterMark) {
                 if (isLoan) {
-                    image_warter = Image.getInstance(globalConfig.getLoanWarterMarkImg());
+                    image_warter = Image.getInstance(warterMarkImg);
                     image_warter.setAbsolutePosition(0, 100);
                     image_warter.scalePercent(90);//缩放
                     image_warter.setRotationDegrees(37f);
                 } else {
-                    image_warter = Image.getInstance(globalConfig.getWarterMarkImg());
+                    image_warter = Image.getInstance(warterMarkImg);
                     image_warter.setAbsolutePosition(-100, 20);
                     image_warter.scalePercent(70);//缩放
                     image_warter.setRotationDegrees(37f);

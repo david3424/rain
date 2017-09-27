@@ -18,6 +18,7 @@ public class ServiceException extends RuntimeException {
     }
 
     public ServiceException(IErrorCode errorCode, String userDefinedReason) {
+
         this(errorCode, userDefinedReason, null);
     }
 
@@ -61,8 +62,8 @@ public class ServiceException extends RuntimeException {
      * 除非throw该异常时，把异常堆栈给传递出来了，
      * 否则外面catch，填充堆栈信息就到此为止（一般是业务约束校验失败场景用到，比如对方没异常，但是返回的code不对，我们业务要block的）
      */
-    @Override
+/*    @Override
     public Throwable fillInStackTrace() {
         return this;
-    }
+    }*/
 }

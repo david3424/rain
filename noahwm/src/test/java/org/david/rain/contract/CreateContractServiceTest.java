@@ -1,10 +1,13 @@
-package org.david.rain.common.contract;
+package org.david.rain.contract;
 
 
-import com.ifaclub.common.utils.StringUtil;
-import org.david.rain.common.contract.service.CreateContractService;
-import com.noah.exception.CommonErrorCode;
-import com.noah.exception.ContractException;
+import org.david.rain.common.exception.ErrorCode;
+import org.david.rain.common.exception.ServiceException;
+import org.david.rain.common.logback.LoggerUtil;
+import org.david.rain.common.mapper.JsonMapper;
+import org.david.rain.common.text.StringUtil;
+import org.david.rain.contract.pojo.ContractData;
+import org.david.rain.contract.service.CreateContractService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,8 +83,8 @@ public class CreateContractServiceTest {
                 "    \"JG_FaRen\": \"清科创投\",\n" +
                 "    \"JG_LianXiRen\": \"清科创投\",\n" +
                 "    \"Tx_ContractNumber\": \"170531000020\",\n" +
-                "    \"sysTemplateUrl\": \"?e=1504175783&token=_gsUZbrLzcDO-vHRLojw0holcS0oaICOyrkDiMOh:P2z-BTmvZCfZyAXKWjgQSDYxeHE=\",\n" +
-                "    \"sysTemplateName\": \"机构测试-电子\",\n" +
+//                "    \"sysTemplateUrl\": \"" +
+                "    \"sysTemplateName\": \"机构测试-电子.pdf\",\n" +
                 "    \"sysContractName\": \"170531000020\"\n" +
                 "}";
 
@@ -90,48 +93,21 @@ public class CreateContractServiceTest {
         ContractData contractData;
         try {
 //            contractData = JSON.parseObject(xx, ContractData.class);
-            contractData = JSON.parseObject(JG_data, ContractData.class);
+            contractData = JsonMapper.firstCaptalMapper().fromJson(JG_data, ContractData.class);
+            LoggerUtil.info("contractData:{}", contractData);
            /* contractData = new ContractData();
             contractData.setSysTemplateName("18711472097484");
             contractData.setSysTemplateUrl("https://dn-ifa-dev-contract.qbox.me/20160825_a26fa18eecbd30b5a18265dd8f7a9227.pdf?e=1473148202&token=_gsUZbrLzcDO-vHRLojw0holcS0oaICOyrkDiMOh:FQcQs4jHFM9HnmWQS6joKJGNEYI=");
             contractData.setSysContractName("160906000006");
             contractData.setTx_ContractNumber("160906000006");*/
         } catch (Exception e) {
-            throw new ContractException(CommonErrorCode.PARSING_PARAMS_ERROR);
+            throw new ServiceException(ErrorCode.SERVICE_EXCEPTION, e.getMessage());
         }
 
-        if (StringUtil.isEmpty(contractData.getSysTemplateName(), contractData.getSysContractName(), contractData.getSysTemplateUrl(), contractData.getTx_ContractNumber())) {
-            throw new ContractException(CommonErrorCode.PARAM_ILLEGAL);
+        if (StringUtil.isEmpty(contractData.getSysTemplateName(), contractData.getSysContractName(), contractData.getTx_ContractNumber())) {
+            throw new ServiceException(ErrorCode.PARAM_ILLEGAL, "part params are empty");
         }
-
         createContractService.createContract(contractData);
-
-    }
-
-
-    @Test
-    public void testPrevCreateContract() throws Exception {
-
-
-        String xx = "{\"Tx_Year\":\"2016\",\"sysReloadTemplate\":false,\"ID_Number\":\"310101198508195373\",\"Tx_BankName\":\"中国光大银行\",\"Tx_OrderAmountCapitalYuan\":\"贰佰万\",\"sysContractName\":\"161012000013\",\"Cb_LawI\":\"on\",\"Tx_CardNumber\":\"6226730033774410\",\"Tx_DayAll\":\"2016年10月12日\",\"Tx_OrderAmount\":200,\"Tx_CustomerName\":\"账号新\",\"Tx_PayAmountYuan\":\"2,000,000.00\",\"Tx_PayCapital\":\"贰佰\",\"Tx_Day\":\"12\",\"sysTemplateUrl\":\"https://dn-ifa-dev-contract.qbox.me/20161010_a26fa18eecbd30b5a18265dd8f7a9227.pdf?e=1476357003&token=_gsUZbrLzcDO-vHRLojw0holcS0oaICOyrkDiMOh:3Q5bNbg1cfw19SVPJtVj-t0Sqps=\",\"Tx_OrderAmountYuan\":\"2,000,000.00\",\"ID_TypeName\":\"身份证\",\"Tx_Month\":\"10\",\"sysTemplateName\":\"19241476346133\",\"ID_Type\":\"1\",\"Tx_ContractNumber\":\"161012000013\",\"Tx_PayAmount\":200,\"Tx_OrderAmountCapital\":\"贰佰\",\"Cb_Level1\":\"on\",\"Tx_PayCapitalYuan\":\"贰佰万\"}";
-        System.out.println(xx);
-        ContractData contractData;
-        try {
-            contractData = JSON.parseObject(xx, ContractData.class);
-           /* contractData = new ContractData();
-            contractData.setSysTemplateName("18711472097484");
-            contractData.setSysTemplateUrl("https://dn-ifa-dev-contract.qbox.me/20160825_a26fa18eecbd30b5a18265dd8f7a9227.pdf?e=1473148202&token=_gsUZbrLzcDO-vHRLojw0holcS0oaICOyrkDiMOh:FQcQs4jHFM9HnmWQS6joKJGNEYI=");
-            contractData.setSysContractName("160906000006");
-            contractData.setTx_ContractNumber("160906000006");*/
-        } catch (Exception e) {
-            throw new ContractException(CommonErrorCode.PARSING_PARAMS_ERROR);
-        }
-
-        if (StringUtil.isEmpty(contractData.getSysTemplateName(), contractData.getSysContractName(), contractData.getSysTemplateUrl(), contractData.getTx_ContractNumber())) {
-            throw new ContractException(CommonErrorCode.PARAM_ILLEGAL);
-        }
-
-        createPreviewContractService.createPrevContract(contractData);
 
     }
 }
