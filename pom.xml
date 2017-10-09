@@ -10,9 +10,10 @@
     <name>rain</name>
 
     <modules>
-        <!--<module>activity</module>-->
-        <module>noahwm</module>
         <module>common-utils</module>
+        <!--<module>activity</module>-->
+        <!--<module>noahwm</module>-->
+        <module>spring-cloud-demo</module>
         <!--<module>parent</module>-->
         <!--<module>games</module>-->
         <!--<module>bhhd</module>-->
