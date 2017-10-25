@@ -34,7 +34,7 @@
         <fastjson_version>1.1.39</fastjson_version>
         <org.codehaus.jackson>1.9.9</org.codehaus.jackson>
         <!--utils-->
-        <guava.version>14.0.1</guava.version>
+        <guava.version>23.0</guava.version>
         <commons-lang3.version>3.6</commons-lang3.version>
         <commons-beanutils>1.8.3</commons-beanutils>
         <commons-dbutils>1.5</commons-dbutils>

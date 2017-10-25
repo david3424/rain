@@ -20,7 +20,7 @@ import org.springframework.core.annotation.Order;
  *
  * @author xdw9486
  */
-@Order(1)
+//@Order(1)
 @WebFilter(filterName = "xssFilter", urlPatterns = "/*", asyncSupported = true)
 public class XssFilter implements Filter {
 

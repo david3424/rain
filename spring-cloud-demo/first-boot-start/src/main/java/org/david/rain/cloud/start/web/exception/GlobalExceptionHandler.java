@@ -3,6 +3,7 @@ package org.david.rain.cloud.start.web.exception;
 import org.david.rain.common.exception.ErrorInfo;
 import org.david.rain.common.exception.IErrorCode;
 import org.david.rain.common.exception.ServiceException;
+import org.david.rain.common.logback.LoggerUtil;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -12,10 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 class GlobalExceptionHandler {
-    private static final String DEFAULT_ERROR_VIEW = "error";
+    private static final String DEFAULT_ERROR_VIEW = "exception";
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
+        LoggerUtil.error("异常统一处理：", e);
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", e);
         mav.addObject("url", req.getRequestURL());
