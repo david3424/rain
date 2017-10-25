@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.david.rain.cloud.start.pojo.KoTask;
 
+import java.util.List;
+
 @Mapper
 public interface KoTaskMapper {
     /**
@@ -65,4 +67,10 @@ public interface KoTaskMapper {
 
     @Select("SELECT * FROM ko_task WHERE task_id = #{taskId} ")
     KoTask findByTaskId(@Param("taskId") String taskId);
+
+    /**
+     * @return all tasks
+     */
+    @Select("SELECT * FROM ko_task ")
+    List<KoTask> findAllTasks();
 }

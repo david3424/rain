@@ -1,6 +1,5 @@
 package org.david.rain.cloud.start.pojo;
 
-import com.google.common.base.Objects;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class KoTask {

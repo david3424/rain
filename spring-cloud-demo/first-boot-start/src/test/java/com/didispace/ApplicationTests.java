@@ -3,9 +3,11 @@ package com.didispace;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.david.rain.cloud.start.Application;
+import org.david.rain.cloud.start.service.BaseProperties;
 import org.david.rain.common.logback.LoggerUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,6 +28,7 @@ public class ApplicationTests {
     // 注入启动server后的实际端口号
     @Value("${test.server.port}")
     protected int port;
+
 
 
     @Test

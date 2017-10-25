@@ -53,5 +53,5 @@ dubbox模块 引入dubbo功能
 api，主要提供服务的接口文件
 provider 生产者，这里用spring-mvc实现，应用服务器为tomcat
 数据源bonecp，持久化可选择mybatis、springjdbctemplate、JPA+hibernate
-consumer 消费者，架构一致（用于测试，实际中可为任意形式）
+consumer 消费者，架构一致（用于测试，实际中可为任意形式）````````````
 
