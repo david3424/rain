@@ -5,11 +5,13 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * 公共异常类
  * 只需要实现ErrorCode就能轻松传递unchecked异常
+ * @author xdw9486
  */
 
 public class ServiceException extends RuntimeException {
 
 
+    private static final long serialVersionUID = 6909436772218493574L;
     private IErrorCode errorCode;
     private String userDefinedReason;
 
@@ -66,4 +68,12 @@ public class ServiceException extends RuntimeException {
     public Throwable fillInStackTrace() {
         return this;
     }*/
+
+    public IErrorCode getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(IErrorCode errorCode) {
+        this.errorCode = errorCode;
+    }
 }

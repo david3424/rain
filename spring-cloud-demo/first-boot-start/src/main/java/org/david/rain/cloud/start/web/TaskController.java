@@ -2,6 +2,8 @@ package org.david.rain.cloud.start.web;
 
 import org.david.rain.cloud.start.dao.mapper.KoTaskMapper;
 import org.david.rain.cloud.start.pojo.KoTask;
+import org.david.rain.common.exception.ErrorCode;
+import org.david.rain.common.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -41,7 +43,8 @@ public class TaskController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public KoTask getTask(@PathVariable Long id) {
         // url中的id可通过@PathVariable绑定到函数的参数中
-        return koTaskMapper.findByTaskId(id + "");
+        throw new ServiceException(ErrorCode.SERVICE_EXCEPTION, "测试异常");
+//        return koTaskMapper.findByTaskId(id + "");
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
