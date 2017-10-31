@@ -13,6 +13,15 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
+    <logger name="org.springframework.jdbc.core.StatementCreatorUtils"
+            additivity="false" level="TRACE">
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <logger name="org.springframework.jdbc.core" additivity="false">
+        <level value="DEBUG" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+
     <logger name="org.david.rain.cloud" level="DEBUG" addctive="false"/>
-    <logger name="org.springframework.amqp.rabbit.listener" level="WARN" addctive="false"/>
+    <!--<logger name="org.springframework" level="INFO" addctive="false"/>-->
 </configuration>

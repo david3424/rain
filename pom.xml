@@ -429,6 +429,13 @@
                 <scope>runtime</scope>
             </dependency>
 
+            <!-- oracle driver -->
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc14</artifactId>
+                <version>1.0</version>
+            </dependency>
+
             <!--mybatis-->
             <dependency>
                 <groupId>org.mybatis</groupId>

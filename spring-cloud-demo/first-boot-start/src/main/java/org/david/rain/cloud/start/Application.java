@@ -9,11 +9,15 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author xdw9486
  */
 @SpringBootApplication
+//@EnableScheduling
+@EnableAsync
 @ServletComponentScan
 public class Application {
 

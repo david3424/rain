@@ -1,7 +1,8 @@
 package com.didispace;
 
 import org.david.rain.cloud.start.Application;
-import org.david.rain.cloud.start.dao.mapper.KoTaskMapper;
+import org.david.rain.cloud.start.dao.mapper.king.KoTaskMapper;
+import org.david.rain.cloud.start.dao.mapper.oracle.PayFundMapper;
 import org.david.rain.cloud.start.pojo.KoTask;
 import org.david.rain.common.logback.LoggerUtil;
 import org.junit.Test;
@@ -10,19 +11,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Map;
 
 /**
  * Created by mac on 14-11-29.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@Transactional
+//@Transactional("ora")
 @SpringBootTest(classes = Application.class)
 public class mybatisTests {
 
 
     @Autowired
     KoTaskMapper koTaskMapper;
+
+    @Autowired
+    PayFundMapper payFundMapper;
 
 
     @Test
@@ -34,6 +39,13 @@ public class mybatisTests {
         koTask.setRemark("test");
         int re = koTaskMapper.updateByPrimaryKeySelective(koTask);
         LoggerUtil.info("task after info :{}", koTask);
-
     }
+
+    @Test
+    public void testFundcodeQuery() throws Exception {
+
+        Map<String, Object> resultMap = payFundMapper.findByFundcode("050003");
+        LoggerUtil.info("pay_product  info :{}", resultMap);
+    }
+
 }
