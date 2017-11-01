@@ -26,7 +26,7 @@ public class OracleDataSourceConfig {
 
 
     static final String PACKAGE = "org.david.rain.cloud.start.dao.mapper.oracle";
-    static final String MAPPER_LOCATION = "classpath:org/david/rain/cloud/start/dao/mapper/oracle/*.xml";
+    private static final String MAPPER_LOCATION = "classpath:org/david/rain/cloud/start/dao/mapper/oracle/*.xml";
 
     @Bean(name = "oracleDataSource")
     @ConfigurationProperties(prefix = "spring.datasource.oracle")

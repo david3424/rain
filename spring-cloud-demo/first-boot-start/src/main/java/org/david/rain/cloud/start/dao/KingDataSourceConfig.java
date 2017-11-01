@@ -2,6 +2,7 @@ package org.david.rain.cloud.start.dao;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
@@ -21,7 +22,8 @@ import javax.sql.DataSource;
  * @author xdw9486
  */
 @Configuration
-@MapperScan(basePackages = KingDataSourceConfig.PACKAGE, sqlSessionFactoryRef = "kingSqlSessionFactory")
+//@MapperScan(basePackages = KingDataSourceConfig.PACKAGE, sqlSessionFactoryRef = "kingSqlSessionFactory")
+@MapperScan(basePackages = KingDataSourceConfig.PACKAGE, sqlSessionTemplateRef = "kingSqlSessionTemplate")
 public class KingDataSourceConfig {
 
 
@@ -62,6 +64,12 @@ public class KingDataSourceConfig {
         sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
                 .getResources(KingDataSourceConfig.MAPPER_LOCATION));
         return sessionFactory.getObject();
+    }
+
+    @Bean(name = "kingSqlSessionTemplate")
+    @Primary
+    public SqlSessionTemplate kingSqlSessionTemplate(@Qualifier("kingSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+        return new SqlSessionTemplate(sqlSessionFactory);
     }
 
 }
