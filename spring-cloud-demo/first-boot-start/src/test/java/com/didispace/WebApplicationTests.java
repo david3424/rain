@@ -1,6 +1,6 @@
 package com.didispace;
 
-import org.david.rain.cloud.start.Application;
+import org.david.rain.boot.start.Application;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;

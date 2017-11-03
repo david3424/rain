@@ -1,6 +1,6 @@
 package com.didispace;
 
-import org.david.rain.cloud.start.Application;
+import org.david.rain.boot.start.Application;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

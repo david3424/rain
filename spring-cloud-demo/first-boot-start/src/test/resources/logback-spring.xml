@@ -22,6 +22,6 @@
         <appender-ref ref="STDOUT" />
     </logger>
 
-    <logger name="org.david.rain.cloud" level="DEBUG" addctive="false"/>
+    <logger name="org.david.rain.boot" level="DEBUG" addctive="false"/>
     <!--<logger name="org.springframework" level="INFO" addctive="false"/>-->
 </configuration>

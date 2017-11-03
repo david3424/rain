@@ -1,7 +1,7 @@
 package com.didispace;
 
-import org.david.rain.cloud.start.Application;
-import org.david.rain.cloud.start.service.TransactionTestService;
+import org.david.rain.boot.start.Application;
+import org.david.rain.boot.start.service.TransactionTestService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

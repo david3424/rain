@@ -17,5 +17,14 @@
 
     <modules>
         <module>first-boot-start</module>
+        <module>first-cloud-start</module>
     </modules>
+
+
+    <build>
+        <plugins>
+
+
+        </plugins>
+    </build>
 </project>

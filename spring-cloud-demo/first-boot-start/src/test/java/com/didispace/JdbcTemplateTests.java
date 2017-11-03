@@ -1,8 +1,8 @@
 package com.didispace;
 
-import org.david.rain.cloud.start.Application;
-import org.david.rain.cloud.start.dao.CommonDao;
-import org.david.rain.cloud.start.pojo.KoTask;
+import org.david.rain.boot.start.Application;
+import org.david.rain.boot.start.dao.CommonDao;
+import org.david.rain.boot.start.pojo.KoTask;
 import org.david.rain.common.logback.LoggerUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -13,6 +13,6 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
-    <logger name="org.david.rain.cloud" level="DEBUG" addctive="false"/>
+    <logger name="org.david.rain.boot" level="DEBUG" addctive="false"/>
     <logger name="org.springframework.amqp.rabbit.listener" level="WARN" addctive="false"/>
 </configuration>
