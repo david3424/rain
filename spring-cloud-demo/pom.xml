@@ -17,6 +17,7 @@
 
     <modules>
         <module>first-boot-start</module>
+        <module>first-boot-consumer</module>
         <module>first-cloud-start</module>
     </modules>
 
