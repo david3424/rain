@@ -16,9 +16,11 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>first-boot-start</module>
-        <module>first-boot-consumer</module>
+        <module>first-boot-config</module>
         <module>first-cloud-start</module>
+        <module>first-boot-start</module>
+        <!--<module>first-boot-consumer</module>-->
+        <module>first-boot-consumer-feign</module>
     </modules>
 
 

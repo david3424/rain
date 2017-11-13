@@ -21,6 +21,8 @@ public class HelloController {
     @Autowired
     RestTemplate restTemplate;
 
+
+    /*没有ribbon时 手动指定*/
     @GetMapping("/consumer")
     public String dc() {
         ServiceInstance serviceInstance = loadBalancerClient.choose("client-service-start");
@@ -28,6 +30,7 @@ public class HelloController {
         LoggerUtil.info("consumer url is {}", url);
         return restTemplate.getForObject(url, String.class);
     }
+    /*ribbon 自动负载均衡指定*/
     @GetMapping("/consumer-lb")
     public String dcLb() {
         return restTemplate.getForObject("http://client-service-start/dc", String.class);
