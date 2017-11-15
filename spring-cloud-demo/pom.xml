@@ -21,6 +21,7 @@
         <module>first-boot-start</module>
         <!--<module>first-boot-consumer</module>-->
         <module>first-boot-consumer-feign</module>
+        <module>first-boot-consumer-feign-hystrix</module>
     </modules>
 
 

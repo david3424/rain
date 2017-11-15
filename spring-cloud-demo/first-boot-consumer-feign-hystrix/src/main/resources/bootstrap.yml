@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: consumer-feign
+  cloud:
+    config:
+      uri: http://10.21.40.58:1201/
+      profile: sit
+      label: dev-test
+server:
+  port: 2001

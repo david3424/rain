@@ -18,8 +18,13 @@ public class DcController {
 
     @GetMapping("/dc")
     public String dc() {
+        try {
+            Thread.sleep(5000L);
+        } catch (InterruptedException e) {
+            LoggerUtil.error("sleep exception:{}", e);
+        }
         String services = "Services: " + discoveryClient.getServices();
-        LoggerUtil.info("services are :{}", services);
+        LoggerUtil.info("sleep services are :{}", services);
         return services;
     }
 }
