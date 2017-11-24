@@ -22,6 +22,7 @@
         <!--<module>first-boot-consumer</module>-->
         <module>first-boot-consumer-feign</module>
         <module>first-boot-consumer-feign-hystrix</module>
+        <module>first-boot-start-zuul</module>
     </modules>
 
 

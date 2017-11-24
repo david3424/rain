@@ -14,6 +14,7 @@
         <!--<module>activity</module>-->
         <!--<module>noahwm</module>-->
         <module>spring-cloud-demo</module>
+        <module>crm-cloud</module>
         <!--<module>parent</module>-->
         <!--<module>games</module>-->
         <!--<module>bhhd</module>-->

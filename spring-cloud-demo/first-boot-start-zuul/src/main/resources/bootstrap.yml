@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: service-zuul
+  cloud:
+    config:
+      uri: http://10.21.40.58:1201/
+      profile: sit
+      label: dev-test
+server:
+  port: 3333
+zuul:
+  ignoredServices: '*'
+  routes:
+    api-a:
+      path: /dc/**
+      serviceId: client-service-start
+    api-b:
+      path: /consumer/**
+      serviceId: consumer-feign
+      stripPrefix: false
