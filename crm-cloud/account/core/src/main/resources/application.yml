@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: account
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URI:http://cloud.cn:8888}
+#      profile: sit
+      label: dev-test
+      failFast: true
+encrypt:
+  failOnError: true

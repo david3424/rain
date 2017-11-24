@@ -18,9 +18,12 @@
     <modules>
         <module>eureka</module>
         <module>config</module>
-        <!--<module>account</module>-->
+        <module>account</module>
+        <module>apis</module>
+        <module>utils</module>
 
     </modules>
+
 
     <build>
         <plugins>
@@ -60,6 +63,10 @@
                 <scope>import</scope>
             </dependency>
         </dependencies>
+
+
+
+
 
     </dependencyManagement>
 
