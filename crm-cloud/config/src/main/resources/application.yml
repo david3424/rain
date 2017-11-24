@@ -1,0 +1,36 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://git.kingifa.com/xudawei/config-repo-demo.git
+#          search-paths: repo
+          username: xudawei
+          password: 12345678
+
+
+
+#management:
+#  context-path: /admin
+  
+logging:
+  level:
+    com.netflix.discovery: 'OFF'
+    org.springframework.cloud: 'DEBUG'
+
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /admin/info
+    healthCheckUrlPath: /admin/health
+
+  client:
+    serviceUrl:
+      defaultZone: http://cloud.cn:1111/eureka/

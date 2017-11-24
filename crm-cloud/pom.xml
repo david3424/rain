@@ -17,7 +17,7 @@
 
     <modules>
         <module>eureka</module>
-        <!--<module>config</module>-->
+        <module>config</module>
         <!--<module>account</module>-->
 
     </modules>
