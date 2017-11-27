@@ -32,6 +32,7 @@
 
 
     <build>
+        <finalName>first-boot-config-1.0.0</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -39,5 +40,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>
