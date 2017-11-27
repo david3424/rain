@@ -14,6 +14,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 
 /**
+ * @author xdw9486
  */
 @SpringBootApplication
 @ComponentScan({"com.noah.crm.cloud.**.service", "com.noah.crm.cloud.**.web"})

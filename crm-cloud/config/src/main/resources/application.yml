@@ -10,7 +10,7 @@ spring:
       server:
         git:
           uri: http://git.kingifa.com/xudawei/config-repo-demo.git
-#          search-paths: repo
+          search-paths: crm
           username: xudawei
           password: 12345678
 

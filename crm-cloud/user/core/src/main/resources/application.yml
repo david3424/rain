@@ -3,9 +3,8 @@ spring:
     name: user
   cloud:
     config:
-      uri: ${CONFIG_SERVER_URI:http://cloud.cn:9999}
+      uri: http://cloud.cn:9999/
 #      profile: sit
-      search-paths: crm
       label: dev-test
       failFast: true
 encrypt:
