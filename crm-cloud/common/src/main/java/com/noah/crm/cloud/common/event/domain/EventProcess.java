@@ -2,7 +2,7 @@ package com.noah.crm.cloud.common.event.domain;
 
 
 import com.noah.crm.cloud.apis.event.constants.EventType;
-import com.noah.crm.cloud.common.domain.VersionEntity;
+import com.noah.crm.cloud.common.domain.AbstractVersionEntity;
 import com.noah.crm.cloud.common.event.constant.EventCategory;
 import com.noah.crm.cloud.common.event.constant.ProcessStatus;
 
@@ -13,7 +13,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "event_process")
-public class EventProcess extends VersionEntity {
+public class EventProcess extends AbstractVersionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

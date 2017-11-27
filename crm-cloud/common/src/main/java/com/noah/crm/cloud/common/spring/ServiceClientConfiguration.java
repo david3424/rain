@@ -4,9 +4,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
 /**
+ * @author xdw9486
  */
 @EnableDiscoveryClient
-@EnableFeignClients("com.akkafun.**.service")
+@EnableFeignClients("com.noah.crm.cloud.**.service")
 public class ServiceClientConfiguration {
 /*
     @Bean(destroyMethod = "shutdown")

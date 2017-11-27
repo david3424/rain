@@ -16,7 +16,6 @@ import org.w3c.dom.events.EventException;
 import java.nio.charset.Charset;
 
 /**
- * Created by liubin on 2016/4/5.
  */
 @EnableBinding(Processor.class)
 @DependsOn("bindingService")

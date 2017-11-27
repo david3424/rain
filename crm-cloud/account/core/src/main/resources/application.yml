@@ -5,6 +5,7 @@ spring:
     config:
       uri: ${CONFIG_SERVER_URI:http://cloud.cn:8888}
 #      profile: sit
+      search-paths: crm
       label: dev-test
       failFast: true
 encrypt:

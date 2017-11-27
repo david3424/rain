@@ -2,7 +2,7 @@ package com.noah.crm.cloud.common.event.domain;
 
 
 import com.noah.crm.cloud.apis.event.constants.EventType;
-import com.noah.crm.cloud.common.domain.VersionEntity;
+import com.noah.crm.cloud.common.domain.AbstractVersionEntity;
 import com.noah.crm.cloud.common.event.constant.ProcessStatus;
 
 import javax.persistence.*;
@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="eventCategory")
 @Table(name = "event_publish")
-public abstract class EventPublish extends VersionEntity {
+public abstract class EventPublish extends AbstractVersionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

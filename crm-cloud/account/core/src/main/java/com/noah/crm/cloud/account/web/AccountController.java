@@ -1,14 +1,17 @@
 package com.noah.crm.cloud.account.web;
 
-import com.akkafun.account.service.AccountService;
-import com.akkafun.base.api.BooleanWrapper;
+import com.noah.crm.cloud.account.service.AccountService;
+import com.noah.crm.cloud.apis.api.BooleanWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
-import static com.akkafun.account.api.AccountUrl.*;
+import static com.noah.crm.cloud.account.api.constants.AccountUrl.ACCOUNT_BALANCE;
+import static com.noah.crm.cloud.account.api.constants.AccountUrl.ACCOUNT_TRANSACTIONS;
+import static com.noah.crm.cloud.account.api.constants.AccountUrl.CHECK_ENOUGH_BALANCE;
 
 /**
- * Created by liubin on 2016/3/29.
+ * @author xdw9486
  */
 @RestController
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -35,7 +38,7 @@ public class AccountController {
             @PathVariable(value = "userId") Long userId,
             @RequestParam(value = "amount") Long amount) {
 
-        if(amount >= 0L) {
+        if (amount >= 0L) {
             return accountService.addBalance(userId, amount);
         } else {
             return accountService.reduceBalance(userId, Math.abs(amount));

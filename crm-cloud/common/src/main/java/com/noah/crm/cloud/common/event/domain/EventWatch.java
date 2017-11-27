@@ -1,7 +1,7 @@
 package com.noah.crm.cloud.common.event.domain;
 
 
-import com.noah.crm.cloud.common.domain.VersionEntity;
+import com.noah.crm.cloud.common.domain.AbstractVersionEntity;
 import com.noah.crm.cloud.common.event.constant.AskEventStatus;
 
 import javax.persistence.*;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  */
 @Entity
 @Table(name = "event_watch")
-public class EventWatch extends VersionEntity {
+public class EventWatch extends AbstractVersionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,7 +1,7 @@
 package com.noah.crm.cloud.common.event.domain;
 
 
-import com.noah.crm.cloud.common.domain.AuditEntity;
+import com.noah.crm.cloud.common.domain.AbstractAuditEntity;
 import com.noah.crm.cloud.common.event.constant.ProcessStatus;
 
 import javax.persistence.*;
@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "event_watch_process")
-public class EventWatchProcess extends AuditEntity {
+public class EventWatchProcess extends AbstractAuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,16 +1,16 @@
 package com.noah.crm.cloud.account.service;
 
-import com.akkafun.account.dao.AccountFlowRepository;
-import com.akkafun.account.dao.AccountRepository;
-import com.akkafun.account.domain.Account;
-import com.akkafun.base.api.CommonErrorCode;
-import com.akkafun.base.exception.AppBusinessException;
+import com.noah.crm.cloud.account.dao.AccountFlowRepository;
+import com.noah.crm.cloud.account.dao.AccountRepository;
+import com.noah.crm.cloud.account.domain.Account;
+import com.noah.crm.cloud.apis.api.ApisErrorCode;
+import com.noah.crm.cloud.apis.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Created by liubin on 2016/4/26.
+ * @author xdw9486
  */
 @Service
 public class AccountService {
@@ -40,13 +40,13 @@ public class AccountService {
     @Transactional
     public Long reduceBalance(Long userId, Long balance) {
         Account account = accountRepository.findByUserId(userId);
-        if(account == null) {
-            throw new AppBusinessException(CommonErrorCode.NOT_FOUND, "根据userId找不到account, userId: " + userId);
+        if (account == null) {
+            throw new ServiceException(ApisErrorCode.NOT_FOUND, "根据userId找不到account, userId: " + userId);
         }
-        if(account.getBalance() - balance < 0L) {
-            throw new AppBusinessException(CommonErrorCode.BAD_REQUEST, "账户余额不足");
+        if (account.getBalance() - balance < 0L) {
+            throw new ServiceException(ApisErrorCode.BAD_REQUEST, "账户余额不足");
         }
-        if(!balance.equals(0L)) {
+        if (!balance.equals(0L)) {
             account.setBalance(account.getBalance() - balance);
             accountRepository.save(account);
         }
@@ -56,10 +56,10 @@ public class AccountService {
     @Transactional
     public Long addBalance(Long userId, Long balance) {
         Account account = accountRepository.findByUserId(userId);
-        if(account == null) {
-            throw new AppBusinessException(CommonErrorCode.NOT_FOUND, "根据userId找不到account, userId: " + userId);
+        if (account == null) {
+            throw new ServiceException(ApisErrorCode.NOT_FOUND, "根据userId找不到account, userId: " + userId);
         }
-        if(!balance.equals(0L)) {
+        if (!balance.equals(0L)) {
             account.setBalance(account.getBalance() + balance);
             accountRepository.save(account);
         }
@@ -70,8 +70,8 @@ public class AccountService {
     @Transactional(readOnly = true)
     public Account get(Long accountId) {
         Account account = accountRepository.findOne(accountId);
-        if(account == null) {
-            throw new AppBusinessException(CommonErrorCode.NOT_FOUND, "根据id找不到account, id: " + accountId);
+        if (account == null) {
+            throw new ServiceException(ApisErrorCode.NOT_FOUND, "根据id找不到account, id: " + accountId);
         }
         return account;
     }
@@ -79,8 +79,8 @@ public class AccountService {
     @Transactional(readOnly = true)
     public Account getByUserId(Long userId) {
         Account account = accountRepository.findByUserId(userId);
-        if(account == null) {
-            throw new AppBusinessException(CommonErrorCode.NOT_FOUND, "根据userId找不到account, userId: " + userId);
+        if (account == null) {
+            throw new ServiceException(ApisErrorCode.NOT_FOUND, "根据userId找不到account, userId: " + userId);
         }
         return account;
     }

@@ -1,10 +1,9 @@
 package com.noah.crm.cloud.account.dao;
 
-import com.akkafun.account.domain.Account;
+import com.noah.crm.cloud.account.domain.Account;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 /**
- * Created by liubin on 2016/4/26.
  */
 public interface AccountRepository extends PagingAndSortingRepository<Account, Long>, AccountRepositoryCustom {
 

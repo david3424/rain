@@ -18,13 +18,13 @@ import org.springframework.web.client.RestTemplate;
  * @author xdw9486
  */
 @EntityScan(basePackages = {
-        "com.akkafun.**.domain",
+        "com.noah.crm.cloud.**.domain",
         "org.springframework.data.jpa.convert.threeten"
 })
-@EnableJpaRepositories("com.akkafun.**.dao")
+@EnableJpaRepositories("com.noah.crm.cloud.**.dao")
 @EnableJpaAuditing
 @EnableHystrix
-@ComponentScan({"com.akkafun.**.service", "com.akkafun.**.web"})
+@ComponentScan({"com.noah.crm.cloud.**.service", "com.noah.crm.cloud.**.web"})
 public class BaseConfiguration {
 
     @Bean

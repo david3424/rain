@@ -17,12 +17,13 @@
     </parent>
 
     <modules>
+        <module>apis</module>
+        <module>utils</module>
         <module>eureka</module>
         <module>config</module>
         <module>common</module>
-        <!--<module>account</module>-->
-        <module>apis</module>
-        <module>utils</module>
+        <module>account</module>
+        <module>user</module>
 
     </modules>
 

@@ -1,14 +1,17 @@
 package com.noah.crm.cloud.account.domain;
 
-import com.akkafun.account.api.constants.AccountFlowType;
-import com.akkafun.common.domain.AuditEntity;
+
+import com.noah.crm.cloud.account.api.constants.AccountFlowType;
+import com.noah.crm.cloud.common.domain.AbstractAuditEntity;
+
+import javax.persistence.*;
 
 /**
- * Created by liubin on 2016/3/28.
+ * @author xdw9486
  */
 @Entity
 @Table(name = "account_flow")
-public class AccountFlow extends AuditEntity {
+public class AccountFlow extends AbstractAuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

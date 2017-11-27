@@ -1,15 +1,15 @@
 package com.noah.crm.cloud.account.handler;
 
-import com.akkafun.account.service.AccountService;
-import com.akkafun.common.event.handler.NotifyEventHandler;
-import com.akkafun.common.spring.ApplicationContextHolder;
-import com.akkafun.user.api.events.UserCreated;
+import com.noah.crm.cloud.account.service.AccountService;
+import com.noah.crm.cloud.common.event.handler.NotifyEventHandler;
+import com.noah.crm.cloud.common.spring.ApplicationContextHolder;
+import com.noah.crm.cloud.user.api.events.UserCreated;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 
 /**
- * Created by liubin on 2016/4/14.
+ * @author xdw9486
  */
 public class UserCreatedHandler implements NotifyEventHandler<UserCreated> {
 

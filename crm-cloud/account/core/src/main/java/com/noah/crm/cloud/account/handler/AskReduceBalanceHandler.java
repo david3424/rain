@@ -1,16 +1,15 @@
 package com.noah.crm.cloud.account.handler;
 
-import com.akkafun.account.api.events.AskReduceBalance;
-import com.akkafun.account.service.AccountService;
-import com.akkafun.base.api.BooleanWrapper;
-import com.akkafun.base.event.constants.FailureInfo;
-import com.akkafun.common.event.handler.RevokableAskEventHandler;
-import com.akkafun.common.spring.ApplicationContextHolder;
+import com.noah.crm.cloud.account.api.events.AskReduceBalance;
+import com.noah.crm.cloud.account.service.AccountService;
+import com.noah.crm.cloud.apis.api.BooleanWrapper;
+import com.noah.crm.cloud.apis.event.constants.FailureInfo;
+import com.noah.crm.cloud.common.event.handler.RevokableAskEventHandler;
+import com.noah.crm.cloud.common.spring.ApplicationContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by liubin on 2016/6/24.
  */
 public class AskReduceBalanceHandler implements RevokableAskEventHandler<AskReduceBalance> {
 

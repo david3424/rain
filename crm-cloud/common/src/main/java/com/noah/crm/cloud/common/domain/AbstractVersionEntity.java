@@ -8,7 +8,7 @@ import javax.persistence.Version;
  * @author xdw9486
  */
 @MappedSuperclass
-public abstract class VersionEntity extends AuditEntity {
+public abstract class AbstractVersionEntity extends AbstractAuditEntity {
 
     @Version
     @Column(name = "optlock", columnDefinition = "integer DEFAULT 0", nullable = false)

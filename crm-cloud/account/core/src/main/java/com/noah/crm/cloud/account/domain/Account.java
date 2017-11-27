@@ -1,13 +1,16 @@
 package com.noah.crm.cloud.account.domain;
 
-import com.akkafun.common.domain.VersionEntity;
+
+import com.noah.crm.cloud.common.domain.AbstractVersionEntity;
+
+import javax.persistence.*;
 
 /**
- * Created by liubin on 2016/3/28.
+ * @author xdw9486
  */
 @Entity
 @Table(name = "account")
-public class Account extends VersionEntity {
+public class Account extends AbstractVersionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
