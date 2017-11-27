@@ -1,4 +1,4 @@
-package com.noah.crm.cloud.utils.exception;
+package com.noah.crm.cloud.apis.exception;
 
 
 public enum ErrorCode implements IErrorCode {

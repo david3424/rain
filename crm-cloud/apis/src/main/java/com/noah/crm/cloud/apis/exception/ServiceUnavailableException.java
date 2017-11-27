@@ -2,8 +2,6 @@ package com.noah.crm.cloud.apis.exception;
 
 
 import com.noah.crm.cloud.apis.api.ApisErrorCode;
-import com.noah.crm.cloud.utils.exception.IErrorCode;
-import com.noah.crm.cloud.utils.exception.ServiceException;
 
 /**
  * @author xdw9486

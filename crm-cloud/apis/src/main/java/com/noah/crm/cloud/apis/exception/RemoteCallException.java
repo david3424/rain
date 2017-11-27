@@ -1,7 +1,5 @@
 package com.noah.crm.cloud.apis.exception;
 
-import com.noah.crm.cloud.utils.exception.ServiceException;
-
 /**
  * hystrix会忽略这个异常, 不会触发熔断
  *
@@ -10,14 +8,14 @@ import com.noah.crm.cloud.utils.exception.ServiceException;
 public class RemoteCallException extends ServiceException {
 
     private static final long serialVersionUID = -5646585116001992664L;
-    private Error originError;
+    private ErrorInfo originError;
 
-    public RemoteCallException(Error error, int httpStatus) {
+    public RemoteCallException(ErrorInfo error, int httpStatus) {
         super("调用远程服务异常" + httpStatus + " cause:" + error.getMessage());
         this.originError = error;
     }
 
-    public Error getOriginError() {
+    public ErrorInfo getOriginError() {
         return originError;
     }
 }

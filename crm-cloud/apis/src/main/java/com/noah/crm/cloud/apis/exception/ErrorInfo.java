@@ -1,4 +1,4 @@
-package com.noah.crm.cloud.utils.exception;
+package com.noah.crm.cloud.apis.exception;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

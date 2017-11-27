@@ -13,12 +13,14 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.1.RELEASE</version>
+        <relativePath></relativePath>
     </parent>
 
     <modules>
         <module>eureka</module>
         <module>config</module>
-        <module>account</module>
+        <module>common</module>
+        <!--<module>account</module>-->
         <module>apis</module>
         <module>utils</module>
 
@@ -38,16 +40,16 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <!--有用吗 module里都有-->
+            <!--&lt;!&ndash;有用吗 module里都有&ndash;&gt;
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!--有啥用？-->
+            &lt;!&ndash;有啥用？&ndash;&gt;
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-            </plugin>
+            </plugin>-->
         </plugins>
 
     </build>

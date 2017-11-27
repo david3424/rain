@@ -8,7 +8,7 @@ import com.noah.crm.cloud.apis.event.constants.EventType;
  */
 public final class AskResponseEvent extends BaseEvent {
 
-    private static final EventType EVENT_TYPE = EventType.ASK_RESPONSE;
+    public static final EventType EVENT_TYPE = EventType.ASK_RESPONSE;
 
     @Override
     public EventType getType() {
