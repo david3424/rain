@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Created by liubin on 2016/6/16.
  */
 public class AskTestEventFirstCallback {
 

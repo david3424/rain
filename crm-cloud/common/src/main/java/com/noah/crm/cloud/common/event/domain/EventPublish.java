@@ -8,7 +8,7 @@ import com.noah.crm.cloud.common.event.constant.ProcessStatus;
 import javax.persistence.*;
 
 /**
- * Created by liubin on 2016/3/28.
+ * @author xdw9486
  */
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)

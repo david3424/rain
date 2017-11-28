@@ -27,7 +27,7 @@ public class InitBindProducer implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        preInitializeProducers.stream().forEach(x -> binderAwareChannelResolver.resolveDestination(x.name()));
+        preInitializeProducers.forEach(x -> binderAwareChannelResolver.resolveDestination(x.name()));
     }
 
     public void addPreInitializeProducers(EventType eventType) {

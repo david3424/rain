@@ -36,7 +36,7 @@ public class EventPublishService {
     protected AskResponseEventPublishRepository askResponseEventPublishRepository;
 
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true,rollbackFor = Exception.class)
     public List<EventPublish> findUnpublishedEvent() {
         List<EventPublish> unpublishedEvents = new ArrayList<>();
         unpublishedEvents.addAll(notifyEventPublishRepository.findByStatus(ProcessStatus.NEW));

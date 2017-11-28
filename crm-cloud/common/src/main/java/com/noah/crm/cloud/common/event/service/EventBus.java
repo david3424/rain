@@ -37,6 +37,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
+ * @author xdw9486
  */
 @Service
 public class EventBus {
@@ -79,6 +80,7 @@ public class EventBus {
 
     /**
      * 发布Notify事件
+     *
      * @param notifyEvent
      * @return
      */
@@ -99,6 +101,7 @@ public class EventBus {
 
     /**
      * 发布ask事件
+     *
      * @param askParameter
      * @return
      */
@@ -126,34 +129,35 @@ public class EventBus {
 
     /**
      * 尝试对事件进行撤销
+     *
      * @param askEvent
      * @return
      */
     @Transactional
     public void revoke(AskEvent askEvent, FailureInfo failureInfo) {
-        if(!(askEvent instanceof Revokable)) {
+        if (!(askEvent instanceof Revokable)) {
             throw new EventException(String.format("类型为%s的事件不能撤销", askEvent.getClass()));
         }
-        if(askEvent.getId() == null) {
+        if (askEvent.getId() == null) {
             throw new EventException("ID为空, 新事件不能撤销");
         }
         AskRequestEventPublish eventPublish = eventPublishService.getAskRequestEventByEventId(askEvent.getId());
-        if(eventPublish.getStatus().equals(ProcessStatus.NEW)) {
+        if (eventPublish.getStatus().equals(ProcessStatus.NEW)) {
             //首先判断原事件有没有发送, 如果没有发送就不发送了
             eventPublish.setStatus(ProcessStatus.IGNORE);
             askRequestEventPublishRepository.save(eventPublish);
         }
 
-        if(eventPublish.getAskEventStatus().equals(AskEventStatus.PENDING)
+        if (eventPublish.getAskEventStatus().equals(AskEventStatus.PENDING)
                 || eventPublish.getAskEventStatus().equals(AskEventStatus.SUCCESS)) {
 
-            if(eventPublish.getStatus().equals(ProcessStatus.PROCESSED)) {
+            if (eventPublish.getStatus().equals(ProcessStatus.PROCESSED)) {
                 publishRevokeEvent(askEvent.getId(), failureInfo);
             }
 
             //改变之前事件的状态
             AskEventStatus revokeAskEventStatus = AskEventStatus.FAILED;
-            if(failureInfo != null && failureInfo.getReason() != null) {
+            if (failureInfo != null && failureInfo.getReason() != null) {
                 revokeAskEventStatus = EventUtils.fromFailureReason(failureInfo.getReason());
             }
             eventPublish.setAskEventStatus(revokeAskEventStatus);
@@ -167,6 +171,7 @@ public class EventBus {
 
     /**
      * 发布撤销事件
+     *
      * @param askEventId
      * @param failureInfo
      */
@@ -185,25 +190,24 @@ public class EventBus {
     }
 
 
-    @SuppressWarnings("unchecked")
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void sendUnpublishedEvent() {
 
         List<EventPublish> events = eventPublishService.findUnpublishedEvent();
-//        logger.info("待发布事件数量: " + events.size());
+        logger.info("待发布事件数量: " + events.size());
 
-        for(EventPublish event : events) {
+        for (EventPublish event : events) {
             try {
                 //eventActivator.sendMessage抛异常不会导致整个事务回滚
-                if(eventActivator.sendMessage(event.getPayload(), event.getEventType().name())) {
+                if (eventActivator.sendMessage(event.getPayload(), event.getEventType().name())) {
                     event.setStatus(ProcessStatus.PROCESSED);
                     saveEventPublish(event);
                 }
             } catch (EventException e) {
                 logger.error(e.getMessage());
-            }  catch (Exception e) {
+            } catch (Exception e) {
                 logger.error(String.format("发送消息到队列的时候发生异常, EventPublish[id=%d, payload=%s]",
-                                event.getId(), event.getPayload()), e);
+                        event.getId(), event.getPayload()), e);
             }
 
         }
@@ -211,16 +215,16 @@ public class EventBus {
 
     private void saveEventPublish(EventPublish eventPublish) {
 
-        if(eventPublish instanceof NotifyEventPublish) {
+        if (eventPublish instanceof NotifyEventPublish) {
             notifyEventPublishRepository.save((NotifyEventPublish) eventPublish);
             notifyEventPublishRepository.getEm().flush();
-        } else if(eventPublish instanceof AskRequestEventPublish) {
+        } else if (eventPublish instanceof AskRequestEventPublish) {
             askRequestEventPublishRepository.save((AskRequestEventPublish) eventPublish);
             askRequestEventPublishRepository.getEm().flush();
-        } else if(eventPublish instanceof AskResponseEventPublish) {
+        } else if (eventPublish instanceof AskResponseEventPublish) {
             askResponseEventPublishRepository.save((AskResponseEventPublish) eventPublish);
             askResponseEventPublishRepository.getEm().flush();
-        } else if(eventPublish instanceof RevokeAskEventPublish) {
+        } else if (eventPublish instanceof RevokeAskEventPublish) {
             revokeAskEventPublishRepository.save((RevokeAskEventPublish) eventPublish);
             revokeAskEventPublishRepository.getEm().flush();
         } else {
@@ -230,14 +234,14 @@ public class EventBus {
     }
 
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void searchAndHandleUnprocessedEvent() {
 
         List<EventProcess> events = eventProcessRepository.findByStatus(ProcessStatus.NEW);
-//        logger.info("待处理事件数量: " + events.size());
+        logger.info("待处理事件数量: " + events.size());
         CountDownLatch latch = new CountDownLatch(events.size());
 
-        for(EventProcess event : events) {
+        for (EventProcess event : events) {
             final Long eventProcessId = event.getId();
             taskExecutor.execute(() -> {
                 try {
@@ -271,7 +275,7 @@ public class EventBus {
         Optional<EventWatchProcess> eventWatchProcessOptional = Optional.empty();
 
         EventProcess eventProcess = eventProcessRepository.findOne(eventProcessId);
-        if(!eventProcess.getStatus().equals(ProcessStatus.NEW)) {
+        if (!eventProcess.getStatus().equals(ProcessStatus.NEW)) {
             //已经被处理过了, 忽略
             return eventWatchProcessOptional;
         }
@@ -309,13 +313,13 @@ public class EventBus {
         EventType type = event.getEventType();
 
         Set<NotifyEventHandler> eventHandlers = eventRegistry.getNotifyEventHandlers(type);
-        if(eventHandlers == null || eventHandlers.isEmpty()) {
+        if (eventHandlers == null || eventHandlers.isEmpty()) {
             logger.error(String.format("EventProcess[id=%d, type=%s, payload=%s]的eventHandlers列表为空'",
                     event.getId(), type, event.getPayload()));
             return;
         }
 
-        NotifyEvent notifyEvent = (NotifyEvent)eventRegistry.deserializeEvent(type, event.getPayload());
+        NotifyEvent notifyEvent = (NotifyEvent) eventRegistry.deserializeEvent(type, event.getPayload());
 
         eventHandlers.forEach(
                 handler -> executeEventHandler(
@@ -334,13 +338,13 @@ public class EventBus {
         EventType type = event.getEventType();
 
         Set<AskEventHandler> eventHandlers = eventRegistry.getAskEventHandlers(type);
-        if(eventHandlers == null || eventHandlers.isEmpty()) {
+        if (eventHandlers == null || eventHandlers.isEmpty()) {
             logger.error(String.format("EventProcess[id=%d, type=%s, payload=%s]的eventHandlers列表为空'",
                     event.getId(), type, event.getPayload()));
             return;
         }
 
-        AskEvent askEvent = (AskEvent)eventRegistry.deserializeEvent(type, event.getPayload());
+        AskEvent askEvent = (AskEvent) eventRegistry.deserializeEvent(type, event.getPayload());
 
         eventHandlers.forEach(handler -> {
             EventHandlerResponse<BooleanWrapper> result = executeEventHandler(event.getId(),
@@ -352,18 +356,18 @@ public class EventBus {
 
     private void processRevokeEvent(EventProcess event) {
 
-        RevokeAskEvent revokeAskEvent = (RevokeAskEvent)eventRegistry.deserializeEvent(
+        RevokeAskEvent revokeAskEvent = (RevokeAskEvent) eventRegistry.deserializeEvent(
                 RevokeAskEvent.EVENT_TYPE,
                 event.getPayload());
 
         EventProcess askEventProcess = eventProcessRepository.getByEventId(revokeAskEvent.getAskEventId());
-        if(askEventProcess == null) {
+        if (askEventProcess == null) {
             throw new EventException(String.format("根据事件ID[%d]没有找到EventProcess", revokeAskEvent.getAskEventId()));
         }
 
         EventType type = askEventProcess.getEventType();
         Set<RevokableAskEventHandler> eventHandlers = eventRegistry.getRevokableAskEventHandlers(type);
-        if(eventHandlers == null || eventHandlers.isEmpty()) {
+        if (eventHandlers == null || eventHandlers.isEmpty()) {
             logger.error(String.format("EventProcess[id=%d, type=%s, payload=%s]的eventHandlers列表为空'",
                     askEventProcess.getId(), type, askEventProcess.getPayload()));
             return;
@@ -388,13 +392,13 @@ public class EventBus {
         AskResponseEvent askResponseEvent = eventRegistry.deserializeAskResponseEvent(event.getPayload());
         Long askEventId = askResponseEvent.getAskEventId();
         AskRequestEventPublish askRequestEventPublish = eventPublishService.getAskRequestEventByEventId(askEventId);
-        if(!askRequestEventPublish.getAskEventStatus().equals(AskEventStatus.PENDING)) {
+        if (!askRequestEventPublish.getAskEventStatus().equals(AskEventStatus.PENDING)) {
             return Optional.empty();
         }
 
         AskEventStatus askEventStatus;
         FailureInfo failureInfo = null;
-        if(askResponseEvent.isSuccess()) {
+        if (askResponseEvent.isSuccess()) {
             askEventStatus = AskEventStatus.SUCCESS;
         } else {
             askEventStatus = AskEventStatus.FAILED;
@@ -409,6 +413,7 @@ public class EventBus {
 
     /**
      * 发送ask结果
+     *
      * @param askEvent
      * @param result
      * @return
@@ -429,13 +434,13 @@ public class EventBus {
     }
 
 
-    private <T> EventHandlerResponse<T> executeEventHandler(Long eventProcessId, Supplier<T> supplier, T defaultValue){
+    private <T> EventHandlerResponse<T> executeEventHandler(Long eventProcessId, Supplier<T> supplier, T defaultValue) {
 
         T value = defaultValue;
         String errorMessage = null;
         Stopwatch stopwatch = null;
         try {
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 stopwatch = Stopwatch.createStarted();
             }
             //开启新事务, 防止handler执行方法报错导致整体事务回滚
@@ -448,7 +453,7 @@ public class EventBus {
             logger.error("", e);
             errorMessage = e.getMessage();
         } finally {
-            if(logger.isDebugEnabled() && stopwatch != null) {
+            if (logger.isDebugEnabled() && stopwatch != null) {
                 stopwatch.stop();
                 logger.debug(String.format("执行事件回调结束耗时%dms, EventProcess[id=%d]",
                         stopwatch.elapsed(TimeUnit.MILLISECONDS), eventProcessId));
@@ -464,23 +469,23 @@ public class EventBus {
         Map<String, Object> eventMap = EventUtils.retrieveEventMapFromJson(message);
         EventType eventType = EventType.valueOfIgnoreCase((String) eventMap.get("type"));
         EventCategory eventCategory = eventRegistry.getEventCategoryByType(eventType);
-        if(eventCategory.equals(EventCategory.ASKRESP) || eventCategory.equals(EventCategory.REVOKE)) {
+        if (eventCategory.equals(EventCategory.ASKRESP) || eventCategory.equals(EventCategory.REVOKE)) {
             Long askEventId = (Long) eventMap.get("askEventId");
-            if(askEventId == null) {
+            if (askEventId == null) {
                 throw new EventException("EventCategory为ASKRESP或REVOKE的事件, askEventId为null, payload: " + message);
             }
             boolean eventPublishNotExist = true;
-            if(eventCategory.equals(EventCategory.ASKRESP)) {
+            if (eventCategory.equals(EventCategory.ASKRESP)) {
                 eventPublishNotExist = askRequestEventPublishRepository.getByEventId(askEventId) == null;
-            } else if(eventCategory.equals(EventCategory.REVOKE)) {
+            } else if (eventCategory.equals(EventCategory.REVOKE)) {
                 eventPublishNotExist = askResponseEventPublishRepository.countByAskEventId(askEventId) == 0L;
             }
-            if(eventPublishNotExist) {
+            if (eventPublishNotExist) {
                 //如果为ASKRESP或REVOKE事件并且请求id在数据库不存在, 则忽略这个事件
                 return null;
             }
         }
-        if(logger.isDebugEnabled()) {
+        if (logger.isDebugEnabled()) {
             logger.debug("receive message from kafka: {}", message);
         }
 
@@ -500,9 +505,9 @@ public class EventBus {
 //        logger.info("待处理eventWatchProcess数量: " + eventWatchProcessList.size());
         Set<Long> successIdSet = new HashSet<>();
         Set<Long> watchIdSet = new HashSet<>();
-        for(EventWatchProcess eventWatchProcess : eventWatchProcessList) {
+        for (EventWatchProcess eventWatchProcess : eventWatchProcessList) {
             try {
-                if(watchIdSet.add(eventWatchProcess.getWatchId())) {
+                if (watchIdSet.add(eventWatchProcess.getWatchId())) {
                     //processUnitedEventWatch方法内报异常只回滚内部事务
                     eventWatchService.processUnitedEventWatch(eventWatchProcess);
                 }
@@ -518,7 +523,7 @@ public class EventBus {
             }
         }
 
-        if(!successIdSet.isEmpty()) {
+        if (!successIdSet.isEmpty()) {
             eventWatchService.updateStatusBatchToProcessed(successIdSet.toArray(new Long[successIdSet.size()]));
         }
     }
@@ -528,13 +533,13 @@ public class EventBus {
         LocalDateTime now = LocalDateTime.now();
         List<EventWatch> eventWatchList = eventWatchService.findTimeoutEventWatch(now);
         FailureInfo failureInfo = new FailureInfo(FailureReason.TIMEOUT, now);
-        for(EventWatch eventWatch : eventWatchList) {
+        for (EventWatch eventWatch : eventWatchList) {
             try {
                 eventWatchService.processEventWatch(eventWatch.getId(), AskEventStatus.TIMEOUT, failureInfo)
                         .map(eventWatchProcess -> eventWatchService.addToQueue(eventWatchProcess));
             } catch (EventException e) {
                 logger.error(e.getMessage());
-            }  catch (Exception e) {
+            } catch (Exception e) {
                 logger.error(String.format("处理超时EventWatch的时候发生异常, id=%d",
                         eventWatch.getId()), e);
             }
@@ -548,7 +553,7 @@ public class EventBus {
     }
 
     public void fillEventId(BaseEvent baseEvent) {
-        if(baseEvent.getId() != null) {
+        if (baseEvent.getId() != null) {
             throw new EventException("event id不为空, id:" + baseEvent.getId());
         }
         baseEvent.setId(generateEventId());
@@ -559,7 +564,6 @@ public class EventBus {
     public void setEventActivator(EventActivator eventActivator) {
         this.eventActivator = eventActivator;
     }
-
 
 
     private static class EventHandlerResponse<T> {

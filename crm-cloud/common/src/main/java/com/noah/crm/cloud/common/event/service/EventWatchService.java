@@ -136,7 +136,7 @@ public class EventWatchService {
         return Optional.empty();
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void processUnitedEventWatch(EventWatchProcess eventWatchProcess) {
 
         /**

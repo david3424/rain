@@ -12,10 +12,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @author xdw9486
  */
+@EnableAsync
 @SpringBootApplication
 @ComponentScan({"com.noah.crm.cloud.**.service", "com.noah.crm.cloud.**.web"})
 @Import({BaseConfiguration.class, EventConfiguration.class, SchedulerConfiguration.class,

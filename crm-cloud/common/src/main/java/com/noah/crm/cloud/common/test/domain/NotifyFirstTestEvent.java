@@ -7,6 +7,9 @@ import com.noah.crm.cloud.apis.event.domain.NotifyEvent;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author xdw9486
+ */
 public class NotifyFirstTestEvent extends NotifyEvent {
 
     public static final EventType EVENT_TYPE = EventType.NOTIFY_FIRST_TEST_EVENT;
