@@ -14,5 +14,7 @@
     </root>
 
     <logger name="com.noah.crm.cloud" level="DEBUG" addctive="false"/>
+    <logger name="org.apache.zookeeper" level="WARN" addctive="false"/>
+    <logger name="org.apache.kafka" level="WARN" addctive="false"/>
     <logger name="org.springframework.amqp.rabbit.listener" level="WARN" addctive="false"/>
 </configuration>

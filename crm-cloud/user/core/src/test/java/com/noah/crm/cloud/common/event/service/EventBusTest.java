@@ -42,6 +42,7 @@ import java.util.Map;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 
 /**
@@ -97,7 +98,7 @@ public class EventBusTest extends UserBaseTest {
     public void testSendAndReceiveNotifyEventSuccess() throws InterruptedException {
 
 
-        NotifyFirstTestEvent event = new NotifyFirstTestEvent("张三", LocalDateTime.now());
+        NotifyFirstTestEvent event = new NotifyFirstTestEvent("张三1", LocalDateTime.now());
         NotifyEventPublish eventPublish = eventBus.publish(event);//保存事件
 
 //        验证数据是否保存成功
@@ -107,26 +108,28 @@ public class EventBusTest extends UserBaseTest {
         assertThat(eventPublishFromDb.getStatus(), is(ProcessStatus.NEW));
         assertThat(eventPublishFromDb.getEventType(), is(event.getType()));
         assertThat(eventPublishFromDb.getEventId(), is(event.getId()));
-
+//发送消息
         sendEvent();
 
         //判断状态已经改过来了
         eventPublishFromDb = notifyEventPublishRepository.findOne(eventPublish.getId());
         assertThat(eventPublishFromDb.getStatus(), is(ProcessStatus.PROCESSED));
-        //判断消息已经发送到kafka
+        //判断消息已经发送到kafka // TODO: 2017/11/29  kafka状态
 //        assertMessageWasSent(event);
-
+//test kafka consumer
+        Thread.sleep(50000);
+        assertTrue(false);
 
         EventProcess eventProcess = eventProcessRepository.getByEventId(event.getId());
         assertThat(eventProcess, notNullValue());
-        assertThat(eventProcess.getPayload(), is(eventPublish.getPayload()));
+//        assertThat(eventProcess.getPayload(), is(eventPublish.getPayload()));
         assertThat(eventProcess.getStatus(), is(ProcessStatus.NEW));
         assertThat(eventProcess.getEventType(), is(event.getType()));
 
         List<NotifyFirstTestEvent> firstEventList = NotifyFirstTestEventFirstHandler.events;
-        List<NotifyFirstTestEvent> secondEventList = NotifyFirstTestEventFirstHandler.events;
+//        List<NotifyFirstTestEvent> secondEventList = NotifyFirstTestEventFirstHandler.events;
         assertThat(firstEventList, empty());
-        assertThat(secondEventList, empty());
+//        assertThat(secondEventList, empty());
 
         handleEvent();
 
@@ -135,7 +138,7 @@ public class EventBusTest extends UserBaseTest {
         assertThat(eventProcess.getStatus(), is(ProcessStatus.PROCESSED));
         //判断事件已经处理
         assertThat(firstEventList, hasItem(event));
-        assertThat(secondEventList, hasItem(event));
+//        assertThat(secondEventList, hasItem(event));
 
     }
 

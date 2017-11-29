@@ -1,14 +1,15 @@
-/*
 package com.noah.crm.cloud.common.spring.cloud.stream;
 
 import com.google.common.base.Stopwatch;
+import com.noah.crm.cloud.apis.event.constants.EventType;
+import com.noah.crm.cloud.common.event.EventRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.boot.bind.RelaxedDataBinder;
 import org.springframework.cloud.stream.binder.*;
-import org.springframework.cloud.stream.binding.ChannelBindingService;
-import org.springframework.cloud.stream.config.ChannelBindingServiceProperties;
+import org.springframework.cloud.stream.binding.BindingService;
+import org.springframework.cloud.stream.config.BindingServiceProperties;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.util.CollectionUtils;
@@ -18,7 +19,6 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-*/
 /**
  * 自定义类与父类的区别:
  * 1. 重新定义bindConsumer, 因为在启动的时候需要监听事件的都调用了EventRegistry.register.
@@ -27,17 +27,18 @@ import java.util.stream.Collectors;
  * 2. 重新定义bindProducer, 因为output channel全都是根据事件名称动态创建的, 他们的配置全部沿用Processor.OUTPUT这个channel的配置
  *
  *
- *//*
+ * @author xdw9486*/
 
-public class CustomChannelBindingService extends ChannelBindingService {
+
+public class CustomChannelBindingService extends BindingService {
 
     private static Logger log = LoggerFactory.getLogger(CustomChannelBindingService.class);
 
     private final CustomValidatorBean validator;
 
-    private BinderFactory<MessageChannel> binderFactory;
+    private BinderFactory binderFactory;
 
-    private final ChannelBindingServiceProperties channelBindingServiceProperties;
+    private final BindingServiceProperties channelBindingServiceProperties;
 
     private final Map<String, List<Binding<MessageChannel>>> consumerBindings = new HashMap<>();
 
@@ -45,8 +46,8 @@ public class CustomChannelBindingService extends ChannelBindingService {
 
     private final EventRegistry eventRegistry;
 
-    public CustomChannelBindingService(ChannelBindingServiceProperties channelBindingServiceProperties,
-                                       BinderFactory<MessageChannel> binderFactory, EventRegistry eventRegistry) {
+    public CustomChannelBindingService(BindingServiceProperties channelBindingServiceProperties,
+                                       BinderFactory binderFactory, EventRegistry eventRegistry) {
         super(channelBindingServiceProperties, binderFactory);
         this.channelBindingServiceProperties = channelBindingServiceProperties;
         this.binderFactory = binderFactory;
@@ -55,9 +56,8 @@ public class CustomChannelBindingService extends ChannelBindingService {
         this.validator.afterPropertiesSet();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public Collection<Binding<MessageChannel>> bindConsumer(MessageChannel inputChannel, String inputChannelName) {
+    public <MessageChannel>Collection<Binding<MessageChannel>> bindConsumer(MessageChannel inputChannel, String inputChannelName) {
         Set<EventType> eventTypeSet = eventRegistry.getInterestedEventTypes();
         String[] channelBindingTargets = eventTypeSet.stream().
                 map(EventType::name).collect(Collectors.toList()).toArray(new String[eventTypeSet.size()]);
@@ -88,7 +88,7 @@ public class CustomChannelBindingService extends ChannelBindingService {
 
     @SuppressWarnings("unchecked")
     @Override
-    public Binding<MessageChannel> bindProducer(MessageChannel outputChannel, String outputChannelName) {
+    public <T> Binding<T> bindProducer(T output, String outputChannelName) {
         String channelBindingTarget = this.channelBindingServiceProperties.getBindingDestination(outputChannelName);
         Binder<MessageChannel, ?, ProducerProperties> binder =
                 (Binder<MessageChannel, ?, ProducerProperties>) getBinderForChannel(outputChannelName);
@@ -108,7 +108,7 @@ public class CustomChannelBindingService extends ChannelBindingService {
             stopwatch = Stopwatch.createStarted();
         }
 
-        Binding<MessageChannel> binding = binder.bindProducer(channelBindingTarget, outputChannel, producerProperties);
+        Binding<MessageChannel> binding = binder.bindProducer(channelBindingTarget, (MessageChannel)output, producerProperties);
 
         if(log.isDebugEnabled() && stopwatch != null) {
             stopwatch.stop();
@@ -160,4 +160,3 @@ public class CustomChannelBindingService extends ChannelBindingService {
     }
 
 }
-*/

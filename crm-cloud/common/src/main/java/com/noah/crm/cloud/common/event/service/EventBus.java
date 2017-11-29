@@ -190,6 +190,9 @@ public class EventBus {
     }
 
 
+    /**
+     * 发布未处理消息到队列
+     */
     @Transactional(rollbackFor = Exception.class)
     public void sendUnpublishedEvent() {
 
@@ -201,6 +204,7 @@ public class EventBus {
                 //eventActivator.sendMessage抛异常不会导致整个事务回滚
                 if (eventActivator.sendMessage(event.getPayload(), event.getEventType().name())) {
                     event.setStatus(ProcessStatus.PROCESSED);
+//                    更新状态
                     saveEventPublish(event);
                 }
             } catch (EventException e) {
@@ -209,7 +213,6 @@ public class EventBus {
                 logger.error(String.format("发送消息到队列的时候发生异常, EventPublish[id=%d, payload=%s]",
                         event.getId(), event.getPayload()), e);
             }
-
         }
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author xdw9486
  */
-@NoRepositoryBean
+//@NoRepositoryBean
 public interface EventPublishRepository<T extends EventPublish> extends PagingAndSortingRepository<T, Long> {
 
     List<T> findByStatus(ProcessStatus status);

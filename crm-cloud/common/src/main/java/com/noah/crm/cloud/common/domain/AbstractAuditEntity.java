@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public abstract class AbstractAuditEntity {
 
     @CreatedDate
-    @Column
+    @Column(name = "createTime")
     private LocalDateTime createTime;
 
     @LastModifiedDate

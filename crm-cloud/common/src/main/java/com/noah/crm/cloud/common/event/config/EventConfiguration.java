@@ -4,6 +4,7 @@ import com.noah.crm.cloud.common.event.EventRegistry;
 import org.springframework.cloud.stream.binder.BinderFactory;
 import org.springframework.cloud.stream.binding.BinderAwareChannelResolver;
 import org.springframework.cloud.stream.binding.DynamicDestinationsBindable;
+import org.springframework.cloud.stream.config.ChannelBindingServiceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
@@ -25,7 +26,7 @@ public class EventConfiguration extends AsyncConfigurerSupport {
 
     }
 
-    /*@Bean
+  /*  @Bean
     public ChannelBindingService bindingService(ChannelBindingServiceProperties channelBindingServiceProperties,
                                                 BinderFactory<MessageChannel> binderFactory, EventRegistry eventRegistry) {
 

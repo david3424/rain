@@ -50,9 +50,7 @@ public class EventActivator {
 
     public boolean sendMessage(String message, String destination) {
 
-        if(logger.isDebugEnabled()) {
-            logger.debug("send message to kafka topic: {}, message: {}", destination, message);
-        }
+        logger.debug("send message to kafka topic: {}, message: {}", destination, message);
 
         MessageChannel messageChannel = binderAwareChannelResolver.resolveDestination(destination);
         byte[] payload = message.getBytes(Charset.forName("UTF-8"));
