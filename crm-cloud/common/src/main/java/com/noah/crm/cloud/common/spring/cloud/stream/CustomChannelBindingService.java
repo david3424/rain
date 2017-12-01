@@ -11,7 +11,6 @@ import org.springframework.cloud.stream.binder.*;
 import org.springframework.cloud.stream.binding.BindingService;
 import org.springframework.cloud.stream.config.BindingServiceProperties;
 import org.springframework.cloud.stream.messaging.Processor;
-import org.springframework.messaging.MessageChannel;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.beanvalidation.CustomValidatorBean;
 
@@ -40,9 +39,9 @@ public class CustomChannelBindingService extends BindingService {
 
     private final BindingServiceProperties channelBindingServiceProperties;
 
-    private final Map<String, List<Binding<MessageChannel>>> consumerBindings = new HashMap<>();
+    private final Map<String, List<Binding<?>>> consumerBindings = new HashMap<>();
 
-    private final Map<String, Binding<MessageChannel>> producerBindings = new HashMap<>();
+    private final Map<String, Binding<?>> producerBindings = new HashMap<>();
 
     private final EventRegistry eventRegistry;
 
@@ -57,16 +56,17 @@ public class CustomChannelBindingService extends BindingService {
     }
 
     @Override
-    public <MessageChannel>Collection<Binding<MessageChannel>> bindConsumer(MessageChannel inputChannel, String inputChannelName) {
+    public <T>Collection<Binding<T>> bindConsumer(T inputChannel, String inputChannelName) {
         Set<EventType> eventTypeSet = eventRegistry.getInterestedEventTypes();
         String[] channelBindingTargets = eventTypeSet.stream().
                 map(EventType::name).collect(Collectors.toList()).toArray(new String[eventTypeSet.size()]);
-        if(log.isInfoEnabled()) {
             log.info("spring kafka consumer bind to these topics: " + Arrays.toString(channelBindingTargets));
-        }
-        List<Binding<MessageChannel>> bindings = new ArrayList<>();
-        Binder<MessageChannel, ConsumerProperties, ?> binder =
-                (Binder<MessageChannel, ConsumerProperties, ?>) getBinderForChannel(inputChannelName);
+//        List<Binding<T>> bindings = new ArrayList<>();
+        Collection<Binding<T>> bindings = new ArrayList<>();
+        /*Binder<T, ConsumerProperties, ?> binder =
+                (Binder<T, ConsumerProperties, ?>) getBinderForChannel(inputChannelName);*/
+        Binder<T, ConsumerProperties, ?> binder = (Binder<T, ConsumerProperties, ?>) getBinderForChannel(
+                inputChannelName, inputChannel.getClass());
         ConsumerProperties consumerProperties =
                 this.channelBindingServiceProperties.getConsumerProperties(inputChannelName);
         if (binder instanceof ExtendedPropertiesBinder) {
@@ -78,10 +78,10 @@ public class CustomChannelBindingService extends BindingService {
         }
         validate(consumerProperties);
         for (String target : channelBindingTargets) {
-            Binding<MessageChannel> binding = binder.bindConsumer(target, channelBindingServiceProperties.getGroup(inputChannelName), inputChannel, consumerProperties);
+            Binding<T> binding = binder.bindConsumer(target, channelBindingServiceProperties.getGroup(inputChannelName), inputChannel, consumerProperties);
             bindings.add(binding);
         }
-        this.consumerBindings.put(inputChannelName, bindings);
+        this.consumerBindings.put(inputChannelName, new ArrayList<>(bindings));
         return bindings;
 
     }
@@ -90,8 +90,8 @@ public class CustomChannelBindingService extends BindingService {
     @Override
     public <T> Binding<T> bindProducer(T output, String outputChannelName) {
         String channelBindingTarget = this.channelBindingServiceProperties.getBindingDestination(outputChannelName);
-        Binder<MessageChannel, ?, ProducerProperties> binder =
-                (Binder<MessageChannel, ?, ProducerProperties>) getBinderForChannel(outputChannelName);
+        Binder<T, ?, ProducerProperties> binder =
+                (Binder<T, ?, ProducerProperties>) getBinderForChannel(outputChannelName,output.getClass());
         //统一使用OUTPUT的配置
         String channelNameForProperties = Processor.OUTPUT;
         ProducerProperties producerProperties = this.channelBindingServiceProperties.getProducerProperties(channelNameForProperties);
@@ -108,7 +108,7 @@ public class CustomChannelBindingService extends BindingService {
             stopwatch = Stopwatch.createStarted();
         }
 
-        Binding<MessageChannel> binding = binder.bindProducer(channelBindingTarget, (MessageChannel)output, producerProperties);
+        Binding<T> binding = binder.bindProducer(channelBindingTarget, output, producerProperties);
 
         if(log.isDebugEnabled() && stopwatch != null) {
             stopwatch.stop();
@@ -122,9 +122,9 @@ public class CustomChannelBindingService extends BindingService {
 
     @Override
     public void unbindConsumers(String inputChannelName) {
-        List<Binding<MessageChannel>> bindings = this.consumerBindings.remove(inputChannelName);
+        List<Binding<?>> bindings = this.consumerBindings.remove(inputChannelName);
         if (bindings != null && !CollectionUtils.isEmpty(bindings)) {
-            for (Binding<MessageChannel> binding : bindings) {
+            for (Binding<?> binding : bindings) {
                 binding.unbind();
             }
         }
@@ -135,7 +135,7 @@ public class CustomChannelBindingService extends BindingService {
 
     @Override
     public void unbindProducers(String outputChannelName) {
-        Binding<MessageChannel> binding = this.producerBindings.remove(outputChannelName);
+        Binding<?> binding = this.producerBindings.remove(outputChannelName);
         if (binding != null) {
             binding.unbind();
         }
@@ -145,9 +145,9 @@ public class CustomChannelBindingService extends BindingService {
     }
 
 
-    private Binder<MessageChannel, ?, ?> getBinderForChannel(String channelName) {
+    private <T> Binder<T, ?, ?> getBinderForChannel(String channelName, Class<T> bindableType) {
         String transport = this.channelBindingServiceProperties.getBinder(channelName);
-        return binderFactory.getBinder(transport);
+        return binderFactory.getBinder(transport, bindableType);
     }
 
     private void validate(Object properties) {

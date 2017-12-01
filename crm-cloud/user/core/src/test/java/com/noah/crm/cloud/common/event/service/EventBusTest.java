@@ -98,7 +98,7 @@ public class EventBusTest extends UserBaseTest {
     public void testSendAndReceiveNotifyEventSuccess() throws InterruptedException {
 
 
-        NotifyFirstTestEvent event = new NotifyFirstTestEvent("张三1", LocalDateTime.now());
+        NotifyFirstTestEvent event = new NotifyFirstTestEvent("王五1", LocalDateTime.now());
         NotifyEventPublish eventPublish = eventBus.publish(event);//保存事件
 
 //        验证数据是否保存成功
@@ -117,8 +117,8 @@ public class EventBusTest extends UserBaseTest {
         //判断消息已经发送到kafka // TODO: 2017/11/29  kafka状态
 //        assertMessageWasSent(event);
 //test kafka consumer
-        Thread.sleep(50000);
-        assertTrue(false);
+//        Thread.sleep(50000);
+//        assertTrue(false);
 
         EventProcess eventProcess = eventProcessRepository.getByEventId(event.getId());
         assertThat(eventProcess, notNullValue());

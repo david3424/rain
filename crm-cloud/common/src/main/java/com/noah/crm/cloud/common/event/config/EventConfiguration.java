@@ -1,10 +1,10 @@
 package com.noah.crm.cloud.common.event.config;
 
 import com.noah.crm.cloud.common.event.EventRegistry;
+import com.noah.crm.cloud.common.spring.cloud.stream.CustomChannelBindingService;
 import org.springframework.cloud.stream.binder.BinderFactory;
-import org.springframework.cloud.stream.binding.BinderAwareChannelResolver;
-import org.springframework.cloud.stream.binding.DynamicDestinationsBindable;
-import org.springframework.cloud.stream.config.ChannelBindingServiceProperties;
+import org.springframework.cloud.stream.binding.*;
+import org.springframework.cloud.stream.config.BindingServiceProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.scheduling.annotation.AsyncConfigurerSupport;
@@ -26,21 +26,20 @@ public class EventConfiguration extends AsyncConfigurerSupport {
 
     }
 
-  /*  @Bean
-    public ChannelBindingService bindingService(ChannelBindingServiceProperties channelBindingServiceProperties,
-                                                BinderFactory<MessageChannel> binderFactory, EventRegistry eventRegistry) {
+    @Bean
+    public BindingService bindingService(BindingServiceProperties channelBindingServiceProperties,
+                                         BinderFactory binderFactory, EventRegistry eventRegistry) {
 
         return new CustomChannelBindingService(channelBindingServiceProperties, binderFactory, eventRegistry);
 
-    }*/
+    }
 
-   /* @Bean
-    public BinderAwareChannelResolver binderAwareChannelResolver(ChannelBindingService channelBindingService,
-                                                                 BindableChannelFactory bindableChannelFactory,
+    /*@Bean
+    public BinderAwareChannelResolver binderAwareChannelResolver(BindingService channelBindingService,
+                                                                 BindingTargetFactory binderFactory,
                                                                  DynamicDestinationsBindable dynamicDestinationsBindable) {
 
-        return new BinderAwareChannelResolver(channelBindingService, bindableChannelFactory,
-                dynamicDestinationsBindable);
+        return new BinderAwareChannelResolver(channelBindingService, (AbstractBindingTargetFactory<? extends MessageChannel>) binderFactory, dynamicDestinationsBindable);
     }*/
 
     @Bean

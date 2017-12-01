@@ -19,7 +19,7 @@ import java.nio.charset.Charset;
  * @author xdw9486
  */
 @EnableBinding(Processor.class)
-//@DependsOn("bindingService")
+@DependsOn("bindingService")
 public class EventActivator {
     private static Logger logger = LoggerFactory.getLogger(EventActivator.class);
 

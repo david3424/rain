@@ -37,7 +37,7 @@ public class EventRegistry implements InitializingBean, DisposableBean {
 
     private static Logger logger = LoggerFactory.getLogger(EventRegistry.class);
 
-    public static final String BASE_PACKAGE = "com/akkafun";
+    public static final String BASE_PACKAGE = "com/noah";
 
     private static final LoadingCache<String, AskEventCallback> ASK_EVENT_CALLBACK_LOADING_CACHE =
             CacheBuilder.newBuilder()
