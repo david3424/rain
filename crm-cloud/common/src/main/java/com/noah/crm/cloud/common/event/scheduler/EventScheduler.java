@@ -5,7 +5,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 
 /**
  */
-public class EventScheduler{
+public class EventScheduler {
 
     EventBus eventBus;
 
@@ -13,26 +13,25 @@ public class EventScheduler{
         this.eventBus = eventBus;
     }
 
-    @Scheduled(fixedRate = 500L)
+    @Scheduled(fixedDelay = 1000 * 10L)
     public void sendUnpublishedEvent() {
         eventBus.sendUnpublishedEvent();
     }
 
-    @Scheduled(fixedRate = 500L)
+    @Scheduled(fixedRate = 1000 * 30)
     public void searchAndHandleUnprocessedEvent() {
         eventBus.searchAndHandleUnprocessedEvent();
     }
 
-    @Scheduled(fixedRate = 500L)
+    @Scheduled(cron = "0 0/20 * * * *")
     public void handleUnprocessedEventWatchProcess() {
         eventBus.handleUnprocessedEventWatchProcess();
     }
 
-    @Scheduled(fixedRate = 1000L)
+    @Scheduled(cron = "0 0/40 * * * *")
     public void handleTimeoutEventWatch() {
         eventBus.handleTimeoutEventWatch();
     }
-
 
 
 }

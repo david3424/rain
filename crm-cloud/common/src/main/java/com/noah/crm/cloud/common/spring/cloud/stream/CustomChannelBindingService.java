@@ -21,12 +21,12 @@ import java.util.stream.Collectors;
 /**
  * 自定义类与父类的区别:
  * 1. 重新定义bindConsumer, 因为在启动的时候需要监听事件的都调用了EventRegistry.register.
- *    所以EventRegistry已经包含了所有的感兴趣的事件类型(即topic), 在这里就将所有感兴趣的topic注册到Processor.INPUT这个channel
- *
+ * 所以EventRegistry已经包含了所有的感兴趣的事件类型(即topic), 在这里就将所有感兴趣的topic注册到Processor.INPUT这个channel
+ * <p>
  * 2. 重新定义bindProducer, 因为output channel全都是根据事件名称动态创建的, 他们的配置全部沿用Processor.OUTPUT这个channel的配置
  *
- *
- * @author xdw9486*/
+ * @author xdw9486
+ */
 
 
 public class CustomChannelBindingService extends BindingService {
@@ -56,11 +56,12 @@ public class CustomChannelBindingService extends BindingService {
     }
 
     @Override
-    public <T>Collection<Binding<T>> bindConsumer(T inputChannel, String inputChannelName) {
+    public <T> Collection<Binding<T>> bindConsumer(T inputChannel, String inputChannelName) {
+        log.info("bindConsumer params , channel:{} ,channelName:{}", inputChannel, inputChannelName);
         Set<EventType> eventTypeSet = eventRegistry.getInterestedEventTypes();
         String[] channelBindingTargets = eventTypeSet.stream().
                 map(EventType::name).collect(Collectors.toList()).toArray(new String[eventTypeSet.size()]);
-            log.info("spring kafka consumer bind to these topics: " + Arrays.toString(channelBindingTargets));
+        log.info("spring kafka consumer bind to these topics: " + Arrays.toString(channelBindingTargets));
 //        List<Binding<T>> bindings = new ArrayList<>();
         Collection<Binding<T>> bindings = new ArrayList<>();
         /*Binder<T, ConsumerProperties, ?> binder =
@@ -91,7 +92,7 @@ public class CustomChannelBindingService extends BindingService {
     public <T> Binding<T> bindProducer(T output, String outputChannelName) {
         String channelBindingTarget = this.channelBindingServiceProperties.getBindingDestination(outputChannelName);
         Binder<T, ?, ProducerProperties> binder =
-                (Binder<T, ?, ProducerProperties>) getBinderForChannel(outputChannelName,output.getClass());
+                (Binder<T, ?, ProducerProperties>) getBinderForChannel(outputChannelName, output.getClass());
         //统一使用OUTPUT的配置
         String channelNameForProperties = Processor.OUTPUT;
         ProducerProperties producerProperties = this.channelBindingServiceProperties.getProducerProperties(channelNameForProperties);
@@ -104,13 +105,13 @@ public class CustomChannelBindingService extends BindingService {
         validate(producerProperties);
 
         Stopwatch stopwatch = null;
-        if(log.isDebugEnabled()) {
+        if (log.isDebugEnabled()) {
             stopwatch = Stopwatch.createStarted();
         }
 
         Binding<T> binding = binder.bindProducer(channelBindingTarget, output, producerProperties);
 
-        if(log.isDebugEnabled() && stopwatch != null) {
+        if (log.isDebugEnabled() && stopwatch != null) {
             stopwatch.stop();
             log.debug(String.format("bind kafka producer [%s] cost %d ms",
                     outputChannelName, stopwatch.elapsed(TimeUnit.MILLISECONDS)));
@@ -127,8 +128,7 @@ public class CustomChannelBindingService extends BindingService {
             for (Binding<?> binding : bindings) {
                 binding.unbind();
             }
-        }
-        else if (log.isWarnEnabled()) {
+        } else if (log.isWarnEnabled()) {
             log.warn("Trying to unbind channel '" + inputChannelName + "', but no binding found.");
         }
     }
@@ -138,8 +138,7 @@ public class CustomChannelBindingService extends BindingService {
         Binding<?> binding = this.producerBindings.remove(outputChannelName);
         if (binding != null) {
             binding.unbind();
-        }
-        else if (log.isWarnEnabled()) {
+        } else if (log.isWarnEnabled()) {
             log.warn("Trying to unbind channel '" + outputChannelName + "', but no binding found.");
         }
     }

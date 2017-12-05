@@ -98,7 +98,7 @@ public class EventBusTest extends UserBaseTest {
     public void testSendAndReceiveNotifyEventSuccess() throws InterruptedException {
 
 
-        NotifyFirstTestEvent event = new NotifyFirstTestEvent("王五1", LocalDateTime.now());
+        NotifyFirstTestEvent event = new NotifyFirstTestEvent("正式测试-3", LocalDateTime.now());
         NotifyEventPublish eventPublish = eventBus.publish(event);//保存事件
 
 //        验证数据是否保存成功
@@ -435,8 +435,11 @@ public class EventBusTest extends UserBaseTest {
         assertThat(count, is(1L));
     }
 
-    *//**
+    */
+
+    /**
      * 从KafkaMessage中取得事件json
+     *
      * @param kafkaMessage
      * @return
      *//*

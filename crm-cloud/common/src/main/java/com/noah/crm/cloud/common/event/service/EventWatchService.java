@@ -275,6 +275,7 @@ public class EventWatchService {
     @Transactional(readOnly = true)
     public List<EventWatchProcess> findUnprocessedEventWatchProcess() {
         List<EventWatchProcess> eventWatchProcessList = fetchAllFromQueue();
+        //将true改为false成功
         if(firstTime.compareAndSet(true, false)) {
             List<EventWatchProcess> list = eventWatchProcessRepository.findByStatus(ProcessStatus.NEW);
             logger.debug("first time to findUnprocessedEventWatchProcess, " +

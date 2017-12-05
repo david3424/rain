@@ -7,6 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.util.List;
 
 /**
+ * @author xdw9486
  */
 public interface EventProcessRepository extends PagingAndSortingRepository<EventProcess, Long>, EventProcessRepositoryCustom{
 

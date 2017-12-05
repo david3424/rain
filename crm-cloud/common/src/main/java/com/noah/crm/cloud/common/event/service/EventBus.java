@@ -197,7 +197,7 @@ public class EventBus {
     public void sendUnpublishedEvent() {
 
         List<EventPublish> events = eventPublishService.findUnpublishedEvent();
-        logger.info("待发布事件数量: " + events.size());
+        logger.info("【sendEvent】待发布事件数量: " + events.size());
 
         for (EventPublish event : events) {
             try {
@@ -206,6 +206,7 @@ public class EventBus {
                     event.setStatus(ProcessStatus.PROCESSED);
 //                    更新状态
                     saveEventPublish(event);
+                    logger.info("【sendEvent】更新事件{}-{}为process ", event.getEventType(), event.getEventId());
                 }
             } catch (EventException e) {
                 logger.error(e.getMessage());
@@ -241,7 +242,7 @@ public class EventBus {
     public void searchAndHandleUnprocessedEvent() {
 
         List<EventProcess> events = eventProcessRepository.findByStatus(ProcessStatus.NEW);
-        logger.info("待处理事件数量: " + events.size());
+        logger.info("【handleEvent】待处理事件数量: " + events.size());
         CountDownLatch latch = new CountDownLatch(events.size());
 
         for (EventProcess event : events) {
@@ -249,7 +250,7 @@ public class EventBus {
             taskExecutor.execute(() -> {
                 try {
                     EventBus eventBus = ApplicationContextHolder.context.getBean(EventBus.class);
-                    //handleEventProcess方法内报异常只回滚内部事务
+                    //handleEventProcess方法内报异常只回滚内部事务 map 处理ask response 类型回调
                     eventBus.handleEventProcess(eventProcessId)
                             .map(eventWatchProcess -> eventWatchService.addToQueue(eventWatchProcess));
                 } catch (EventException e) {
@@ -269,7 +270,7 @@ public class EventBus {
         } catch (InterruptedException e) {
             logger.error("", e);
         }
-
+        logger.info("【handleEvent】异步处理结束，回到主线程 ");
     }
 
     @Transactional
@@ -280,6 +281,7 @@ public class EventBus {
         EventProcess eventProcess = eventProcessRepository.findOne(eventProcessId);
         if (!eventProcess.getStatus().equals(ProcessStatus.NEW)) {
             //已经被处理过了, 忽略
+            logger.warn("【handleEvent】已经被处理过{}", eventProcess);
             return eventWatchProcessOptional;
         }
 
@@ -311,6 +313,11 @@ public class EventBus {
     }
 
 
+    /**
+     * 事件处理
+     *
+     * @param event
+     */
     private void processNotifyEvent(EventProcess event) {
 
         EventType type = event.getEventType();
@@ -505,7 +512,7 @@ public class EventBus {
     //不在这里加事务注解, 因为想让这个方法内对service的调用都是独立事务.
     public void handleUnprocessedEventWatchProcess() {
         List<EventWatchProcess> eventWatchProcessList = eventWatchService.findUnprocessedEventWatchProcess();
-//        logger.info("待处理eventWatchProcess数量: " + eventWatchProcessList.size());
+        logger.info("待处理eventWatchProcess数量: " + eventWatchProcessList.size());
         Set<Long> successIdSet = new HashSet<>();
         Set<Long> watchIdSet = new HashSet<>();
         for (EventWatchProcess eventWatchProcess : eventWatchProcessList) {

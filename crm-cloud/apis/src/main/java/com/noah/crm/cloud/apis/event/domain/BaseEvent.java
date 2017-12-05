@@ -1,6 +1,10 @@
 package com.noah.crm.cloud.apis.event.domain;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.noah.crm.cloud.apis.event.constants.EventType;
 
 import java.time.LocalDateTime;
@@ -16,6 +20,8 @@ public abstract class BaseEvent {
 
     protected Long id;
 
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     protected LocalDateTime createTime;
 
     public BaseEvent() {

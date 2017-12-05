@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 public class RegisterDto {
 
     @NotBlank(message = "用户名不能为空")
-    @Pattern(regexp = RegExpUtils.USERNAME_REG_EXP, message = "用户名请输入2-20位，可由中文、英文或数字组成")
+    @Pattern(regexp = RegExpUtils.USERNAME_REG_EXP, message = "用户名请输入2-20位，可由中文、英文或数字或_或-组成")
     private String username;
 
     @NotBlank(message = "密码不能为空")

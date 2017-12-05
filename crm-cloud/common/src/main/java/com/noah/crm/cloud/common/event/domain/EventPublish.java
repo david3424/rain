@@ -74,4 +74,16 @@ public abstract class EventPublish extends AbstractVersionEntity {
     public void setEventType(EventType eventType) {
         this.eventType = eventType;
     }
+
+
+    @Override
+    public String toString() {
+        return "EventPublish{" +
+                "id=" + id +
+                ", payload='" + payload + '\'' +
+                ", status=" + status +
+                ", eventId=" + eventId +
+                ", eventType=" + eventType +
+                '}';
+    }
 }

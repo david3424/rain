@@ -1,6 +1,7 @@
 package com.noah.crm.cloud.user.service;
 
 import com.noah.crm.cloud.apis.exception.ServiceException;
+import com.noah.crm.cloud.common.event.TransactionalForExceptionRollback;
 import com.noah.crm.cloud.common.event.service.EventBus;
 import com.noah.crm.cloud.user.api.UserErrorCode;
 import com.noah.crm.cloud.user.api.dtos.RegisterDto;
@@ -32,7 +33,7 @@ public class UserService {
     EventBus eventBus;
 
 
-    @Transactional
+    @TransactionalForExceptionRollback
     public void save(User user) {
         userRepository.save(user);
     }
@@ -44,7 +45,7 @@ public class UserService {
 
     @Transactional
     public User register(RegisterDto registerDto) {
-        if(isUsernameExist(registerDto.getUsername(), Optional.empty())) {
+        if (isUsernameExist(registerDto.getUsername(), Optional.empty())) {
             throw new ServiceException(UserErrorCode.UsernameExist,
                     String.format("用户名%s已存在", registerDto.getUsername()));
         }
@@ -69,11 +70,12 @@ public class UserService {
 
     /**
      * 判断用户名是否存在
+     *
      * @param username
-     * @param userId 当前用户ID,如果是修改用户的话,需要传,否则可以传empty
+     * @param userId   当前用户ID,如果是修改用户的话,需要传,否则可以传empty
      * @return
      */
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, rollbackFor = Exception.class)
     public boolean isUsernameExist(String username, Optional<Integer> userId) {
 
         return userRepository.isUsernameExist(username, userId);

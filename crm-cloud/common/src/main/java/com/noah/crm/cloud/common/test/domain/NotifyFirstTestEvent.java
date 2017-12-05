@@ -2,6 +2,10 @@ package com.noah.crm.cloud.common.test.domain;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.noah.crm.cloud.apis.event.constants.EventType;
 import com.noah.crm.cloud.apis.event.domain.NotifyEvent;
 
@@ -21,6 +25,8 @@ public class NotifyFirstTestEvent extends NotifyEvent {
 
     private String name;
 
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime registerTime;
 
     @JsonCreator

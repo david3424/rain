@@ -2,12 +2,18 @@ package com.noah.crm.cloud.user.api.events;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.noah.crm.cloud.apis.event.constants.EventType;
 import com.noah.crm.cloud.apis.event.domain.NotifyEvent;
 
 import java.time.LocalDateTime;
 
 /**
+ * @author xdw9486
+ * 用户注册后发布一条消息
  */
 public class UserCreated extends NotifyEvent {
 
@@ -22,6 +28,8 @@ public class UserCreated extends NotifyEvent {
 
     private String username;
 
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime registerTime;
 
     @JsonCreator
