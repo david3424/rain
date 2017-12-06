@@ -22,8 +22,11 @@
         <module>eureka</module>
         <module>config</module>
         <module>common</module>
-        <module>account</module>
         <module>user</module>
+        <module>account</module>
+        <module>product</module>
+        <!--<module>order</module>-->
+        <!--<module>coupon</module>-->
 
     </modules>
 
