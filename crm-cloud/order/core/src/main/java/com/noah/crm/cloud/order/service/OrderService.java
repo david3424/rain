@@ -107,7 +107,7 @@ public class OrderService {
         order.setTotalAmount(order.calcTotalAmount());
 
         //查询优惠券信息
-        List<OrderCoupon> orderCouponList = new ArrayList<>();
+       /* List<OrderCoupon> orderCouponList = new ArrayList<>();
         Set<Long> couponIdSet = new HashSet<>(placeOrderDto.getCouponIdList());
         if (!couponIdSet.isEmpty()) {
 
@@ -121,10 +121,11 @@ public class OrderService {
                 return orderCoupon;
             }).collect(Collectors.toList());
 
-        }
+        }*/
 
         //计算订单金额
-        long couponAmount = orderCouponList.stream().mapToLong(OrderCoupon::getCouponAmount).sum();
+//        long couponAmount = orderCouponList.stream().mapToLong(OrderCoupon::getCouponAmount).sum();
+        long couponAmount = 0;
         order.setPayAmount(order.calcPayAmount(order.getTotalAmount(), couponAmount));
 
         //检验账户余额是否足够
@@ -142,10 +143,10 @@ public class OrderService {
             orderItem.setOrderId(order.getId());
             orderItemRepository.save(orderItem);
         });
-        orderCouponList.forEach(orderCoupon -> {
+       /* orderCouponList.forEach(orderCoupon -> {
             orderCoupon.setOrderId(order.getId());
             orderCouponRepository.save(orderCoupon);
-        });
+        });*/
 
         //解决订单金额为0还发送请求的问题
         Optional<AskReduceBalance> askReduceBalance = Optional.empty();
@@ -153,13 +154,14 @@ public class OrderService {
             askReduceBalance = Optional.of(new AskReduceBalance(placeOrderDto.getUserId(), order.getPayAmount()));
         }
         Optional<AskUseCoupon> askUseCoupon = Optional.empty();
-        if (!orderCouponList.isEmpty()) {
+        /*if (!orderCouponList.isEmpty()) {
             List<Long> couponIds = orderCouponList.stream().map(OrderCoupon::getCouponId).collect(Collectors.toList());
             askUseCoupon = Optional.of(new AskUseCoupon(couponIds, placeOrderDto.getUserId(), order.getId()));
-        }
-        if (!askReduceBalance.isPresent() && !askUseCoupon.isPresent()) {
+        }*/
+//        if (!askReduceBalance.isPresent() && !askUseCoupon.isPresent()) {
+        if (!askReduceBalance.isPresent()) {
             markCreateSuccess(order.getId());
-
+    logger.info("下单成功，无需付款，且没有优惠券的使用");
         } else {
             eventBus.ask(
                     AskParameterBuilder.askOptional(askReduceBalance, askUseCoupon)
