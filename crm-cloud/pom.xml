@@ -25,8 +25,8 @@
         <module>user</module>
         <module>account</module>
         <module>product</module>
-        <!--<module>order</module>-->
-        <!--<module>coupon</module>-->
+        <module>coupon</module>
+        <module>order</module>
 
     </modules>
 

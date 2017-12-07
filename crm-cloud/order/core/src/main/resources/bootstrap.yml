@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: order
+  cloud:
+    config:
+      uri: http://cloud.cn:9999/
+#      profile: sit
+      label: dev-test
+#      failFast: true
+encrypt:
+  failOnError: true

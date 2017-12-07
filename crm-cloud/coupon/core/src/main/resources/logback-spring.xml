@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="3 seconds">
+    <contextName>crm-coupon</contextName>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="com.noah.crm.cloud.utils.logback.MyPatternLayoutEncoder">
+            <pattern>
+                %d{HH:mm:ss.SSS} %-5level[%thread]%logger{32}:%line > %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level="WARN">
+        <appender-ref ref="console"/>
+    </root>
+
+    <logger name="com.noah.crm.cloud" level="DEBUG" addctive="false"/>
+    <logger name="org.apache.zookeeper" level="WARN" addctive="false"/>
+    <logger name="org.apache.kafka" level="WARN" addctive="false"/>
+    <logger name="org.springframework.amqp.rabbit.listener" level="WARN" addctive="false"/>
+</configuration>

@@ -12,6 +12,7 @@ public enum ApisErrorCode implements IErrorCode {
     UNAUTHORIZED(401, "无权访问"),
     FORBIDDEN(403, "禁止访问"),
     NOT_FOUND(404, "请求的地址不正确"),
+    NOT_FOUND_S(404, "请求的地址不正确,%s"),
     METHOD_NOT_ALLOWED(405, "不允许的请求方法"),
     NOT_ACCEPTABLE(406, "不接受的请求"),
     CONFLICT(409, "资源冲突"),

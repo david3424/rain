@@ -1,7 +1,7 @@
 package com.noah.crm.cloud.user.api.dtos;
 
 /**
- * Created by liubin on 2016/3/29.
+ * @author xdw9486
  */
 public class UserDto {
 

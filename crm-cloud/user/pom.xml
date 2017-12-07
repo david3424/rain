@@ -20,12 +20,7 @@
     <packaging>pom</packaging>
 
     <dependencies>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-            <version>5.1.21</version>
-        </dependency>
+
     </dependencies>
 
 </project>

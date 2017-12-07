@@ -80,9 +80,12 @@
         </dependency>
 
 
-
-
-
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+            <version>5.1.21</version>
+        </dependency>
 
         <!-- Log libs -->
         <dependency>

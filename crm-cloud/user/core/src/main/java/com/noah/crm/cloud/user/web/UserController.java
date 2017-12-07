@@ -1,5 +1,7 @@
 package com.noah.crm.cloud.user.web;
 
+import com.noah.crm.cloud.order.api.dtos.OrderDto;
+import com.noah.crm.cloud.order.api.dtos.PlaceOrderDto;
 import com.noah.crm.cloud.user.api.dtos.RegisterDto;
 import com.noah.crm.cloud.user.api.dtos.UserDto;
 import com.noah.crm.cloud.user.domain.User;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+
+import static com.noah.crm.cloud.user.api.UserUrl.USER_PLACEORDER_URL;
 import static com.noah.crm.cloud.user.api.UserUrl.USER_REGISTER_URL;
 
 /**
@@ -33,6 +37,13 @@ public class UserController {
         userDto.setUsername(user.getUsername());
 
         return userDto;
+    }
+
+
+    @RequestMapping(value = USER_PLACEORDER_URL, method = RequestMethod.POST)
+    public OrderDto placeOrder(@Valid @RequestBody PlaceOrderDto placeOrderDto) {
+
+        return userService.placeOrder(placeOrderDto);
     }
 
 

@@ -7,6 +7,7 @@ import com.noah.crm.cloud.apis.event.domain.AskEvent;
 import com.noah.crm.cloud.apis.event.domain.Revokable;
 
 /**
+ * @author xdw9486
  */
 public class AskReduceBalance extends AskEvent implements Revokable {
 
