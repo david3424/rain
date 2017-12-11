@@ -19,7 +19,8 @@ public enum ApisErrorCode implements IErrorCode {
     UNSUPPORTED_MEDIA_TYPE(415, "不支持的Media Type"),
     INTERNAL_ERROR(500, "服务器内部错误"),
     SERVICE_UNAVAILABLE_(503, "服务不可用,%s"),
-    GATEWAY_TIMEOUT(504, "请求服务超时");
+    GATEWAY_TIMEOUT(504, "请求服务超时"),
+    DATA_ERROR_S(601, "%s的数据有误或无数据");
 
     private int status;
     private String message;

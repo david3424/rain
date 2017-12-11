@@ -91,6 +91,9 @@ public class OrderService {
                 .collect(Collectors.toList());
 
         List<ProductDto> productDtoList = productGateway.findProducts(productIds);
+        if (null == productDtoList || productDtoList.size() <= 0) {
+            throw new ServiceException(ApisErrorCode.DATA_ERROR_S, "产品");
+        }
         Map<Long, ProductDto> productDtoMap = productDtoList.stream()
                 .collect(Collectors.toMap(ProductDto::getId, Function.identity()));
 
@@ -161,7 +164,7 @@ public class OrderService {
 //        if (!askReduceBalance.isPresent() && !askUseCoupon.isPresent()) {
         if (!askReduceBalance.isPresent()) {
             markCreateSuccess(order.getId());
-    logger.info("下单成功，无需付款，且没有优惠券的使用");
+            logger.info("下单成功，无需付款，且没有优惠券的使用");
         } else {
             eventBus.ask(
                     AskParameterBuilder.askOptional(askReduceBalance, askUseCoupon)
