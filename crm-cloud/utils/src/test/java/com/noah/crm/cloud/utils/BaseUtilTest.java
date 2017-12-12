@@ -2,8 +2,11 @@ package com.noah.crm.cloud.utils;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -73,12 +76,23 @@ public class BaseUtilTest {
             }
         }).start();
 //Java 8方式：
+        Runnable r = () -> System.out.println("In Java8, Lambda expression rocks !!");
+        new Thread(r).start();
         new Thread(() -> System.out.println("In Java8, Lambda expression rocks !!")).start();
 
 
         String[] datas = new String[]{"peng", "zhao", "li"};
         Arrays.sort(datas, (v1, v2) -> Integer.compare(v1.length(), v2.length()));
         Stream.of(datas).forEach(param -> System.out.println(param));
+
+        Consumer<Integer> c = System.out::println;
+        //接口定义 括号是接口对应方法的参数列表，后面是语句和返回,括号只有一个参数时可省略
+        Consumer<Integer> cc = System.out::println;
+        BiConsumer<Integer, String> b = (Integer x, String y) -> System.out.println(x + " : " + y);
+        Predicate<String> p = Objects::isNull;
+        p.test(null);
+
+
     }
 
 
@@ -88,5 +102,22 @@ public class BaseUtilTest {
         Pattern USERNAME_PATTERN = Pattern.compile(USERNAME_REG_EXP);
         System.out.println(USERNAME_PATTERN.matcher("测试-*&123456"));
         System.out.println(USERNAME_PATTERN.matcher("测试-*&123456").matches());
+    }
+
+    @Test
+    public void mapReduce() throws Exception {
+        //Old way:
+        List<Integer> list = Arrays.asList(1,2,3,4,5,6,7);
+        int sum = 0;
+        for(Integer n : list) {
+            int x = n * n;
+            sum = sum + x;
+        }
+        System.out.println(sum);
+
+//New way:
+        List<Integer> list11 = Arrays.asList(1,2,3,4,5,6,7);
+        int sum11 = list11.stream().map(x -> x*x).reduce((x,y) -> x + y).get();
+        System.out.println(sum11);
     }
 }

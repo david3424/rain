@@ -3,6 +3,7 @@ package com.noah.crm.cloud.product.web;
 import com.noah.crm.cloud.product.api.dtos.ProductDto;
 import com.noah.crm.cloud.product.domain.Product;
 import com.noah.crm.cloud.product.service.ProductService;
+import com.noah.crm.cloud.utils.logback.LoggerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,7 @@ public class ProductController {
         List<Long> idList = Arrays.asList(ids);
 
         List<Product> products = productService.findById(idList);
+        LoggerUtil.debug("input product ids{} in db size :{}",ids,products.size());
         Map<Long, ProductDto> couponDtoMap = products.stream()
                 .map(this::convertProductDto)
                 .collect(Collectors.toMap(ProductDto::getId, Function.identity()));

@@ -61,7 +61,7 @@ public class ProductService {
                     .collect(Collectors.toList());
 
             if (!notExistIdList.isEmpty()) {
-                throw new ServiceException(ApisErrorCode.NOT_FOUND,
+                throw new ServiceException(ApisErrorCode.DATA_ERROR_S,
                         String.format("不存在的产品id: %s", notExistIdList.toString()));
             }
         }

@@ -9,6 +9,7 @@ import com.noah.crm.cloud.apis.exception.ServiceUnavailableException;
 import com.noah.crm.cloud.apis.exception.ErrorInfo;
 import com.noah.crm.cloud.apis.exception.IErrorCode;
 import com.noah.crm.cloud.apis.exception.ServiceException;
+import com.noah.crm.cloud.utils.logback.LoggerUtil;
 import com.noah.crm.cloud.utils.mapper.JsonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 
 /**
  * 统一异常处理
+ *
  * @author xdw9486
  */
 @ControllerAdvice
@@ -97,6 +99,7 @@ public class AppExceptionHandlerController extends ResponseEntityExceptionHandle
     public ResponseEntity<Object> handleAppBusinessException(HttpServletRequest request, ServiceException e) {
 
         //业务异常
+        LoggerUtil.error("ServiceException业务异常：{}", e);
         return createResponseEntity(e.getErrorCode().getRespCode(), e.getErrorCode().getStatus(), request.getRequestURI(), e.getMessage());
     }
 
