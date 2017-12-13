@@ -38,7 +38,7 @@ public class mybatisTests {
     @Rollback
     public void testQuery() throws Exception {
 
-        KoTask koTask = koTaskMapper.findByTaskId("33");
+        KoTask koTask;
         koTask = koTaskMapper.findByTaskId("33");
         LoggerUtil.info("task before info :{}", koTask);
         LoggerUtil.info("task cache info :{}", cacheManager.getCache("tasks"));
