@@ -99,16 +99,6 @@ public class LoggerUtil {
 		logger.debug(format, arguments);
 	}
 
-	/**
-	 * 记录调式日志信息.
-	 *
-	 * @param clazz
-	 * @param msg
-	 */
-	public static void debug(final Class<?> clazz, final String msg) {
-		Logger logger = getLogger(clazz);
-		logger.debug(msg);
-	}
 
 	/**
 	 * 记录调式日志信息.

@@ -20,7 +20,8 @@ public enum ApisErrorCode implements IErrorCode {
     INTERNAL_ERROR(500, "服务器内部错误"),
     SERVICE_UNAVAILABLE_(503, "服务不可用,%s"),
     GATEWAY_TIMEOUT(504, "请求服务超时"),
-    DATA_ERROR_S(601, "%s,数据有误或无数据");
+    BAD_REQUEST_S(400, "请求的参数个数或格式不符合要求,%s"),
+    DATA_ERROR_S(500, "%s,数据有误或无数据");
 
     private int status;
     private String message;

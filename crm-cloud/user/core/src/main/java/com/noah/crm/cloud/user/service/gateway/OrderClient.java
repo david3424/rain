@@ -13,7 +13,7 @@ import javax.validation.Valid;
 /**
  * @author xdw9486
  */
-@FeignClient(OrderUrl.SERVICE_NAME)
+@FeignClient(value = OrderUrl.SERVICE_NAME, fallback = OrderClientHystrix.class)
 public interface OrderClient {
 
     @RequestMapping(method = RequestMethod.POST, value = OrderUrl.PLACE_ORDER)

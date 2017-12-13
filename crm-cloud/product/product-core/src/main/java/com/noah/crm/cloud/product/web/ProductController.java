@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -43,11 +44,15 @@ public class ProductController {
         List<Long> idList = Arrays.asList(ids);
 
         List<Product> products = productService.findById(idList);
-        LoggerUtil.debug("input product ids{} in db size :{}",ids,products.size());
+        LoggerUtil.debug("input product ids{} in db size :{}", ids, products.size());
+        if (products.size() == 0) {
+            return new ArrayList<>();
+        }
         Map<Long, ProductDto> couponDtoMap = products.stream()
                 .map(this::convertProductDto)
                 .collect(Collectors.toMap(ProductDto::getId, Function.identity()));
-
+        LoggerUtil.debug("input  ids{}  productMap is  :{}", ids, couponDtoMap);
+        //过滤出dto map list
         return idList.stream().map(couponDtoMap::get).collect(Collectors.toList());
     }
 

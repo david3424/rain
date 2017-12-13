@@ -9,3 +9,6 @@ spring:
 #      failFast: true
 encrypt:
   failOnError: true
+feign:
+  hystrix:
+    enabled: true

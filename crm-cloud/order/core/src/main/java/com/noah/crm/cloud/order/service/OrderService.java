@@ -19,6 +19,7 @@ import com.noah.crm.cloud.order.domain.OrderCoupon;
 import com.noah.crm.cloud.order.domain.OrderItem;
 import com.noah.crm.cloud.order.service.gateway.*;
 import com.noah.crm.cloud.product.api.dtos.ProductDto;
+import com.noah.crm.cloud.utils.logback.LoggerUtil;
 import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,6 +95,7 @@ public class OrderService {
         if (null == productDtoList || productDtoList.size() <= 0) {
             throw new ServiceException(ApisErrorCode.DATA_ERROR_S, "产品");
         }
+        productDtoList.forEach(productDto -> LoggerUtil.debug("gateway of product dto list :{}", productDto));
         Map<Long, ProductDto> productDtoMap = productDtoList.stream()
                 .collect(Collectors.toMap(ProductDto::getId, Function.identity()));
 

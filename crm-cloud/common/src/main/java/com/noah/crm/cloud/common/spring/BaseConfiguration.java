@@ -1,8 +1,10 @@
 package com.noah.crm.cloud.common.spring;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.noah.crm.cloud.common.exception.UserErrorDecoder;
 import com.noah.crm.cloud.utils.mapper.JsonMapper;
 import com.noah.crm.cloud.utils.spring.CustomRestTemplate;
+import feign.codec.ErrorDecoder;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
@@ -26,6 +28,11 @@ import org.springframework.web.client.RestTemplate;
 @EnableHystrix
 @ComponentScan({"com.noah.crm.cloud.**.service", "com.noah.crm.cloud.**.web"})
 public class BaseConfiguration {
+
+    @Bean
+    public ErrorDecoder errorDecoder(){
+        return new UserErrorDecoder();
+    }
 
     @Bean
     public ApplicationConstant applicationConstant() {
