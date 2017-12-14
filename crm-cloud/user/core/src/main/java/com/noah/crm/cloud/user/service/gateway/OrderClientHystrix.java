@@ -13,7 +13,6 @@ public class OrderClientHystrix implements OrderClient {
 
     @Override
     public OrderDto placeOrder(PlaceOrderDto placeOrderDto) {
-        LoggerUtil.error("wrong things happened ,caused fallback,{}");
         return new OrderDto();
     }
 

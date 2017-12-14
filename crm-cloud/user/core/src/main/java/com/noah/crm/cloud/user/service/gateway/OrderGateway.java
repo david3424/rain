@@ -27,7 +27,8 @@ public class OrderGateway {
     @HystrixCommand(ignoreExceptions = RemoteCallException.class)
     public OrderDto placeOrder(PlaceOrderDto placeOrderDto) {
 
-        return orderClient.placeOrder(placeOrderDto);
+            return orderClient.placeOrder(placeOrderDto);
+
     }
 
 }
