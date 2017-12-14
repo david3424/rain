@@ -72,10 +72,10 @@ public class AppExceptionHandlerController extends ResponseEntityExceptionHandle
     }
 
     @ExceptionHandler(value = {ServiceUnavailableException.class, RemoteCallException.class})
-    public ResponseEntity<Object> handleRemoteCallException(HttpServletRequest request, ServiceException e) {
+    public ResponseEntity<Object> handleRemoteCallException(HttpServletRequest request, RemoteCallException e) {
 
-        logger.error(e.getMessage(), e);
-        return createResponseEntity(e.getErrorCode().getRespCode(), e.getErrorCode().getStatus(), request.getRequestURI(), e.getMessage());
+        logger.error("业务异常捕获后抛出：" + e.getMessage(), e);
+        return createResponseEntity(e.getCode(), e.getHttpStatus(), request.getRequestURI(), e.getMessage());
     }
 
     @ExceptionHandler(value = HystrixTimeoutException.class)

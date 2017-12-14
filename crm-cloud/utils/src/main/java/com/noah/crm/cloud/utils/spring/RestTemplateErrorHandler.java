@@ -45,10 +45,10 @@ public class RestTemplateErrorHandler extends DefaultResponseErrorHandler {
         } catch (Exception ignore) {
             super.handleError(response);
         }
-
+/*
         if(error != null) {
             throw new RemoteCallException(error, getHttpStatusCode(response).value());
-        }
+        }*/
     }
 
     private byte[] getResponseBody(ClientHttpResponse response) {
