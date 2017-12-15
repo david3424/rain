@@ -4,6 +4,7 @@ package com.noah.crm.cloud.user.api;
 import com.noah.crm.cloud.apis.exception.IErrorCode;
 
 /**
+ * @author xdw9486
  */
 public enum UserErrorCode implements IErrorCode {
 

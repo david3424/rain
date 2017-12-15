@@ -1,8 +1,6 @@
 package com.noah.crm.cloud.common.event;
 
 
-import com.noah.crm.cloud.apis.event.domain.AskEvent;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;

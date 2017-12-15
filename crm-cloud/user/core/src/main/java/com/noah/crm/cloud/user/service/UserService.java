@@ -3,8 +3,6 @@ package com.noah.crm.cloud.user.service;
 import com.noah.crm.cloud.apis.exception.ServiceException;
 import com.noah.crm.cloud.common.event.TransactionalForExceptionRollback;
 import com.noah.crm.cloud.common.event.service.EventBus;
-import com.noah.crm.cloud.order.api.dtos.OrderDto;
-import com.noah.crm.cloud.order.api.dtos.PlaceOrderDto;
 import com.noah.crm.cloud.user.api.UserErrorCode;
 import com.noah.crm.cloud.user.api.dtos.RegisterDto;
 import com.noah.crm.cloud.user.api.events.UserCreated;
@@ -87,8 +85,4 @@ public class UserService {
         return userRepository.isUsernameExist(username, userId);
     }
 
-    public OrderDto placeOrder(PlaceOrderDto placeOrderDto) {
-
-        return orderGateway.placeOrder(placeOrderDto);
-    }
 }

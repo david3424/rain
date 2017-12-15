@@ -1,7 +1,6 @@
 package com.noah.crm.cloud.common.scheduler;
 
 import com.noah.crm.cloud.common.spring.ApplicationConstant;
-import com.noah.crm.cloud.utils.ZkUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;

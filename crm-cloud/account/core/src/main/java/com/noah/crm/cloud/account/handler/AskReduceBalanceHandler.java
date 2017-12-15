@@ -1,6 +1,5 @@
 package com.noah.crm.cloud.account.handler;
 
-import com.noah.crm.cloud.account.api.events.AskReduceBalance;
 import com.noah.crm.cloud.account.service.AccountService;
 import com.noah.crm.cloud.apis.api.BooleanWrapper;
 import com.noah.crm.cloud.apis.event.constants.FailureInfo;

@@ -1,7 +1,6 @@
 package com.noah.crm.cloud.account.domain;
 
 
-import com.noah.crm.cloud.account.api.constants.AccountFlowType;
 import com.noah.crm.cloud.common.domain.AbstractAuditEntity;
 
 import javax.persistence.*;

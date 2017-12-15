@@ -6,7 +6,6 @@ import com.noah.crm.cloud.user.api.UserUrl;
 import com.noah.crm.cloud.user.api.dtos.RegisterDto;
 import com.noah.crm.cloud.user.api.dtos.UserDto;
 import com.noah.crm.cloud.user.test.UserBaseControllerTest;
-import com.noah.crm.cloud.utils.TestUtils;
 import org.apache.commons.text.RandomStringGenerator;
 import org.junit.Test;
 import org.springframework.web.client.RestTemplate;

@@ -3,7 +3,6 @@ package com.noah.crm.cloud.common.event.service;
 import com.google.common.collect.Lists;
 import com.noah.crm.cloud.apis.event.constants.FailureInfo;
 import com.noah.crm.cloud.apis.event.constants.FailureReason;
-import com.noah.crm.cloud.apis.event.domain.AskEvent;
 import com.noah.crm.cloud.common.event.AskParameter;
 import com.noah.crm.cloud.common.event.AskParameterBuilder;
 import com.noah.crm.cloud.common.event.EventTestUtils;

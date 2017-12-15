@@ -1,8 +1,6 @@
 package com.noah.crm.cloud.common.event.config;
 
 import com.noah.crm.cloud.apis.event.constants.EventType;
-import com.noah.crm.cloud.apis.event.domain.AskResponseEvent;
-import com.noah.crm.cloud.apis.event.domain.RevokeAskEvent;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.binding.BinderAwareChannelResolver;

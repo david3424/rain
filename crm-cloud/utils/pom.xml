@@ -111,20 +111,6 @@
             <version>0.1.4</version>
         </dependency>
 
-        <!--  &lt;!&ndash;杂乱&ndash;&gt;
-          <dependency>
-              <groupId>cglib</groupId>
-              <artifactId>cglib</artifactId>
-          </dependency>
-          <dependency>
-              <groupId>cglib</groupId>
-              <artifactId>cglib-nodep</artifactId>
-          </dependency>
-          <dependency>
-              <groupId>commons-pool</groupId>
-              <artifactId>commons-pool</artifactId>
-          </dependency>-->
-
         <!--TEST-->
         <!-- TEST begin -->
 

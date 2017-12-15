@@ -1,7 +1,6 @@
 package com.noah.crm.cloud.common.event;
 
 import com.noah.crm.cloud.apis.event.constants.FailureInfo;
-import com.noah.crm.cloud.apis.event.domain.AskEvent;
 import com.noah.crm.cloud.apis.event.domain.BaseEvent;
 import com.noah.crm.cloud.common.event.domain.AskRequestEventPublish;
 import com.noah.crm.cloud.common.exception.EventException;

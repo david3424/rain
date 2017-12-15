@@ -14,5 +14,4 @@
     </root>
 
     <logger name="com.noah.crm.cloud.eureka" level="DEBUG" addctive="false"/>
-    <logger name="org.springframework.amqp.rabbit.listener" level="WARN" addctive="false"/>
 </configuration>
