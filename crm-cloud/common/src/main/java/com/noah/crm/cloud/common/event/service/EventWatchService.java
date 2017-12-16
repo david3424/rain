@@ -1,40 +1,22 @@
 package com.noah.crm.cloud.common.event.service;
 
-import com.noah.crm.cloud.apis.event.constants.FailureInfo;
-import com.noah.crm.cloud.apis.event.constants.FailureReason;
-import com.noah.crm.cloud.common.event.AskEventCallback;
-import com.noah.crm.cloud.common.event.AskParameter;
 import com.noah.crm.cloud.common.event.EventRegistry;
-import com.noah.crm.cloud.common.event.EventUtils;
-import com.noah.crm.cloud.common.event.constant.AskEventStatus;
-import com.noah.crm.cloud.common.event.constant.ProcessStatus;
-import com.noah.crm.cloud.common.event.dao.AskRequestEventPublishRepository;
 import com.noah.crm.cloud.common.event.dao.EventWatchProcessRepository;
 import com.noah.crm.cloud.common.event.dao.EventWatchRepository;
-import com.noah.crm.cloud.common.event.domain.AskRequestEventPublish;
-import com.noah.crm.cloud.common.event.domain.EventWatch;
 import com.noah.crm.cloud.common.event.domain.EventWatchProcess;
-import com.noah.crm.cloud.common.exception.EventException;
-import com.noah.crm.cloud.utils.mapper.JsonMapper;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Collectors;
 
 /**
- * Created by liubin on 2016/6/6.
  */
 @Service
 public class EventWatchService {
@@ -47,8 +29,6 @@ public class EventWatchService {
     @Autowired
     EventWatchProcessRepository eventWatchProcessRepository;
 
-    @Autowired
-    AskRequestEventPublishRepository askRequestEventPublishRepository;
 
     @Autowired
     EventPublishService eventPublishService;
@@ -66,30 +46,7 @@ public class EventWatchService {
 
     private AtomicBoolean firstTime = new AtomicBoolean(true);
 
-    @Transactional
-    public EventWatch watchAskEvents(AskParameter askParameter) {
-
-        EventWatch eventWatch = new EventWatch();
-        eventWatch.setAskEventStatus(AskEventStatus.PENDING);
-        eventWatch.setAskEventIds(askParameter.getAskEvents().stream()
-                .map(AskEvent::getId).collect(Collectors.toList()));
-        if(askParameter.getCallbackClass() != null) {
-            eventWatch.setCallbackClass(askParameter.getCallbackClass().getName());
-        }
-        if(!askParameter.getExtraParams().isEmpty()) {
-            String json = JsonMapper.defaultMapper().toJson(askParameter.getExtraParams());
-            eventWatch.setExtraParams(json);
-        }
-        if(askParameter.getTimeoutTime().isPresent()) {
-            eventWatch.setTimeoutTime(askParameter.getTimeoutTime().get());
-        }
-        eventWatch.setUnited(askParameter.isUnited());
-
-        eventWatchRepository.save(eventWatch);
-
-        return eventWatch;
-    }
-
+/*
     @Transactional
     public Optional<EventWatchProcess> processEventWatch(Long watchId, AskEventStatus triggerStatus, FailureInfo failureInfo) {
 
@@ -138,7 +95,7 @@ public class EventWatchService {
     @Transactional(rollbackFor = Exception.class)
     public void processUnitedEventWatch(EventWatchProcess eventWatchProcess) {
 
-        /**
+       */ /**
          *
          如果不为PENDING, 不做处理.
          如果为PENDING, 则根据AskResponseEvent的success是true还是false, 设置成SUCESS或FAILED. 然后根据watchId, 找到UnitedEventWatch.
@@ -151,7 +108,7 @@ public class EventWatchService {
          失败逻辑: UnitedEventWatch状态设置为TIMEOUT/FAILED/CANCELLED. 调用注册的回调函数FailureCallback. 再次查询UnionEventWatch下所有的askEvents,判断他们的状态.
          如果为TIMEOUT/FAILED/CANCELLED, 不做处理.
          如果为PENDING/SUCCESS, 设置状态为TIMEOUT/FAILED/CANCELLED, 然后判断该askEvent是否实现了Revokable接口, 如果实现了, 需要发送RevokeAskEvent事件进行撤销操作.
-         */
+         *//*
 
         logger.debug(String.format("process event watch process, id: %d",
                 eventWatchProcess.getId()));
@@ -244,14 +201,14 @@ public class EventWatchService {
 
     }
 
-    /**
+    *//**
      * 执行回调函数
      * @param success
      * @param callbackClassName
      * @param extraParams
      * @param askEvents
      * @param failureInfo
-     */
+     *//*
     private void executeCallback(boolean success, String callbackClassName, String extraParams,
                                  List<AskRequestEventPublish> askEvents, FailureInfo failureInfo) {
 
@@ -298,7 +255,7 @@ public class EventWatchService {
 
         return eventWatchRepository.findByAskEventStatusAndTimeoutTimeBefore(AskEventStatus.PENDING, timeoutTime);
 
-    }
+    }*/
 
 
 

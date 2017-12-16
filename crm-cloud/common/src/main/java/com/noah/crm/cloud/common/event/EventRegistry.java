@@ -1,21 +1,18 @@
 package com.noah.crm.cloud.common.event;
 
+import com.google.common.base.Preconditions;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimaps;
+import com.google.common.collect.SetMultimap;
 import com.noah.crm.cloud.apis.event.constants.EventType;
-import com.noah.crm.cloud.apis.event.domain.*;
+import com.noah.crm.cloud.apis.event.domain.BaseEvent;
+import com.noah.crm.cloud.apis.event.domain.NotifyEvent;
 import com.noah.crm.cloud.common.event.constant.EventCategory;
 import com.noah.crm.cloud.common.event.handler.AskEventHandler;
 import com.noah.crm.cloud.common.event.handler.NotifyEventHandler;
 import com.noah.crm.cloud.common.event.handler.RevokableAskEventHandler;
 import com.noah.crm.cloud.common.exception.EventException;
 import com.noah.crm.cloud.common.spring.utils.InnerClassPathScanningCandidateComponentProvider;
-import com.google.common.base.Preconditions;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimaps;
-import com.google.common.collect.SetMultimap;
-import com.google.common.util.concurrent.UncheckedExecutionException;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,14 +36,6 @@ public class EventRegistry implements InitializingBean, DisposableBean {
 
     public static final String BASE_PACKAGE = "com/noah";
 
-    private static final LoadingCache<String, AskEventCallback> ASK_EVENT_CALLBACK_LOADING_CACHE =
-            CacheBuilder.newBuilder()
-                    .build(new CacheLoader<String, AskEventCallback>() {
-                        @Override
-                        public AskEventCallback load(String callbackClassName) throws Exception {
-                            return AskEventCallback.createCallback(callbackClassName);
-                        }
-                    });
 
     private Map<EventType, Class<? extends BaseEvent>> eventTypeClassMap = new HashMap<>();
 
@@ -59,18 +48,6 @@ public class EventRegistry implements InitializingBean, DisposableBean {
     private Set<EventType> interestedEventTypes = new HashSet<>();
 
 
-    /**
-     * 根据回调类名解析成回调对象, 如果回调类不符合要求, 会抛出EventException
-     * @param callbackClassName
-     * @return
-     */
-    public static AskEventCallback getAskEventCallback(String callbackClassName) {
-        try {
-            return ASK_EVENT_CALLBACK_LOADING_CACHE.getUnchecked(callbackClassName);
-        } catch (UncheckedExecutionException e) {
-            throw new EventException(e.getCause());
-        }
-    }
 
 
     /**
@@ -117,8 +94,6 @@ public class EventRegistry implements InitializingBean, DisposableBean {
 
         //得到感兴趣的所有事件类型
         Set<EventType> allInterestedSet = new HashSet<>();
-        allInterestedSet.add(AskResponseEvent.EVENT_TYPE);
-        allInterestedSet.add(RevokeAskEvent.EVENT_TYPE);
         allInterestedSet.addAll(notifyEventHandlerMap.keySet());
         allInterestedSet.addAll(askEventHandlerMap.keySet());
         allInterestedSet.addAll(revokableAskEventHandlerMap.keySet());
@@ -153,14 +128,8 @@ public class EventRegistry implements InitializingBean, DisposableBean {
     public EventCategory getEventCategoryByType(EventType eventType) {
         Class<? extends BaseEvent> eventClass = eventTypeClassMap.get(eventType);
         EventCategory eventCategory;
-        if(eventClass.equals(AskResponseEvent.class)) {
-            eventCategory = EventCategory.ASKRESP;
-        } else if(NotifyEvent.class.isAssignableFrom(eventClass)) {
+         if(NotifyEvent.class.isAssignableFrom(eventClass)) {
             eventCategory = EventCategory.NOTIFY;
-        } else if(AskEvent.class.isAssignableFrom(eventClass)) {
-            eventCategory = EventCategory.ASK;
-        } else if(RevokeAskEvent.class.isAssignableFrom(eventClass)) {
-            eventCategory = EventCategory.REVOKE;
         } else {
             throw new EventException("unknown event category for event type: " + eventType);
         }
@@ -173,23 +142,7 @@ public class EventRegistry implements InitializingBean, DisposableBean {
         return EventUtils.deserializeEvent(payload, eventClass);
     }
 
-    /**
-     * @param payload
-     * @return
-     */
-    public AskResponseEvent deserializeAskResponseEvent(String payload) {
-        return EventUtils.deserializeEvent(payload, AskResponseEvent.class);
-    }
 
-    /**
-     * 事件类型是否实现了Revokable接口
-     * @param eventType
-     * @return
-     */
-    public boolean isEventRevokable(EventType eventType) {
-        Class<? extends BaseEvent> eventClass = eventTypeClassMap.get(eventType);
-        return Revokable.class.isAssignableFrom(eventClass);
-    }
 
     /**
      * 根据事件类型查找notify监听器

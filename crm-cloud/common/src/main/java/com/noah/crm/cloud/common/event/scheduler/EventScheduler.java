@@ -23,15 +23,7 @@ public class EventScheduler {
         eventBus.searchAndHandleUnprocessedEvent();
     }
 
-    @Scheduled(cron = "0 0/20 * * * *")
-    public void handleUnprocessedEventWatchProcess() {
-        eventBus.handleUnprocessedEventWatchProcess();
-    }
 
-    @Scheduled(cron = "0 0/40 * * * *")
-    public void handleTimeoutEventWatch() {
-        eventBus.handleTimeoutEventWatch();
-    }
 
 
 }

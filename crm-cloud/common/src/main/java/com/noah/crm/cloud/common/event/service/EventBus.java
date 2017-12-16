@@ -1,25 +1,23 @@
 package com.noah.crm.cloud.common.event.service;
 
-import com.noah.crm.cloud.apis.api.BooleanWrapper;
+import com.google.common.base.Stopwatch;
 import com.noah.crm.cloud.apis.event.constants.EventType;
 import com.noah.crm.cloud.apis.event.constants.FailureInfo;
 import com.noah.crm.cloud.apis.event.constants.FailureReason;
-import com.noah.crm.cloud.apis.event.domain.*;
+import com.noah.crm.cloud.apis.event.domain.BaseEvent;
+import com.noah.crm.cloud.apis.event.domain.NotifyEvent;
 import com.noah.crm.cloud.apis.exception.ServiceException;
-import com.noah.crm.cloud.common.event.AskParameter;
 import com.noah.crm.cloud.common.event.EventRegistry;
 import com.noah.crm.cloud.common.event.EventUtils;
 import com.noah.crm.cloud.common.event.constant.AskEventStatus;
 import com.noah.crm.cloud.common.event.constant.EventCategory;
 import com.noah.crm.cloud.common.event.constant.ProcessStatus;
-import com.noah.crm.cloud.common.event.dao.*;
+import com.noah.crm.cloud.common.event.dao.EventProcessRepository;
+import com.noah.crm.cloud.common.event.dao.NotifyEventPublishRepository;
 import com.noah.crm.cloud.common.event.domain.*;
-import com.noah.crm.cloud.common.event.handler.AskEventHandler;
 import com.noah.crm.cloud.common.event.handler.NotifyEventHandler;
-import com.noah.crm.cloud.common.event.handler.RevokableAskEventHandler;
 import com.noah.crm.cloud.common.exception.EventException;
 import com.noah.crm.cloud.common.spring.ApplicationContextHolder;
-import com.google.common.base.Stopwatch;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +32,6 @@ import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 /**
  * @author xdw9486
@@ -46,15 +43,6 @@ public class EventBus {
 
     @Autowired
     protected NotifyEventPublishRepository notifyEventPublishRepository;
-
-    @Autowired
-    protected AskRequestEventPublishRepository askRequestEventPublishRepository;
-
-    @Autowired
-    protected RevokeAskEventPublishRepository revokeAskEventPublishRepository;
-
-    @Autowired
-    protected AskResponseEventPublishRepository askResponseEventPublishRepository;
 
     @Autowired
     protected EventProcessRepository eventProcessRepository;
@@ -99,95 +87,9 @@ public class EventBus {
         return eventPublish;
     }
 
-    /**
-     * 发布ask事件
-     *
-     * @param askParameter
-     * @return
-     */
-    @Transactional
-    public List<AskRequestEventPublish> ask(AskParameter askParameter) {
 
-        askParameter.getAskEvents().forEach(this::fillEventId);
 
-        EventWatch eventWatch = eventWatchService.watchAskEvents(askParameter);
 
-        return askParameter.getAskEvents().stream().map(askEvent -> {
-            AskRequestEventPublish eventPublish = new AskRequestEventPublish();
-            eventPublish.setEventId(askEvent.getId());
-            eventPublish.setEventType(askEvent.getType());
-            eventPublish.setAskEventStatus(AskEventStatus.PENDING);
-            eventPublish.setWatchId(eventWatch.getId());
-            eventPublish.setPayload(EventUtils.serializeEvent(askEvent));
-
-            askRequestEventPublishRepository.save(eventPublish);
-
-            return eventPublish;
-
-        }).collect(Collectors.toList());
-    }
-
-    /**
-     * 尝试对事件进行撤销
-     *
-     * @param askEvent
-     * @return
-     */
-    @Transactional
-    public void revoke(AskEvent askEvent, FailureInfo failureInfo) {
-        if (!(askEvent instanceof Revokable)) {
-            throw new EventException(String.format("类型为%s的事件不能撤销", askEvent.getClass()));
-        }
-        if (askEvent.getId() == null) {
-            throw new EventException("ID为空, 新事件不能撤销");
-        }
-        AskRequestEventPublish eventPublish = eventPublishService.getAskRequestEventByEventId(askEvent.getId());
-        if (eventPublish.getStatus().equals(ProcessStatus.NEW)) {
-            //首先判断原事件有没有发送, 如果没有发送就不发送了
-            eventPublish.setStatus(ProcessStatus.IGNORE);
-            askRequestEventPublishRepository.save(eventPublish);
-        }
-
-        if (eventPublish.getAskEventStatus().equals(AskEventStatus.PENDING)
-                || eventPublish.getAskEventStatus().equals(AskEventStatus.SUCCESS)) {
-
-            if (eventPublish.getStatus().equals(ProcessStatus.PROCESSED)) {
-                publishRevokeEvent(askEvent.getId(), failureInfo);
-            }
-
-            //改变之前事件的状态
-            AskEventStatus revokeAskEventStatus = AskEventStatus.FAILED;
-            if (failureInfo != null && failureInfo.getReason() != null) {
-                revokeAskEventStatus = EventUtils.fromFailureReason(failureInfo.getReason());
-            }
-            eventPublish.setAskEventStatus(revokeAskEventStatus);
-
-            askRequestEventPublishRepository.save(eventPublish);
-
-            //TODO AskRequestEventPublish 状态已经改变, 根据watchId判断eventWatch是不是也要改变
-
-        }
-    }
-
-    /**
-     * 发布撤销事件
-     *
-     * @param askEventId
-     * @param failureInfo
-     */
-    @Transactional
-    public void publishRevokeEvent(Long askEventId, FailureInfo failureInfo) {
-        RevokeAskEvent revokeAskEvent = new RevokeAskEvent(failureInfo, askEventId);
-        fillEventId(revokeAskEvent);
-
-        RevokeAskEventPublish revokeAskEventPublish = new RevokeAskEventPublish();
-        revokeAskEventPublish.setAskEventId(askEventId);
-        revokeAskEventPublish.setEventId(revokeAskEvent.getId());
-        revokeAskEventPublish.setEventType(revokeAskEvent.getType());
-        revokeAskEventPublish.setPayload(EventUtils.serializeEvent(revokeAskEvent));
-
-        revokeAskEventPublishRepository.save(revokeAskEventPublish);
-    }
 
 
     /**
@@ -222,15 +124,6 @@ public class EventBus {
         if (eventPublish instanceof NotifyEventPublish) {
             notifyEventPublishRepository.save((NotifyEventPublish) eventPublish);
             notifyEventPublishRepository.getEm().flush();
-        } else if (eventPublish instanceof AskRequestEventPublish) {
-            askRequestEventPublishRepository.save((AskRequestEventPublish) eventPublish);
-            askRequestEventPublishRepository.getEm().flush();
-        } else if (eventPublish instanceof AskResponseEventPublish) {
-            askResponseEventPublishRepository.save((AskResponseEventPublish) eventPublish);
-            askResponseEventPublishRepository.getEm().flush();
-        } else if (eventPublish instanceof RevokeAskEventPublish) {
-            revokeAskEventPublishRepository.save((RevokeAskEventPublish) eventPublish);
-            revokeAskEventPublishRepository.getEm().flush();
         } else {
             throw new EventException(String.format("unknown eventPublish class: %s, id: %d",
                     eventPublish.getClass(), eventPublish.getId()));
@@ -292,15 +185,6 @@ public class EventBus {
             case NOTIFY:
                 processNotifyEvent(eventProcess);
                 break;
-            case ASK:
-                processAskEvent(eventProcess);
-                break;
-            case REVOKE:
-                processRevokeEvent(eventProcess);
-                break;
-            case ASKRESP:
-                eventWatchProcessOptional = processAskResponseEvent(eventProcess);
-                break;
             default:
                 throw new EventException(String.format("unknown event category, process id: %d, event category: %s ",
                         eventProcessId, eventProcess.getEventCategory()));
@@ -342,108 +226,6 @@ public class EventBus {
 
     }
 
-
-    private void processAskEvent(EventProcess event) {
-
-        EventType type = event.getEventType();
-
-        Set<AskEventHandler> eventHandlers = eventRegistry.getAskEventHandlers(type);
-        if (eventHandlers == null || eventHandlers.isEmpty()) {
-            logger.error(String.format("EventProcess[id=%d, type=%s, payload=%s]的eventHandlers列表为空'",
-                    event.getId(), type, event.getPayload()));
-            return;
-        }
-
-        AskEvent askEvent = (AskEvent) eventRegistry.deserializeEvent(type, event.getPayload());
-
-        eventHandlers.forEach(handler -> {
-            EventHandlerResponse<BooleanWrapper> result = executeEventHandler(event.getId(),
-                    () -> handler.processRequest(askEvent), new BooleanWrapper(false));
-            createAskResponse(askEvent, result.getValue());
-        });
-
-    }
-
-    private void processRevokeEvent(EventProcess event) {
-
-        RevokeAskEvent revokeAskEvent = (RevokeAskEvent) eventRegistry.deserializeEvent(
-                RevokeAskEvent.EVENT_TYPE,
-                event.getPayload());
-
-        EventProcess askEventProcess = eventProcessRepository.getByEventId(revokeAskEvent.getAskEventId());
-        if (askEventProcess == null) {
-            throw new EventException(String.format("根据事件ID[%d]没有找到EventProcess", revokeAskEvent.getAskEventId()));
-        }
-
-        EventType type = askEventProcess.getEventType();
-        Set<RevokableAskEventHandler> eventHandlers = eventRegistry.getRevokableAskEventHandlers(type);
-        if (eventHandlers == null || eventHandlers.isEmpty()) {
-            logger.error(String.format("EventProcess[id=%d, type=%s, payload=%s]的eventHandlers列表为空'",
-                    askEventProcess.getId(), type, askEventProcess.getPayload()));
-            return;
-        }
-
-        AskEvent originEvent = (AskEvent) eventRegistry.deserializeEvent(type, askEventProcess.getPayload());
-
-        eventHandlers.forEach(
-                handler -> executeEventHandler(
-                        event.getId(),
-                        () -> {
-                            handler.processRevoke(originEvent, revokeAskEvent.getFailureInfo());
-                            return null;
-                        },
-                        null
-                )
-        );
-    }
-
-    private Optional<EventWatchProcess> processAskResponseEvent(EventProcess event) {
-
-        AskResponseEvent askResponseEvent = eventRegistry.deserializeAskResponseEvent(event.getPayload());
-        Long askEventId = askResponseEvent.getAskEventId();
-        AskRequestEventPublish askRequestEventPublish = eventPublishService.getAskRequestEventByEventId(askEventId);
-        if (!askRequestEventPublish.getAskEventStatus().equals(AskEventStatus.PENDING)) {
-            return Optional.empty();
-        }
-
-        AskEventStatus askEventStatus;
-        FailureInfo failureInfo = null;
-        if (askResponseEvent.isSuccess()) {
-            askEventStatus = AskEventStatus.SUCCESS;
-        } else {
-            askEventStatus = AskEventStatus.FAILED;
-            failureInfo = new FailureInfo(FailureReason.FAILED, LocalDateTime.now());
-        }
-        askRequestEventPublish.setAskEventStatus(askEventStatus);
-        askRequestEventPublishRepository.save(askRequestEventPublish);
-
-        return eventWatchService.processEventWatch(askRequestEventPublish.getWatchId(), askEventStatus, failureInfo);
-
-    }
-
-    /**
-     * 发送ask结果
-     *
-     * @param askEvent
-     * @param result
-     * @return
-     */
-    private AskResponseEventPublish createAskResponse(AskEvent askEvent, BooleanWrapper result) {
-        AskResponseEvent askResponseEvent = new AskResponseEvent(result.isSuccess(), result.getMessage(), askEvent.getId());
-        fillEventId(askResponseEvent);
-        AskResponseEventPublish eventPublish = new AskResponseEventPublish();
-        eventPublish.setSuccess(result.isSuccess());
-        eventPublish.setAskEventId(askEvent.getId());
-        eventPublish.setEventType(AskResponseEvent.EVENT_TYPE);
-        eventPublish.setEventId(askResponseEvent.getId());
-        eventPublish.setPayload(EventUtils.serializeEvent(askResponseEvent));
-
-        askResponseEventPublishRepository.save(eventPublish);
-
-        return eventPublish;
-    }
-
-
     private <T> EventHandlerResponse<T> executeEventHandler(Long eventProcessId, Supplier<T> supplier, T defaultValue) {
 
         T value = defaultValue;
@@ -474,27 +256,13 @@ public class EventBus {
     }
 
 
+
+
     @Transactional
     public EventProcess recordEvent(String message) {
         Map<String, Object> eventMap = EventUtils.retrieveEventMapFromJson(message);
         EventType eventType = EventType.valueOfIgnoreCase((String) eventMap.get("type"));
         EventCategory eventCategory = eventRegistry.getEventCategoryByType(eventType);
-        if (eventCategory.equals(EventCategory.ASKRESP) || eventCategory.equals(EventCategory.REVOKE)) {
-            Long askEventId = (Long) eventMap.get("askEventId");
-            if (askEventId == null) {
-                throw new EventException("EventCategory为ASKRESP或REVOKE的事件, askEventId为null, payload: " + message);
-            }
-            boolean eventPublishNotExist = true;
-            if (eventCategory.equals(EventCategory.ASKRESP)) {
-                eventPublishNotExist = askRequestEventPublishRepository.getByEventId(askEventId) == null;
-            } else if (eventCategory.equals(EventCategory.REVOKE)) {
-                eventPublishNotExist = askResponseEventPublishRepository.countByAskEventId(askEventId) == 0L;
-            }
-            if (eventPublishNotExist) {
-                //如果为ASKRESP或REVOKE事件并且请求id在数据库不存在, 则忽略这个事件
-                return null;
-            }
-        }
         if (logger.isDebugEnabled()) {
             logger.debug("receive message from kafka: {}", message);
         }
@@ -509,7 +277,7 @@ public class EventBus {
         return eventProcess;
     }
 
-    //不在这里加事务注解, 因为想让这个方法内对service的调用都是独立事务.
+    /*//不在这里加事务注解, 因为想让这个方法内对service的调用都是独立事务.
     public void handleUnprocessedEventWatchProcess() {
         List<EventWatchProcess> eventWatchProcessList = eventWatchService.findUnprocessedEventWatchProcess();
         logger.info("待处理eventWatchProcess数量: " + eventWatchProcessList.size());
@@ -536,9 +304,9 @@ public class EventBus {
         if (!successIdSet.isEmpty()) {
             eventWatchService.updateStatusBatchToProcessed(successIdSet.toArray(new Long[successIdSet.size()]));
         }
-    }
+    }*/
 
-    //不在这里加事务注解, 因为想让这个方法内对service的调用都是独立事务.
+   /* //不在这里加事务注解, 因为想让这个方法内对service的调用都是独立事务.
     public void handleTimeoutEventWatch() {
         LocalDateTime now = LocalDateTime.now();
         List<EventWatch> eventWatchList = eventWatchService.findTimeoutEventWatch(now);
@@ -554,7 +322,7 @@ public class EventBus {
                         eventWatch.getId()), e);
             }
         }
-    }
+    }*/
 
 
     public Long generateEventId() {

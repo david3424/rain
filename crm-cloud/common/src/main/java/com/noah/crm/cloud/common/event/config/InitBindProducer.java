@@ -19,8 +19,8 @@ public class InitBindProducer implements InitializingBean {
     private Set<EventType> preInitializeProducers = new HashSet<>();
 
     public InitBindProducer() {
-        preInitializeProducers.add(AskResponseEvent.EVENT_TYPE);
-        preInitializeProducers.add(RevokeAskEvent.EVENT_TYPE);
+        //初始化需要监听的队列
+//        preInitializeProducers.add(RevokeAskEvent.EVENT_TYPE);
     }
 
     @Override

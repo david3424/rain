@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Created by liubin on 2016/3/29.
  */
 public interface EventWatchRepository extends PagingAndSortingRepository<EventWatch, Long>, EventWatchRepositoryCustom{
 

@@ -3,7 +3,6 @@ package com.noah.crm.cloud.user.context;
 import com.noah.crm.cloud.apis.event.constants.EventType;
 import com.noah.crm.cloud.common.event.config.EventConfiguration;
 import com.noah.crm.cloud.common.event.config.InitBindProducer;
-import com.noah.crm.cloud.common.scheduler.config.SchedulerConfiguration;
 import com.noah.crm.cloud.common.spring.BaseConfiguration;
 import com.noah.crm.cloud.common.spring.ServiceClientConfiguration;
 import com.noah.crm.cloud.common.spring.WebApplication;
@@ -22,7 +21,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 @EnableJpaRepositories("com.noah.crm.cloud.**.dao")
 @ComponentScan({"com.noah.crm.cloud.**.service", "com.noah.crm.cloud.**.web"})
-@Import({BaseConfiguration.class, EventConfiguration.class, SchedulerConfiguration.class,
+@Import({BaseConfiguration.class, EventConfiguration.class,
         ServiceClientConfiguration.class, WebApplication.class})
 public class UserApplication {
 

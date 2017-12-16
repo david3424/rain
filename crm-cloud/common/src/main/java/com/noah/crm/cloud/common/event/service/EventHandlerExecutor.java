@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.function.Supplier;
 
 /**
- * Created by liubin on 2016/6/30.
  */
 @Service
 public class EventHandlerExecutor {
