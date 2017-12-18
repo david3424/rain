@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 import static com.noah.crm.cloud.user.api.UserUrl.USER_REGISTER_URL;
+import static com.noah.crm.cloud.user.api.UserUrl.USER_REGISTER_TEST_URL;
 
 /**
  * @author xdw9486
@@ -33,6 +34,16 @@ public class UserController {
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
 
+        return userDto;
+    }
+
+    @RequestMapping(value = USER_REGISTER_TEST_URL, method = RequestMethod.POST)
+    public UserDto registerTest(@Valid @RequestBody RegisterDto registerDto) {
+
+        User user = userService.registerTest(registerDto);
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
         return userDto;
     }
 

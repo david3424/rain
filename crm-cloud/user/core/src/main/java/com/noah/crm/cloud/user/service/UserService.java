@@ -33,39 +33,29 @@ public class UserService {
     EventBus eventBus;
 
 
-
     @TransactionalForExceptionRollback
     public void save(User user) {
         userRepository.save(user);
     }
 
-    @Transactional(readOnly = true)
+    @TransactionalForExceptionRollback
     public Optional<User> getById(Long userId) {
         return Optional.ofNullable(userRepository.findOne(userId));
     }
 
-    @Transactional
+    @TransactionalForExceptionRollback
     public User register(RegisterDto registerDto) {
         if (isUsernameExist(registerDto.getUsername(), Optional.empty())) {
             throw new ServiceException(UserErrorCode.UsernameExist,
                     String.format("用户名%s已存在", registerDto.getUsername()));
         }
 
-        User user = new User();
-        user.setUsername(registerDto.getUsername());
-        try {
-            user.setPassword(PasswordHash.createHash(registerDto.getPassword()));
-        } catch (GeneralSecurityException e) {
-            logger.error("创建哈希密码的时候发生错误", e);
-            throw new ServiceException("用户注册失败");
-        }
-
-        userRepository.save(user);
+        User newUser = createUser(registerDto);
 
         //用户创建事件
-        eventBus.publish(new UserCreated(user.getId(), user.getUsername(), user.getCreateTime()));
+        eventBus.publish(new UserCreated(newUser.getId(), newUser.getUsername(), newUser.getCreateTime()));
 
-        return user;
+        return newUser;
     }
 
 
@@ -82,4 +72,31 @@ public class UserService {
         return userRepository.isUsernameExist(username, userId);
     }
 
+    public User registerTest(RegisterDto registerDto) {
+
+        if (isUsernameExist(registerDto.getUsername(), Optional.empty())) {
+            throw new ServiceException(UserErrorCode.UsernameExist,
+                    String.format("用户名%s已存在", registerDto.getUsername()));
+        }
+
+        User newUser = createUser(registerDto);
+
+        //用户创建rest
+
+        return newUser;
+    }
+
+    private User createUser(RegisterDto registerDto) {
+
+        User user = new User();
+        user.setUsername(registerDto.getUsername());
+        try {
+            user.setPassword(PasswordHash.createHash(registerDto.getPassword()));
+        } catch (GeneralSecurityException e) {
+            logger.error("创建哈希密码的时候发生错误", e);
+            throw new ServiceException("用户注册失败");
+        }
+        userRepository.save(user);
+        return user;
+    }
 }

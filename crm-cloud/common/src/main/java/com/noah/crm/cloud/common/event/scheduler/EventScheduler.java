@@ -4,6 +4,7 @@ import com.noah.crm.cloud.common.event.service.EventBus;
 import org.springframework.scheduling.annotation.Scheduled;
 
 /**
+ * @author xdw9486
  */
 public class EventScheduler {
 
