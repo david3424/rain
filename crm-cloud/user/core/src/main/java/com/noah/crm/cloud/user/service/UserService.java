@@ -8,6 +8,7 @@ import com.noah.crm.cloud.user.api.dtos.RegisterDto;
 import com.noah.crm.cloud.user.api.events.UserCreated;
 import com.noah.crm.cloud.user.dao.UserRepository;
 import com.noah.crm.cloud.user.domain.User;
+import com.noah.crm.cloud.user.service.gateway.AccountGateway;
 import com.noah.crm.cloud.utils.text.PasswordHash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,9 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    AccountGateway accountGateway;
 
     @Autowired
     EventBus eventBus;
@@ -82,7 +86,7 @@ public class UserService {
         User newUser = createUser(registerDto);
 
         //用户创建rest
-
+        accountGateway.saveAccount(newUser.getId());
         return newUser;
     }
 

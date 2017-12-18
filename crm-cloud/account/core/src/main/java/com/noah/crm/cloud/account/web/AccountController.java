@@ -1,14 +1,18 @@
 package com.noah.crm.cloud.account.web;
 
+import com.noah.crm.cloud.account.api.dtos.AccountDto;
+import com.noah.crm.cloud.account.domain.Account;
 import com.noah.crm.cloud.account.service.AccountService;
+import com.noah.crm.cloud.apis.api.ApisErrorCode;
 import com.noah.crm.cloud.apis.api.BooleanWrapper;
+import com.noah.crm.cloud.apis.exception.ServiceException;
+import com.noah.crm.cloud.utils.logback.LoggerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import static com.noah.crm.cloud.account.api.constants.AccountUrl.ACCOUNT_BALANCE;
-import static com.noah.crm.cloud.account.api.constants.AccountUrl.ACCOUNT_TRANSACTIONS;
-import static com.noah.crm.cloud.account.api.constants.AccountUrl.CHECK_ENOUGH_BALANCE;
+import static com.noah.crm.cloud.account.api.constants.AccountUrl.*;
 
 /**
  * @author xdw9486
@@ -45,4 +49,18 @@ public class AccountController {
         }
     }
 
+    @RequestMapping(value = ACCOUNT_CREATE, method = RequestMethod.POST)
+    public AccountDto saveAccount(Long userId) {
+        try {
+            Account account = accountService.initAccount(userId);
+            AccountDto accountDto = new AccountDto();
+            accountDto.setUserId(userId);
+            accountDto.setBalance(account.getBalance());
+            accountDto.setId(account.getId());
+            return accountDto;
+        } catch (DataIntegrityViolationException e) {
+            LoggerUtil.warn(String.format("userId=%d的account在数据库已存在, errorMsg: %s", userId, e.getMessage()));
+            throw new ServiceException(ApisErrorCode.DATA_ERROR_S, e.getMessage());
+        }
+    }
 }

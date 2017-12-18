@@ -10,6 +10,7 @@ public class AccountUrl {
     public final static String CHECK_ENOUGH_BALANCE = "/accounts/{userId}/enough";
     public final static String ACCOUNT_BALANCE = "/accounts/{userId}/balance";
     public final static String ACCOUNT_TRANSACTIONS = "/accounts/{userId}/transactions";
+    public final static String ACCOUNT_CREATE = "/accounts/create";
 
     public static String buildUrl(String url) {
         return SERVICE_HOSTNAME + url;
