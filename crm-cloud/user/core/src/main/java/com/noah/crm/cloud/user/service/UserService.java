@@ -76,6 +76,8 @@ public class UserService {
         return userRepository.isUsernameExist(username, userId);
     }
 
+
+
     public User registerTest(RegisterDto registerDto) {
 
         if (isUsernameExist(registerDto.getUsername(), Optional.empty())) {
