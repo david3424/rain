@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: zuul
+  cloud:
+    config:
+      uri: http://cloud.cn:9999/
+#      profile: sit
+      label: dev-test
+#      failFast: true
+encrypt:
+  failOnError: true
+feign:
+  hystrix:
+    enabled: true

@@ -24,6 +24,7 @@
         <module>common</module>
         <module>user</module>
         <module>account</module>
+        <module>zuul</module>
         <!--<module>product</module>-->
         <!--<module>coupon</module>-->
         <!--<module>order</module>-->
