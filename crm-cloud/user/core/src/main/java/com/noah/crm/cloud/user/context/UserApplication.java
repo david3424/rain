@@ -19,7 +19,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @author xdw9486
  */
 @EnableAsync
-@EnableFeignClients
 @SpringBootApplication
 @EnableJpaRepositories("com.noah.crm.cloud.**.dao")
 @ComponentScan({"com.noah.crm.cloud.**.service", "com.noah.crm.cloud.**.web"})

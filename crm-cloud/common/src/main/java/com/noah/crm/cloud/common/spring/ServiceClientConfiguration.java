@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Bean;
  * @author xdw9486
  */
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients("com.noah.crm.cloud.**.service")
 public class ServiceClientConfiguration {
     @Bean(destroyMethod = "shutdown")
     @org.springframework.cloud.context.config.annotation.RefreshScope

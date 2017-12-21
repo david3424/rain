@@ -5,16 +5,17 @@ import com.noah.crm.cloud.account.api.dtos.AccountDto;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import static com.noah.crm.cloud.account.api.constants.AccountUrl.ACCOUNT_CREATE;
 
 /**
  * @author xdw9486
  */
-@FeignClient(value = AccountUrl.SERVICE_NAME, fallback = AccountClientHystrix.class)
+@FeignClient(AccountUrl.SERVICE_NAME)
 public interface AccountClient {
 
     @RequestMapping(value = ACCOUNT_CREATE, method = RequestMethod.POST)
-    AccountDto saveAccount(Long userId);
+    AccountDto saveAccount(@RequestParam(value = "userId") Long userId);
 
 }

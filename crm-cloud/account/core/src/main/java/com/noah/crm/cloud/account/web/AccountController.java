@@ -50,7 +50,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = ACCOUNT_CREATE, method = RequestMethod.POST)
-    public AccountDto saveAccount(Long userId) {
+    public AccountDto saveAccount(@RequestParam(value = "userId") Long userId) {
         try {
             Account account = accountService.initAccount(userId);
             AccountDto accountDto = new AccountDto();
