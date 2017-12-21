@@ -7,3 +7,5 @@ spring:
 #      profile: sit
       label: dev-test
 #      failFast: true
+server:
+  port: 23100
