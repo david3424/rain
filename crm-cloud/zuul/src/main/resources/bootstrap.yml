@@ -7,8 +7,3 @@ spring:
 #      profile: sit
       label: dev-test
 #      failFast: true
-encrypt:
-  failOnError: true
-feign:
-  hystrix:
-    enabled: true
