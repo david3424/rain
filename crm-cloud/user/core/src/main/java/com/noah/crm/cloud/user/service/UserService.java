@@ -102,7 +102,7 @@ public class UserService {
             logger.error("创建哈希密码的时候发生错误", e);
             throw new ServiceException("用户注册失败");
         }
-        userRepository.save(user);
+       userRepository.save(user);
         return user;
     }
 }

@@ -11,7 +11,7 @@ import static com.noah.crm.cloud.account.api.constants.AccountUrl.ACCOUNT_CREATE
 /**
  * @author xdw9486
  */
-@FeignClient(value = AccountUrl.SERVICE_NAME)
+@FeignClient(value = AccountUrl.SERVICE_NAME, fallback = AccountClientHystrix.class)
 public interface AccountClient {
 
     @RequestMapping(value = ACCOUNT_CREATE, method = RequestMethod.POST)

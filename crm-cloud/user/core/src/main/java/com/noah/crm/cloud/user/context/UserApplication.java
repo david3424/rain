@@ -8,6 +8,7 @@ import com.noah.crm.cloud.common.spring.ServiceClientConfiguration;
 import com.noah.crm.cloud.common.spring.WebApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
@@ -18,6 +19,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @author xdw9486
  */
 @EnableAsync
+@EnableFeignClients
 @SpringBootApplication
 @EnableJpaRepositories("com.noah.crm.cloud.**.dao")
 @ComponentScan({"com.noah.crm.cloud.**.service", "com.noah.crm.cloud.**.web"})

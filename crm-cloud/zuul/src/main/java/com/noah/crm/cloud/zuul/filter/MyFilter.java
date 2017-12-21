@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author xdw9486
  */
-@Component
+//@Component
 public class MyFilter extends ZuulFilter {
 
     @Override
